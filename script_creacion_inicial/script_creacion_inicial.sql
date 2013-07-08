@@ -503,6 +503,7 @@ BEGIN
 END
 GO
 
+
 CREATE PROCEDURE DATACENTERinsert_funcxrol (@id_rol int, @func_id int)
 AS
 BEGIN

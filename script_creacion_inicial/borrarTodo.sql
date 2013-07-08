@@ -28,6 +28,10 @@ DROP VIEW Micros_Migrados
 
 DROP PROCEDURE DATACENTER.update_cant_intentos_fallidos
 
+DROP PROCEDURE DATACENTER.insert_Rol
+
+DROP PROCEDURE DATACENTERinsert_funcxrol
+
 DROP SCHEMA DATACENTER
 
 
