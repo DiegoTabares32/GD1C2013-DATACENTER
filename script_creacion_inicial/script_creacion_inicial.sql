@@ -504,11 +504,20 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATACENTERinsert_funcxrol (@id_rol int, @func_id int)
+CREATE PROCEDURE DATACENTER.insert_funcxrol (@id_rol int, @func_id int)
 AS
 BEGIN
 	INSERT DATACENTER.FuncionalidadPorRol( fxrol_rol_id, fxrol_func_id, fxrol_estado)
 	VALUES (@id_rol, @func_id, 'H')
 END
 GO
+
+CREATE PROCEDURE DATACENTER.delete_funcxrol @rol_id int, @func_id int
+AS
+BEGIN
+	DELETE DATACENTER.FuncionalidadPorRol
+	WHERE fxrol_rol_id = @rol_id AND fxrol_func_id = @func_id
+END
+GO
+
 
