@@ -102,7 +102,6 @@ namespace FrbaBus.Abm_Rol
                 estado_actual_rol = func.get_estado_BD(id_rol_a_mod);
             }
 
-
             //this.Visible = true;
             //devuelve true si se realizaron cambios en el nombre o estado 
             if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
