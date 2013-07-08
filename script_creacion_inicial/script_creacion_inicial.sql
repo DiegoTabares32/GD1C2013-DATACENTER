@@ -495,3 +495,19 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE DATACENTER.insert_Rol(@rol_nombre nvarchar(255))
+AS
+BEGIN
+		INSERT DATACENTER.Rol (rol_nombre, rol_estado)
+		VALUES (@rol_nombre, 'H')
+END
+GO
+
+CREATE PROCEDURE DATACENTERinsert_funcxrol (@id_rol int, @func_id int)
+AS
+BEGIN
+	INSERT DATACENTER.FuncionalidadPorRol( fxrol_rol_id, fxrol_func_id, fxrol_estado)
+	VALUES (@id_rol, @func_id, 'H')
+END
+GO
+
