@@ -483,6 +483,7 @@ ALTER TABLE DATACENTER.Compra
 DROP COLUMN comp_codigo_pas_paq
 GO
 
+
 /*-------------------------------------------------------------------*/
 /*-------------------------STORED PROCEDURE--------------------------*/
 
