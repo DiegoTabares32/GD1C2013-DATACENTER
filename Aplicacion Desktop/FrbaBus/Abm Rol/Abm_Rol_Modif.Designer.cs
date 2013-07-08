@@ -84,6 +84,7 @@
             this.estado_comboBox.Name = "estado_comboBox";
             this.estado_comboBox.Size = new System.Drawing.Size(137, 21);
             this.estado_comboBox.TabIndex = 5;
+            this.estado_comboBox.SelectedIndexChanged += new System.EventHandler(this.estado_comboBox_SelectedIndexChanged);
             // 
             // aplicar_boton
             // 

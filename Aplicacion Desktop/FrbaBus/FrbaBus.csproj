@@ -87,6 +87,12 @@
     <Compile Include="Abm Rol\Abm_Rol_Alta.Designer.cs">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Rol\Abm_Rol_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Abm_Rol_Baja.Designer.cs">
+      <DependentUpon>Abm_Rol_Baja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Rol\Abm_Rol_Busqueda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Abm_Rol_Baja.resx">
+      <DependentUpon>Abm_Rol_Baja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Busqueda.resx">
       <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>

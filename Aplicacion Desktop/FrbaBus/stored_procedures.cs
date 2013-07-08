@@ -42,9 +42,21 @@ namespace FrbaBus
             DataTable table_rol= connect.execute_query(query);
             string rol_id = table_rol.Rows[0].ItemArray[0].ToString();
 
-            query = "EXECUTE DATACENTERinsert_funcxrol " + rol_id + ", " + func_id.ToString();
+            query = "EXECUTE DATACENTER.insert_funcxrol " + rol_id + ", " + func_id.ToString();
             connect.execute_query_only(query);
 
+        }
+
+        public void delete_funcxrol(string rol_id, string func_id)
+        {
+            query = "EXECUTE DATACENTER.delete_funcxrol " + rol_id + ", " + func_id;
+            connect.execute_query_only(query);
+        }
+
+        public void update_rol(string rol_id, string rol_nombre, char rol_estado)
+        {
+            query = "EXECUTE DATACENTER.update_rol " + rol_id + ", '" + rol_nombre + "', '" + rol_estado + "'";
+            connect.execute_query_only(query);
         }
         
     }
