@@ -51,7 +51,16 @@ namespace FrbaBus
         }
 
 
-
+        public bool check_func_activa(string id_rol , string id_func)
+        {
+            bool func_activa =false;
+            connection conexion = new connection();
+            string query = "SELECT fxrol_func_id FROM DATACENTER.FuncionalidadPorRol WHERE fxrol_rol_id = "+id_rol+" and fxrol_func_id = "+id_func;
+            DataTable table_rol = conexion.execute_query(query);
+            if (table_rol.Rows.Count > 0)
+                func_activa = true;
+            return func_activa;
+        }
   
     }
 }

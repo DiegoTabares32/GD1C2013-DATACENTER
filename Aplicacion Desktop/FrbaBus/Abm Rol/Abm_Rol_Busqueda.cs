@@ -38,8 +38,8 @@ namespace FrbaBus.Abm_Rol
         {
             //currentRow obtiene la fila que contiene a la fila tildada
             Abm_Rol_Modif abm_rol_mod = new Abm_Rol_Modif();
-            abm_rol_mod.rol_a_modificar= this.roles_dataGrid.CurrentRow.Cells[1].Value.ToString();
-            abm_rol_mod.id_rol_a_mod= this.roles_dataGrid.CurrentRow.Cells[2].Value.ToString();
+            abm_rol_mod.id_rol_a_mod = this.roles_dataGrid.CurrentRow.Cells[1].Value.ToString();
+            abm_rol_mod.rol_nomb_mod= this.roles_dataGrid.CurrentRow.Cells[2].Value.ToString();
             abm_rol_mod.ShowDialog();
             
         }

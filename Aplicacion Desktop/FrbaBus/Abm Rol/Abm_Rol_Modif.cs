@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace FrbaBus.Abm_Rol
 {
     public partial class Abm_Rol_Modif : Form
     {
 
         /*-----------ATRIBUTOS--------------------*/
-        public string rol_a_modificar;
+        public string rol_nomb_mod;
         public string id_rol_a_mod;
 
         /*----------------------------------------*/
@@ -26,10 +27,11 @@ namespace FrbaBus.Abm_Rol
 
         private void list_funcionalidades_Load(object sender, EventArgs e)
         {
-            if (this.rol_a_modificar != null)
-            {
-                this.rol_select_tbox.Text = this.rol_a_modificar;
+            if (this.rol_nomb_mod != null) //evaluamos si esta seteada la var rol_nombre
+            {                               //esta seteada si ya se selecciono un rol a modificar
+                this.rol_select_tbox.Text = this.rol_nomb_mod;
                 this.rol_select_tbox.ReadOnly = true;
+                this.select_boton.Enabled = false;
 
                 //cargamos lista segun corresponde
 
@@ -40,7 +42,16 @@ namespace FrbaBus.Abm_Rol
                 list_funcionalidades.DisplayMember = "func_nombre";
                 list_funcionalidades.ValueMember = "func_id";
 
-                // falta: tildamos las funciones que ya tiene 
+                //tildamos las funciones que ya tiene el rol
+
+                int i;
+                funciones func = new funciones();
+                for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+                {
+                     this.list_funcionalidades.SelectedIndex= i;
+                     if(func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
+                         this.list_funcionalidades.SetItemChecked(i, true);
+                }
 
               
             }
