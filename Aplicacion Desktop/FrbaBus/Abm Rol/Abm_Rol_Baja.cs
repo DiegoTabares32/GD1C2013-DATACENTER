@@ -27,7 +27,7 @@ namespace FrbaBus.Abm_Rol
         {
             if (this.rol_a_buscarTB.Text == "")
             {
-                MessageBox.Show("Debe Ingresar un Rol ");
+                MessageBox.Show("Debe ingresar un Rol", "Baja de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -47,6 +47,9 @@ namespace FrbaBus.Abm_Rol
                 string id_a_eliminar = this.roles_elim_dataGrid.CurrentRow.Cells[1].Value.ToString();
                 stored_procedures stored_proc = new stored_procedures();
                 stored_proc.delete_Rol(id_a_eliminar);
+                MessageBox.Show("Rol Eliminado Correctamente", "Baja de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.rol_a_buscarTB.Text = "";
+                this.roles_elim_dataGrid.DataSource = null;
             }
            
         }

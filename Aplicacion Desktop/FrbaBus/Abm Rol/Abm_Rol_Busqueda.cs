@@ -16,13 +16,17 @@ namespace FrbaBus.Abm_Rol
             InitializeComponent();
             
         }
-
+        private void limpiar()
+        {
+            this.rol_a_buscarTBox.Clear();
+            this.roles_dataGrid.DataSource = null;
+        }
         private void buscar_boton_Click(object sender, EventArgs e)
         {
 
             if (rol_a_buscarTBox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar un Rol ");
+                MessageBox.Show("Debe ingresar un Rol", "Buscar  Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -43,14 +47,15 @@ namespace FrbaBus.Abm_Rol
                 abm_rol_mod.id_rol_a_mod = this.roles_dataGrid.CurrentRow.Cells[1].Value.ToString();
                 abm_rol_mod.rol_nomb_mod = this.roles_dataGrid.CurrentRow.Cells[2].Value.ToString();
                 abm_rol_mod.ShowDialog();
+                //cuando retorna de la modificacion refrescamos la pantalla
+                this.Close();
             }
             
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
         {
-            this.rol_a_buscarTBox.Clear();
-            this.roles_dataGrid.DataSource = null;
+            this.limpiar();
         }
 
 

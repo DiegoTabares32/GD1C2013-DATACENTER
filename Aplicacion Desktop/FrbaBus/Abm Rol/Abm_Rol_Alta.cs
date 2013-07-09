@@ -20,6 +20,18 @@ namespace FrbaBus.Abm_Rol
             InitializeComponent();
         }
 
+        private void limpiar()
+        {
+            //refresca la pantalla 
+            this.name_rol.Clear();
+
+            //destildamos las opciones que estaban marcadas
+            int i;
+            for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+            {
+                this.list_funcionalidades.SetItemChecked(i, false);
+            }
+        }
         private void list_funcionalidades_Load(object sender, EventArgs e)
         {
             //consulta a ejecutar para mostrar todas las funcionalidades cargadas en el checkedlistbox
@@ -43,35 +55,36 @@ namespace FrbaBus.Abm_Rol
 
         private void butt_Cleaning_Click(object sender, EventArgs e)
         {
-            //refresca la pantalla 
-            this.name_rol.Clear();
-    
-            //destildamos las opciones que estaban marcadas
-            int i;
-            for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
-            {
-                this.list_funcionalidades.SetItemChecked(i, false);
-            }
 
+            this.limpiar();
         }
 
         private void butt_add_Click(object sender, EventArgs e)
         {
-            if (this.list_funcionalidades.CheckedIndices.Count == 0)
-            {
-                MessageBox.Show("ERROR: Debe seleccionar una Funcionalidad");
-                return;
-            }
+            bool error = false;
+
             if (this.name_rol.Text == "")
             {
-                MessageBox.Show("ERROR: Debe ingresar un nombre de Rol");
-                return;
+                MessageBox.Show("Debe ingresar un nombre de Rol","Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (this.list_funcionalidades.CheckedIndices.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar una funcionalidad", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
             }
             
             //controlamos que el nombre de rol ingresado NO este en la base de datos
             if (func.existe_nombre_rol(name_rol.Text) == true)
             {
-                MessageBox.Show("Error: Nombre de Rol Existente");
+                MessageBox.Show("Nombre de Rol existente en la Base de Datos", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (error)
+            {
+                this.limpiar();
                 return;
             }
 
@@ -87,8 +100,8 @@ namespace FrbaBus.Abm_Rol
                 
                 
             }
-            MessageBox.Show("Rol Insertado correctamente");
-
+            MessageBox.Show("Rol Insertado Correctamente", "Alta de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.limpiar();
         }
 
 

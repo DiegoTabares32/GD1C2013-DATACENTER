@@ -98,7 +98,6 @@ namespace FrbaBus.Abm_Rol
 
             if(this.estado_comboBox.SelectedIndex ==-1) //Devuelve -1 si no se ha seleccionado ninguna opcion del combo
             {
-                MessageBox.Show("Actualizacion Exitosa");
                 estado_actual_rol = func.get_estado_BD(id_rol_a_mod);
             }
 
@@ -107,7 +106,7 @@ namespace FrbaBus.Abm_Rol
             if (func.check_cambio_nomb_est_rol(id_rol_a_mod, this.estado_actual_rol, this.rol_select_tbox.Text, this.rol_nomb_mod))
                 stored_proc.update_rol(this.id_rol_a_mod, this.rol_select_tbox.Text, estado_actual_rol);
 
-            MessageBox.Show("Actualizacion Exitosa");
+            MessageBox.Show("Actualización Exitosa", "Modificación  Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
             
         }
@@ -117,7 +116,6 @@ namespace FrbaBus.Abm_Rol
            
             Abm_Rol_Busqueda buscar_rol = new Abm_Rol_Busqueda();
             buscar_rol.ShowDialog();
-            this.Close();
             
             
             
