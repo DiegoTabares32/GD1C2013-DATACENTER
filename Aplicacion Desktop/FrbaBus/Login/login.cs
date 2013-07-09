@@ -76,8 +76,7 @@ namespace FrbaBus.Login
                 if ( cant_fallidas == 3)
                 {
                     MessageBox.Show("Superada la cantidad Máxima de intentos por loguearse, Usuario Inhabilitado ", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.username_textbox.Text = "";
-                    this.passw_textbox.Text = "";
+                    this.limpiar();
                     return;
                 }
                 
