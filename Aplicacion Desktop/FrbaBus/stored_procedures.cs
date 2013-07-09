@@ -58,6 +58,12 @@ namespace FrbaBus
             query = "EXECUTE DATACENTER.update_rol " + rol_id + ", '" + rol_nombre + "', '" + rol_estado + "'";
             connect.execute_query_only(query);
         }
+
+        public void delete_Rol(string id_rol)
+        {
+            query = "DATACENTER.delete_Rol " + id_rol;
+            connect.execute_query_only(query);
+        }
         
     }
 }

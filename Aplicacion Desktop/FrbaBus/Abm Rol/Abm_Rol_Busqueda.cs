@@ -35,12 +35,15 @@ namespace FrbaBus.Abm_Rol
         }
 
         private void roles_dataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //currentRow obtiene la fila que contiene a la fila tildada
-            Abm_Rol_Modif abm_rol_mod = new Abm_Rol_Modif();
-            abm_rol_mod.id_rol_a_mod = this.roles_dataGrid.CurrentRow.Cells[1].Value.ToString();
-            abm_rol_mod.rol_nomb_mod= this.roles_dataGrid.CurrentRow.Cells[2].Value.ToString();
-            abm_rol_mod.ShowDialog();
+        {   //verificamos que el evento se haya producido en la columna que contiene el boton
+            if (e.ColumnIndex == 0)
+            {
+                //currentRow obtiene la fila que contiene a la fila tildada
+                Abm_Rol_Modif abm_rol_mod = new Abm_Rol_Modif();
+                abm_rol_mod.id_rol_a_mod = this.roles_dataGrid.CurrentRow.Cells[1].Value.ToString();
+                abm_rol_mod.rol_nomb_mod = this.roles_dataGrid.CurrentRow.Cells[2].Value.ToString();
+                abm_rol_mod.ShowDialog();
+            }
             
         }
 

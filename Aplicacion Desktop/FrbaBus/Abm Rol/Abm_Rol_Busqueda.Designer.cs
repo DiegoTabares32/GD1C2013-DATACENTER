@@ -93,11 +93,12 @@
             // 
             // Seleccionar
             // 
-            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.HeaderText = "Acción";
             this.Seleccionar.Name = "Seleccionar";
             this.Seleccionar.ReadOnly = true;
             this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Seleccionar.Text = "";
+            this.Seleccionar.Text = "Seleccionar";
+            this.Seleccionar.UseColumnTextForButtonValue = true;
             // 
             // Abm_Rol_Busqueda
             // 

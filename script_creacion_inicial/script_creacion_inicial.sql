@@ -520,4 +520,15 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE DATACENTER.delete_Rol @id_rol int
+AS
+BEGIN
+	DELETE DATACENTER.FuncionalidadPorRol
+	WHERE fxrol_rol_id= @id_rol
+	
+	DELETE DATACENTER.Rol
+	WHERE rol_id = @id_rol
+END
+GO
+
 
