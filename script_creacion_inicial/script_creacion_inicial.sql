@@ -378,6 +378,9 @@ INSERT INTO DATACENTER.Cliente(cli_dni, cli_nombre, cli_apellido, cli_dir, cli_t
 	FROM gd_esquema.Maestra
 GO
 
+UPDATE DATACENTER.Cliente
+SET cli_puntos_acum=0
+
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE SERVICIO-----------------------------*/
 
