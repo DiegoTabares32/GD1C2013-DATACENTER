@@ -32,6 +32,20 @@ C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TP BUS\Codigo de
 C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TP BUS\Codigo del tp\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
 C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TP BUS\Codigo del tp\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
 C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TP BUS\Codigo del tp\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Alta.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.exe
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.pdb
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Alta.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Alta.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormAdmin.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormCompra.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Login.login.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Consulta_Puntos_Adquiridos.Abm_Consulta_Puntos.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_Alta.resources
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.exe
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe
@@ -48,19 +62,4 @@ C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATAC
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.FormButacaAlta.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.pdb
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_Alta.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.FormButacaAlta.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Alta.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Alta.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Canje_de_Ptos.CanjeDePuntos.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Consulta_Puntos_Adquiridos.Abm_Consulta_Puntos.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormAdmin.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormCompra.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Login.login.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.exe
-C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
+C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Form1.resources

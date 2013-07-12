@@ -90,7 +90,6 @@ namespace FrbaBus.Canje_de_Ptos
             //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             DataTable puntosAcumulados = connect1.execute_query(query1);
-            MessageBox.Show("Puntos Consumidos " + puntosConsumidos.ToString());
 
             if (puntosConsumidos <= Convert.ToInt16(puntosAcumulados.Rows[0].ItemArray[0]))
             {
@@ -101,6 +100,39 @@ namespace FrbaBus.Canje_de_Ptos
                 //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
                 connection connect2 = new connection();
                 connect2.execute_query(query2);
+
+                // se actualiza el stock de los premios
+                for (i = 0; i < tablaPremios.RowCount; i++)
+                {
+                    if (Convert.ToBoolean(tablaPremios.Rows[i].Cells[0].Value))
+                    {
+                        // descuenta stock del premio de la fila
+
+                        //consulta a ejecutar para mostrar todas los premios cargados en la tabla
+                        string query4 = "SELECT prem_stock FROM DATACENTER.Premio where prem_nombre='" + tablaPremios.Rows[i].Cells[2].Value.ToString()+"'";
+
+                        //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+                        connection connect4 = new connection();
+                        DataTable premStock = connect4.execute_query(query4);
+                        int nuevoPremStock = Convert.ToInt32(premStock.Rows[0].ItemArray[0]) - Convert.ToInt32(tablaPremios.Rows[i].Cells[1].Value);
+
+                        if (nuevoPremStock < 0)
+                        {
+                            MessageBox.Show("ERROR: No se puede entregar "+ Math.Abs(Convert.ToInt32(nuevoPremStock)) +" unidades de "+tablaPremios.Rows[i].Cells[2].Value.ToString()+" por falta de stock.");
+                            return; 
+                        }
+
+                        //consulta a ejecutar para mostrar todas los premios cargados en la tabla
+                        string query3 = "UPDATE DATACENTER.Premio set prem_stock=" + nuevoPremStock.ToString() + " where '" + tablaPremios.Rows[i].Cells[2].Value.ToString() + "'=prem_nombre";
+
+                        //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+                        connection connect3 = new connection();
+                        connect3.execute_query(query3);
+
+                    }
+                }
+
+                MessageBox.Show("Puntos Consumidos " + puntosConsumidos.ToString());
                 MessageBox.Show("El canje se ha realizado con éxito.");
 
                 // Limpiar campo DNIcliente y tabla
