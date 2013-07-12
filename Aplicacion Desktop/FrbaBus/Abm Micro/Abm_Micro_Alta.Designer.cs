@@ -50,7 +50,7 @@
             // textBoxPatente
             // 
             this.textBoxPatente.Location = new System.Drawing.Point(101, 53);
-            this.textBoxPatente.MaxLength = 7;
+            this.textBoxPatente.MaxLength = 6;
             this.textBoxPatente.Name = "textBoxPatente";
             this.textBoxPatente.Size = new System.Drawing.Size(136, 20);
             this.textBoxPatente.TabIndex = 0;

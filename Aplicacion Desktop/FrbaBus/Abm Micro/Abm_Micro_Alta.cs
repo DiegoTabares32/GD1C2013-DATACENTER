@@ -29,24 +29,24 @@ namespace FrbaBus.Abm_Micro
 
             char[] caracter = textBoxPatente.Text.ToCharArray();
             int i;
-            if (caracter.Length != 7)
+            if (caracter.Length != 6)
             {
-                MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLL-NNN");
+                MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
                 return;
             }
             for (i = 0;i<3; i++)
             {
                 if (Char.IsDigit(caracter.ElementAt(i)))
                 {
-                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLL-NNN");
+                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
                     return;
                 }
             }
-            for (i=4; i < 7; i++)
+            for (i=3; i < 6; i++)
             {
                 if (Char.IsLetter(caracter.ElementAt(i)))
                 {
-                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLL-NNN");
+                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
                     return;
                 }
             }

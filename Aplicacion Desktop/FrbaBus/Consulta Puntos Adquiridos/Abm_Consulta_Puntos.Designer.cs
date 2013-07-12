@@ -67,6 +67,7 @@
             // textBoxDni
             // 
             this.textBoxDni.Location = new System.Drawing.Point(112, 8);
+            this.textBoxDni.MaxLength = 8;
             this.textBoxDni.Name = "textBoxDni";
             this.textBoxDni.Size = new System.Drawing.Size(120, 20);
             this.textBoxDni.TabIndex = 2;
