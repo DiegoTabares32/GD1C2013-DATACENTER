@@ -69,6 +69,12 @@
     <Compile Include="Abm Micro\Abm_Micro_Alta.Designer.cs">
       <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Micro\Butaca_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Micro\Butaca_Alta.Designer.cs">
+      <DependentUpon>Butaca_Alta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Permisos\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,11 +99,11 @@
     <Compile Include="Cancelar Viaje\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje de Ptos\Form1.cs">
+    <Compile Include="Canje de Ptos\CanjeDePuntos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje de Ptos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Canje de Ptos\CanjeDePuntos.Designer.cs">
+      <DependentUpon>CanjeDePuntos.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra de Pasajes\Form1.cs">
       <SubType>Form</SubType>
@@ -142,11 +148,17 @@
     <EmbeddedResource Include="Abm Micro\Abm_Micro_Alta.resx">
       <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Micro\Butaca_Alta.resx">
+      <DependentUpon>Butaca_Alta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Alta.resx">
       <DependentUpon>Abm_Reco_Alta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Canje de Ptos\CanjeDePuntos.resx">
+      <DependentUpon>CanjeDePuntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Puntos Adquiridos\Abm_Consulta_Puntos.resx">
       <DependentUpon>Abm_Consulta_Puntos.cs</DependentUpon>
