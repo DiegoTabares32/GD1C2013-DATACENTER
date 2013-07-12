@@ -51,7 +51,12 @@ namespace FrbaBus.Abm_Micro
                 }
             }
 
-            if (funciones.existePatente(textBoxPatente.Text))
+            //preparar patente para poder registrar nuevo micro
+            string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
+            string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
+            string nroPatente = primerPartePatente + "-" + segundaPartePatente;
+
+            if (funciones.existePatente(nroPatente))
             {
                 MessageBox.Show("La patente ingresada ya existe en la Base de Datos");
                 return;
@@ -86,11 +91,7 @@ namespace FrbaBus.Abm_Micro
             connection connect2 = new connection();
             DataTable idMarca = connect2.execute_query(query2);
 
-            //preparar patente para poder registrar nuevo micro
-            string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
-            string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
-            string nroPatente = primerPartePatente + "-" + segundaPartePatente;
-
+          
             //consulta a ejecutar para registrar nuevo micro
             string query3 = "INSERT INTO DATACENTER.Micro(mic_patente, mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo, mic_fecha_alta, mic_fecha_baja_def) VALUES ('"+
                             nroPatente + "','" + idMarca.Rows[0].ItemArray[0].ToString() + "','" + idServ.Rows[0].ItemArray[0].ToString() + "','" + textBoxCButacas.Text.ToString() + "','" + textBoxCKGDisp.Text.ToString() + "','" + textBoxModelo.Text.ToString() + "','" + dateTimePickerFechaAlta.Value.ToString("dd/MM/yyyy") + "',NULL)";

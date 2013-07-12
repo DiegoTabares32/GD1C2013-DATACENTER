@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using FrbaBus.Consulta_Puntos_Adquiridos;
+using FrbaBus.Abm_Micro;
 
 namespace FrbaBus
 {
@@ -16,7 +16,7 @@ namespace FrbaBus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Abm_Consulta_Puntos());
+            Application.Run(new Abm_Micro_Alta());
             
            
         }
