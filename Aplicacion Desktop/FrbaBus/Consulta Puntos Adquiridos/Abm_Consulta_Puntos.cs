@@ -51,7 +51,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
             this.dataGridViewCanjesRealizados.DataSource = tabla_canje;
             
             //Lleno la tabla de detalle de puntos
-            string query3 = "SELECT c.comp_Id AS 'Compra ID', c.comp_fecha_compra AS 'Fecha Compra',(SELECT (c2.comp_costo_Total/5) FROM DATACENTER.Compra c2 WHERE c2.comp_Id = c.comp_Id) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) as 'ESTADO' FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Recorrido r ON v.viaj_reco_cod = r.reco_cod JOIN DATACENTER.Compra c ON r.reco_cod = c.comp_reco_cod and c.comp_comprador_Dni =  "+ textBoxDni.Text;
+            string query3 = "SELECT c.comp_Id AS 'Compra ID', c.comp_fecha_compra AS 'Fecha Compra',(SELECT cast(round((c2.comp_costo_Total/5),0) as numeric(18,0)) FROM DATACENTER.Compra c2 WHERE c2.comp_Id = c.comp_Id) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) as 'ESTADO' FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Recorrido r ON v.viaj_reco_cod = r.reco_cod JOIN DATACENTER.Compra c ON r.reco_cod = c.comp_reco_cod and c.comp_comprador_Dni =  " + textBoxDni.Text;
             DataTable tabla_puntosDetallados = connect.execute_query(query3);
 
             this.dataGridViewPuntosDetallados.DataSource = tabla_puntosDetallados;
