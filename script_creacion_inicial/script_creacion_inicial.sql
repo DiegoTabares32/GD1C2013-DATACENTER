@@ -85,7 +85,7 @@ GO
 /*-------------------CREAMOS TABLA CANJE----------------------------*/
 
 CREATE TABLE DATACENTER.Canje
-(canj_id int IDENTITY (1,1) NOT NULL,
+(canj_id int NOT NULL,
 canj_cli_dni numeric (18,0) NOT NULL,
 canj_prem_id int NOT NULL,
 canj_cant_retirada int NULL,
