@@ -45,7 +45,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
             }            
             this.labelResultadoPuntos.Text = tabla_puntos.Rows[0].ItemArray.ElementAt(0).ToString();
             //Cargo el resultado de los puntos vencidos
-            string puntosVencidos =  "SELECT SUM(cast(round((c.comp_costo_Total/5),0) as numeric(18,0)))FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Recorrido r ON v.viaj_reco_cod = r.reco_cod JOIN DATACENTER.Compra c ON r.reco_cod = c.comp_reco_cod and c.comp_comprador_Dni = "+ textBoxDni.Text +" WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS'";
+            string puntosVencidos = "SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = " + textBoxDni.Text + " WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS'";
             this.labelResultadoPuntosVencidos.Text = connect.execute_query(puntosVencidos).Rows[0].ItemArray.ElementAt(0).ToString();
             //Lleno la tabla de canjes 
             string query2 = "SELECT	prem_nombre AS 'Premio', prem_costo_Puntos AS 'Puntos', canj_fecha AS 'Fecha', canj_cant_retirada AS 'Cantidad' FROM DATACENTER.Canje join DATACENTER.Premio on canj_prem_Id = prem_Id WHERE canj_cli_Dni = " + textBoxDni.Text;
@@ -54,7 +54,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
             this.dataGridViewCanjesRealizados.DataSource = tabla_canje;
             
             //Lleno la tabla de detalle de puntos
-            string query3 = "SELECT c.comp_Id AS 'Compra ID', c.comp_fecha_compra AS 'Fecha Compra',(SELECT cast(round((c2.comp_costo_Total/5),0) as numeric(18,0)) FROM DATACENTER.Compra c2 WHERE c2.comp_Id = c.comp_Id) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) as 'ESTADO' FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Recorrido r ON v.viaj_reco_cod = r.reco_cod JOIN DATACENTER.Compra c ON r.reco_cod = c.comp_reco_cod and c.comp_comprador_Dni =  " + textBoxDni.Text;
+            string query3 = "SELECT V.viaj_id AS 'Viaje ID', V.viaj_fecha_llegada AS 'Fecha Llegada',cast(round((p.pas_precio/5),0) as numeric(18,0)) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) as 'ESTADO' FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Pasaje p on p.pas_viaj_id = v.viaj_id and p.pas_cli_dni = "+ textBoxDni.Text;
             DataTable tabla_puntosDetallados = connect.execute_query(query3);
 
             this.dataGridViewPuntosDetallados.DataSource = tabla_puntosDetallados;
