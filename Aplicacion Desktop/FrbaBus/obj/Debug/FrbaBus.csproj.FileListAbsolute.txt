@@ -63,3 +63,6 @@ C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATAC
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.FormButacaAlta.resources
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Form1.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Form1.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.FormButacaAlta.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Canje_de_Ptos.CanjeDePuntos.resources
