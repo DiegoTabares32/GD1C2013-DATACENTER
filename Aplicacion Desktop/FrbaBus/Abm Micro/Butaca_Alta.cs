@@ -27,10 +27,10 @@ namespace FrbaBus.Abm_Micro
             tablaButacas1.Columns.Add("tipo_butaca", typeof(string));
             
             DataRow filaButacas1 = tablaButacas1.NewRow();
-            filaButacas1["tipo_butaca"]= "V";
+            filaButacas1["tipo_butaca"]= "Ventanilla";
             tablaButacas1.Rows.Add(filaButacas1);
             DataRow filaButacas2 = tablaButacas1.NewRow();
-            filaButacas2["tipo_butaca"] = "P";
+            filaButacas2["tipo_butaca"] = "Pasillo";
             tablaButacas1.Rows.Add(filaButacas2);
             ButacaTipo.DataSource = tablaButacas1;
             ButacaTipo.DisplayMember = "tipo_butaca";
