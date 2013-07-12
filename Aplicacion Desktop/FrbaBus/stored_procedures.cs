@@ -64,6 +64,12 @@ namespace FrbaBus
             query = "DATACENTER.delete_Rol " + id_rol;
             connect.execute_query_only(query);
         }
+
+        public DataTable get_listado_viaje(string ciu_origen, string ciu_destino, string fecha_salida)
+        {
+            query = "EXECUTE DATACENTER.get_listado_viaje '" + ciu_origen + "','" + ciu_destino + "','" + fecha_salida+"'";
+            return connect.execute_query(query);
+        }
         
     }
 }
