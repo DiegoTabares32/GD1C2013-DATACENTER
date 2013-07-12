@@ -102,10 +102,10 @@ namespace FrbaBus.Abm_Micro
             MessageBox.Show("El ingreso de Micro se ha realizado con éxito.");
 
             // Se redirecciona al formulario de alta de butacas
-            //FormButacaAlta butaca_Alta = new FormButacaAlta();
-            //butaca_Alta.patente = nroPatente;
-            //butaca_Alta.cantButacas = Convert.ToInt32(textBoxCButacas.Text);
-            //butaca_Alta.Show();
+			FormButacaAlta butaca_Alta = new FormButacaAlta();
+            butaca_Alta.patente = nroPatente;
+            butaca_Alta.cantButacas = Convert.ToInt32(textBoxCButacas.Text);
+            butaca_Alta.Show();
             
             // Limpiar campos
             this.textBoxPatente.Clear();
