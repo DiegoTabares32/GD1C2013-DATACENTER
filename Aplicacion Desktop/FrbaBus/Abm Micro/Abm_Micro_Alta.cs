@@ -29,19 +29,24 @@ namespace FrbaBus.Abm_Micro
 
             char[] caracter = textBoxPatente.Text.ToCharArray();
             int i;
+            if (caracter.Length != 7)
+            {
+                MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLL-NNN");
+                return;
+            }
             for (i = 0;i<3; i++)
             {
                 if (Char.IsDigit(caracter.ElementAt(i)))
                 {
-                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
+                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLL-NNN");
                     return;
                 }
             }
-            for (i=3; i < 6; i++)
+            for (i=4; i < 7; i++)
             {
                 if (Char.IsLetter(caracter.ElementAt(i)))
                 {
-                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
+                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLL-NNN");
                     return;
                 }
             }
@@ -97,10 +102,10 @@ namespace FrbaBus.Abm_Micro
             MessageBox.Show("El ingreso de Micro se ha realizado con éxito.");
 
             // Se redirecciona al formulario de alta de butacas
-            FormButacaAlta butaca_Alta = new FormButacaAlta();
-            butaca_Alta.patente = nroPatente;
-            butaca_Alta.cantButacas = Convert.ToInt32(textBoxCButacas.Text);
-            butaca_Alta.Show();
+            //FormButacaAlta butaca_Alta = new FormButacaAlta();
+            //butaca_Alta.patente = nroPatente;
+            //butaca_Alta.cantButacas = Convert.ToInt32(textBoxCButacas.Text);
+            //butaca_Alta.Show();
             
             // Limpiar campos
             this.textBoxPatente.Clear();
