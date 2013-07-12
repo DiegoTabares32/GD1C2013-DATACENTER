@@ -44,6 +44,9 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
                 return;
             }            
             this.labelResultadoPuntos.Text = tabla_puntos.Rows[0].ItemArray.ElementAt(0).ToString();
+            //Cargo el resultado de los puntos vencidos
+            string puntosVencidos =  "SELECT SUM(cast(round((c.comp_costo_Total/5),0) as numeric(18,0)))FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Recorrido r ON v.viaj_reco_cod = r.reco_cod JOIN DATACENTER.Compra c ON r.reco_cod = c.comp_reco_cod and c.comp_comprador_Dni = "+ textBoxDni.Text +" WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS'";
+            this.labelResultadoPuntosVencidos.Text = connect.execute_query(puntosVencidos).Rows[0].ItemArray.ElementAt(0).ToString();
             //Lleno la tabla de canjes 
             string query2 = "SELECT	prem_nombre AS 'Premio', prem_costo_Puntos AS 'Puntos', canj_fecha AS 'Fecha', canj_cant_retirada AS 'Cantidad' FROM DATACENTER.Canje join DATACENTER.Premio on canj_prem_Id = prem_Id WHERE canj_cli_Dni = " + textBoxDni.Text;
             DataTable tabla_canje = connect.execute_query(query2);
@@ -60,6 +63,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
         private void buttonLimpiar_Click(object sender, EventArgs e)
         {
             this.textBoxDni.Clear();
+            this.labelResultadoPuntosVencidos.Text = "";
             this.labelResultadoPuntos.Text = "";
 
             this.dataGridViewPuntosDetallados.Columns.Clear();

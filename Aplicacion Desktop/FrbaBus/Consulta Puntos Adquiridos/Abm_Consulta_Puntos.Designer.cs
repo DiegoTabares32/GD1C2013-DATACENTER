@@ -48,6 +48,8 @@
             this.dataGridViewPuntosDetallados = new System.Windows.Forms.DataGridView();
             this.dataGridViewCanjesRealizados = new System.Windows.Forms.DataGridView();
             this.buttonLimpiar = new System.Windows.Forms.Button();
+            this.labelPuntosVencidos = new System.Windows.Forms.Label();
+            this.labelResultadoPuntosVencidos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPuntosDetallados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCanjesRealizados)).BeginInit();
             this.SuspendLayout();
@@ -207,6 +209,23 @@
             this.buttonLimpiar.UseVisualStyleBackColor = true;
             this.buttonLimpiar.Click += new System.EventHandler(this.buttonLimpiar_Click);
             // 
+            // labelPuntosVencidos
+            // 
+            this.labelPuntosVencidos.AutoSize = true;
+            this.labelPuntosVencidos.Location = new System.Drawing.Point(244, 35);
+            this.labelPuntosVencidos.Name = "labelPuntosVencidos";
+            this.labelPuntosVencidos.Size = new System.Drawing.Size(93, 13);
+            this.labelPuntosVencidos.TabIndex = 10;
+            this.labelPuntosVencidos.Text = "Puntos Vencidos: ";
+            // 
+            // labelResultadoPuntosVencidos
+            // 
+            this.labelResultadoPuntosVencidos.AutoSize = true;
+            this.labelResultadoPuntosVencidos.Location = new System.Drawing.Point(372, 35);
+            this.labelResultadoPuntosVencidos.Name = "labelResultadoPuntosVencidos";
+            this.labelResultadoPuntosVencidos.Size = new System.Drawing.Size(0, 13);
+            this.labelResultadoPuntosVencidos.TabIndex = 11;
+            // 
             // Abm_Consulta_Puntos
             // 
             this.AcceptButton = this.consultarDni;
@@ -214,6 +233,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonLimpiar;
             this.ClientSize = new System.Drawing.Size(769, 289);
+            this.Controls.Add(this.labelResultadoPuntosVencidos);
+            this.Controls.Add(this.labelPuntosVencidos);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.dataGridViewCanjesRealizados);
             this.Controls.Add(this.dataGridViewPuntosDetallados);
@@ -245,5 +266,7 @@
         private System.Windows.Forms.DataGridView dataGridViewPuntosDetallados;
         private System.Windows.Forms.DataGridView dataGridViewCanjesRealizados;
         private System.Windows.Forms.Button buttonLimpiar;
+        private System.Windows.Forms.Label labelPuntosVencidos;
+        private System.Windows.Forms.Label labelResultadoPuntosVencidos;
     }
 }
