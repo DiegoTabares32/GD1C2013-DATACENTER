@@ -69,6 +69,12 @@
     <Compile Include="Abm Micro\Abm_Micro_Alta.Designer.cs">
       <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Micro\Butaca_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Micro\Butaca_Alta.Designer.cs">
+      <DependentUpon>Butaca_Alta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Permisos\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Abm Micro\Abm_Micro_Alta.resx">
       <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Micro\Butaca_Alta.resx">
+      <DependentUpon>Butaca_Alta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Alta.resx">
       <DependentUpon>Abm_Reco_Alta.cs</DependentUpon>
