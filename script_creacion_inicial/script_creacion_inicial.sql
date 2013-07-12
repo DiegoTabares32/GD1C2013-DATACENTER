@@ -139,25 +139,7 @@ PRIMARY KEY (reco_cod)
 )
 GO
 
-/*------------------------------------------------------------------*/
-/*-----------------CREAMOS TABLA COMPRA-----------------------------*/
 
-CREATE TABLE DATACENTER.Compra
-(comp_id int IDENTITY (1,1) NOT NULL,
-comp_comprador_dni numeric (18,0) NOT NULL,
-comp_tipo_tarj_id int  NULL,
-comp_reco_cod numeric(18,0) NOT NULL,
-comp_cant_pasajes int NULL,
-comp_cant_total_kg numeric (18,0) NULL, 
-comp_costo_total numeric (18,2) NULL,
-comp_fecha_compra datetime NULL,
-comp_codigo_pas_paq numeric (18,0) NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
-FOREIGN KEY (comp_comprador_dni) REFERENCES DATACENTER.Cliente (cli_dni),
-FOREIGN KEY (comp_tipo_tarj_id) REFERENCES DATACENTER.TipoTarjeta (tipo_id),
-FOREIGN KEY (comp_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
-PRIMARY KEY (comp_id)
-)
-GO
 
 /*------------------------------------------------------------------*/
 /*-------------------CREAMOS TABLA MARCA----------------------------*/
@@ -213,6 +195,42 @@ PRIMARY KEY (but_nro, but_mic_patente)
 )
 GO
 
+
+/*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA VIAJE-------------------------*/
+
+CREATE TABLE DATACENTER.Viaje
+(viaj_id int IDENTITY (1,1) NOT NULL,
+viaj_mic_patente nvarchar(255) NOT NULL,
+viaj_reco_cod numeric(18,0) NOT NULL,
+viaj_fecha_salida datetime NULL,
+viaj_fecha_lleg_estimada datetime NULL,
+viaj_fecha_llegada datetime NULL,
+FOREIGN KEY (viaj_mic_patente) REFERENCES DATACENTER.Micro (mic_patente), 
+FOREIGN KEY (viaj_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
+PRIMARY KEY (viaj_id)
+)
+GO
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA COMPRA-----------------------------*/
+
+CREATE TABLE DATACENTER.Compra
+(comp_id int IDENTITY (1,1) NOT NULL,
+comp_comprador_dni numeric (18,0) NOT NULL,
+comp_tipo_tarj_id int  NULL,
+comp_viaj_id int  NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
+comp_cant_pasajes int NULL,
+comp_cant_total_kg numeric (18,0) NULL, 
+comp_costo_total numeric (18,2) NULL,
+comp_fecha_compra datetime NULL,
+comp_codigo_pas_paq numeric (18,0) NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
+FOREIGN KEY (comp_comprador_dni) REFERENCES DATACENTER.Cliente (cli_dni),
+FOREIGN KEY (comp_tipo_tarj_id) REFERENCES DATACENTER.TipoTarjeta (tipo_id),
+--FOREIGN KEY (comp_viaj_id) REFERENCES DATACENTER.Viaje (viaj_id),
+PRIMARY KEY (comp_id)
+)
+GO
+
 /*------------------------------------------------------------------*/
 /*---------------------CREAMOS TABLA PASAJE-------------------------*/
 
@@ -223,6 +241,8 @@ pas_micro_patente nvarchar(255) NOT NULL,
 pas_cli_dni numeric (18,0) NOT NULL,
 pas_compra_id int NOT NULL,
 pas_precio numeric(18,2) NULL,
+pas_viaj_id int  NOT NULL,
+FOREIGN KEY (pas_viaj_id) REFERENCES DATACENTER.Viaje (viaj_id),
 FOREIGN KEY (pas_nro_butaca, pas_micro_patente) REFERENCES DATACENTER.Butaca (but_nro, but_mic_patente),
 FOREIGN KEY (pas_cli_dni) REFERENCES DATACENTER.Cliente (cli_dni),
 FOREIGN KEY (pas_compra_id) REFERENCES DATACENTER.Compra (comp_id),
@@ -238,6 +258,8 @@ CREATE TABLE DATACENTER.Paquete
 paq_comp_id int NOT NULL,
 paq_precio numeric (18,2) NULL,
 paq_kg numeric (18,0)NULL,
+paq_viaj_id int  NOT NULL,
+FOREIGN KEY (paq_viaj_id) REFERENCES DATACENTER.Viaje (viaj_id),
 FOREIGN KEY (paq_comp_id) REFERENCES DATACENTER.Compra (comp_id),
 PRIMARY KEY (paq_cod)
 )
@@ -259,24 +281,6 @@ FOREIGN KEY (dev_paq_cod) REFERENCES DATACENTER.Paquete (paq_cod),
 PRIMARY KEY (dev_id)
 )
 GO
-
-
-/*------------------------------------------------------------------*/
-/*---------------------CREAMOS TABLA VIAJE-------------------------*/
-
-CREATE TABLE DATACENTER.Viaje
-(viaj_id int IDENTITY (1,1) NOT NULL,
-viaj_mic_patente nvarchar(255) NOT NULL,
-viaj_reco_cod numeric(18,0) NOT NULL,
-viaj_fecha_salida datetime NULL,
-viaj_fecha_lleg_estimada datetime NULL,
-viaj_fecha_llegada datetime NULL,
-FOREIGN KEY (viaj_mic_patente) REFERENCES DATACENTER.Micro (mic_patente), 
-FOREIGN KEY (viaj_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
-PRIMARY KEY (viaj_id)
-)
-GO
-
 /*------------------------------------------------------------------*/
 /*---------------------CREAMOS TABLA ARRIBO-------------------------*/
 
@@ -367,9 +371,6 @@ INSERT INTO DATACENTER.Cliente(cli_dni, cli_nombre, cli_apellido, cli_dir, cli_t
 	FROM gd_esquema.Maestra
 GO
 
-UPDATE DATACENTER.Cliente
-SET cli_puntos_acum=0
-
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE SERVICIO-----------------------------*/
 
@@ -421,19 +422,44 @@ INSERT INTO DATACENTER.Recorrido(reco_cod, reco_serv_id, reco_origen, reco_desti
 	ORDER BY 1
 GO
 
+CREATE FUNCTION DATACENTER.get_id_viaje (@mic_patente nvarchar(255), @reco_cod numeric(18,0), @fecha_salida datetime, @fecha_lleg_estimada datetime, @fecha_llegada datetime)
+RETURNS int
+BEGIN
+	RETURN (SELECT viaj_id
+	FROM DATACENTER.Viaje
+	WHERE viaj_mic_patente=@mic_patente AND viaj_reco_cod=@reco_cod AND viaj_fecha_salida=@fecha_salida AND viaj_fecha_lleg_estimada=@fecha_lleg_estimada AND viaj_fecha_llegada=@fecha_llegada)
+END
+GO
+
+/*------------------------------------------------------------------*/
+/*-------------------MIGRACION DE VIAJE-----------------------------*/
+INSERT INTO DATACENTER.Viaje(viaj_mic_patente, viaj_reco_cod, viaj_fecha_salida, viaj_fecha_lleg_estimada, viaj_fecha_llegada)
+	SELECT DISTINCT Micro_Patente, Recorrido_Codigo, FechaSalida, Fecha_LLegada_Estimada, FechaLLegada
+	FROM gd_esquema.Maestra
+GO
+
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION COMPRA-----------------------------*/
 
-INSERT INTO DATACENTER.Compra(comp_cant_pasajes, comp_cant_total_kg, comp_reco_cod, comp_comprador_dni, comp_costo_total, comp_fecha_compra, comp_codigo_pas_paq)
-SELECT 1 AS cant_pasajes, Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Pasaje_Precio AS costo_total, Pasaje_FechaCompra AS fecha_compra, Pasaje_Codigo
+INSERT INTO DATACENTER.Compra(comp_cant_pasajes, comp_cant_total_kg, comp_viaj_id, comp_comprador_dni, comp_costo_total, comp_fecha_compra, comp_codigo_pas_paq)
+SELECT 1 AS cant_pasajes, Paquete_KG AS cant_total_kg, (
+SELECT viaj_id
+FROM DATACENTER.Viaje
+WHERE viaj_mic_patente=Micro_Patente  AND viaj_reco_cod=Recorrido_Codigo AND viaj_fecha_salida=FechaSalida AND viaj_fecha_lleg_estimada=Fecha_LLegada_Estimada AND viaj_fecha_llegada=FechaLLegada
+),
+Cli_Dni AS comprador_Dni , Pasaje_Precio AS costo_total, Pasaje_FechaCompra AS fecha_compra, Pasaje_Codigo
 FROM gd_esquema.Maestra
 WHERE  Pasaje_Codigo<>0 --NOS REFERIMOS A PASAJES
 UNION ALL --POR SI SE DA ALGUNA REPETICION ; "UNION" ME DEVUELVE LA UNION DE LAS CONSULTAS PERO SIN REPETICIONES (DISTINCT)
-SELECT 0 AS cant_pasajes,Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Paquete_Precio AS costo_total, Paquete_FechaCompra AS fecha_compra, Paquete_Codigo
+SELECT 0 AS cant_pasajes,Paquete_KG AS cant_total_kg, 
+(SELECT viaj_id
+FROM DATACENTER.Viaje
+WHERE viaj_mic_patente=Micro_Patente  AND viaj_reco_cod=Recorrido_Codigo AND viaj_fecha_salida=FechaSalida AND viaj_fecha_lleg_estimada=Fecha_LLegada_Estimada AND viaj_fecha_llegada=FechaLLegada
+),
+Cli_Dni AS comprador_Dni, Paquete_Precio AS costo_total, Paquete_FechaCompra AS fecha_compra, Paquete_Codigo
 FROM gd_esquema.Maestra
 WHERE  Pasaje_Codigo=0 --NOS REFERIMOS A PAQUETE
 GO 
-
 /*------------------------------------------------------------------*/
 /*---------------------MIGRACION BUTACA-----------------------------*/
 
@@ -445,18 +471,12 @@ INSERT INTO DATACENTER.Butaca(but_nro, but_mic_patente, but_tipo, but_piso)
 	ORDER BY Micro_Patente, Butaca_Nro
 GO
 
-/*------------------------------------------------------------------*/
-/*-------------------MIGRACION DE VIAJE-----------------------------*/
-INSERT INTO DATACENTER.Viaje(viaj_mic_patente, viaj_reco_cod, viaj_fecha_salida, viaj_fecha_lleg_estimada, viaj_fecha_llegada)
-	SELECT DISTINCT Micro_Patente, Recorrido_Codigo, FechaSalida, Fecha_LLegada_Estimada, FechaLLegada
-	FROM gd_esquema.Maestra
-GO
 
 
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE PASAJE-------------------------------*/
-INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_dni, pas_compra_id, pas_precio)
-	SELECT M.Pasaje_Codigo, M.Butaca_Nro, M.Micro_Patente, M.Cli_Dni, C.comp_Id, M.Pasaje_Precio 
+INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_dni, pas_compra_id, pas_precio, pas_viaj_id)
+	SELECT M.Pasaje_Codigo, M.Butaca_Nro, M.Micro_Patente, M.Cli_Dni, C.comp_Id, M.Pasaje_Precio, C.comp_viaj_id
  	FROM gd_esquema.Maestra M join DATACENTER.Compra C on M.Cli_Dni = C.comp_comprador_Dni AND  C.comp_cant_pasajes = 1 AND C.comp_Codigo_Pas_Paq = M.Pasaje_Codigo
  	ORDER BY  Pasaje_Codigo, Cli_Dni, C.comp_Id
 GO
@@ -464,16 +484,19 @@ GO
 /*------------------------------------------------------------------*/
 /*---------------------MIGRACION DE PAQUETE-------------------------*/
 
-INSERT INTO DATACENTER.Paquete (paq_cod, paq_comp_id, paq_precio, paq_kg)
-	SELECT comp_Codigo_Pas_Paq, comp_Id, comp_costo_Total, comp_cant_total_KG
+INSERT INTO DATACENTER.Paquete (paq_cod, paq_comp_id, paq_precio, paq_kg, paq_viaj_id)
+	SELECT comp_Codigo_Pas_Paq, comp_Id, comp_costo_Total, comp_cant_total_KG, comp_viaj_id
 	FROM DATACENTER.Compra
 	WHERE comp_cant_total_KG <> 0
 GO
 
---Eliminamos columna extra en COMPRA que fue utilizada para OPTIMIZAR la Migracion
+
+
+--Eliminamos columnas extras en COMPRA que fue utilizada para OPTIMIZAR la Migracion
 ALTER TABLE DATACENTER.Compra
-DROP COLUMN comp_codigo_pas_paq
+DROP COLUMN comp_codigo_pas_paq, comp_viaj_id
 GO
+
 
 /*-------------------------------------------------------------------*/
 /*-------------------------STORED PROCEDURE--------------------------*/
@@ -511,6 +534,52 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE DATACENTER.delete_Rol @id_rol int
+AS
+BEGIN
+	DELETE DATACENTER.FuncionalidadPorRol
+	WHERE fxrol_rol_id= @id_rol
+
+	DELETE DATACENTER.Rol
+	WHERE rol_id = @id_rol
+END
+GO
+
+CREATE PROCEDURE DATACENTER.update_rol @rol_id int, @rol_nombre nvarchar(255), @rol_estado char
+AS
+BEGIN
+	UPDATE DATACENTER.Rol
+	SET rol_nombre = @rol_nombre, rol_estado = @rol_estado
+	WHERE rol_id = @rol_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_listado_viaje @ciu_origen nvarchar(255), @ciu_destino nvarchar(255), @fecha_salida nvarchar(255)
+AS
+BEGIN
+SELECT viaj_id,viaj_fecha_salida, reco_origen, reco_destino,serv_tipo, mic_cant_butacas -
+(
+	SELECT COUNT(pas_viaj_id)
+	FROM DATACENTER.Pasaje
+	WHERE pas_viaj_id = viaj_id
+) AS butacas_Disponibles, mic_cant_kg_disponibles-
+(
+	SELECT SUM(paq_kg)
+	FROM DATACENTER.Paquete
+	WHERE paq_viaj_id = viaj_id
+) AS kg_Disponibles
+FROM DATACENTER.Viaje JOIN DATACENTER.Recorrido ON (viaj_reco_cod = reco_cod)
+	 JOIN DATACENTER.Micro ON (mic_patente= viaj_mic_patente)
+	 JOIN DATACENTER.Servicio ON (reco_serv_id= serv_id)
+WHERE reco_origen = @ciu_origen AND reco_destino= @ciu_destino
+	  AND DAY(viaj_fecha_salida) = DAY(@fecha_salida)
+	  AND MONTH(viaj_fecha_salida) = MONTH(@fecha_salida)
+	  AND YEAR(viaj_fecha_salida) = YEAR(@fecha_salida)
+
+END
+
+GO
+
 CREATE FUNCTION DATACENTER.estado_puntos(@inicio datetime, @fin datetime2)
 RETURNS nvarchar(10)
 AS
@@ -527,5 +596,3 @@ BEGIN
 	RETURN @estado
 END
 GO
-
-
