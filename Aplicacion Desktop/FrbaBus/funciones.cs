@@ -69,5 +69,11 @@ namespace FrbaBus
             return conexion.execute_query(query);
         }
 
+        public string totalPuntosVencidos(string dni)
+        {
+            connection conexion = new connection();
+            string query = "SELECT DATACENTER.totalPuntosVencidos("+dni+")";
+            return conexion.execute_query(query).Rows[0].ItemArray.ElementAt(0).ToString();
+        }
     }
 }

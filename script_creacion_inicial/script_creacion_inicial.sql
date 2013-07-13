@@ -596,3 +596,19 @@ BEGIN
 	RETURN @estado
 END
 GO
+
+create function DATACENTER.totalPuntosVencidos(@dni numeric(18,0))
+returns int
+as
+begin
+	return (select isnull(sum(cast(round(p.paq_precio/5,0) as numeric(18,0))),0) 
+			from DATACENTER.Paquete p join DATACENTER.Arribo a 
+			on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = @dni join DATACENTER.Viaje v 
+			on v.viaj_id = a.arri_viaj_id 
+			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')
+			+
+			(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
+			FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
+			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni 
+			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')
+end
