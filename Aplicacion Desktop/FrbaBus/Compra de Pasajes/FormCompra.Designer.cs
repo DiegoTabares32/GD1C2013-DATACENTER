@@ -40,13 +40,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.cargar_pas_boton = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.CantPasaj_numericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.total_tbox = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // login_boton
             // 
-            this.login_boton.Location = new System.Drawing.Point(649, 3);
+            this.login_boton.Location = new System.Drawing.Point(356, 3);
             this.login_boton.Name = "login_boton";
             this.login_boton.Size = new System.Drawing.Size(64, 25);
             this.login_boton.TabIndex = 0;
@@ -120,7 +122,7 @@
             this.busc_viaje_boton.Name = "busc_viaje_boton";
             this.busc_viaje_boton.Size = new System.Drawing.Size(118, 31);
             this.busc_viaje_boton.TabIndex = 12;
-            this.busc_viaje_boton.Text = "Buscar Viajes";
+            this.busc_viaje_boton.Text = "Seleccionar Viaje";
             this.busc_viaje_boton.UseVisualStyleBackColor = true;
             this.busc_viaje_boton.Click += new System.EventHandler(this.busc_viaje_boton_Click);
             // 
@@ -142,27 +144,56 @@
             // 
             // cargar_pas_boton
             // 
-            this.cargar_pas_boton.Location = new System.Drawing.Point(216, 394);
+            this.cargar_pas_boton.Location = new System.Drawing.Point(219, 361);
             this.cargar_pas_boton.Name = "cargar_pas_boton";
             this.cargar_pas_boton.Size = new System.Drawing.Size(117, 30);
             this.cargar_pas_boton.TabIndex = 18;
-            this.cargar_pas_boton.Text = "Cargar Pasajero";
+            this.cargar_pas_boton.Text = "Cargar Pasaje";
             this.cargar_pas_boton.UseVisualStyleBackColor = true;
             this.cargar_pas_boton.Click += new System.EventHandler(this.cargar_pas_boton_Click);
             // 
-            // numericUpDown1
+            // CantPasaj_numericUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(216, 325);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 19;
+            this.CantPasaj_numericUpDown.Location = new System.Drawing.Point(216, 325);
+            this.CantPasaj_numericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CantPasaj_numericUpDown.Name = "CantPasaj_numericUpDown";
+            this.CantPasaj_numericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.CantPasaj_numericUpDown.TabIndex = 19;
+            this.CantPasaj_numericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CantPasaj_numericUpDown.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroPasaj_numericUpDown_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 430);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Total de Compra: ";
+            // 
+            // total_tbox
+            // 
+            this.total_tbox.Location = new System.Drawing.Point(183, 427);
+            this.total_tbox.Name = "total_tbox";
+            this.total_tbox.Size = new System.Drawing.Size(131, 20);
+            this.total_tbox.TabIndex = 21;
             // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 499);
-            this.Controls.Add(this.numericUpDown1);
+            this.ClientSize = new System.Drawing.Size(456, 499);
+            this.Controls.Add(this.total_tbox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.CantPasaj_numericUpDown);
             this.Controls.Add(this.cargar_pas_boton);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label5);
@@ -178,7 +209,7 @@
             this.Name = "FormCompra";
             this.Text = "Compra";
             this.Load += new System.EventHandler(this.FormCompra_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,8 +227,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button cargar_pas_boton;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         public System.Windows.Forms.ComboBox ciu_orig_list;
         public System.Windows.Forms.ComboBox ciu_dest_list;
+        public System.Windows.Forms.NumericUpDown CantPasaj_numericUpDown;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox total_tbox;
     }
 }

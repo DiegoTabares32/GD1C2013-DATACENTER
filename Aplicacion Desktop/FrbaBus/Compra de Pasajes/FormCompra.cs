@@ -14,7 +14,10 @@ namespace FrbaBus.Compra_de_Pasajes
     {
         //Atributos
 
-        public string cod_viaje;
+        public string cod_viaje="";
+
+        //Colección de Pasajes una vez confirmada la compra los cargamos en la base
+        List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
 
         public FormCompra()
         {
@@ -58,14 +61,67 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void busc_viaje_boton_Click(object sender, EventArgs e)
         {
+            bool error = false;
+            if (this.fecha_tbox.Text == "")
+            {
+                MessageBox.Show("Debe Seleccionar Fecha", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (error)
+                return;
+
             select_viaje seleccionar_viaje = new select_viaje(this);
             seleccionar_viaje.ShowDialog();
         }
 
         private void cargar_pas_boton_Click(object sender, EventArgs e)
         {
-            cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje);
-            form_cargar_pas.ShowDialog();
+            bool error = false;
+
+            if (this.cod_viaje == "")
+            {
+                MessageBox.Show("Debe Seleccionar Viaje", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (error)
+                return;
+
+            int cant_pasajes = Convert.ToInt16(this.CantPasaj_numericUpDown.Value);
+            int i;
+
+            //cargamos los datos de los pasajeros
+            select_viaje form_viaje = new select_viaje(this);
+            for (i = 0; i < cant_pasajes; i++)
+            {
+                cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje);
+                form_cargar_pas.ShowDialog();
+                listas_pasajeros.Add(form_cargar_pas);
+                if (cant_pasajes - 1 != i)
+                {
+                    MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    form_viaje.ShowDialog();
+                }
+                
+
+            }
+            stored_procedures stored_proc = new stored_procedures();
+            Single total_compra = 0;
+            foreach (cargar_pasajero pasaje in listas_pasajeros)
+            {
+                total_compra += Convert.ToSingle(stored_proc.get_porcentaje(pasaje.viaje_cod));
+            }
+            this.total_tbox.Text = total_compra.ToString();
+        }
+
+        private void NroPasaj_numericUpDown_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo permite q ingrese numeros
+            if (char.IsNumber(e.KeyChar) | char.IsControl(e.KeyChar) )
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
 
 

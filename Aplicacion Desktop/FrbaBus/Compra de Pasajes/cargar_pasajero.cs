@@ -101,18 +101,46 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
+            if (this.butNro_tbox.Text == "" | this.piso_tbox.Text == "" | this.pos_but_tbox.Text == "")
+            {
+                MessageBox.Show("Debe Seleccionar Butaca", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
             if (error)
             {
                 this.refrescar();
                 return;
             }
 
+            stored_procedures stored_proc = new stored_procedures();
+            string sexo;
+            if (this.mascul_radioBut.Checked)
+                    sexo = "M";
+                else
+                    sexo = "F";
+
+            //Actualizamos o Insertamos Cliente
+            if (this.cliente_existente)
+            {
+
+                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
+
+            }
+            else
+            {
+                //Insertamos Cliente
+                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
+
+            }
+
+            this.Close();
+
         }
 
         private void DNI_Tbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             stored_procedures stored_proc = new stored_procedures();
-            DateTime date = new DateTime();
 
             if (char.IsPunctuation(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsLetter(e.KeyChar) | char.IsSymbol(e.KeyChar))
                 e.Handled = true;
@@ -125,7 +153,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 DataTable table_campos_cli = stored_proc.cargar_campos_cliente(this.DNI_Tbox.Text);
                 if (table_campos_cli.Rows.Count != 0)
                 {
-                    date = Convert.ToDateTime(table_campos_cli.Rows[0].ItemArray[5].ToString());
+                    this.DNI_Tbox.Enabled = false;
                     this.cliente_existente = true;
                     this.nombre_Tbox.Text = table_campos_cli.Rows[0].ItemArray[0].ToString();
                     this.apell_Tbox.Text = table_campos_cli.Rows[0].ItemArray[1].ToString();
@@ -135,9 +163,9 @@ namespace FrbaBus.Compra_de_Pasajes
                     this.fec_nac_Tbox.Text = table_campos_cli.Rows[0].ItemArray[5].ToString().Substring(0, 10);
 
                     //controlo si esta ingresado el sexo
-                    if (table_campos_cli.Rows[0].ItemArray[5].ToString() == "M")
+                    if (table_campos_cli.Rows[0].ItemArray[6].ToString() == "M")
                         this.mascul_radioBut.Checked = true;
-                    if (table_campos_cli.Rows[0].ItemArray[5].ToString() == "F")
+                    if (table_campos_cli.Rows[0].ItemArray[6].ToString() == "F")
                         this.fem_radButton.Checked = true;
                 }
 
@@ -169,7 +197,7 @@ namespace FrbaBus.Compra_de_Pasajes
         private void tel_Tbox_KeyPress(object sender, KeyPressEventArgs e)
         {
             //solo permite q ingrese numeros
-            if (char.IsNumber(e.KeyChar))
+            if (char.IsNumber(e.KeyChar) | char.IsControl(e.KeyChar))
                 e.Handled = false;
             else
                 e.Handled = true;

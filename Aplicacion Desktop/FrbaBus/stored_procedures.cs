@@ -77,5 +77,25 @@ namespace FrbaBus
             query = "EXECUTE DATACENTER.get_Butacas " + cod_viaje;
             return connect.execute_query(query);
         }
+
+        public void update_Cliente(string cli_dni, string cli_nombre, string cli_apellido, string cli_dir, string cli_telefono, string cli_mail, string cli_fecha_nac, string cli_sexo)
+        {
+            query = "EXECUTE DATACENTER.update_Cliente "+cli_dni+",'"+cli_nombre+"','"+cli_apellido+"','"+cli_dir+"','"+cli_telefono+"','"+cli_mail+"','"+cli_fecha_nac+"','"+cli_sexo+"'";
+            connect.execute_query_only(query);
+        }
+
+        public void insert_Cliente(string cli_dni, string cli_nombre, string cli_apellido, string cli_dir, string cli_telefono, string cli_mail, string cli_fecha_nac, string cli_sexo)
+        {
+            query = "EXECUTE DATACENTER.insert_Cliente " + cli_dni + ",'" + cli_nombre + "','" + cli_apellido + "','" + cli_dir + "','" + cli_telefono + "','" + cli_mail + "','" + cli_fecha_nac + "','" + cli_sexo + "'";
+            connect.execute_query_only(query);
+        }
+
+        public string get_porcentaje(string viaj_id)
+        {
+            connection conexion = new connection();
+            string query = " EXECUTE DATACENTER.get_porcentaje " + viaj_id;
+            DataTable tabl_porc = conexion.execute_query(query);
+            return tabl_porc.Rows[0].ItemArray[0].ToString();
+        }
     }
 }

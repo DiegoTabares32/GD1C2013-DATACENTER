@@ -362,7 +362,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "cargar_pasajero";
-            this.Text = "Pasaje";
+            this.Text = "Pasajero";
             this.ResumeLayout(false);
             this.PerformLayout();
 

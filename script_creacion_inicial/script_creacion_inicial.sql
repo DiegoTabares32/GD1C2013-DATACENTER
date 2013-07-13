@@ -599,4 +599,43 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE DATACENTER.get_butacas @cod_viaje int
+AS
+BEGIN
+SELECT but_nro AS Nro_Butaca, but_tipo AS Tipo, but_piso AS Nro_Piso
+FROM DATACENTER.Viaje JOIN DATACENTER.Micro ON (viaj_mic_patente = mic_patente)
+	 JOIN DATACENTER.Butaca ON (mic_patente = but_mic_patente)
+WHERE viaj_id = @cod_viaje AND NOT but_nro IN (select pas_nro_butaca from DATACENTER.Pasaje where pas_viaj_id=@cod_viaje)
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_porcentaje @viaj_id int
+AS
+BEGIN
+	SELECT reco_precio_base_pasaje+((serv_porc_adicional *reco_precio_base_pasaje)/ 100)
+		   FROM DATACENTER.Recorrido JOIN DATACENTER.Viaje ON (reco_cod=viaj_reco_cod)
+				JOIN DATACENTER.Servicio ON (reco_serv_id=serv_id)
+		   WHERE viaj_id=@viaj_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5)
+AS
+BEGIN
+	INSERT DATACENTER.Cliente (cli_dni, cli_rol_id, cli_nombre, cli_apellido, cli_dir, cli_telefono, cli_mail, cli_fecha_nac, cli_puntos_acum,  cli_sexo)
+	VALUES (@cli_dni,2,@cli_nombre,@cli_apellido, @cli_dir, @cli_telefono,@cli_mail, convert(datetime,@cli_fecha_nac), 0,convert (char, @cli_sexo))
+	
+END
+GO
+
+CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5)
+AS
+BEGIN
+	UPDATE DATACENTER.Cliente
+	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo)
+	WHERE cli_dni=@cli_dni
+END
+GO
+
+
 
