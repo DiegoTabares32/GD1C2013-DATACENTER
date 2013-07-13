@@ -53,11 +53,8 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
 
             this.dataGridViewCanjesRealizados.DataSource = tabla_canje;
             
-            //Lleno la tabla de detalle de puntos
-            string query3 = "SELECT V.viaj_id AS 'Viaje ID', V.viaj_fecha_llegada AS 'Fecha Llegada',cast(round((p.pas_precio/5),0) as numeric(18,0)) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) as 'ESTADO' FROM DATACENTER.Arribo a JOIN DATACENTER.Viaje v ON a.arri_viaj_Id = v.viaj_Id JOIN DATACENTER.Pasaje p on p.pas_viaj_id = v.viaj_id and p.pas_cli_dni = "+ textBoxDni.Text;
-            DataTable tabla_puntosDetallados = connect.execute_query(query3);
-
-            this.dataGridViewPuntosDetallados.DataSource = tabla_puntosDetallados;
+            //Lleno la tabla de detalle de puntos            
+            this.dataGridViewPuntosDetallados.DataSource = this.funciones.consultarPuntos(this.textBoxDni.Text);
         }
 
         private void buttonLimpiar_Click(object sender, EventArgs e)

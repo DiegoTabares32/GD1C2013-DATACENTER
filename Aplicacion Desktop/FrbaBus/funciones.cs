@@ -62,5 +62,12 @@ namespace FrbaBus
             return tabla_patente.Rows.Count > 0;
         }
 
+        public DataTable consultarPuntos(string dni)
+        {
+            connection conexion = new connection();
+            string query = "SELECT v.viaj_id AS 'Viaje ID', v.viaj_fecha_llegada AS 'Fecha Llegada', cast(round(isnull(p.pas_precio,0)/5,0) as numeric(18,0)) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) AS 'ESTADO' FROM DATACENTER.Arribo a join DATACENTER.Viaje v ON a.arri_viaj_id = v.viaj_id join DATACENTER.Pasaje p on p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = " + dni + " union all SELECT a.arri_viaj_id AS 'Viaje ID',  v.viaj_fecha_llegada AS 'Fecha Llegada', cast(round(isnull(p.paq_precio,0)/5,0) as numeric(18,0)) AS 'Puntos', DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) AS 'ESTADO' FROM DATACENTER.Paquete p join DATACENTER.Arribo a on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = " + dni + " join DATACENTER.Viaje v on v.viaj_id = a.arri_viaj_id";
+            return conexion.execute_query(query);
+        }
+
     }
 }
