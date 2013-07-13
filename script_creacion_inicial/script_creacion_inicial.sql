@@ -590,4 +590,13 @@ WHERE reco_origen = @ciu_origen AND reco_destino= @ciu_destino
 END
 GO
 
+CREATE PROCEDURE DATACENTER.cargar_campos_cliente @cli_dni numeric(18,0)
+AS
+BEGIN 
+	SELECT C.cli_nombre, C.cli_apellido, C.cli_dir, C.cli_telefono, C.cli_mail , C.cli_fecha_nac, C.cli_sexo
+	FROM DATACENTER.Cliente C
+	WHERE C.cli_dni = @cli_dni
+END
+GO
+
 

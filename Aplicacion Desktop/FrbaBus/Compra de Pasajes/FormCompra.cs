@@ -12,6 +12,10 @@ namespace FrbaBus.Compra_de_Pasajes
 {
     public partial class FormCompra : Form
     {
+        //Atributos
+
+        public string cod_viaje;
+
         public FormCompra()
         {
             InitializeComponent();
@@ -30,7 +34,6 @@ namespace FrbaBus.Compra_de_Pasajes
         {
             select_fecha_viaje select_viaje = new select_fecha_viaje(this);
             select_viaje.ShowDialog();
-            
         }
 
         private void FormCompra_Load(object sender, EventArgs e)
@@ -55,8 +58,14 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void busc_viaje_boton_Click(object sender, EventArgs e)
         {
-            select_viaje seleccionar_viaje = new select_viaje(this.ciu_orig_list.Text, this.ciu_dest_list.Text, this.fecha_tbox.Text);
+            select_viaje seleccionar_viaje = new select_viaje(this);
             seleccionar_viaje.ShowDialog();
+        }
+
+        private void cargar_pas_boton_Click(object sender, EventArgs e)
+        {
+            cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje);
+            form_cargar_pas.ShowDialog();
         }
 
 

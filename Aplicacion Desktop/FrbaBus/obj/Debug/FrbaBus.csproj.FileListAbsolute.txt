@@ -21,7 +21,8 @@ C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\Frb
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormAdmin.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Modif.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Busqueda.resources
-C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Baja.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.FormCompra.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_fecha_viaje.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_viaje.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.cargar_pasajero.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_butaca.resources

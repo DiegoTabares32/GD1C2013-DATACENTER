@@ -37,6 +37,11 @@
             this.ciu_orig_list = new System.Windows.Forms.ComboBox();
             this.ciu_dest_list = new System.Windows.Forms.ComboBox();
             this.busc_viaje_boton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.cargar_pas_boton = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // login_boton
@@ -119,11 +124,48 @@
             this.busc_viaje_boton.UseVisualStyleBackColor = true;
             this.busc_viaje_boton.Click += new System.EventHandler(this.busc_viaje_boton_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 327);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(195, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Ingrese Cantidad de Pasajes a comprar:";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(16, 8);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 16;
+            // 
+            // cargar_pas_boton
+            // 
+            this.cargar_pas_boton.Location = new System.Drawing.Point(216, 394);
+            this.cargar_pas_boton.Name = "cargar_pas_boton";
+            this.cargar_pas_boton.Size = new System.Drawing.Size(117, 30);
+            this.cargar_pas_boton.TabIndex = 18;
+            this.cargar_pas_boton.Text = "Cargar Pasajero";
+            this.cargar_pas_boton.UseVisualStyleBackColor = true;
+            this.cargar_pas_boton.Click += new System.EventHandler(this.cargar_pas_boton_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(216, 325);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 19;
+            // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 499);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.cargar_pas_boton);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.busc_viaje_boton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -136,6 +178,7 @@
             this.Name = "FormCompra";
             this.Text = "Compra";
             this.Load += new System.EventHandler(this.FormCompra_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,8 +192,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.TextBox fecha_tbox;
-        private System.Windows.Forms.ComboBox ciu_orig_list;
-        private System.Windows.Forms.ComboBox ciu_dest_list;
         private System.Windows.Forms.Button busc_viaje_boton;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button cargar_pas_boton;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        public System.Windows.Forms.ComboBox ciu_orig_list;
+        public System.Windows.Forms.ComboBox ciu_dest_list;
     }
 }

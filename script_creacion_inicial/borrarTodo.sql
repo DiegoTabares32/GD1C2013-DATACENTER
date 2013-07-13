@@ -40,6 +40,8 @@ DROP PROCEDURE DATACENTER.update_rol
 
 DROP PROCEDURE DATACENTER.get_listado_viaje
 
+DROP PROCEDURE DATACENTER.cargar_campos_cliente
+
 DROP FUNCTION DATACENTER.get_id_viaje
 
 

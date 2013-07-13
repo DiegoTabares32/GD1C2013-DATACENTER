@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using FrbaBus.Compra_de_Pasajes;
 
 namespace FrbaBus
 {
@@ -59,17 +60,22 @@ namespace FrbaBus
             connect.execute_query_only(query);
         }
 
-        public void delete_Rol(string id_rol)
-        {
-            query = "DATACENTER.delete_Rol " + id_rol;
-            connect.execute_query_only(query);
-        }
-
         public DataTable get_listado_viaje(string ciu_origen, string ciu_destino, string fecha_salida)
         {
             query = "EXECUTE DATACENTER.get_listado_viaje '" + ciu_origen + "','" + ciu_destino + "','" + fecha_salida+"'";
             return connect.execute_query(query);
         }
-        
+
+        public DataTable cargar_campos_cliente(string dni)
+        {
+            query = "EXECUTE DATACENTER.cargar_campos_cliente " + dni;
+            return connect.execute_query(query);
+        }
+
+        public DataTable get_Butacas(string cod_viaje)
+        {
+            query = "EXECUTE DATACENTER.get_Butacas " + cod_viaje;
+            return connect.execute_query(query);
+        }
     }
 }
