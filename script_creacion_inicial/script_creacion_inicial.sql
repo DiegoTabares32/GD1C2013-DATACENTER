@@ -675,23 +675,14 @@ begin
 end
 go
 
-create procedure DATACENTER.actualizarPuntos(@viajeId int)
+create procedure DATACENTER.actualizarPuntos(@dni numeric(18,0))
 as
 begin
 	update DATACENTER.Cliente
-	set cli_puntos_acum = ((select DATACENTER.totalPuntos(cli_dni))-(select DATACENTER.totalPuntosVencidos(cli_dni)))
-	where cli_dni in (
-				select distinct p.pas_cli_dni
-				from DATACENTER.Pasaje p join DATACENTER.Arribo a 
-				on a.arri_viaj_id = p.pas_viaj_id and a.arri_viaj_id = @viajeId				
-				union all
-				select distinct c.cli_dni
-				from DATACENTER.Cliente c join DATACENTER.Compra co 
-				on co.comp_comprador_dni = c.cli_dni join DATACENTER.Paquete pa
-				on pa.paq_comp_id = co.comp_id join DATACENTER.Arribo a
-				on a.arri_viaj_id = pa.paq_viaj_id and a.arri_viaj_id = @viajeId
-				)
+	set cli_puntos_acum = ((select DATACENTER.totalPuntos(@dni))-(select DATACENTER.totalPuntosVencidos(@dni)))
+	where cli_dni = @dni
 end
+
 go 
 
 --ESTE TRIGGER ES PARA EL PUNTO 8 "REGISTRO DE LLEGADA A DESTINO"

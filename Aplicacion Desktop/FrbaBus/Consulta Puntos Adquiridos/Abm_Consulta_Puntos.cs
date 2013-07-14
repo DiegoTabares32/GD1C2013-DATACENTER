@@ -34,7 +34,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
                 return;
             }
 
-            string query = "SELECT isnull(Cli_puntos_Acum,0) FROM DATACENTER.Cliente WHERE cli_Dni = " + textBoxDni.Text;
+            string query = "exec DATACENTER.actualizarPuntos "+ textBoxDni.Text + "Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDni.Text;
             connection connect = new connection();
             DataTable tabla_puntos = connect.execute_query(query);
             
