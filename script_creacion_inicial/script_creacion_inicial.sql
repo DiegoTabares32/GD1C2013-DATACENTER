@@ -371,6 +371,11 @@ INSERT INTO DATACENTER.Cliente(cli_dni, cli_nombre, cli_apellido, cli_dir, cli_t
 	FROM gd_esquema.Maestra
 GO
 
+--SETEAMOS LOS PUNTOS ACUMULADOS EN 0 PARA INICIALIZARLOS
+UPDATE DATACENTER.Cliente
+SET cli_puntos_acum = 0
+GO
+
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE SERVICIO-----------------------------*/
 
@@ -643,11 +648,9 @@ go
 
 create procedure DATACENTER.registrarPuntos(@viajeId int)
 as
-begin
-	declare @puntos int = 0
-	declare @puntosAnt int = 0
+begin	
 	update DATACENTER.Cliente
-	set @puntosAnt = isnull(cli_puntos_acum,0), @puntos = ((select isnull(sum(cast(round(p.paq_precio/5,0) as numeric(18,0))),0) 
+	set cli_puntos_acum += ((select isnull(sum(cast(round(p.paq_precio/5,0) as numeric(18,0))),0) 
 															from DATACENTER.Paquete p join DATACENTER.Arribo a 
 															on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c 
 															on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = cli_dni join DATACENTER.Viaje v 
@@ -657,8 +660,7 @@ begin
 															(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
 															FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
 															ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = cli_dni
-															where a.arri_viaj_id = @viajeId)),
-	@puntosAnt += @puntos , cli_puntos_acum = @puntosAnt
+															where a.arri_viaj_id = @viajeId))
 	where cli_dni in (
 				select distinct p.pas_cli_dni
 				from DATACENTER.Pasaje p join DATACENTER.Arribo a 
@@ -708,8 +710,7 @@ begin
 	SET @fetch = @@FETCH_STATUS
 	while @fetch = 0
 	begin
-		exec DATACENTER.update_fecha_llegada @fechaLlegada, @viaje
-		exec DATACENTER.actualizarPuntos @viaje
+		exec DATACENTER.update_fecha_llegada @fechaLlegada, @viaje		
 		exec DATACENTER.registrarPuntos @viaje
 		FETCH CUR INTO @fechaLlegada, @patente, @viaje, @destino
 		SET @fetch = @@FETCH_STATUS
