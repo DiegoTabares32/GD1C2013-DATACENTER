@@ -612,3 +612,77 @@ begin
 			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni 
 			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')			
 end
+
+go
+
+
+create procedure DATACENTER.update_fecha_llegada(@fecha datetime, @viaje int)
+as
+begin
+	update DATACENTER.Viaje
+	set viaj_fecha_llegada = @fecha
+	where viaj_id = @viaje
+end
+
+go
+
+create procedure DATACENTER.registrarPuntos(@viajeId int)
+as
+begin
+	declare @puntos int = 0
+	declare @puntosAnt int = 0
+	update DATACENTER.Cliente
+	set @puntosAnt = isnull(cli_puntos_acum,0), @puntos = ((select isnull(sum(cast(round(p.paq_precio/5,0) as numeric(18,0))),0) 
+															from DATACENTER.Paquete p join DATACENTER.Arribo a 
+															on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c 
+															on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = cli_dni join DATACENTER.Viaje v 
+															on v.viaj_id = a.arri_viaj_id 
+															where v.viaj_id = @viajeId)			
+															+
+															(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
+															FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
+															ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = cli_dni
+															where a.arri_viaj_id = @viajeId)),
+	@puntosAnt += @puntos , cli_puntos_acum = @puntosAnt
+	where cli_dni in (
+				select distinct p.pas_cli_dni
+				from DATACENTER.Pasaje p join DATACENTER.Arribo a 
+				on a.arri_viaj_id = p.pas_viaj_id and a.arri_viaj_id = @viajeId				
+				union all
+				select distinct c.cli_dni
+				from DATACENTER.Cliente c join DATACENTER.Compra co 
+				on co.comp_comprador_dni = c.cli_dni join DATACENTER.Paquete pa
+				on pa.paq_comp_id = co.comp_id join DATACENTER.Arribo a
+				on a.arri_viaj_id = pa.paq_viaj_id and a.arri_viaj_id = @viajeId
+				)
+end
+ 
+ 
+go 
+
+--ESTE TRIGGER ES PARA EL PUNTO 8 "REGISTRO DE LLEGADA A DESTINO"
+--PARA TODOS LOS CLIENTES QUE VIAJARON O MANDARON ENCOMIENDAS, LES ACUMULA LOS PUNTOS POR ESE VIAJE
+create trigger DATACENTER.llegadaADestino
+on DATACENTER.Arribo
+after insert
+as
+begin
+	declare @fechaLlegada datetime = SYSDATETIME(), @patente nvarchar(255) = '', @viaje int = 0, @destino nvarchar(255) = ''
+	declare @fetch int = 0
+	declare cur cursor
+	for select i.arri_fecha_llegada, i.arri_mic_patente, i.arri_viaj_id, i.arri_ciu_arribada from inserted i
+	OPEN cur
+	FETCH CUR INTO @fechaLlegada, @patente, @viaje, @destino
+	SET @fetch = @@FETCH_STATUS
+	while @fetch = 0
+	begin
+		exec DATACENTER.update_fecha_llegada @fechaLlegada, @viaje
+		exec DATACENTER.registrarPuntos @viaje
+		FETCH CUR INTO @fechaLlegada, @patente, @viaje, @destino
+		SET @fetch = @@FETCH_STATUS
+	end
+	close cur
+	deallocate cur
+end
+
+go
