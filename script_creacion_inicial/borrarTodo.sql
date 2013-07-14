@@ -45,6 +45,10 @@ DROP FUNCTION DATACENTER.estado_puntos
 
 DROP FUNCTION DATACENTER.totalPuntosVencidos
 
+DROP FUNCTION DATACENTER.totalPuntos
+
+DROP PROCEDURE DATACENTER.actualizarPuntos
+
 DROP procedure DATACENTER.registrarPuntos
 
 DROP procedure DATACENTER.update_fecha_llegada

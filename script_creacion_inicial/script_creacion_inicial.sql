@@ -615,6 +615,21 @@ end
 
 go
 
+create function DATACENTER.totalPuntos(@dni numeric(18,0))
+returns int
+begin
+	return	((select isnull(sum(cast(round(p.paq_precio/5,0) as numeric(18,0))),0) 
+			from DATACENTER.Paquete p join DATACENTER.Arribo a 
+			on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = @dni join DATACENTER.Viaje v 
+			on v.viaj_id = a.arri_viaj_id 
+			)
+			+
+			(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
+			FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
+			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni
+			))
+end
+go
 
 create procedure DATACENTER.update_fecha_llegada(@fecha datetime, @viaje int)
 as
@@ -656,8 +671,14 @@ begin
 				on a.arri_viaj_id = pa.paq_viaj_id and a.arri_viaj_id = @viajeId
 				)
 end
- 
- 
+go
+
+create procedure DATACENTER.actualizarPuntos
+as
+begin
+	update DATACENTER.Cliente
+	set cli_puntos_acum = ((select DATACENTER.totalPuntos(cli_dni))-(select DATACENTER.totalPuntosVencidos(cli_dni)))
+end
 go 
 
 --ESTE TRIGGER ES PARA EL PUNTO 8 "REGISTRO DE LLEGADA A DESTINO"
@@ -677,6 +698,7 @@ begin
 	while @fetch = 0
 	begin
 		exec DATACENTER.update_fecha_llegada @fechaLlegada, @viaje
+		exec DATACENTER.actualizarPuntos
 		exec DATACENTER.registrarPuntos @viaje
 		FETCH CUR INTO @fechaLlegada, @patente, @viaje, @destino
 		SET @fetch = @@FETCH_STATUS
