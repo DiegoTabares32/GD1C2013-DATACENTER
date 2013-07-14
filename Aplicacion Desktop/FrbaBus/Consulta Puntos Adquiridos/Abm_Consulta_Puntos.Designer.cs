@@ -110,7 +110,7 @@
             // labelCanjesRealizados
             // 
             this.labelCanjesRealizados.AutoSize = true;
-            this.labelCanjesRealizados.Location = new System.Drawing.Point(444, 67);
+            this.labelCanjesRealizados.Location = new System.Drawing.Point(470, 67);
             this.labelCanjesRealizados.Name = "labelCanjesRealizados";
             this.labelCanjesRealizados.Size = new System.Drawing.Size(94, 13);
             this.labelCanjesRealizados.TabIndex = 6;
@@ -122,6 +122,8 @@
             this.dataGridViewPuntosDetallados.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewPuntosDetallados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewPuntosDetallados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -153,7 +155,7 @@
             this.dataGridViewPuntosDetallados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewPuntosDetallados.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewPuntosDetallados.Size = new System.Drawing.Size(418, 192);
+            this.dataGridViewPuntosDetallados.Size = new System.Drawing.Size(429, 220);
             this.dataGridViewPuntosDetallados.TabIndex = 7;
             // 
             // dataGridViewCanjesRealizados
@@ -162,6 +164,8 @@
             this.dataGridViewCanjesRealizados.AllowUserToDeleteRows = false;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewCanjesRealizados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewCanjesRealizados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridViewCanjesRealizados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewCanjesRealizados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -181,7 +185,7 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewCanjesRealizados.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewCanjesRealizados.Location = new System.Drawing.Point(447, 83);
+            this.dataGridViewCanjesRealizados.Location = new System.Drawing.Point(473, 85);
             this.dataGridViewCanjesRealizados.Name = "dataGridViewCanjesRealizados";
             this.dataGridViewCanjesRealizados.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -195,7 +199,7 @@
             this.dataGridViewCanjesRealizados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewCanjesRealizados.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridViewCanjesRealizados.Size = new System.Drawing.Size(310, 192);
+            this.dataGridViewCanjesRealizados.Size = new System.Drawing.Size(345, 218);
             this.dataGridViewCanjesRealizados.TabIndex = 8;
             // 
             // buttonLimpiar
@@ -232,7 +236,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonLimpiar;
-            this.ClientSize = new System.Drawing.Size(769, 289);
+            this.ClientSize = new System.Drawing.Size(830, 315);
             this.Controls.Add(this.labelResultadoPuntosVencidos);
             this.Controls.Add(this.labelPuntosVencidos);
             this.Controls.Add(this.buttonLimpiar);

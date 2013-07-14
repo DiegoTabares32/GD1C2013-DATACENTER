@@ -186,6 +186,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registrar LLegada Micro\FormularioDeArribo.resx">
+      <DependentUpon>FormularioDeArribo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registrar LLegada Micro\RegistroLlegadaMicro.resx">
+      <DependentUpon>RegistroLlegadaMicro.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -199,11 +205,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Registrar LLegada Micro\Form1.cs">
+    <Compile Include="Registrar LLegada Micro\FormularioDeArribo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar LLegada Micro\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registrar LLegada Micro\FormularioDeArribo.Designer.cs">
+      <DependentUpon>FormularioDeArribo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar LLegada Micro\RegistroLlegadaMicro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar LLegada Micro\RegistroLlegadaMicro.Designer.cs">
+      <DependentUpon>RegistroLlegadaMicro.cs</DependentUpon>
     </Compile>
     <Compile Include="stored_procedures.cs" />
     <Compile Include="Top Clientes\Form1.cs">
