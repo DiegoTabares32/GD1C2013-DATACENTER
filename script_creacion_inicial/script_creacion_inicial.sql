@@ -673,11 +673,22 @@ begin
 end
 go
 
-create procedure DATACENTER.actualizarPuntos
+create procedure DATACENTER.actualizarPuntos(@viajeId int)
 as
 begin
 	update DATACENTER.Cliente
 	set cli_puntos_acum = ((select DATACENTER.totalPuntos(cli_dni))-(select DATACENTER.totalPuntosVencidos(cli_dni)))
+	where cli_dni in (
+				select distinct p.pas_cli_dni
+				from DATACENTER.Pasaje p join DATACENTER.Arribo a 
+				on a.arri_viaj_id = p.pas_viaj_id and a.arri_viaj_id = @viajeId				
+				union all
+				select distinct c.cli_dni
+				from DATACENTER.Cliente c join DATACENTER.Compra co 
+				on co.comp_comprador_dni = c.cli_dni join DATACENTER.Paquete pa
+				on pa.paq_comp_id = co.comp_id join DATACENTER.Arribo a
+				on a.arri_viaj_id = pa.paq_viaj_id and a.arri_viaj_id = @viajeId
+				)
 end
 go 
 
@@ -698,7 +709,7 @@ begin
 	while @fetch = 0
 	begin
 		exec DATACENTER.update_fecha_llegada @fechaLlegada, @viaje
-		exec DATACENTER.actualizarPuntos
+		exec DATACENTER.actualizarPuntos @viaje
 		exec DATACENTER.registrarPuntos @viaje
 		FETCH CUR INTO @fechaLlegada, @patente, @viaje, @destino
 		SET @fetch = @@FETCH_STATUS
