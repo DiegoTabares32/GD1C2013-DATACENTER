@@ -24,14 +24,12 @@ namespace FrbaBus.Abm_Rol
         private void buscar_boton_Click(object sender, EventArgs e)
         {
 
-            if (rol_a_buscarTBox.Text == "")
-            {
-                MessageBox.Show("Debe ingresar un Rol", "Buscar  Rol", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            string seleccion = "SELECT rol_id AS ID, rol_nombre AS Nombre, rol_estado AS Estado";
+            string desde = " FROM DATACENTER.Rol";
+            string condicion = "";
+            if (this.rol_a_buscarTBox.Text != "") condicion = " WHERE rol_nombre like '" + rol_a_buscarTBox.Text + "%'"; 
             //buscamos Patron
-            string query = "SELECT rol_id AS ID, rol_nombre AS Nombre, rol_estado AS Estado FROM DATACENTER.Rol WHERE rol_nombre like '"+rol_a_buscarTBox.Text+"%'";
+            string query = seleccion + desde + condicion;
             connection connect = new connection();
             DataTable tabla_func = connect.execute_query(query);
             //cargamos el data_grid con el resultado de la busqueda

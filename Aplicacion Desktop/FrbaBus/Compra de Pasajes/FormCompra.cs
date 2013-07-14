@@ -95,7 +95,7 @@ namespace FrbaBus.Compra_de_Pasajes
             select_viaje form_viaje = new select_viaje(this);
             for (i = 0; i < cant_pasajes; i++)
             {
-                cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje);
+                cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje, listas_pasajeros);
                 form_cargar_pas.ShowDialog();
                 listas_pasajeros.Add(form_cargar_pas);
                 if (cant_pasajes - 1 != i)
@@ -107,12 +107,12 @@ namespace FrbaBus.Compra_de_Pasajes
 
             }
             stored_procedures stored_proc = new stored_procedures();
-            Single total_compra = 0;
+            Single sub_total_compra_pasaj = 0;
             foreach (cargar_pasajero pasaje in listas_pasajeros)
             {
-                total_compra += Convert.ToSingle(stored_proc.get_porcentaje(pasaje.viaje_cod));
+                sub_total_compra_pasaj += Convert.ToSingle(stored_proc.get_porcentaje(pasaje.viaje_cod));
             }
-            this.total_tbox.Text = total_compra.ToString();
+            this.sub_total_pasaj_tbox.Text = sub_total_compra_pasaj.ToString();
         }
 
         private void NroPasaj_numericUpDown_KeyPress(object sender, KeyPressEventArgs e)

@@ -42,13 +42,25 @@
             this.cargar_pas_boton = new System.Windows.Forms.Button();
             this.CantPasaj_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
+            this.sub_total_pasaj_tbox = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cant_totKg_tbox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.sub_tot_encom_tbox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.total_tbox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // login_boton
             // 
-            this.login_boton.Location = new System.Drawing.Point(356, 3);
+            this.login_boton.Location = new System.Drawing.Point(422, 8);
             this.login_boton.Name = "login_boton";
             this.login_boton.Size = new System.Drawing.Size(64, 25);
             this.login_boton.TabIndex = 0;
@@ -59,7 +71,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 52);
+            this.label1.Location = new System.Drawing.Point(38, 52);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 13);
             this.label1.TabIndex = 1;
@@ -67,14 +79,14 @@
             // 
             // fecha_tbox
             // 
-            this.fecha_tbox.Location = new System.Drawing.Point(183, 45);
+            this.fecha_tbox.Location = new System.Drawing.Point(213, 45);
             this.fecha_tbox.Name = "fecha_tbox";
             this.fecha_tbox.Size = new System.Drawing.Size(150, 20);
             this.fecha_tbox.TabIndex = 3;
             // 
             // select_boton
             // 
-            this.select_boton.Location = new System.Drawing.Point(215, 85);
+            this.select_boton.Location = new System.Drawing.Point(246, 89);
             this.select_boton.Name = "select_boton";
             this.select_boton.Size = new System.Drawing.Size(118, 26);
             this.select_boton.TabIndex = 4;
@@ -85,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 143);
+            this.label2.Location = new System.Drawing.Point(42, 140);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 13);
             this.label2.TabIndex = 6;
@@ -94,7 +106,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 187);
+            this.label3.Location = new System.Drawing.Point(38, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(117, 13);
             this.label3.TabIndex = 7;
@@ -103,7 +115,7 @@
             // ciu_orig_list
             // 
             this.ciu_orig_list.FormattingEnabled = true;
-            this.ciu_orig_list.Location = new System.Drawing.Point(183, 140);
+            this.ciu_orig_list.Location = new System.Drawing.Point(213, 140);
             this.ciu_orig_list.Name = "ciu_orig_list";
             this.ciu_orig_list.Size = new System.Drawing.Size(150, 21);
             this.ciu_orig_list.TabIndex = 10;
@@ -111,14 +123,14 @@
             // ciu_dest_list
             // 
             this.ciu_dest_list.FormattingEnabled = true;
-            this.ciu_dest_list.Location = new System.Drawing.Point(183, 184);
+            this.ciu_dest_list.Location = new System.Drawing.Point(213, 179);
             this.ciu_dest_list.Name = "ciu_dest_list";
             this.ciu_dest_list.Size = new System.Drawing.Size(150, 21);
             this.ciu_dest_list.TabIndex = 11;
             // 
             // busc_viaje_boton
             // 
-            this.busc_viaje_boton.Location = new System.Drawing.Point(215, 228);
+            this.busc_viaje_boton.Location = new System.Drawing.Point(246, 225);
             this.busc_viaje_boton.Name = "busc_viaje_boton";
             this.busc_viaje_boton.Size = new System.Drawing.Size(118, 31);
             this.busc_viaje_boton.TabIndex = 12;
@@ -129,7 +141,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 327);
+            this.label5.Location = new System.Drawing.Point(13, 288);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(195, 13);
             this.label5.TabIndex = 15;
@@ -137,14 +149,14 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(16, 8);
+            this.dateTimePicker1.Location = new System.Drawing.Point(41, 8);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 16;
             // 
             // cargar_pas_boton
             // 
-            this.cargar_pas_boton.Location = new System.Drawing.Point(219, 361);
+            this.cargar_pas_boton.Location = new System.Drawing.Point(247, 331);
             this.cargar_pas_boton.Name = "cargar_pas_boton";
             this.cargar_pas_boton.Size = new System.Drawing.Size(117, 30);
             this.cargar_pas_boton.TabIndex = 18;
@@ -154,44 +166,140 @@
             // 
             // CantPasaj_numericUpDown
             // 
-            this.CantPasaj_numericUpDown.Location = new System.Drawing.Point(216, 325);
-            this.CantPasaj_numericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.CantPasaj_numericUpDown.Location = new System.Drawing.Point(243, 288);
             this.CantPasaj_numericUpDown.Name = "CantPasaj_numericUpDown";
             this.CantPasaj_numericUpDown.Size = new System.Drawing.Size(120, 20);
             this.CantPasaj_numericUpDown.TabIndex = 19;
-            this.CantPasaj_numericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.CantPasaj_numericUpDown.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroPasaj_numericUpDown_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 430);
+            this.label4.Location = new System.Drawing.Point(88, 383);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
+            this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Total de Compra: ";
+            this.label4.Text = "SubTotal Pasajes:";
+            // 
+            // sub_total_pasaj_tbox
+            // 
+            this.sub_total_pasaj_tbox.Enabled = false;
+            this.sub_total_pasaj_tbox.Location = new System.Drawing.Point(232, 383);
+            this.sub_total_pasaj_tbox.Name = "sub_total_pasaj_tbox";
+            this.sub_total_pasaj_tbox.Size = new System.Drawing.Size(131, 20);
+            this.sub_total_pasaj_tbox.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 431);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(214, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Ingrese Cantidad  de Encomiendas a Enviar";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(243, 429);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 23;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(88, 582);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(120, 13);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "SubTotal Encomiendas:";
+            // 
+            // cant_totKg_tbox
+            // 
+            this.cant_totKg_tbox.Enabled = false;
+            this.cant_totKg_tbox.Location = new System.Drawing.Point(232, 542);
+            this.cant_totKg_tbox.Name = "cant_totKg_tbox";
+            this.cant_totKg_tbox.Size = new System.Drawing.Size(131, 20);
+            this.cant_totKg_tbox.TabIndex = 25;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(48, 542);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(160, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Cantidad de KG totales a enviar:";
+            // 
+            // sub_tot_encom_tbox
+            // 
+            this.sub_tot_encom_tbox.Enabled = false;
+            this.sub_tot_encom_tbox.Location = new System.Drawing.Point(232, 579);
+            this.sub_tot_encom_tbox.Name = "sub_tot_encom_tbox";
+            this.sub_tot_encom_tbox.Size = new System.Drawing.Size(132, 20);
+            this.sub_tot_encom_tbox.TabIndex = 27;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 644);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Total:";
             // 
             // total_tbox
             // 
-            this.total_tbox.Location = new System.Drawing.Point(183, 427);
+            this.total_tbox.Enabled = false;
+            this.total_tbox.Location = new System.Drawing.Point(79, 644);
             this.total_tbox.Name = "total_tbox";
-            this.total_tbox.Size = new System.Drawing.Size(131, 20);
-            this.total_tbox.TabIndex = 21;
+            this.total_tbox.Size = new System.Drawing.Size(102, 20);
+            this.total_tbox.TabIndex = 29;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(213, 638);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 24);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Aceptar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(371, 638);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(115, 24);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "Cancelar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(245, 483);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(118, 29);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "Cargar Encomienda";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(456, 499);
+            this.ClientSize = new System.Drawing.Size(498, 676);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.total_tbox);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.sub_tot_encom_tbox);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cant_totKg_tbox);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.sub_total_pasaj_tbox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CantPasaj_numericUpDown);
             this.Controls.Add(this.cargar_pas_boton);
@@ -210,6 +318,7 @@
             this.Text = "Compra";
             this.Load += new System.EventHandler(this.FormCompra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,6 +340,17 @@
         public System.Windows.Forms.ComboBox ciu_dest_list;
         public System.Windows.Forms.NumericUpDown CantPasaj_numericUpDown;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox sub_total_pasaj_tbox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox cant_totKg_tbox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox sub_tot_encom_tbox;
+        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox total_tbox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

@@ -14,12 +14,17 @@ namespace FrbaBus.Compra_de_Pasajes
 
         bool cliente_existente = false;
         public string viaje_cod;
+        public List<cargar_pasajero> listas_pasajeros;
 
-        public cargar_pasajero(string cod_viaje)
+        public cargar_pasajero(string cod_viaje, List<cargar_pasajero> listas_pasajeros)
         {
             InitializeComponent();
             this.viaje_cod = cod_viaje;
+            this.listas_pasajeros = listas_pasajeros;
         }
+
+
+
 
         private void refrescar()
         {
@@ -32,6 +37,7 @@ namespace FrbaBus.Compra_de_Pasajes
             this.fec_nac_Tbox.Clear();
             this.mascul_radioBut.Checked = false;
             this.fem_radButton.Checked = false;
+            this.DNI_Tbox.Enabled = true;
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -100,6 +106,13 @@ namespace FrbaBus.Compra_de_Pasajes
                 MessageBox.Show("Debe Seleccionar Sexo", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
+
+            if (this.butNro_tbox.Text == "" | this.piso_tbox.Text == "" | this.pos_but_tbox.Text == "")
+            {
+                MessageBox.Show("Debe Seleccionar Butaca", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
 
             if (this.butNro_tbox.Text == "" | this.piso_tbox.Text == "" | this.pos_but_tbox.Text == "")
             {
@@ -211,6 +224,8 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void select_butaca_boton_Click(object sender, EventArgs e)
         {
+            
+
             select_butaca select_butaca = new select_butaca(this);
             select_butaca.ShowDialog();
         }
