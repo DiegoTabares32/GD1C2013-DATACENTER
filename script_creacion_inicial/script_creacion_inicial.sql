@@ -610,5 +610,5 @@ begin
 			(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
 			FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
 			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni 
-			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')
+			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')			
 end
