@@ -90,6 +90,7 @@ namespace FrbaBus.Compra_de_Pasajes
         private void cargar_pas_boton_Click(object sender, EventArgs e)
         {
             bool error = false;
+            
 
             if (this.CantPasaj_numericUpDown.Value <= 0)
             {
@@ -106,6 +107,7 @@ namespace FrbaBus.Compra_de_Pasajes
             if (error)
                 return;
 
+            this.CantPasaj_numericUpDown.Enabled = false;
             int cant_pasajes = Convert.ToInt16(this.CantPasaj_numericUpDown.Value);
             int i;
 
@@ -135,6 +137,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             this.total_compra += sub_total_compra_pasaj;
             this.total_tbox.Text = this.total_compra.ToString();
+            this.cargar_pas_boton.Enabled = false;
         }
 
         private void NroPasaj_numericUpDown_KeyPress(object sender, KeyPressEventArgs e)
@@ -187,6 +190,7 @@ namespace FrbaBus.Compra_de_Pasajes
             if (error)
                 return;
 
+            this.cant_encomiendas_numUpdown.Enabled = false;
             int cant_encomiendas = Convert.ToInt16(this.cant_encomiendas_numUpdown.Value);
             int i;
 
@@ -217,6 +221,7 @@ namespace FrbaBus.Compra_de_Pasajes
             this.cant_totKg_tbox.Text = total_KG_encomienda.ToString();
             this.total_compra += sub_total_compra_encomienda;
             this.total_tbox.Text = this.total_compra.ToString();
+            this.carg_encom_boton.Enabled = false;
         }
 
         private void cancelar_boton_Click(object sender, EventArgs e)
@@ -233,6 +238,10 @@ namespace FrbaBus.Compra_de_Pasajes
             this.cant_totKg_tbox.Clear();
             this.sub_tot_encom_tbox.Clear();
             this.total_tbox.Clear();
+            this.cant_encomiendas_numUpdown.Enabled = true;
+            this.CantPasaj_numericUpDown.Enabled = true;
+            this.cargar_pas_boton.Enabled = true;
+            this.carg_encom_boton.Enabled = true;
 
             this.cod_viaje_encomienda = "";
             this.cod_viaje_pasaje = "";
@@ -240,6 +249,23 @@ namespace FrbaBus.Compra_de_Pasajes
             this.listas_pasajeros.Clear();
 
         }
+
+        private void aceptar_boton_Click(object sender, EventArgs e)
+        {
+            Form_Comprador comprador = new Form_Comprador();
+            comprador.ShowDialog();
+        }
+
+        private void cant_encomiendas_numUpdown_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo permite q ingrese numeros
+            if (char.IsNumber(e.KeyChar) | char.IsControl(e.KeyChar))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+ 
 
 
      

@@ -51,7 +51,7 @@
             this.sub_tot_encom_tbox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.total_tbox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.aceptar_boton = new System.Windows.Forms.Button();
             this.cancelar_boton = new System.Windows.Forms.Button();
             this.carg_encom_boton = new System.Windows.Forms.Button();
             this.selec_viaje_encom_button = new System.Windows.Forms.Button();
@@ -205,7 +205,7 @@
             this.cant_encomiendas_numUpdown.Name = "cant_encomiendas_numUpdown";
             this.cant_encomiendas_numUpdown.Size = new System.Drawing.Size(120, 20);
             this.cant_encomiendas_numUpdown.TabIndex = 23;
-            
+            this.cant_encomiendas_numUpdown.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cant_encomiendas_numUpdown_KeyPress);
             // 
             // label7
             // 
@@ -258,14 +258,15 @@
             this.total_tbox.Size = new System.Drawing.Size(102, 20);
             this.total_tbox.TabIndex = 29;
             // 
-            // button1
+            // aceptar_boton
             // 
-            this.button1.Location = new System.Drawing.Point(213, 638);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 24);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "Aceptar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.aceptar_boton.Location = new System.Drawing.Point(213, 638);
+            this.aceptar_boton.Name = "aceptar_boton";
+            this.aceptar_boton.Size = new System.Drawing.Size(115, 24);
+            this.aceptar_boton.TabIndex = 30;
+            this.aceptar_boton.Text = "Aceptar";
+            this.aceptar_boton.UseVisualStyleBackColor = true;
+            this.aceptar_boton.Click += new System.EventHandler(this.aceptar_boton_Click);
             // 
             // cancelar_boton
             // 
@@ -305,7 +306,7 @@
             this.Controls.Add(this.selec_viaje_encom_button);
             this.Controls.Add(this.carg_encom_boton);
             this.Controls.Add(this.cancelar_boton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.aceptar_boton);
             this.Controls.Add(this.total_tbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.sub_tot_encom_tbox);
@@ -362,7 +363,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox total_tbox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button aceptar_boton;
         private System.Windows.Forms.Button cancelar_boton;
         private System.Windows.Forms.Button carg_encom_boton;
         private System.Windows.Forms.Button selec_viaje_encom_button;

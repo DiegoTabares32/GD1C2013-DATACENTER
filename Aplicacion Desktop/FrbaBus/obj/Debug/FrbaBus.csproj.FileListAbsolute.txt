@@ -27,3 +27,4 @@ C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\Frb
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.cargar_pasajero.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_butaca.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_encomienda.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_Comprador.resources

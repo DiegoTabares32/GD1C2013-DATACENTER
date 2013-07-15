@@ -124,7 +124,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(296, 460);
+            this.label8.Location = new System.Drawing.Point(352, 475);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 13);
             this.label8.TabIndex = 44;
@@ -277,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 497);
+            this.ClientSize = new System.Drawing.Size(493, 497);
             this.Controls.Add(this.check_peso_encom_boton);
             this.Controls.Add(this.peso_encom_tbox);
             this.Controls.Add(this.label12);
