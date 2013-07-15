@@ -31,13 +31,13 @@
             this.textBoxPatente = new System.Windows.Forms.TextBox();
             this.comboBoxOrigen = new System.Windows.Forms.ComboBox();
             this.comboBoxArribo = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelfecha = new System.Windows.Forms.Label();
+            this.labelpatente = new System.Windows.Forms.Label();
+            this.labelorigen = new System.Windows.Forms.Label();
+            this.labelarribo = new System.Windows.Forms.Label();
             this.textBoxFechallegada = new System.Windows.Forms.TextBox();
             this.textBoxHorallegada = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelhora = new System.Windows.Forms.Label();
             this.buttonAceptar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -65,41 +65,41 @@
             this.comboBoxArribo.Size = new System.Drawing.Size(121, 21);
             this.comboBoxArribo.TabIndex = 3;
             // 
-            // label1
+            // labelfecha
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Fecha de llegada (aaaa-mm-dd)";
+            this.labelfecha.AutoSize = true;
+            this.labelfecha.Location = new System.Drawing.Point(13, 30);
+            this.labelfecha.Name = "labelfecha";
+            this.labelfecha.Size = new System.Drawing.Size(156, 13);
+            this.labelfecha.TabIndex = 4;
+            this.labelfecha.Text = "Fecha de llegada (aaaa-mm-dd)";
             // 
-            // label2
+            // labelpatente
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(332, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Patente";
+            this.labelpatente.AutoSize = true;
+            this.labelpatente.Location = new System.Drawing.Point(332, 31);
+            this.labelpatente.Name = "labelpatente";
+            this.labelpatente.Size = new System.Drawing.Size(44, 13);
+            this.labelpatente.TabIndex = 5;
+            this.labelpatente.Text = "Patente";
             // 
-            // label3
+            // labelorigen
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(429, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Ciudad de Origen";
+            this.labelorigen.AutoSize = true;
+            this.labelorigen.Location = new System.Drawing.Point(429, 31);
+            this.labelorigen.Name = "labelorigen";
+            this.labelorigen.Size = new System.Drawing.Size(89, 13);
+            this.labelorigen.TabIndex = 6;
+            this.labelorigen.Text = "Ciudad de Origen";
             // 
-            // label4
+            // labelarribo
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(569, 30);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Ciudad Arribada";
+            this.labelarribo.AutoSize = true;
+            this.labelarribo.Location = new System.Drawing.Point(569, 30);
+            this.labelarribo.Name = "labelarribo";
+            this.labelarribo.Size = new System.Drawing.Size(82, 13);
+            this.labelarribo.TabIndex = 7;
+            this.labelarribo.Text = "Ciudad Arribada";
             // 
             // textBoxFechallegada
             // 
@@ -115,14 +115,14 @@
             this.textBoxHorallegada.Size = new System.Drawing.Size(127, 20);
             this.textBoxHorallegada.TabIndex = 9;
             // 
-            // label5
+            // labelhora
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(180, 30);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Hora de Llegada (hh:mm)";
+            this.labelhora.AutoSize = true;
+            this.labelhora.Location = new System.Drawing.Point(180, 30);
+            this.labelhora.Name = "labelhora";
+            this.labelhora.Size = new System.Drawing.Size(126, 13);
+            this.labelhora.TabIndex = 10;
+            this.labelhora.Text = "Hora de Llegada (hh:mm)";
             // 
             // buttonAceptar
             // 
@@ -150,13 +150,13 @@
             this.ClientSize = new System.Drawing.Size(711, 107);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.buttonAceptar);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelhora);
             this.Controls.Add(this.textBoxHorallegada);
             this.Controls.Add(this.textBoxFechallegada);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelarribo);
+            this.Controls.Add(this.labelorigen);
+            this.Controls.Add(this.labelpatente);
+            this.Controls.Add(this.labelfecha);
             this.Controls.Add(this.comboBoxArribo);
             this.Controls.Add(this.comboBoxOrigen);
             this.Controls.Add(this.textBoxPatente);
@@ -173,13 +173,13 @@
         private System.Windows.Forms.TextBox textBoxPatente;
         private System.Windows.Forms.ComboBox comboBoxOrigen;
         private System.Windows.Forms.ComboBox comboBoxArribo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelfecha;
+        private System.Windows.Forms.Label labelpatente;
+        private System.Windows.Forms.Label labelorigen;
+        private System.Windows.Forms.Label labelarribo;
         private System.Windows.Forms.TextBox textBoxFechallegada;
         private System.Windows.Forms.TextBox textBoxHorallegada;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelhora;
         private System.Windows.Forms.Button buttonAceptar;
         private System.Windows.Forms.Button buttonLimpiar;
     }

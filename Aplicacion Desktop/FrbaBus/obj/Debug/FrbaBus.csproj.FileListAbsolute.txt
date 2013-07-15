@@ -17,3 +17,4 @@ C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion D
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.FormularioDeArribo.resources
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.llegadaMicros.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.RegistrosCargados.resources

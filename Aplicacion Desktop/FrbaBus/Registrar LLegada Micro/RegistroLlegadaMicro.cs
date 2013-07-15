@@ -14,17 +14,36 @@ namespace FrbaBus.Registrar_LLegada_Micro
         public llegadaMicros()
         {
             InitializeComponent();
+            string query = "create table DATACENTER.arribosCargados(id int identity primary key,fechayhora datetime,patente nvarchar(255),origen nvarchar(255),arribo nvarchar(255))";
+            connection conexion = new connection();
+            conexion.execute_query(query);
         }
-
-        public void agregarDatos(DataTable tabla)
-        {
-            this.dataGridViewRegistrosCargados.Rows.Add(tabla);
-        }
-
+                          
         private void buttonIngresarArribo_Click(object sender, EventArgs e)
         {
             Form formularioDeArribo = new FormularioDeArribo(this);
             formularioDeArribo.Show();            
+        }
+
+        private void llegadaMicros_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string query = "drop table DATACENTER.arribosCargados";
+            connection conexion = new connection();
+            conexion.execute_query(query);
+        }
+
+        private void buttonVerRegistrosIngresados_Click(object sender, EventArgs e)
+        {
+            string query = "select fechayhora as 'Fecha y Hora de Llegada', patente as 'Patente', origen as 'Origen', arribo as 'Arribo' from DATACENTER.arribosCargados";
+            connection conexion = new connection();
+            DataTable resultado = conexion.execute_query(query);
+            RegistrosCargados registros = new RegistrosCargados(resultado);
+            registros.Show();            
+        }
+
+        private void buttonProcesarArribos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

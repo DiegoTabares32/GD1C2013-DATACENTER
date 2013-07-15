@@ -35,14 +35,21 @@ namespace FrbaBus.Registrar_LLegada_Micro
             this.comboBoxArribo.DataSource = table_ciu_dest;
             this.comboBoxArribo.DisplayMember = "ciu_nombre";
             this.comboBoxArribo.ValueMember = "ciu_nombre";
-            
+
         }
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
             //LLENO UNA TABLA CON EL RESULTADO DE LOS VALORES INGRESADOS Y 
             //LOS AGREGO EN LA DATAGRID DE REGISTRO LLEGADA MICRO
-            this.llegadaMicros.agregarDatos();
+            string fechayhora = textBoxFechallegada.Text +" "+ textBoxHorallegada.Text;
+            string patente = labelpatente.Text;
+            string origen = comboBoxOrigen.Text;
+            string destino = comboBoxArribo.Text;
+            string query = "insert into DATACENTER.arribosCargados values('" + fechayhora + "', '" + patente + "', '" + origen + "', '" + destino + "')";
+            connection conexion = new connection();
+            conexion.execute_query(query);
+            this.Close();
         }
                
     }
