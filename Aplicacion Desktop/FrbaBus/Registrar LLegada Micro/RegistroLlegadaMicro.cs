@@ -43,7 +43,9 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void buttonProcesarArribos_Click(object sender, EventArgs e)
         {
-
+            string query = "";
+            connection conexion = new connection();
+            conexion.execute_query(query);
         }
     }
 }

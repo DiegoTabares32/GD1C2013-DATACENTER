@@ -189,6 +189,9 @@
     <EmbeddedResource Include="Registrar LLegada Micro\FormularioDeArribo.resx">
       <DependentUpon>FormularioDeArribo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registrar LLegada Micro\InfoMicro.resx">
+      <DependentUpon>InfoMicro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registrar LLegada Micro\RegistroLlegadaMicro.resx">
       <DependentUpon>RegistroLlegadaMicro.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,6 +216,12 @@
     </Compile>
     <Compile Include="Registrar LLegada Micro\FormularioDeArribo.Designer.cs">
       <DependentUpon>FormularioDeArribo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registrar LLegada Micro\InfoMicro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registrar LLegada Micro\InfoMicro.Designer.cs">
+      <DependentUpon>InfoMicro.cs</DependentUpon>
     </Compile>
     <Compile Include="Registrar LLegada Micro\RegistroLlegadaMicro.cs">
       <SubType>Form</SubType>

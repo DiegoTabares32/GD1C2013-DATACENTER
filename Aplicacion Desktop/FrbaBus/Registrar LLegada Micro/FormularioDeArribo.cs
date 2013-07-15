@@ -46,9 +46,21 @@ namespace FrbaBus.Registrar_LLegada_Micro
             string patente = labelpatente.Text;
             string origen = comboBoxOrigen.Text;
             string destino = comboBoxArribo.Text;
+            string query1 = "select m.mic_nro as 'N° Micro', m.mic_patente as 'Patente', m.mic_serv_id as 'Servicio', m.mic_modelo as 'Modelo', m.mic_marc_id as 'Marca', m.mic_fecha_alta as 'Fecha de alta', m.mic_cant_kg_disponibles as 'Capacidad (Kg)', m.mic_cant_butacas as 'Cantidad de Butacas' from DATACENTER.Micro m where m.mic_patente = '"+ textBoxPatente.Text +"'";
             string query = "insert into DATACENTER.arribosCargados values('" + fechayhora + "', '" + patente + "', '" + origen + "', '" + destino + "')";
             connection conexion = new connection();
             conexion.execute_query(query);
+            DataTable infoMicro = conexion.execute_query(query1);
+            string query2 = "select count(distinct v.viaj_mic_patente) from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '"+ comboBoxOrigen.Text +"' and r.reco_destino = '"+ comboBoxArribo.Text +"' and v.viaj_mic_patente = '"+ textBoxPatente.Text +"'";
+            DataTable resultadoDestino = conexion.execute_query(query2);
+            string mensaje = "La ciudad arribada es distinta a la que el micro tenía programada";            
+            if ((int)resultadoDestino.Rows[0].ItemArray.ElementAt(0) > 0)
+            {
+                mensaje = "";    
+            }
+            
+            InfoMicro info = new InfoMicro(infoMicro, mensaje);
+            info.Show();            
             this.Close();
         }
                
