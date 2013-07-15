@@ -275,6 +275,7 @@ dev_pas_cod numeric(18,0) NULL,       --NULL POR QUE LA DEVOLUCION PUEDE TENER P
 dev_paq_cod numeric(18,0) NULL,
 dev_fecha datetime NULL,
 dev_motivo nvarchar(255) NULL,
+dev_monto numeric(18,2) NULL,
 FOREIGN KEY (dev_comp_id) REFERENCES DATACENTER.Compra (comp_id),
 FOREIGN KEY (dev_pas_cod) REFERENCES DATACENTER.Pasaje (pas_cod),
 FOREIGN KEY (dev_paq_cod) REFERENCES DATACENTER.Paquete (paq_cod),
@@ -711,3 +712,144 @@ begin
 end
 
 go
+
+
+
+create function DATACENTER.verificaStock(@premNombre nvarchar(255), @premCantidad int)
+returns int
+begin
+	declare @stockActual int
+	set @stockActual=(select prem_stock from DATACENTER.Premio where prem_nombre=@premNombre)
+	return abs(@stockActual-@premCantidad)
+end
+go
+
+
+create procedure DATACENTER.canjeaPremio(@premNombre nvarchar(255),@dniCliente numeric(18,0),@nuevoStock int,@premCantidad int,@idCanjeNuevo int)
+as
+begin
+	declare @idPremio int
+	set @idPremio= (select prem_id from DATACENTER.Premio where prem_nombre=@premNombre)
+
+	UPDATE DATACENTER.Premio
+	SET prem_stock=@nuevoStock
+	where prem_nombre=@premNombre
+
+	INSERT INTO DATACENTER.Canje(canj_id,canj_cli_dni,canj_prem_id,canj_cant_retirada,canj_fecha)
+	VALUES (@idCanjeNuevo,@dniCliente,@idPremio,@premCantidad,GETDATE())
+end
+go
+
+
+create function DATACENTER.microDisponible(@patente nvarchar(255), @fechaFS datetime, @fechaR datetime)
+returns nvarchar(255)
+begin
+	declare @micMarcaId int
+	declare @micServId int
+	declare @micCantButacas int
+	set @micMarcaId = (select mic_marc_id from DATACENTER.Micro where mic_patente=@patente)
+	set @micServId = (select mic_serv_id from DATACENTER.Micro where mic_patente=@patente)
+	set @micCantButacas = (select mic_cant_butacas from DATACENTER.Micro where mic_patente=@patente)
+	
+	declare cursorPatentes cursor
+	for select mic_patente,viaj_fecha_salida,viaj_fecha_lleg_estimada from DATACENTER.Micro join DATACENTER.Viaje on (mic_patente=viaj_mic_patente) where mic_patente<>@patente and mic_marc_id=@micMarcaId and mic_serv_id=@micServId and mic_cant_butacas>=@micCantButacas
+	open cursorPatentes
+	declare @ocupado int
+	set @ocupado=0
+	declare @patenteMicro nvarchar(255)
+	declare @viajFechaSalida datetime
+	declare @viajFechaLlegEstim datetime
+	fetch cursorPatentes into @patenteMicro,@viajFechaSalida,@viajFechaLlegEstim
+	declare @microDisponible nvarchar(255)
+	set @microDisponible = @patenteMicro
+	declare @microEncontrado nvarchar(255)
+	set @microEncontrado = ''
+	
+	if (@fechaR<>null)
+	begin
+	while (@@FETCH_STATUS = 0)
+	begin
+		if ((@viajFechaSalida between @fechaFS and @fechaR) and (@viajFechaLlegEstim between @fechaFS and @fechaR))
+			set @ocupado=1;
+		
+		fetch cursorPatentes into @patenteMicro,@viajFechaSalida,@viajFechaLlegEstim
+		if (@@FETCH_STATUS <> 0)
+			break
+		if (@patenteMicro<>@microDisponible and @ocupado=0)
+		begin
+			set @microEncontrado=@microDisponible
+			break
+		end
+		else
+		begin
+			if(@patenteMicro<>@microDisponible)
+			set @microDisponible=@patenteMicro
+		end
+	end
+	end
+	else
+	begin
+	while (@@FETCH_STATUS = 0)
+	begin
+		if (@viajFechaLlegEstim > @fechaFS)
+			set @ocupado=1;
+		
+		fetch cursorPatentes into @patenteMicro,@viajFechaSalida,@viajFechaLlegEstim
+		if (@@FETCH_STATUS <> 0)
+			break
+		if (@patenteMicro<>@microDisponible and @ocupado=0)
+		begin
+			set @microEncontrado=@microDisponible
+			break
+		end
+		else
+		begin
+			if(@patenteMicro<>@microDisponible)
+			set @microDisponible=@patenteMicro
+		end
+	end
+	
+	end
+	
+	close cursorPatentes
+	deallocate cursorPatentes
+	return @microEncontrado
+end
+go
+
+
+create procedure DATACENTER.registrarNuevoMicro(@patenteNueva nvarchar(255),@patenteAReemplazar nvarchar(255))
+as
+begin
+	declare @micMarcaId int
+	declare @micServId int
+	declare @micCantButacas int
+	declare @micCantKg int
+	declare @micModelo nvarchar(255)
+	
+	set @micMarcaId = (select mic_marc_id from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
+	set @micServId = (select mic_serv_id from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
+	set @micCantButacas = (select mic_cant_butacas from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
+	set @micCantKg = (select mic_cant_kg_disponibles from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
+	set @micModelo = (select mic_modelo from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
+	
+	INSERT INTO DATACENTER.Micro(mic_patente,mic_marc_id,mic_serv_id,mic_cant_butacas,mic_cant_kg_disponibles,mic_modelo,mic_fecha_alta,mic_fecha_baja_def)
+	VALUES (@patenteNueva,@micMarcaId,@micServId,@micCantButacas,@micCantKg,@micModelo,GETDATE(),null)
+end
+go
+
+
+create function DATACENTER.estadoBaja(@fechaBajaNueva datetime,@patente nvarchar(255))
+returns int
+begin
+	declare @baja int
+	set @baja = 0
+	declare @fechaBajaMicro datetime
+	set @fechaBajaMicro = (SELECT mic_fecha_baja_def from DATACENTER.Micro where mic_patente=@patente)
+	if (year(@fechaBajaMicro)<year(@fechaBajaNueva)) and (month(@fechaBajaMicro)<month(@fechaBajaNueva)) and day(@fechaBajaMicro)<day(@fechaBajaNueva)
+		set @baja=1
+	return @baja
+end
+go
+
+
