@@ -14,7 +14,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
         public llegadaMicros()
         {
             InitializeComponent();
-            string query = "create table DATACENTER.arribosCargados(id int identity primary key,fechayhora datetime,patente nvarchar(255),origen nvarchar(255),arribo nvarchar(255))";
+            string query = "create table DATACENTER.arribosCargados(id int identity primary key,fechayhora datetime,patente nvarchar(255),origen nvarchar(255),arribo nvarchar(255), viaje int)";
             connection conexion = new connection();
             conexion.execute_query(query);
         }
@@ -34,7 +34,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void buttonVerRegistrosIngresados_Click(object sender, EventArgs e)
         {
-            string query = "select fechayhora as 'Fecha y Hora de Llegada', patente as 'Patente', origen as 'Origen', arribo as 'Arribo' from DATACENTER.arribosCargados";
+            string query = "select fechayhora as 'Fecha y Hora de Llegada', patente as 'Patente', origen as 'Origen', arribo as 'Arribo', viaje as 'Viaje Id' from DATACENTER.arribosCargados";
             connection conexion = new connection();
             DataTable resultado = conexion.execute_query(query);
             RegistrosCargados registros = new RegistrosCargados(resultado);
