@@ -14,10 +14,16 @@ namespace FrbaBus.Compra_de_Pasajes
     {
         //Atributos
 
-        public string cod_viaje="";
-
+        public string cod_viaje_pasaje="";
+        public string cod_viaje_encomienda = "";
+        public char tipo_viaje; //indica si el viaje es por encomienda o pasaje 'E' 'P' solo para seleccionar viaje 
+        float total_compra = 0;
+        string cod_compra;
         //Colección de Pasajes una vez confirmada la compra los cargamos en la base
         List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
+
+        //Colección de Encomiendas una vez confirmada la compra las cargamos en la base
+        List<Form_encomienda> listas_encomiendas = new List<Form_encomienda>();
 
         public FormCompra()
         {
@@ -55,13 +61,16 @@ namespace FrbaBus.Compra_de_Pasajes
             this.ciu_dest_list.DataSource = table_ciu_dest;
             this.ciu_dest_list.DisplayMember = "ciu_nombre";
             this.ciu_dest_list.ValueMember = "ciu_nombre";
+            this.total_tbox.Text = total_compra.ToString();
 
 
         }
 
         private void busc_viaje_boton_Click(object sender, EventArgs e)
         {
+
             bool error = false;
+
             if (this.fecha_tbox.Text == "")
             {
                 MessageBox.Show("Debe Seleccionar Fecha", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -70,7 +79,10 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (error)
                 return;
+            this.ciu_orig_list.Enabled = false;
+            this.ciu_dest_list.Enabled = false;
 
+            this.tipo_viaje = 'P';
             select_viaje seleccionar_viaje = new select_viaje(this);
             seleccionar_viaje.ShowDialog();
         }
@@ -79,9 +91,15 @@ namespace FrbaBus.Compra_de_Pasajes
         {
             bool error = false;
 
-            if (this.cod_viaje == "")
+            if (this.CantPasaj_numericUpDown.Value <= 0)
             {
-                MessageBox.Show("Debe Seleccionar Viaje", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Cantidad de Pasajes Incorrecta", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (this.cod_viaje_pasaje == "")
+            {
+                MessageBox.Show("Debe Seleccionar Viaje para el Pasaje", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
@@ -92,10 +110,11 @@ namespace FrbaBus.Compra_de_Pasajes
             int i;
 
             //cargamos los datos de los pasajeros
-            select_viaje form_viaje = new select_viaje(this);
+            this.tipo_viaje='P';
+            select_viaje form_viaje = new select_viaje(this); //con esto me aseguro que siempre sea el mismo recorrido
             for (i = 0; i < cant_pasajes; i++)
             {
-                cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje, listas_pasajeros);
+                cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje_pasaje, listas_pasajeros);
                 form_cargar_pas.ShowDialog();
                 listas_pasajeros.Add(form_cargar_pas);
                 if (cant_pasajes - 1 != i)
@@ -113,6 +132,9 @@ namespace FrbaBus.Compra_de_Pasajes
                 sub_total_compra_pasaj += Convert.ToSingle(stored_proc.get_porcentaje(pasaje.viaje_cod));
             }
             this.sub_total_pasaj_tbox.Text = sub_total_compra_pasaj.ToString();
+
+            this.total_compra += sub_total_compra_pasaj;
+            this.total_tbox.Text = this.total_compra.ToString();
         }
 
         private void NroPasaj_numericUpDown_KeyPress(object sender, KeyPressEventArgs e)
@@ -124,9 +146,102 @@ namespace FrbaBus.Compra_de_Pasajes
                 e.Handled = true;
         }
 
+        private void selec_viaje_encom_button_Click(object sender, EventArgs e)
+        {
+            
+            bool error = false;
 
 
- 
+            if (this.fecha_tbox.Text == "")
+            {
+                MessageBox.Show("Debe Seleccionar Fecha", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (error)
+                return;
+            this.ciu_orig_list.Enabled = false;
+            this.ciu_dest_list.Enabled = false;
+
+            this.tipo_viaje = 'E';
+            select_viaje seleccionar_viaje = new select_viaje(this);
+            seleccionar_viaje.ShowDialog();
+        }
+
+        private void carg_encom_boton_Click(object sender, EventArgs e)
+        {
+            bool error = false;
+
+            if (this.cant_encomiendas_numUpdown.Value <= 0)
+            {
+                MessageBox.Show("Cantidad de Encomiendas Incorrecta", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (this.cod_viaje_encomienda == "")
+            {
+                MessageBox.Show("Debe Seleccionar Viaje para la Encomienda", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (error)
+                return;
+
+            int cant_encomiendas = Convert.ToInt16(this.cant_encomiendas_numUpdown.Value);
+            int i;
+
+            //cargamos datos de la encomienda
+            this.tipo_viaje='E'; //le decimos que los viajes a seleccionar seran para envio de encomiendas
+            select_viaje form_viaje = new select_viaje(this); //con esto aseguro que sea siempre el mismo recorrido NO dejo q me setee mas los campos de ciu_origen y dest
+            for (i = 0; i < cant_encomiendas; i++)
+            {
+                Form_encomienda form_encom = new Form_encomienda(this.cod_viaje_encomienda, this.listas_encomiendas);
+                form_encom.ShowDialog();
+                listas_encomiendas.Add(form_encom);
+                if (cant_encomiendas - 1 != i)
+                {
+                    MessageBox.Show("Datos de la Encomienda Ingresados, A continuación debe seleccionar viaje de la siguiente Encomienda", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    form_viaje.ShowDialog();
+                }
+                
+
+            }
+            stored_procedures stored_proc = new stored_procedures();
+            Single sub_total_compra_encomienda = 0, total_KG_encomienda=0;
+            foreach (Form_encomienda encomienda in listas_encomiendas)
+            {
+                sub_total_compra_encomienda += Convert.ToSingle(stored_proc.get_costo_encomienda(encomienda.viaje_cod, encomienda.peso_encom_tbox.Text));
+                total_KG_encomienda += Convert.ToSingle(encomienda.peso_encom_tbox.Text);
+            }
+            this.sub_tot_encom_tbox.Text= sub_total_compra_encomienda.ToString();
+            this.cant_totKg_tbox.Text = total_KG_encomienda.ToString();
+            this.total_compra += sub_total_compra_encomienda;
+            this.total_tbox.Text = this.total_compra.ToString();
+        }
+
+        private void cancelar_boton_Click(object sender, EventArgs e)
+        {
+            this.fecha_tbox.Clear();
+            this.fecha_tbox.Enabled = true;
+            this.ciu_orig_list.SelectedIndex = 0;
+            this.ciu_dest_list.SelectedIndex = 0;
+            this.ciu_orig_list.Enabled = true;
+            this.ciu_dest_list.Enabled = true;
+            this.CantPasaj_numericUpDown.Value = this.CantPasaj_numericUpDown.Minimum;
+            this.sub_total_pasaj_tbox.Clear();
+            this.cant_encomiendas_numUpdown.Value = this.cant_encomiendas_numUpdown.Minimum;
+            this.cant_totKg_tbox.Clear();
+            this.sub_tot_encom_tbox.Clear();
+            this.total_tbox.Clear();
+
+            this.cod_viaje_encomienda = "";
+            this.cod_viaje_pasaje = "";
+            this.listas_encomiendas.Clear();
+            this.listas_pasajeros.Clear();
+
+        }
+
+
      
     }
 }

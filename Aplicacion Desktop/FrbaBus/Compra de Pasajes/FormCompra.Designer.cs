@@ -44,7 +44,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.sub_total_pasaj_tbox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.cant_encomiendas_numUpdown = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.cant_totKg_tbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -52,10 +52,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.total_tbox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.cancelar_boton = new System.Windows.Forms.Button();
+            this.carg_encom_boton = new System.Windows.Forms.Button();
+            this.selec_viaje_encom_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cant_encomiendas_numUpdown)).BeginInit();
             this.SuspendLayout();
             // 
             // login_boton
@@ -130,7 +131,7 @@
             // 
             // busc_viaje_boton
             // 
-            this.busc_viaje_boton.Location = new System.Drawing.Point(246, 225);
+            this.busc_viaje_boton.Location = new System.Drawing.Point(397, 288);
             this.busc_viaje_boton.Name = "busc_viaje_boton";
             this.busc_viaje_boton.Size = new System.Drawing.Size(118, 31);
             this.busc_viaje_boton.TabIndex = 12;
@@ -198,12 +199,13 @@
             this.label6.TabIndex = 22;
             this.label6.Text = "Ingrese Cantidad  de Encomiendas a Enviar";
             // 
-            // numericUpDown1
+            // cant_encomiendas_numUpdown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(243, 429);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 23;
+            this.cant_encomiendas_numUpdown.Location = new System.Drawing.Point(243, 429);
+            this.cant_encomiendas_numUpdown.Name = "cant_encomiendas_numUpdown";
+            this.cant_encomiendas_numUpdown.Size = new System.Drawing.Size(120, 20);
+            this.cant_encomiendas_numUpdown.TabIndex = 23;
+            
             // 
             // label7
             // 
@@ -265,31 +267,44 @@
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // cancelar_boton
             // 
-            this.button2.Location = new System.Drawing.Point(371, 638);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 24);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cancelar_boton.Location = new System.Drawing.Point(371, 638);
+            this.cancelar_boton.Name = "cancelar_boton";
+            this.cancelar_boton.Size = new System.Drawing.Size(115, 24);
+            this.cancelar_boton.TabIndex = 31;
+            this.cancelar_boton.Text = "Cancelar";
+            this.cancelar_boton.UseVisualStyleBackColor = true;
+            this.cancelar_boton.Click += new System.EventHandler(this.cancelar_boton_Click);
             // 
-            // button3
+            // carg_encom_boton
             // 
-            this.button3.Location = new System.Drawing.Point(245, 483);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 29);
-            this.button3.TabIndex = 32;
-            this.button3.Text = "Cargar Encomienda";
-            this.button3.UseVisualStyleBackColor = true;
+            this.carg_encom_boton.Location = new System.Drawing.Point(245, 483);
+            this.carg_encom_boton.Name = "carg_encom_boton";
+            this.carg_encom_boton.Size = new System.Drawing.Size(118, 29);
+            this.carg_encom_boton.TabIndex = 32;
+            this.carg_encom_boton.Text = "Cargar Encomienda";
+            this.carg_encom_boton.UseVisualStyleBackColor = true;
+            this.carg_encom_boton.Click += new System.EventHandler(this.carg_encom_boton_Click);
+            // 
+            // selec_viaje_encom_button
+            // 
+            this.selec_viaje_encom_button.Location = new System.Drawing.Point(397, 429);
+            this.selec_viaje_encom_button.Name = "selec_viaje_encom_button";
+            this.selec_viaje_encom_button.Size = new System.Drawing.Size(118, 31);
+            this.selec_viaje_encom_button.TabIndex = 33;
+            this.selec_viaje_encom_button.Text = "Seleccionar Viaje";
+            this.selec_viaje_encom_button.UseVisualStyleBackColor = true;
+            this.selec_viaje_encom_button.Click += new System.EventHandler(this.selec_viaje_encom_button_Click);
             // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 676);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(582, 676);
+            this.Controls.Add(this.selec_viaje_encom_button);
+            this.Controls.Add(this.carg_encom_boton);
+            this.Controls.Add(this.cancelar_boton);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.total_tbox);
             this.Controls.Add(this.label9);
@@ -297,7 +312,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cant_totKg_tbox);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.cant_encomiendas_numUpdown);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.sub_total_pasaj_tbox);
             this.Controls.Add(this.label4);
@@ -318,7 +333,7 @@
             this.Text = "Compra";
             this.Load += new System.EventHandler(this.FormCompra_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cant_encomiendas_numUpdown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,15 +357,16 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox sub_total_pasaj_tbox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown cant_encomiendas_numUpdown;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox cant_totKg_tbox;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox sub_tot_encom_tbox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox total_tbox;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button cancelar_boton;
+        private System.Windows.Forms.Button carg_encom_boton;
+        private System.Windows.Forms.Button selec_viaje_encom_button;
+        public System.Windows.Forms.TextBox cant_totKg_tbox;
+        public System.Windows.Forms.TextBox sub_tot_encom_tbox;
     }
 }

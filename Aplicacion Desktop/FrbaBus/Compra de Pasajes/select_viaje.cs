@@ -30,7 +30,10 @@ namespace FrbaBus.Compra_de_Pasajes
         {
             if (e.ColumnIndex == 0)
             {
-                this.compra_form.cod_viaje= this.viajes_dataGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
+                if (this.compra_form.tipo_viaje=='P')
+                    this.compra_form.cod_viaje_pasaje= this.viajes_dataGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
+                else
+                    this.compra_form.cod_viaje_encomienda= this.viajes_dataGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
                 this.Close();
             }
         }

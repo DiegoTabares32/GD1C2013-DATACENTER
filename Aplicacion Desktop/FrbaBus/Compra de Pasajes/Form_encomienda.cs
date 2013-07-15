@@ -9,23 +9,19 @@ using System.Windows.Forms;
 
 namespace FrbaBus.Compra_de_Pasajes
 {
-    public partial class cargar_pasajero : Form
+    public partial class Form_encomienda : Form
     {
-
-        bool cliente_existente = false;
         public string viaje_cod;
-        public List<cargar_pasajero> listas_pasajeros;
-        public string cod_pasaje = "";
+        public List<Form_encomienda> listas_encomienda;
+        bool cliente_existente = false;
+        public string cod_encomienda = "";
 
-        public cargar_pasajero(string cod_viaje, List<cargar_pasajero> listas_pasajeros)
+        public Form_encomienda(string viaje_cod, List<Form_encomienda> listas_encomienda)
         {
             InitializeComponent();
-            this.viaje_cod = cod_viaje;
-            this.listas_pasajeros = listas_pasajeros; //lo necesito para luego filtrar butacas
+            this.viaje_cod = viaje_cod;
+            this.listas_encomienda = listas_encomienda; //la necesito para chequear KG
         }
-
-
-
 
         private void refrescar()
         {
@@ -39,14 +35,35 @@ namespace FrbaBus.Compra_de_Pasajes
             this.mascul_radioBut.Checked = false;
             this.fem_radButton.Checked = false;
             this.DNI_Tbox.Enabled = true;
-            this.butNro_tbox.Clear();
-            this.pos_but_tbox.Clear();
-            this.piso_tbox.Clear();
+            this.peso_encom_tbox.Clear();
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
         {
             this.refrescar();
+        }
+
+        private void check_peso_encom_boton_Click(object sender, EventArgs e)
+        {
+            int kg_a_ocupar = Convert.ToInt16(this.peso_encom_tbox.Text); //inicializo con peso actual
+            foreach (Form_encomienda encomienda in this.listas_encomienda)
+            {
+                if (this.viaje_cod == encomienda.viaje_cod)
+                    kg_a_ocupar += Convert.ToInt16(encomienda.peso_encom_tbox.Text);
+ 
+            }
+
+            //hacemos la diferencia con el peso disponible para ver si es posible enviar encomienda
+            stored_procedures stored_proc = new stored_procedures();
+            if ((stored_proc.get_kg_disponibles(this.viaje_cod) - kg_a_ocupar) >= 0)
+            {
+                MessageBox.Show("Se puede enviar Encomienda con este Peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("El peso de la Encomienda supera los KG disponibles del micro, Imposible enviar Encomienda", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void guardar_boton_Click(object sender, EventArgs e)
@@ -55,37 +72,37 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (this.DNI_Tbox.Text == "")
             {
-                MessageBox.Show("Debe ingresar DNI", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe ingresar DNI", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (this.nombre_Tbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar Nombre", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Ingresar Nombre", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (this.apell_Tbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar Apellido", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Ingresar Apellido", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (this.dir_Tbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar Dirección", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Ingresar Dirección", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (this.tel_Tbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar Telefono", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Ingresar Telefono", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
-            if (this.fec_nac_Tbox.Text == "" )
+            if (this.fec_nac_Tbox.Text == "")
             {
-                MessageBox.Show("Debe Ingresar Fecha de Nacimiento", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Ingresar Fecha de Nacimiento", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
@@ -94,28 +111,23 @@ namespace FrbaBus.Compra_de_Pasajes
             {
                 if (this.fec_nac_Tbox.Text[2] != '/' | this.fec_nac_Tbox.Text[5] != '/')
                 {
-                    MessageBox.Show("Error en el formato de fecha. Formato obligatorio: dd/mm/aaaaa", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error en el formato de fecha. Formato obligatorio: dd/mm/aaaaa", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     error = true;
 
                 }
             }
             else
             {
-                MessageBox.Show("Error en el formato de fecha. Formato obligatorio: dd/mm/aaaaa", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error en el formato de fecha. Formato obligatorio: dd/mm/aaaaa", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (!(this.mascul_radioBut.Checked | this.fem_radButton.Checked))
             {
-                MessageBox.Show("Debe Seleccionar Sexo", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Seleccionar Sexo", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
-            if (this.butNro_tbox.Text == "" | this.piso_tbox.Text == "" | this.pos_but_tbox.Text == "")
-            {
-                MessageBox.Show("Debe Seleccionar Butaca", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
-            }
 
             if (error)
             {
@@ -126,9 +138,9 @@ namespace FrbaBus.Compra_de_Pasajes
             stored_procedures stored_proc = new stored_procedures();
             string sexo;
             if (this.mascul_radioBut.Checked)
-                    sexo = "M";
-                else
-                    sexo = "F";
+                sexo = "M";
+            else
+                sexo = "F";
 
             //Actualizamos o Insertamos Cliente
             if (this.cliente_existente)
@@ -180,57 +192,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 }
 
             }
-            
         }
-
-        private void nombre_Tbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //no permite que ingresen numeros/signos de puntuacion/espacios/simbolos
-            if (char.IsNumber(e.KeyChar) | char.IsPunctuation(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsSymbol(e.KeyChar)) 
-                e.Handled = true;
-        }
-
-        private void apell_Tbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //no permite que ingresen numeros/signos de puntuacion/espacios/simbolos
-            if (char.IsNumber(e.KeyChar) | char.IsPunctuation(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsSymbol(e.KeyChar))
-                e.Handled = true;
-        }
-
-        private void dir_Tbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //no permite que ingresen signos de puntuación/simbolos
-            if (char.IsPunctuation(e.KeyChar) | char.IsSymbol(e.KeyChar))
-                e.Handled = true;
-        }
-
-        private void tel_Tbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //solo permite q ingrese numeros
-            if (char.IsNumber(e.KeyChar) | char.IsControl(e.KeyChar))
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-
-        private void fec_nac_Tbox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsLetter(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsSymbol(e.KeyChar))
-                e.Handled = true;
-        }
-
-        private void select_butaca_boton_Click(object sender, EventArgs e)
-        {
-            
-
-            select_butaca select_butaca = new select_butaca(this);
-            select_butaca.ShowDialog();
-        }
-
- 
-
-   
-
 
 
     }

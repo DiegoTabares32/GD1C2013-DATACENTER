@@ -637,5 +637,23 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE DATACENTER.get_costo_encomienda @viaj_id int, @paq_kg nvarchar(255)
+AS
+BEGIN
+	SELECT reco_precio_base_kg * convert(numeric(18,0),@paq_kg)
+		   FROM DATACENTER.Recorrido JOIN DATACENTER.Viaje ON (reco_cod=viaj_reco_cod)
+		   WHERE viaj_id=@viaj_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_kg_disponibles @viaj_id int
+AS
+BEGIN
+	SELECT mic_cant_kg_disponibles
+	FROM DATACENTER.Viaje JOIN DATACENTER.Micro ON (viaj_mic_patente=mic_patente)
+	WHERE viaj_id = @viaj_id
+END
+GO
+
 
 

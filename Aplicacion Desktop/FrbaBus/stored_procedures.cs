@@ -97,5 +97,21 @@ namespace FrbaBus
             DataTable tabl_porc = conexion.execute_query(query);
             return tabl_porc.Rows[0].ItemArray[0].ToString();
         }
+
+        public string get_costo_encomienda(string viaj_id, string paq_kg)
+        {
+            connection conexion = new connection();
+            string query = " EXECUTE DATACENTER.get_costo_encomienda " + viaj_id+","+paq_kg;
+            DataTable tabl_porc = conexion.execute_query(query);
+            return tabl_porc.Rows[0].ItemArray[0].ToString();
+        }
+
+        public Single get_kg_disponibles(string viaj_id)
+        {
+            connection conexion = new connection();
+            string query = "EXECUTE DATACENTER.get_kg_disponibles " + viaj_id;
+            DataTable tabl_porc = conexion.execute_query(query);
+            return Convert.ToSingle(tabl_porc.Rows[0].ItemArray[0].ToString());
+        }
     }
 }
