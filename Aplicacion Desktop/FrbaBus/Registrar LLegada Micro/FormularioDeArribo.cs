@@ -11,12 +11,11 @@ namespace FrbaBus.Registrar_LLegada_Micro
 {
     public partial class FormularioDeArribo : Form
     {
-        private llegadaMicros llegadaMicros;
-
-        public FormularioDeArribo(llegadaMicros llegada)
+        
+        public FormularioDeArribo()
         {
             InitializeComponent();
-            this.llegadaMicros = llegada;
+            
         }
 
         private void FormularioDeArribo_Load(object sender, EventArgs e)
@@ -35,7 +34,8 @@ namespace FrbaBus.Registrar_LLegada_Micro
             this.comboBoxArribo.DataSource = table_ciu_dest;
             this.comboBoxArribo.DisplayMember = "ciu_nombre";
             this.comboBoxArribo.ValueMember = "ciu_nombre";
-
+            this.comboBoxOrigen.ResetText();
+            this.comboBoxArribo.ResetText();
         }
 
         private void buttonAceptar_Click(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
             //LLENO UNA TABLA CON EL RESULTADO DE LOS VALORES INGRESADOS Y 
             //LOS AGREGO EN LA DATAGRID DE REGISTRO LLEGADA MICRO
             string fechayhora = textBoxFechallegada.Text +" "+ textBoxHorallegada.Text;
-            string patente = labelpatente.Text;
+            string patente = textBoxPatente.Text;
             string origen = comboBoxOrigen.Text;
             string destino = comboBoxArribo.Text;
             //ACA PIDO LA INFORMACION DEL MICRO
@@ -69,6 +69,15 @@ namespace FrbaBus.Registrar_LLegada_Micro
             InfoMicro info = new InfoMicro(infoMicro, mensaje);
             info.Show();            
             this.Close();
+        }
+
+        private void buttonLimpiar_Click(object sender, EventArgs e)
+        {
+            this.textBoxFechallegada.Clear();
+            this.textBoxHorallegada.Clear();
+            this.textBoxPatente.Clear();
+            this.comboBoxOrigen.ResetText();
+            this.comboBoxArribo.ResetText();
         }
                
     }

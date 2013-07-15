@@ -21,14 +21,24 @@ namespace FrbaBus.Registrar_LLegada_Micro
                           
         private void buttonIngresarArribo_Click(object sender, EventArgs e)
         {
-            Form formularioDeArribo = new FormularioDeArribo(this);
+            Form formularioDeArribo = new FormularioDeArribo();
             formularioDeArribo.Show();            
         }
 
         private void llegadaMicros_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            string query = "drop table DATACENTER.arribosCargados";
+        {            
             connection conexion = new connection();
+            string query1 = "SELECT fechayhora, patente, viaje, arribo FROM DATACENTER.arribosCargados";
+            DataTable tabla = conexion.execute_query(query1);
+            if (tabla.Rows.Count > 0)
+            {
+                MessageBox.Show("Todavía hay registros ingresados sin procesar!!!");
+                e.Cancel = true;
+                return;
+            }
+
+            string query = "drop table DATACENTER.arribosCargados";
+            
             conexion.execute_query(query);
         }
 
@@ -43,8 +53,10 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void buttonProcesarArribos_Click(object sender, EventArgs e)
         {
-            string query = "";
+            string query = "INSERT INTO DATACENTER.Arribo (arri_fecha_llegada, arri_mic_patente, arri_viaj_id, arri_ciu_arribada) SELECT fechayhora, patente, viaje, arribo FROM DATACENTER.arribosCargados";
             connection conexion = new connection();
+            conexion.execute_query(query);
+            query = "delete DATACENTER.arribosCargados";
             conexion.execute_query(query);
         }
     }
