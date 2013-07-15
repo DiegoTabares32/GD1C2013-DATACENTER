@@ -55,13 +55,16 @@
             this.cancelar_boton = new System.Windows.Forms.Button();
             this.carg_encom_boton = new System.Windows.Forms.Button();
             this.selec_viaje_encom_button = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cant_encomiendas_numUpdown)).BeginInit();
             this.SuspendLayout();
             // 
             // login_boton
             // 
-            this.login_boton.Location = new System.Drawing.Point(422, 8);
+            this.login_boton.Location = new System.Drawing.Point(506, 3);
             this.login_boton.Name = "login_boton";
             this.login_boton.Size = new System.Drawing.Size(64, 25);
             this.login_boton.TabIndex = 0;
@@ -74,9 +77,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(116, 13);
+            this.label1.Size = new System.Drawing.Size(132, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Ingrese Fecha de Viaje";
+            this.label1.Text = "Ingrese Fecha de Viaje (*):";
             // 
             // fecha_tbox
             // 
@@ -100,18 +103,18 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(42, 140);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 13);
+            this.label2.Size = new System.Drawing.Size(146, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Ingrese Ciudad Origen";
+            this.label2.Text = "Seleccione Ciudad Origen (*):";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(38, 187);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 13);
+            this.label3.Size = new System.Drawing.Size(151, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Ingrese Ciudad Destino";
+            this.label3.Text = "Seleccione Ciudad Destino (*):";
             // 
             // ciu_orig_list
             // 
@@ -131,7 +134,7 @@
             // 
             // busc_viaje_boton
             // 
-            this.busc_viaje_boton.Location = new System.Drawing.Point(397, 288);
+            this.busc_viaje_boton.Location = new System.Drawing.Point(232, 325);
             this.busc_viaje_boton.Name = "busc_viaje_boton";
             this.busc_viaje_boton.Size = new System.Drawing.Size(118, 31);
             this.busc_viaje_boton.TabIndex = 12;
@@ -157,7 +160,7 @@
             // 
             // cargar_pas_boton
             // 
-            this.cargar_pas_boton.Location = new System.Drawing.Point(247, 331);
+            this.cargar_pas_boton.Location = new System.Drawing.Point(398, 298);
             this.cargar_pas_boton.Name = "cargar_pas_boton";
             this.cargar_pas_boton.Size = new System.Drawing.Size(117, 30);
             this.cargar_pas_boton.TabIndex = 18;
@@ -280,9 +283,9 @@
             // 
             // carg_encom_boton
             // 
-            this.carg_encom_boton.Location = new System.Drawing.Point(245, 483);
+            this.carg_encom_boton.Location = new System.Drawing.Point(398, 442);
             this.carg_encom_boton.Name = "carg_encom_boton";
-            this.carg_encom_boton.Size = new System.Drawing.Size(118, 29);
+            this.carg_encom_boton.Size = new System.Drawing.Size(117, 30);
             this.carg_encom_boton.TabIndex = 32;
             this.carg_encom_boton.Text = "Cargar Encomienda";
             this.carg_encom_boton.UseVisualStyleBackColor = true;
@@ -290,7 +293,7 @@
             // 
             // selec_viaje_encom_button
             // 
-            this.selec_viaje_encom_button.Location = new System.Drawing.Point(397, 429);
+            this.selec_viaje_encom_button.Location = new System.Drawing.Point(233, 474);
             this.selec_viaje_encom_button.Name = "selec_viaje_encom_button";
             this.selec_viaje_encom_button.Size = new System.Drawing.Size(118, 31);
             this.selec_viaje_encom_button.TabIndex = 33;
@@ -298,11 +301,41 @@
             this.selec_viaje_encom_button.UseVisualStyleBackColor = true;
             this.selec_viaje_encom_button.Click += new System.EventHandler(this.selec_viaje_encom_button_Click);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(454, 684);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(116, 13);
+            this.label16.TabIndex = 81;
+            this.label16.Text = "(*) Campos Obligatorios";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(57, 333);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(151, 13);
+            this.label10.TabIndex = 82;
+            this.label10.Text = "Seleccione Viaje para Pasaje :";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(30, 483);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(178, 13);
+            this.label11.TabIndex = 83;
+            this.label11.Text = "Seleccione Viaje para Encomienda :";
+            // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 676);
+            this.ClientSize = new System.Drawing.Size(582, 706);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.selec_viaje_encom_button);
             this.Controls.Add(this.carg_encom_boton);
             this.Controls.Add(this.cancelar_boton);
@@ -369,5 +402,8 @@
         private System.Windows.Forms.Button selec_viaje_encom_button;
         public System.Windows.Forms.TextBox cant_totKg_tbox;
         public System.Windows.Forms.TextBox sub_tot_encom_tbox;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

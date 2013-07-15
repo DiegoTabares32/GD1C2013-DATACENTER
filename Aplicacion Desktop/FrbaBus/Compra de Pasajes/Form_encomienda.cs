@@ -194,6 +194,43 @@ namespace FrbaBus.Compra_de_Pasajes
             }
         }
 
+        private void apell_Tbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //no permite que ingresen numeros/signos de puntuacion/espacios/simbolos
+            if (char.IsNumber(e.KeyChar) | char.IsPunctuation(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsSymbol(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void nombre_Tbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //no permite que ingresen numeros/signos de puntuacion/espacios/simbolos
+            if (char.IsNumber(e.KeyChar) | char.IsPunctuation(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsSymbol(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void dir_Tbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //no permite que ingresen signos de puntuación/simbolos
+            if (char.IsPunctuation(e.KeyChar) | char.IsSymbol(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void tel_Tbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo permite q ingrese numeros
+            if (char.IsNumber(e.KeyChar) | char.IsControl(e.KeyChar))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        private void fec_nac_Tbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) | char.IsSeparator(e.KeyChar) | char.IsSymbol(e.KeyChar))
+                e.Handled = true;
+        }
+
+      
 
     }
 }

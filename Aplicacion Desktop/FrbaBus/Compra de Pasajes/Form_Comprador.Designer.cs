@@ -48,19 +48,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.nro_tarj_tbox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cod_Seg_tbox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.fech_venc_tbox = new System.Windows.Forms.TextBox();
+            this.tipoTarj_comboBox = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.cant_cuot_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.Limpiar_boton = new System.Windows.Forms.Button();
             this.aceptar_boton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.label17 = new System.Windows.Forms.Label();
+            this.confirmar_boton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // label11
@@ -110,6 +112,7 @@
             this.fec_nac_Tbox.Name = "fec_nac_Tbox";
             this.fec_nac_Tbox.Size = new System.Drawing.Size(138, 20);
             this.fec_nac_Tbox.TabIndex = 65;
+            this.fec_nac_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fec_nac_Tbox_KeyPress);
             // 
             // label9
             // 
@@ -133,6 +136,7 @@
             this.tel_Tbox.Name = "tel_Tbox";
             this.tel_Tbox.Size = new System.Drawing.Size(138, 20);
             this.tel_Tbox.TabIndex = 62;
+            this.tel_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tel_Tbox_KeyPress);
             // 
             // dir_Tbox
             // 
@@ -140,6 +144,7 @@
             this.dir_Tbox.Name = "dir_Tbox";
             this.dir_Tbox.Size = new System.Drawing.Size(138, 20);
             this.dir_Tbox.TabIndex = 61;
+            this.dir_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dir_Tbox_KeyPress);
             // 
             // apell_Tbox
             // 
@@ -147,6 +152,7 @@
             this.apell_Tbox.Name = "apell_Tbox";
             this.apell_Tbox.Size = new System.Drawing.Size(138, 20);
             this.apell_Tbox.TabIndex = 60;
+            this.apell_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.apell_Tbox_KeyPress);
             // 
             // nombre_Tbox
             // 
@@ -154,6 +160,7 @@
             this.nombre_Tbox.Name = "nombre_Tbox";
             this.nombre_Tbox.Size = new System.Drawing.Size(138, 20);
             this.nombre_Tbox.TabIndex = 59;
+            this.nombre_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombre_Tbox_KeyPress);
             // 
             // DNI_Tbox
             // 
@@ -161,6 +168,7 @@
             this.DNI_Tbox.Name = "DNI_Tbox";
             this.DNI_Tbox.Size = new System.Drawing.Size(138, 20);
             this.DNI_Tbox.TabIndex = 58;
+            this.DNI_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DNI_Tbox_KeyPress);
             // 
             // label7
             // 
@@ -234,12 +242,13 @@
             this.label8.TabIndex = 70;
             this.label8.Text = "Ingrese Nro de Tarjeta de Credito (*):";
             // 
-            // textBox1
+            // nro_tarj_tbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(220, 376);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 20);
-            this.textBox1.TabIndex = 71;
+            this.nro_tarj_tbox.Location = new System.Drawing.Point(220, 376);
+            this.nro_tarj_tbox.Name = "nro_tarj_tbox";
+            this.nro_tarj_tbox.Size = new System.Drawing.Size(145, 20);
+            this.nro_tarj_tbox.TabIndex = 71;
+            this.nro_tarj_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nro_tarj_tbox_KeyPress);
             // 
             // label12
             // 
@@ -250,12 +259,13 @@
             this.label12.TabIndex = 72;
             this.label12.Text = "Ingrese Codigo de Seguridad(*)";
             // 
-            // textBox2
+            // cod_Seg_tbox
             // 
-            this.textBox2.Location = new System.Drawing.Point(220, 418);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(145, 20);
-            this.textBox2.TabIndex = 73;
+            this.cod_Seg_tbox.Location = new System.Drawing.Point(220, 418);
+            this.cod_Seg_tbox.Name = "cod_Seg_tbox";
+            this.cod_Seg_tbox.Size = new System.Drawing.Size(145, 20);
+            this.cod_Seg_tbox.TabIndex = 73;
+            this.cod_Seg_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cod_Seg_tbox_KeyPress);
             // 
             // label13
             // 
@@ -266,25 +276,26 @@
             this.label13.TabIndex = 74;
             this.label13.Text = "Ingrese Fecha de Vencimiento(*)";
             // 
-            // textBox3
+            // fech_venc_tbox
             // 
-            this.textBox3.Location = new System.Drawing.Point(220, 459);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(145, 20);
-            this.textBox3.TabIndex = 75;
+            this.fech_venc_tbox.Location = new System.Drawing.Point(220, 459);
+            this.fech_venc_tbox.Name = "fech_venc_tbox";
+            this.fech_venc_tbox.Size = new System.Drawing.Size(145, 20);
+            this.fech_venc_tbox.TabIndex = 75;
+            this.fech_venc_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fech_venc_tbox_KeyPress);
             // 
-            // comboBox1
+            // tipoTarj_comboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(219, 500);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(145, 21);
-            this.comboBox1.TabIndex = 76;
+            this.tipoTarj_comboBox.FormattingEnabled = true;
+            this.tipoTarj_comboBox.Location = new System.Drawing.Point(220, 522);
+            this.tipoTarj_comboBox.Name = "tipoTarj_comboBox";
+            this.tipoTarj_comboBox.Size = new System.Drawing.Size(145, 21);
+            this.tipoTarj_comboBox.TabIndex = 76;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(20, 500);
+            this.label14.Location = new System.Drawing.Point(23, 525);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(151, 13);
             this.label14.TabIndex = 77;
@@ -293,23 +304,33 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(27, 538);
+            this.label15.Location = new System.Drawing.Point(23, 587);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(144, 13);
             this.label15.TabIndex = 78;
             this.label15.Text = "Ingrese Cantidad de Cuotas: ";
             // 
-            // numericUpDown1
+            // cant_cuot_numericUpDown
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(218, 531);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(73, 20);
-            this.numericUpDown1.TabIndex = 79;
+            this.cant_cuot_numericUpDown.Location = new System.Drawing.Point(218, 585);
+            this.cant_cuot_numericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.cant_cuot_numericUpDown.Name = "cant_cuot_numericUpDown";
+            this.cant_cuot_numericUpDown.Size = new System.Drawing.Size(73, 20);
+            this.cant_cuot_numericUpDown.TabIndex = 79;
+            this.cant_cuot_numericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(334, 632);
+            this.label16.Location = new System.Drawing.Point(437, 698);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(116, 13);
             this.label16.TabIndex = 80;
@@ -317,39 +338,62 @@
             // 
             // Limpiar_boton
             // 
-            this.Limpiar_boton.Location = new System.Drawing.Point(58, 581);
+            this.Limpiar_boton.Location = new System.Drawing.Point(67, 649);
             this.Limpiar_boton.Name = "Limpiar_boton";
             this.Limpiar_boton.Size = new System.Drawing.Size(133, 32);
             this.Limpiar_boton.TabIndex = 81;
             this.Limpiar_boton.Text = "Limpiar";
             this.Limpiar_boton.UseVisualStyleBackColor = true;
+            this.Limpiar_boton.Click += new System.EventHandler(this.Limpiar_boton_Click);
             // 
             // aceptar_boton
             // 
-            this.aceptar_boton.Location = new System.Drawing.Point(253, 581);
+            this.aceptar_boton.Location = new System.Drawing.Point(271, 649);
             this.aceptar_boton.Name = "aceptar_boton";
             this.aceptar_boton.Size = new System.Drawing.Size(133, 32);
             this.aceptar_boton.TabIndex = 82;
             this.aceptar_boton.Text = "Aceptar";
             this.aceptar_boton.UseVisualStyleBackColor = true;
+            this.aceptar_boton.Click += new System.EventHandler(this.aceptar_boton_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(235, 482);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(130, 13);
+            this.label17.TabIndex = 83;
+            this.label17.Text = "Formato de Fecha DDMM";
+            // 
+            // confirmar_boton
+            // 
+            this.confirmar_boton.Location = new System.Drawing.Point(398, 516);
+            this.confirmar_boton.Name = "confirmar_boton";
+            this.confirmar_boton.Size = new System.Drawing.Size(139, 31);
+            this.confirmar_boton.TabIndex = 84;
+            this.confirmar_boton.Text = "Confirmar Tipo Tarjeta";
+            this.confirmar_boton.UseVisualStyleBackColor = true;
+            this.confirmar_boton.Click += new System.EventHandler(this.confirmar_boton_Click);
             // 
             // Form_Comprador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(452, 645);
+            this.ClientSize = new System.Drawing.Size(575, 725);
+            this.Controls.Add(this.confirmar_boton);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.aceptar_boton);
             this.Controls.Add(this.Limpiar_boton);
             this.Controls.Add(this.label16);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.cant_cuot_numericUpDown);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.tipoTarj_comboBox);
+            this.Controls.Add(this.fech_venc_tbox);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.cod_Seg_tbox);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.nro_tarj_tbox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.fem_radButton);
@@ -372,7 +416,8 @@
             this.Controls.Add(this.label1);
             this.Name = "Form_Comprador";
             this.Text = "Form_Comprador";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Load += new System.EventHandler(this.Form_Comprador_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,17 +445,19 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox nro_tarj_tbox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox cod_Seg_tbox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox fech_venc_tbox;
+        private System.Windows.Forms.ComboBox tipoTarj_comboBox;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown cant_cuot_numericUpDown;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button Limpiar_boton;
         private System.Windows.Forms.Button aceptar_boton;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button confirmar_boton;
     }
 }

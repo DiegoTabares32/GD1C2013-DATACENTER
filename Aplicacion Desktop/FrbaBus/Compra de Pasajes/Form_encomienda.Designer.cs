@@ -111,6 +111,7 @@
             this.fec_nac_Tbox.Name = "fec_nac_Tbox";
             this.fec_nac_Tbox.Size = new System.Drawing.Size(138, 20);
             this.fec_nac_Tbox.TabIndex = 46;
+            this.fec_nac_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fec_nac_Tbox_KeyPress);
             // 
             // label9
             // 
@@ -143,6 +144,7 @@
             this.tel_Tbox.Name = "tel_Tbox";
             this.tel_Tbox.Size = new System.Drawing.Size(138, 20);
             this.tel_Tbox.TabIndex = 42;
+            this.tel_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tel_Tbox_KeyPress);
             // 
             // dir_Tbox
             // 
@@ -150,6 +152,7 @@
             this.dir_Tbox.Name = "dir_Tbox";
             this.dir_Tbox.Size = new System.Drawing.Size(138, 20);
             this.dir_Tbox.TabIndex = 41;
+            this.dir_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dir_Tbox_KeyPress);
             // 
             // apell_Tbox
             // 
@@ -157,6 +160,7 @@
             this.apell_Tbox.Name = "apell_Tbox";
             this.apell_Tbox.Size = new System.Drawing.Size(138, 20);
             this.apell_Tbox.TabIndex = 40;
+            this.apell_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.apell_Tbox_KeyPress);
             // 
             // nombre_Tbox
             // 
@@ -164,6 +168,7 @@
             this.nombre_Tbox.Name = "nombre_Tbox";
             this.nombre_Tbox.Size = new System.Drawing.Size(138, 20);
             this.nombre_Tbox.TabIndex = 39;
+            this.nombre_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombre_Tbox_KeyPress);
             // 
             // DNI_Tbox
             // 

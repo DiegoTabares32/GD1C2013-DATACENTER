@@ -25,6 +25,10 @@ namespace FrbaBus.Compra_de_Pasajes
         //Colección de Encomiendas una vez confirmada la compra las cargamos en la base
         List<Form_encomienda> listas_encomiendas = new List<Form_encomienda>();
 
+        //Datos del Comprador
+        public string dni_comprador = "";
+        public string tipo_tarjeta = "";
+
         public FormCompra()
         {
             InitializeComponent();
@@ -73,7 +77,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (this.fecha_tbox.Text == "")
             {
-                MessageBox.Show("Debe Seleccionar Fecha", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Seleccionar Fecha", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
@@ -94,13 +98,13 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (this.CantPasaj_numericUpDown.Value <= 0)
             {
-                MessageBox.Show("Cantidad de Pasajes Incorrecta", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Cantidad de Pasajes Incorrecta", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (this.cod_viaje_pasaje == "")
             {
-                MessageBox.Show("Debe Seleccionar Viaje para el Pasaje", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Seleccionar Viaje para el Pasaje", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
@@ -121,7 +125,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 listas_pasajeros.Add(form_cargar_pas);
                 if (cant_pasajes - 1 != i)
                 {
-                    MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     form_viaje.ShowDialog();
                 }
                 
@@ -157,7 +161,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (this.fecha_tbox.Text == "")
             {
-                MessageBox.Show("Debe Seleccionar Fecha", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Seleccionar Fecha", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
@@ -177,13 +181,13 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (this.cant_encomiendas_numUpdown.Value <= 0)
             {
-                MessageBox.Show("Cantidad de Encomiendas Incorrecta", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Cantidad de Encomiendas Incorrecta", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
             if (this.cod_viaje_encomienda == "")
             {
-                MessageBox.Show("Debe Seleccionar Viaje para la Encomienda", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Seleccionar Viaje para la Encomienda", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 
@@ -252,8 +256,20 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void aceptar_boton_Click(object sender, EventArgs e)
         {
-            Form_Comprador comprador = new Form_Comprador();
+
+            if (this.total_tbox.Text == "0")
+            {
+                MessageBox.Show("No se han Ingresado Datos Obligatorios para hacer la compra", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Form_Comprador comprador = new Form_Comprador(this);
             comprador.ShowDialog();
+            MessageBox.Show(this.dni_comprador + " " + this.tipo_tarjeta);
+
+            /*--------------Insertamos y Mostramos Compra/Pasaje/Encomienda------------------*/
+
+
         }
 
         private void cant_encomiendas_numUpdown_KeyPress(object sender, KeyPressEventArgs e)
@@ -264,10 +280,6 @@ namespace FrbaBus.Compra_de_Pasajes
             else
                 e.Handled = true;
         }
-
- 
-
-
-     
+  
     }
 }

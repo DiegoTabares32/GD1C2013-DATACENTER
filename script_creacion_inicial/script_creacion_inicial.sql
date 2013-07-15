@@ -374,6 +374,30 @@ DATACENTER.Premio(prem_nombre, prem_costo_puntos, prem_stock)
 VALUES ('Notebook Lenovo G470', 150, 30)
 GO
 
+--AGREGAMOS TIPO DE TARJETA
+--H Habilitada para comprar en cuotas
+--D Deshabilitada para comprar en cuotas
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Mastercard', 'H')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('American Express', 'D')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Visa', 'H')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Italcred', 'D')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Cabal', 'H')
+
 /*------------------------------------------------------------------*/
 /*-----------------MIGRACION DE CLIENTES----------------------------*/
 
@@ -655,5 +679,12 @@ BEGIN
 END
 GO
 
-
+CREATE PROCEDURE DATACENTER.check_tipo_tarjeta @tipo_id int
+AS
+BEGIN
+	SELECT tipo_cuotas 
+	FROM DATACENTER.TipoTarjeta 
+	WHERE tipo_id = @tipo_id
+END
+GO
 

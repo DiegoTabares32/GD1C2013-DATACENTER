@@ -113,5 +113,14 @@ namespace FrbaBus
             DataTable tabl_porc = conexion.execute_query(query);
             return Convert.ToSingle(tabl_porc.Rows[0].ItemArray[0].ToString());
         }
+
+        public char check_tipo_tarjeta(string tipo_id)
+        {
+            connection conexion = new connection();
+            string query = "EXECUTE DATACENTER.check_tipo_tarjeta " + tipo_id;
+            DataTable tabl_porc = conexion.execute_query(query);
+            return Convert.ToChar(tabl_porc.Rows[0].ItemArray[0].ToString());
+        }
+
     }
 }
