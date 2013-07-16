@@ -278,7 +278,7 @@ dev_motivo nvarchar(255) NULL,
 FOREIGN KEY (dev_comp_id) REFERENCES DATACENTER.Compra (comp_id),
 FOREIGN KEY (dev_cod_PasPaq) REFERENCES DATACENTER.Pasaje (pas_cod),
 FOREIGN KEY (dev_cod_PasPaq) REFERENCES DATACENTER.Paquete (paq_cod),
-PRIMARY KEY (dev_id, dev_cod_PasPaq)
+PRIMARY KEY (dev_id, dev_cod_PasPaq, dev_tipo_devuelto)
 )
 GO
 /*------------------------------------------------------------------*/
