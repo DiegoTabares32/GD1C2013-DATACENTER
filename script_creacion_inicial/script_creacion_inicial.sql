@@ -270,16 +270,15 @@ GO
 
 CREATE TABLE DATACENTER.Devolucion
 (dev_id int IDENTITY (1,1) NOT NULL,
+dev_cod_PasPaq numeric(18,0) NOT NULL,
+dev_tipo_devuelto nvarchar(255) NOT NULL,	--INDICA PAQUETE O PASAJE QUE SE REGISTRA EN LA DEVOLUCION
 dev_comp_id int NOT NULL,
-dev_pas_cod numeric(18,0) NULL,       --NULL POR QUE LA DEVOLUCION PUEDE TENER PAQ Y/O PASAJES
-dev_paq_cod numeric(18,0) NULL,
 dev_fecha datetime NULL,
 dev_motivo nvarchar(255) NULL,
-dev_monto numeric(18,2) NULL,
 FOREIGN KEY (dev_comp_id) REFERENCES DATACENTER.Compra (comp_id),
-FOREIGN KEY (dev_pas_cod) REFERENCES DATACENTER.Pasaje (pas_cod),
-FOREIGN KEY (dev_paq_cod) REFERENCES DATACENTER.Paquete (paq_cod),
-PRIMARY KEY (dev_id)
+FOREIGN KEY (dev_cod_PasPaq) REFERENCES DATACENTER.Pasaje (pas_cod),
+FOREIGN KEY (dev_cod_PasPaq) REFERENCES DATACENTER.Paquete (paq_cod),
+PRIMARY KEY (dev_id, dev_cod_PasPaq)
 )
 GO
 /*------------------------------------------------------------------*/
