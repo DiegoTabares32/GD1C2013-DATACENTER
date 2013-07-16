@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaBus.Top_Clientes;
 using FrbaBus.Top_Destinos;
+using FrbaBus.Top_Micros;
 
 namespace FrbaBus
 {
@@ -44,7 +45,9 @@ namespace FrbaBus
 
         private void buttonDestinosMicrosMasVacios_Click(object sender, EventArgs e)
         {
-            if (this.validarAnio()) { return; }            
+            if (this.validarAnio()) { return; }
+            MicrosMasButacasVacias microsVacios = new MicrosMasButacasVacias(this.textBoxAnio.Text,comboBoxSemestre.Text);
+            microsVacios.Show();
         }
 
         private void buttonClientesConMasPuntosAcumulados_Click(object sender, EventArgs e)

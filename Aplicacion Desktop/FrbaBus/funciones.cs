@@ -96,5 +96,12 @@ namespace FrbaBus
             connection conexion = new connection();
             return conexion.execute_query(query);
         }
+
+        public DataTable top5MicrosMasVacios(string anio, string semestre)
+        {
+            string query = "select top 5 m.mic_patente as 'Patente', (m.mic_cant_butacas-COUNT(distinct p.pas_cod)) as 'Cantidad de Butacas Vacías' from DATACENTER.Micro m join DATACENTER.Pasaje p on p.pas_micro_patente = m.mic_patente join DATACENTER.Arribo a on a.arri_mic_patente = m.mic_patente and a.arri_viaj_id = p.pas_viaj_id and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + ") and DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ") group by m.mic_patente, m.mic_cant_butacas order by 2 desc";
+            connection conexion = new connection();
+            return conexion.execute_query(query);
+        }
     }
 }
