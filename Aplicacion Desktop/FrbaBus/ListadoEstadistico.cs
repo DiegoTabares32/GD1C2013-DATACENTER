@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaBus.Top_Clientes;
+using FrbaBus.Top_Destinos;
 
 namespace FrbaBus
 {
@@ -36,7 +37,9 @@ namespace FrbaBus
 
         private void buttonDestinosMasPasajesComprados_Click(object sender, EventArgs e)
         {
-            if (this.validarAnio()) { return; }            
+            if (this.validarAnio()) { return; }
+            Top5DestinosMasPasajesComprados destinosMasPasajes = new Top5DestinosMasPasajesComprados(this.textBoxAnio.Text, comboBoxSemestre.Text);
+            destinosMasPasajes.Show();
         }             
 
         private void buttonDestinosMicrosMasVacios_Click(object sender, EventArgs e)

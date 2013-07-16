@@ -82,5 +82,12 @@ namespace FrbaBus
             connection conexion = new connection();
             return conexion.execute_query(query);
         }
+
+        public DataTable top5DestinosConMasPasajes(string anio, string semestre)
+        {
+            string query = "select top 5 r.reco_destino as 'Destino', COUNT(distinct p.pas_cod) as 'Cantidad de Pasajes' from DATACENTER.Pasaje p join DATACENTER.Viaje v on p.pas_viaj_id = v.viaj_id join DATACENTER.Recorrido r on r.reco_cod = v.viaj_reco_cod join DATACENTER.Compra co on co.comp_id = p.pas_compra_id and co.comp_fecha_compra between DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + ") and DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ") group by r.reco_destino order by COUNT(distinct p.pas_cod) desc";
+            connection conexion = new connection();
+            return conexion.execute_query(query);
+        }
     }
 }

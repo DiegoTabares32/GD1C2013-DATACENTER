@@ -210,6 +210,10 @@
     <EmbeddedResource Include="Top Clientes\Top5Clientes.resx">
       <DependentUpon>Top5Clientes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Top Destinos\MasPasajesComprados.resx">
+      <DependentUpon>MasPasajesComprados.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -254,11 +258,13 @@
     <Compile Include="Top Clientes\Top5Clientes.Designer.cs">
       <DependentUpon>Top5Clientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Top Destinos\Form1.cs">
+    <Compile Include="Top Destinos\MasPasajesComprados.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Top Destinos\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Top Destinos\MasPasajesComprados.Designer.cs">
+      <DependentUpon>MasPasajesComprados.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Top Destinos\Form2.cs">
       <SubType>Form</SubType>
