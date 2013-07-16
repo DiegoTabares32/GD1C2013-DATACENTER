@@ -25,3 +25,4 @@ C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion D
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\Top Destinos\MasPasajesComprados.cs
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\Top Destinos\MasPasajesComprados.Designer.cs
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Destinos.Top5DestinosMasPasajesComprados.resources
+C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Destinos.MasPasajesCancelados.resources

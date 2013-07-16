@@ -56,7 +56,9 @@ namespace FrbaBus
 
         private void buttonDestinosConPasajesCancelados_Click(object sender, EventArgs e)
         {
-            if (this.validarAnio()) { return; }            
+            if (this.validarAnio()) { return; }
+            MasPasajesCancelados cancelados = new MasPasajesCancelados(textBoxAnio.Text, comboBoxSemestre.Text);
+            cancelados.Show();
         }
 
         private void buttonMicrosDiasFueraServicio_Click(object sender, EventArgs e)
