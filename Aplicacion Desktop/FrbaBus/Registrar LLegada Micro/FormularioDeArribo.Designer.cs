@@ -45,6 +45,7 @@
             // textBoxPatente
             // 
             this.textBoxPatente.Location = new System.Drawing.Point(317, 47);
+            this.textBoxPatente.MaxLength = 6;
             this.textBoxPatente.Name = "textBoxPatente";
             this.textBoxPatente.Size = new System.Drawing.Size(78, 20);
             this.textBoxPatente.TabIndex = 1;
@@ -104,6 +105,7 @@
             // textBoxFechallegada
             // 
             this.textBoxFechallegada.Location = new System.Drawing.Point(14, 46);
+            this.textBoxFechallegada.MaxLength = 10;
             this.textBoxFechallegada.Name = "textBoxFechallegada";
             this.textBoxFechallegada.Size = new System.Drawing.Size(154, 20);
             this.textBoxFechallegada.TabIndex = 8;

@@ -11,11 +11,12 @@ namespace FrbaBus.Registrar_LLegada_Micro
 {
     public partial class FormularioDeArribo : Form
     {
-        
+        private funciones funciones;
+
         public FormularioDeArribo()
         {
             InitializeComponent();
-            
+            this.funciones = new funciones();    
         }
 
         private void FormularioDeArribo_Load(object sender, EventArgs e)
@@ -48,6 +49,56 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
+            //Validaciones
+            if (this.textBoxFechallegada.Text == "")
+            {
+                MessageBox.Show("Debe ingresar la Fecha de llegada");                
+            }
+            if (this.textBoxHorallegada.Text == "")
+            {
+                MessageBox.Show("Debe ingresar la Hora de llegada");
+            }
+            if (textBoxPatente.Text == "")
+            {
+                MessageBox.Show("Debe ingresar una Patente");
+                return;
+            }
+
+            char[] caracter = textBoxPatente.Text.ToCharArray();
+            int i;
+            if (caracter.Length != 6)
+            {
+                MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
+                return;
+            }
+            for (i = 0; i < 3; i++)
+            {
+                if (Char.IsDigit(caracter.ElementAt(i)))
+                {
+                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
+                    return;
+                }
+            }
+            for (i = 3; i < 6; i++)
+            {
+                if (Char.IsLetter(caracter.ElementAt(i)))
+                {
+                    MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
+                    return;
+                }
+            }
+
+            //preparar patente para poder registrar nuevo micro
+            string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
+            string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
+            string nroPatente = primerPartePatente + "-" + segundaPartePatente;
+
+            if (!funciones.existePatente(nroPatente))
+            {
+                MessageBox.Show("La patente ingresada no existe en la Base de Datos");
+                return;
+            }
+
             //LLENO UNA TABLA CON EL RESULTADO DE LOS VALORES INGRESADOS Y 
             //LOS AGREGO EN LA DATAGRID DE REGISTRO LLEGADA MICRO
             string fechayhora = textBoxFechallegada.Text +" "+ textBoxHorallegada.Text;
@@ -55,18 +106,18 @@ namespace FrbaBus.Registrar_LLegada_Micro
             string origen = comboBoxOrigen.Text;
             string destino = comboBoxArribo.Text;
             //ACA PIDO LA INFORMACION DEL MICRO
-            string query1 = "select m.mic_nro as 'N° Micro', m.mic_patente as 'Patente', s.serv_tipo as 'Servicio', m.mic_modelo as 'Modelo', ma.marc_nombre as 'Marca', m.mic_fecha_alta as 'Fecha de alta', m.mic_cant_kg_disponibles as 'Capacidad (Kg)', m.mic_cant_butacas as 'Cantidad de Butacas' from DATACENTER.Micro m join DATACENTER.Servicio s on s.serv_id = m.mic_serv_id join DATACENTER.Marca ma on ma.marc_id = m.mic_marc_id where m.mic_patente = '"+ textBoxPatente.Text +"'";
+            string query1 = "select m.mic_nro as 'N° Micro', m.mic_patente as 'Patente', s.serv_tipo as 'Servicio', m.mic_modelo as 'Modelo', ma.marc_nombre as 'Marca', m.mic_fecha_alta as 'Fecha de alta', m.mic_cant_kg_disponibles as 'Capacidad (Kg)', m.mic_cant_butacas as 'Cantidad de Butacas' from DATACENTER.Micro m join DATACENTER.Servicio s on s.serv_id = m.mic_serv_id join DATACENTER.Marca ma on ma.marc_id = m.mic_marc_id where m.mic_patente = '"+ nroPatente +"'";
             //VOY CARGARDO LOS REGISTROS INSERTADOS EN UNA TABLA PARA DESPUES INSETARLOS EN ARRIBO
             connection conexion = new connection();
-            string querySeleccionViajeId = "select v.viaj_id from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '" + comboBoxOrigen.Text + "' and v.viaj_mic_patente = '" + textBoxPatente.Text + "' where DATEDIFF(HH, v.viaj_fecha_salida, '" + fechayhora + "' ) BETWEEN 0 AND 24";
+            string querySeleccionViajeId = "select v.viaj_id from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '" + comboBoxOrigen.Text + "' and v.viaj_mic_patente = '" + nroPatente + "' where DATEDIFF(HH, v.viaj_fecha_salida, '" + fechayhora + "' ) BETWEEN 0 AND 24";
             DataTable resultadoSeleccionViajeId = conexion.execute_query(querySeleccionViajeId);
             
-            string query = "insert into DATACENTER.arribosCargados values('" + fechayhora + "', '" + patente + "', '" + origen + "', '" + destino + "' ,"+ resultadoSeleccionViajeId.Rows[0].ItemArray.ElementAt(0).ToString()+ ")";
+            string query = "insert into DATACENTER.arribosCargados values('" + fechayhora + "', '" + nroPatente + "', '" + origen + "', '" + destino + "' ,"+ resultadoSeleccionViajeId.Rows[0].ItemArray.ElementAt(0).ToString()+ ")";
             
             conexion.execute_query(query);
             DataTable infoMicro = conexion.execute_query(query1);
             //VALIDO QUE LA CIUDAD DE DESTINO SEA LA MISMA A LA QUE LLEGO
-            string query2 = "select r.reco_destino from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '" + comboBoxOrigen.Text + "'and r.reco_destino = '"+ comboBoxArribo.Text +"' and v.viaj_mic_patente = '" + textBoxPatente.Text + "' where DATEDIFF(HH, v.viaj_fecha_salida, '" + fechayhora + "' ) BETWEEN 0 AND 24";
+            string query2 = "select r.reco_destino from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '" + comboBoxOrigen.Text + "'and r.reco_destino = '"+ comboBoxArribo.Text +"' and v.viaj_mic_patente = '" + nroPatente + "' where DATEDIFF(HH, v.viaj_fecha_salida, '" + fechayhora + "' ) BETWEEN 0 AND 24";
             DataTable resultadoDestino = conexion.execute_query(query2);
             string mensaje = "La ciudad arribada es distinta a la que el micro tenía programada";            
             if (resultadoDestino.Rows.Count > 0)
