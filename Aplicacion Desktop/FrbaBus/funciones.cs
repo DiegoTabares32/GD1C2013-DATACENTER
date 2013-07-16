@@ -78,7 +78,7 @@ namespace FrbaBus
 
         public DataTable top5Clientes(string anio, string semestre)
         {
-            string query = "select top 5 cli_dni, DATACENTER.puntosParaSemestre('"+anio+"',"+semestre+", cli_dni) from DATACENTER.Cliente where (DATACENTER.puntosParaSemestre('"+anio+"',"+semestre+", cli_dni)) > 0 order by 2 desc";
+            string query = "select top 5 cli_dni as 'Cliente (DNI)', DATACENTER.puntosParaSemestre('" + anio + "'," + semestre + ",cli_dni) as 'Puntos acumulados en el semestre' from DATACENTER.Cliente where cli_dni in (select distinct p.pas_cli_dni from DATACENTER.Pasaje p join DATACENTER.Arribo a on a.arri_viaj_id = p.pas_viaj_id and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + ") and DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ")	union all select distinct c.cli_dni	from DATACENTER.Cliente c join DATACENTER.Compra co on co.comp_comprador_dni = c.cli_dni join DATACENTER.Paquete pa	on pa.paq_comp_id = co.comp_id join DATACENTER.Arribo a	on a.arri_viaj_id = pa.paq_viaj_id and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + ") and DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ")) order by 2 desc";
             connection conexion = new connection();
             return conexion.execute_query(query);
         }

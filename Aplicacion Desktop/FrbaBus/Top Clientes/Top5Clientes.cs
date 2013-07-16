@@ -11,9 +11,23 @@ namespace FrbaBus.Top_Clientes
 {
     public partial class Top5Clientes : Form
     {
-        public Top5Clientes()
+        private funciones funciones;
+        private string anio;
+        private string semestre;
+
+        public Top5Clientes(string anio, string semestre)
         {
             InitializeComponent();
+            this.funciones = new funciones();
+            this.anio = anio;
+            this.semestre = semestre;
+        }
+
+        private void Top5Clientes_Load(object sender, EventArgs e)
+        {
+            this.labelAnio.Text = this.anio;
+            this.labelSemestre.Text = this.semestre;
+            this.dataGridViewTop5Clientes.DataSource = funciones.top5Clientes(anio, semestre);
         }
     }
 }

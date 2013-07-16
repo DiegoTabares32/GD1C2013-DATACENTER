@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaBus.Top_Clientes;
 
 namespace FrbaBus
 {
@@ -30,12 +31,62 @@ namespace FrbaBus
             this.comboBoxSemestre.DataSource = tablaSemestre;
             this.comboBoxSemestre.DisplayMember = "semestre";
             this.comboBoxSemestre.ValueMember = "semestre";
+                                   
+        }
 
-            //UNA QUERY QUE DEVUELVE TODOS LOS ANIOS QUE HAY REGISTRADOS EN LOS VIAJES
-            connection conexion = new connection();
-            string query = "";
-            this.comboBoxAnio.DataSource = conexion.execute_query(query);
-            
+        private void buttonDestinosMasPasajesComprados_Click(object sender, EventArgs e)
+        {
+            if (this.validarAnio()) { return; }            
+        }             
+
+        private void buttonDestinosMicrosMasVacios_Click(object sender, EventArgs e)
+        {
+            if (this.validarAnio()) { return; }            
+        }
+
+        private void buttonClientesConMasPuntosAcumulados_Click(object sender, EventArgs e)
+        {
+            if (this.validarAnio()) { return; }            
+            Top5Clientes clientes = new Top5Clientes(textBoxAnio.Text, comboBoxSemestre.Text);
+            clientes.Show();
+        }
+
+        private void buttonDestinosConPasajesCancelados_Click(object sender, EventArgs e)
+        {
+            if (this.validarAnio()) { return; }            
+        }
+
+        private void buttonMicrosDiasFueraServicio_Click(object sender, EventArgs e)
+        {
+            if (this.validarAnio()) { return; }            
+        }
+
+        private bool validarAnio()
+        {
+            bool error = false;
+            if (textBoxAnio.Text == "")
+            {
+                MessageBox.Show("Debe especificar el año (AAAA)");
+                return error = true;
+            }
+            char[] anio = textBoxAnio.Text.ToCharArray();
+            if (anio.Length != 4)
+            {
+                MessageBox.Show("El año debe ser de 4 digitos AAAA");
+                error = true;
+            }
+
+            int i;
+            for (i = 0; i < anio.Length; i++)
+            {
+                if (Char.IsLetter(anio.ElementAt(i)))
+                {
+                    MessageBox.Show("ERROR: El formato de año es numérico AAAA. Por ej: 2013");
+                    error = true;
+                    return error;
+                }
+            }
+            return error;
         }
     }
 }

@@ -30,13 +30,13 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBoxAnio = new System.Windows.Forms.ComboBox();
             this.comboBoxSemestre = new System.Windows.Forms.ComboBox();
             this.buttonDestinosMasPasajesComprados = new System.Windows.Forms.Button();
             this.buttonDestinosMicrosMasVacios = new System.Windows.Forms.Button();
             this.buttonClientesConMasPuntosAcumulados = new System.Windows.Forms.Button();
             this.buttonDestinosConPasajesCancelados = new System.Windows.Forms.Button();
             this.buttonMicrosDiasFueraServicio = new System.Windows.Forms.Button();
+            this.textBoxAnio = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -57,16 +57,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Seleccione el Semestre: ";
             // 
-            // comboBoxAnio
-            // 
-            this.comboBoxAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAnio.FormattingEnabled = true;
-            this.comboBoxAnio.Location = new System.Drawing.Point(128, 24);
-            this.comboBoxAnio.Name = "comboBoxAnio";
-            this.comboBoxAnio.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxAnio.Sorted = true;
-            this.comboBoxAnio.TabIndex = 2;
-            // 
             // comboBoxSemestre
             // 
             this.comboBoxSemestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -86,6 +76,7 @@
             this.buttonDestinosMasPasajesComprados.TabIndex = 4;
             this.buttonDestinosMasPasajesComprados.Text = "Destinos con mas pasajes comprados";
             this.buttonDestinosMasPasajesComprados.UseVisualStyleBackColor = true;
+            this.buttonDestinosMasPasajesComprados.Click += new System.EventHandler(this.buttonDestinosMasPasajesComprados_Click);
             // 
             // buttonDestinosMicrosMasVacios
             // 
@@ -96,6 +87,7 @@
             this.buttonDestinosMicrosMasVacios.TabIndex = 5;
             this.buttonDestinosMicrosMasVacios.Text = "Destinos con Micros más Vacíos";
             this.buttonDestinosMicrosMasVacios.UseVisualStyleBackColor = true;
+            this.buttonDestinosMicrosMasVacios.Click += new System.EventHandler(this.buttonDestinosMicrosMasVacios_Click);
             // 
             // buttonClientesConMasPuntosAcumulados
             // 
@@ -106,6 +98,7 @@
             this.buttonClientesConMasPuntosAcumulados.TabIndex = 6;
             this.buttonClientesConMasPuntosAcumulados.Text = "Clientes con más puntos acumulados";
             this.buttonClientesConMasPuntosAcumulados.UseVisualStyleBackColor = true;
+            this.buttonClientesConMasPuntosAcumulados.Click += new System.EventHandler(this.buttonClientesConMasPuntosAcumulados_Click);
             // 
             // buttonDestinosConPasajesCancelados
             // 
@@ -116,6 +109,7 @@
             this.buttonDestinosConPasajesCancelados.TabIndex = 7;
             this.buttonDestinosConPasajesCancelados.Text = "Destinos con mas pasajes cancelados";
             this.buttonDestinosConPasajesCancelados.UseVisualStyleBackColor = true;
+            this.buttonDestinosConPasajesCancelados.Click += new System.EventHandler(this.buttonDestinosConPasajesCancelados_Click);
             // 
             // buttonMicrosDiasFueraServicio
             // 
@@ -126,18 +120,27 @@
             this.buttonMicrosDiasFueraServicio.TabIndex = 8;
             this.buttonMicrosDiasFueraServicio.Text = "Micros con mas dias fuera de servicio";
             this.buttonMicrosDiasFueraServicio.UseVisualStyleBackColor = true;
+            this.buttonMicrosDiasFueraServicio.Click += new System.EventHandler(this.buttonMicrosDiasFueraServicio_Click);
+            // 
+            // textBoxAnio
+            // 
+            this.textBoxAnio.Location = new System.Drawing.Point(128, 27);
+            this.textBoxAnio.MaxLength = 4;
+            this.textBoxAnio.Name = "textBoxAnio";
+            this.textBoxAnio.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAnio.TabIndex = 9;
             // 
             // ListadoEstadistico
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.textBoxAnio);
             this.Controls.Add(this.buttonMicrosDiasFueraServicio);
             this.Controls.Add(this.buttonDestinosConPasajesCancelados);
             this.Controls.Add(this.buttonClientesConMasPuntosAcumulados);
             this.Controls.Add(this.buttonDestinosMicrosMasVacios);
             this.Controls.Add(this.buttonDestinosMasPasajesComprados);
             this.Controls.Add(this.comboBoxSemestre);
-            this.Controls.Add(this.comboBoxAnio);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
@@ -153,12 +156,12 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxAnio;
         private System.Windows.Forms.ComboBox comboBoxSemestre;
         private System.Windows.Forms.Button buttonDestinosMasPasajesComprados;
         private System.Windows.Forms.Button buttonDestinosMicrosMasVacios;
         private System.Windows.Forms.Button buttonClientesConMasPuntosAcumulados;
         private System.Windows.Forms.Button buttonDestinosConPasajesCancelados;
         private System.Windows.Forms.Button buttonMicrosDiasFueraServicio;
+        private System.Windows.Forms.TextBox textBoxAnio;
     }
 }
