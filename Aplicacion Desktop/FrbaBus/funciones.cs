@@ -75,5 +75,12 @@ namespace FrbaBus
             string query = "SELECT DATACENTER.totalPuntosVencidos("+dni+")";
             return conexion.execute_query(query).Rows[0].ItemArray.ElementAt(0).ToString();
         }
+
+        public DataTable top5Clientes(string anio, string semestre)
+        {
+            string query = "select top 5 cli_dni, DATACENTER.puntosParaSemestre('"+anio+"',"+semestre+", cli_dni) from DATACENTER.Cliente where (DATACENTER.puntosParaSemestre('"+anio+"',"+semestre+", cli_dni)) > 0 order by 2 desc";
+            connection conexion = new connection();
+            return conexion.execute_query(query);
+        }
     }
 }

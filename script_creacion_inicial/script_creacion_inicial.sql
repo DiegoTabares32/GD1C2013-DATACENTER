@@ -957,3 +957,51 @@ begin
 	deallocate cursorViajes
 end
 go
+
+CREATE FUNCTION DATACENTER.fechaInicioSemestre(@anio nvarchar(6),@semestre int)
+returns datetime
+begin
+	declare @fecha datetime = ''
+	if(@semestre = 1)
+	begin
+		set @fecha = @anio+'01'+'01'
+	end
+	else
+	begin
+		set @fecha = @anio+'07'+'01'
+	end
+	return @fecha
+end
+
+go
+
+CREATE FUNCTION DATACENTER.fechaFinSemestre(@anio nvarchar(6), @semestre int)
+returns datetime
+begin
+	declare @fecha datetime = ''
+	if(@semestre = 1)
+	begin
+		set @fecha = @anio+'06'+'30'
+	end
+	else
+	begin
+		set @fecha = @anio+'12'+'31'
+	end
+	return @fecha
+end
+go
+
+create function DATACENTER.puntosParaSemestre(@anio nvarchar(6),@semestre int, @dni numeric(18,0))
+returns int
+begin
+	return	(select isnull(sum(cast(round(p.paq_precio/5,0) as numeric(18,0))),0) 
+			from DATACENTER.Paquete p join DATACENTER.Arribo a 
+			on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = @dni join DATACENTER.Viaje v 
+			on v.viaj_id = a.arri_viaj_id and v.viaj_fecha_llegada between DATACENTER.fechaInicioSemestre(@anio, @semestre) and DATACENTER.fechaFinSemestre(@anio, @semestre)
+			)
+			+
+			(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
+			FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
+			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre(@anio, @semestre) and DATACENTER.fechaFinSemestre(@anio, @semestre)
+			)
+end

@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace FrbaBus.Top_Clientes
 {
-    public partial class Form1 : Form
+    public partial class Top5Clientes : Form
     {
-        public Form1()
+        public Top5Clientes()
         {
             InitializeComponent();
         }
