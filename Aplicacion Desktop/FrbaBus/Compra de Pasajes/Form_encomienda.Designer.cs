@@ -267,6 +267,7 @@
             this.peso_encom_tbox.Name = "peso_encom_tbox";
             this.peso_encom_tbox.Size = new System.Drawing.Size(113, 20);
             this.peso_encom_tbox.TabIndex = 52;
+            this.peso_encom_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.peso_encom_tbox_KeyPress);
             // 
             // check_peso_encom_boton
             // 

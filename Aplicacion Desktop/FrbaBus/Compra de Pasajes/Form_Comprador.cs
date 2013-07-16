@@ -157,7 +157,7 @@ namespace FrbaBus.Compra_de_Pasajes
             }
 
             this.form_compra.dni_comprador = this.DNI_Tbox.Text;
-            this.form_compra.tipo_tarjeta = this.tipoTarj_comboBox.Text;
+            this.form_compra.tipo_tarjeta = this.tipoTarj_comboBox.SelectedValue.ToString();
             this.Close();
         }
 

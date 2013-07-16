@@ -688,3 +688,13 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE DATACENTER.insert_compra (@comprador_dni numeric(18,0), @tipo_tarj_id int, @cant_pasajes int, @cant_total_kg numeric(18,0), @costo_total numeric(18,2))
+AS
+BEGIN 
+	INSERT INTO DATACENTER.Compra(comp_comprador_dni, comp_tipo_tarj_id, comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
+	VALUES
+	(@comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+	
+	SELECT @@IDENTITY AS Id_compra_Ingresado
+END
+GO

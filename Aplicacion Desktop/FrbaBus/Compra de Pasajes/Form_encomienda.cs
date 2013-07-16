@@ -230,6 +230,17 @@ namespace FrbaBus.Compra_de_Pasajes
                 e.Handled = true;
         }
 
+        private void peso_encom_tbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo permite q ingrese numeros
+            if (char.IsNumber(e.KeyChar) | char.IsControl(e.KeyChar))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+  
+
       
 
     }

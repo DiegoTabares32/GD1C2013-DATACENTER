@@ -122,5 +122,25 @@ namespace FrbaBus
             return Convert.ToChar(tabl_porc.Rows[0].ItemArray[0].ToString());
         }
 
+        public string insert_compra(string comprador_dni, string tipo_tarj_id, string cant_pasajes, string cant_total_kg, decimal costo_total)
+        {
+            connection connect = new connection();
+            SqlConnection conexion = connect.connector();
+            string query= "EXECUTE DATACENTER.insert_compra @comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg, @costo_total";
+            
+            SqlCommand comando = new SqlCommand(query, conexion); 
+            comando.Parameters.AddWithValue("@comprador_dni", comprador_dni);
+            comando.Parameters.AddWithValue("@tipo_tarj_id", tipo_tarj_id);
+            comando.Parameters.AddWithValue("@cant_pasajes", cant_pasajes);
+            comando.Parameters.AddWithValue("@cant_total_kg", cant_total_kg);
+            comando.Parameters.AddWithValue("@costo_total", costo_total);
+            string cod_compra =comando.ExecuteScalar().ToString();
+            conexion.Close();
+            return cod_compra;
+        }
+    
+
+    
+
     }
 }

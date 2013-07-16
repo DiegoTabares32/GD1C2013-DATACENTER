@@ -17,7 +17,7 @@ namespace FrbaBus.Compra_de_Pasajes
         public string cod_viaje_pasaje="";
         public string cod_viaje_encomienda = "";
         public char tipo_viaje; //indica si el viaje es por encomienda o pasaje 'E' 'P' solo para seleccionar viaje 
-        float total_compra = 0;
+        decimal total_compra;
         string cod_compra;
         //Colección de Pasajes una vez confirmada la compra los cargamos en la base
         List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
@@ -67,6 +67,10 @@ namespace FrbaBus.Compra_de_Pasajes
             this.ciu_dest_list.ValueMember = "ciu_nombre";
             this.total_tbox.Text = total_compra.ToString();
 
+            this.cant_totKg_tbox.Text = "0";
+            this.sub_tot_encom_tbox.Text = "0";
+            this.sub_total_pasaj_tbox.Text = "0";
+            this.total_tbox.Text="0";
 
         }
 
@@ -132,15 +136,14 @@ namespace FrbaBus.Compra_de_Pasajes
 
             }
             stored_procedures stored_proc = new stored_procedures();
-            Single sub_total_compra_pasaj = 0;
+            decimal sub_total_compra_pasaj = 0;
             foreach (cargar_pasajero pasaje in listas_pasajeros)
             {
-                sub_total_compra_pasaj += Convert.ToSingle(stored_proc.get_porcentaje(pasaje.viaje_cod));
+                sub_total_compra_pasaj += Convert.ToDecimal(stored_proc.get_porcentaje(pasaje.viaje_cod));
             }
-            this.sub_total_pasaj_tbox.Text = sub_total_compra_pasaj.ToString();
-
+            this.sub_total_pasaj_tbox.Text = sub_total_compra_pasaj.ToString("N2");
             this.total_compra += sub_total_compra_pasaj;
-            this.total_tbox.Text = this.total_compra.ToString();
+            this.total_tbox.Text = this.total_compra.ToString("N2");
             this.cargar_pas_boton.Enabled = false;
         }
 
@@ -215,20 +218,21 @@ namespace FrbaBus.Compra_de_Pasajes
 
             }
             stored_procedures stored_proc = new stored_procedures();
-            Single sub_total_compra_encomienda = 0, total_KG_encomienda=0;
+            decimal sub_total_compra_encomienda = 0;
+            int total_KG_encomienda = 0; //solo se ingresan valores enteros de peso
             foreach (Form_encomienda encomienda in listas_encomiendas)
             {
-                sub_total_compra_encomienda += Convert.ToSingle(stored_proc.get_costo_encomienda(encomienda.viaje_cod, encomienda.peso_encom_tbox.Text));
-                total_KG_encomienda += Convert.ToSingle(encomienda.peso_encom_tbox.Text);
+                sub_total_compra_encomienda += Convert.ToDecimal(stored_proc.get_costo_encomienda(encomienda.viaje_cod, encomienda.peso_encom_tbox.Text));
+                total_KG_encomienda += Convert.ToInt16(encomienda.peso_encom_tbox.Text);
             }
-            this.sub_tot_encom_tbox.Text= sub_total_compra_encomienda.ToString();
+            this.sub_tot_encom_tbox.Text= sub_total_compra_encomienda.ToString("N2");
             this.cant_totKg_tbox.Text = total_KG_encomienda.ToString();
             this.total_compra += sub_total_compra_encomienda;
-            this.total_tbox.Text = this.total_compra.ToString();
+            this.total_tbox.Text = this.total_compra.ToString("N2");
             this.carg_encom_boton.Enabled = false;
         }
 
-        private void cancelar_boton_Click(object sender, EventArgs e)
+        private void reset_formulario()
         {
             this.fecha_tbox.Clear();
             this.fecha_tbox.Enabled = true;
@@ -246,11 +250,21 @@ namespace FrbaBus.Compra_de_Pasajes
             this.CantPasaj_numericUpDown.Enabled = true;
             this.cargar_pas_boton.Enabled = true;
             this.carg_encom_boton.Enabled = true;
+            this.cant_totKg_tbox.Text = "0";
+            this.sub_tot_encom_tbox.Text = "0";
+            this.sub_total_pasaj_tbox.Text = "0";
+            this.total_tbox.Text = "0";
+            this.total_compra = 0;
 
             this.cod_viaje_encomienda = "";
             this.cod_viaje_pasaje = "";
             this.listas_encomiendas.Clear();
             this.listas_pasajeros.Clear();
+        }
+
+        private void cancelar_boton_Click(object sender, EventArgs e)
+        {
+            this.reset_formulario();    
 
         }
 
@@ -262,13 +276,21 @@ namespace FrbaBus.Compra_de_Pasajes
                 MessageBox.Show("No se han Ingresado Datos Obligatorios para hacer la compra", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
+            this.total_tbox.Text = total_compra.ToString("N2");
             Form_Comprador comprador = new Form_Comprador(this);
             comprador.ShowDialog();
             MessageBox.Show(this.dni_comprador + " " + this.tipo_tarjeta);
 
+            
             /*--------------Insertamos y Mostramos Compra/Pasaje/Encomienda------------------*/
+            stored_procedures stored_proc = new stored_procedures();
+            
+            this.cod_compra = stored_proc.insert_compra(this.dni_comprador, this.tipo_tarjeta, this.CantPasaj_numericUpDown.Value.ToString(), this.cant_totKg_tbox.Text, this.total_compra);
+            MessageBox.Show("Compra registrada CODIGO DE COMPRA: "+this.cod_compra);
 
+
+
+            this.reset_formulario();
 
         }
 
