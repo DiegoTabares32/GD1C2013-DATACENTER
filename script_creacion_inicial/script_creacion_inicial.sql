@@ -269,7 +269,7 @@ GO
 /*---------------------CREAMOS TABLA DEVOLUCION-------------------------*/
 
 CREATE TABLE DATACENTER.Devolucion
-(dev_id int IDENTITY (1,1) NOT NULL,
+(dev_id int NOT NULL,
 dev_cod_PasPaq numeric(18,0) NOT NULL,
 dev_tipo_devuelto nvarchar(255) NOT NULL,	--INDICA PAQUETE O PASAJE QUE SE REGISTRA EN LA DEVOLUCION
 dev_comp_id int NOT NULL,
