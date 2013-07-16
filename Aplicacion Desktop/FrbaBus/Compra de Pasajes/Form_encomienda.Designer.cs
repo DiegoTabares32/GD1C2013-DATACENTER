@@ -53,6 +53,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.peso_encom_tbox = new System.Windows.Forms.TextBox();
             this.check_peso_encom_boton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.precio_encomiendaTbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -125,7 +127,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(352, 475);
+            this.label8.Location = new System.Drawing.Point(365, 493);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 13);
             this.label8.TabIndex = 44;
@@ -180,7 +182,7 @@
             // 
             // limpiar_boton
             // 
-            this.limpiar_boton.Location = new System.Drawing.Point(20, 414);
+            this.limpiar_boton.Location = new System.Drawing.Point(23, 447);
             this.limpiar_boton.Name = "limpiar_boton";
             this.limpiar_boton.Size = new System.Drawing.Size(122, 32);
             this.limpiar_boton.TabIndex = 37;
@@ -190,7 +192,7 @@
             // 
             // guardar_boton
             // 
-            this.guardar_boton.Location = new System.Drawing.Point(259, 414);
+            this.guardar_boton.Location = new System.Drawing.Point(293, 447);
             this.guardar_boton.Name = "guardar_boton";
             this.guardar_boton.Size = new System.Drawing.Size(122, 32);
             this.guardar_boton.TabIndex = 36;
@@ -279,11 +281,29 @@
             this.check_peso_encom_boton.UseVisualStyleBackColor = true;
             this.check_peso_encom_boton.Click += new System.EventHandler(this.check_peso_encom_boton_Click);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(92, 419);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 13);
+            this.label13.TabIndex = 54;
+            this.label13.Text = "Precio: ";
+            // 
+            // precio_encomiendaTbox
+            // 
+            this.precio_encomiendaTbox.Location = new System.Drawing.Point(167, 412);
+            this.precio_encomiendaTbox.Name = "precio_encomiendaTbox";
+            this.precio_encomiendaTbox.Size = new System.Drawing.Size(114, 20);
+            this.precio_encomiendaTbox.TabIndex = 55;
+            // 
             // Form_encomienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 497);
+            this.ClientSize = new System.Drawing.Size(493, 515);
+            this.Controls.Add(this.precio_encomiendaTbox);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.check_peso_encom_boton);
             this.Controls.Add(this.peso_encom_tbox);
             this.Controls.Add(this.label12);
@@ -331,7 +351,6 @@
         public System.Windows.Forms.TextBox dir_Tbox;
         public System.Windows.Forms.TextBox apell_Tbox;
         public System.Windows.Forms.TextBox nombre_Tbox;
-        private System.Windows.Forms.TextBox DNI_Tbox;
         private System.Windows.Forms.Button limpiar_boton;
         private System.Windows.Forms.Button guardar_boton;
         private System.Windows.Forms.Label label7;
@@ -343,5 +362,8 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button check_peso_encom_boton;
         public System.Windows.Forms.TextBox peso_encom_tbox;
+        public System.Windows.Forms.TextBox DNI_Tbox;
+        private System.Windows.Forms.Label label13;
+        public System.Windows.Forms.TextBox precio_encomiendaTbox;
     }
 }

@@ -16,6 +16,7 @@ namespace FrbaBus.Compra_de_Pasajes
         public string viaje_cod;
         public List<cargar_pasajero> listas_pasajeros;
         public string cod_pasaje = "";
+        public decimal costo_pasaje = 0;
 
         public cargar_pasajero(string cod_viaje, List<cargar_pasajero> listas_pasajeros)
         {
@@ -143,6 +144,8 @@ namespace FrbaBus.Compra_de_Pasajes
                 stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
 
             }
+
+            this.costo_pasaje= stored_proc.get_porcentaje(this.viaje_cod);
 
             this.Close();
 

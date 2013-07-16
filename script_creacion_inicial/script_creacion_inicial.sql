@@ -698,3 +698,40 @@ BEGIN
 	SELECT @@IDENTITY AS Id_compra_Ingresado
 END
 GO
+
+CREATE PROCEDURE DATACENTER.insert_pasaje(@nro_butaca numeric(18,0),@micro_patente nvarchar(255), @cli_dni numeric(18,0), @pas_compra int, @pas_precio numeric(18,2), @viaj_id int)
+AS
+BEGIN 
+	DECLARE @pas_codigo numeric(18,0)
+	SET @pas_codigo = (SELECT MAX(pas_cod) FROM DATACENTER.Pasaje) + 1
+	INSERT INTO 
+	DATACENTER.Pasaje(pas_cod,pas_nro_butaca,pas_micro_patente, pas_cli_dni, pas_compra_id, pas_precio, pas_viaj_id)	
+	VALUES
+	(@pas_codigo, @nro_butaca,@micro_patente, @cli_dni, @pas_compra, @pas_precio, @viaj_id)
+	
+	SELECT @pas_codigo
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_micro_patente (@viaje_id int)
+AS
+BEGIN
+	SELECT viaj_mic_patente
+	FROM DATACENTER.Viaje
+	WHERE viaj_id = @viaje_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.insert_paquete (@comp_id int, @precio numeric(18,2), @paq_kg numeric(18,0), @viaj_id int)
+AS
+BEGIN 
+	DECLARE @paquete_cod numeric(18,0)
+	SET @paquete_cod = (SELECT MAX(paq_cod) FROM DATACENTER.Paquete) + 1
+	INSERT INTO 
+	DATACENTER.Paquete(paq_cod, paq_comp_id, paq_precio, paq_kg, paq_viaj_id)	
+	VALUES
+	(@paquete_cod , @comp_id, @precio, @paq_kg, @viaj_id)	
+	
+	SELECT @paquete_cod
+END
+GO

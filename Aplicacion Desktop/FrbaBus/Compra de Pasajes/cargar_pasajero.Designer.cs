@@ -379,7 +379,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button guardar_boton;
         private System.Windows.Forms.Button limpiar_boton;
-        private System.Windows.Forms.TextBox DNI_Tbox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
@@ -400,5 +399,6 @@
         public System.Windows.Forms.TextBox butNro_tbox;
         public System.Windows.Forms.TextBox pos_but_tbox;
         public System.Windows.Forms.TextBox piso_tbox;
+        public System.Windows.Forms.TextBox DNI_Tbox;
     }
 }

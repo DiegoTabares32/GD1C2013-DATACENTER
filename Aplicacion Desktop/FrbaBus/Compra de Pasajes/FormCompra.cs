@@ -135,13 +135,15 @@ namespace FrbaBus.Compra_de_Pasajes
                 
 
             }
+
+            /*---------Una vez cargados todos los pasajes calculo el costo total-------*/
             stored_procedures stored_proc = new stored_procedures();
             decimal sub_total_compra_pasaj = 0;
             foreach (cargar_pasajero pasaje in listas_pasajeros)
             {
-                sub_total_compra_pasaj += Convert.ToDecimal(stored_proc.get_porcentaje(pasaje.viaje_cod));
+                sub_total_compra_pasaj += pasaje.costo_pasaje;
             }
-            this.sub_total_pasaj_tbox.Text = sub_total_compra_pasaj.ToString("N2");
+            this.sub_total_pasaj_tbox.Text = sub_total_compra_pasaj.ToString("N2"); //muestre 2 decimas
             this.total_compra += sub_total_compra_pasaj;
             this.total_tbox.Text = this.total_compra.ToString("N2");
             this.cargar_pas_boton.Enabled = false;
@@ -279,16 +281,34 @@ namespace FrbaBus.Compra_de_Pasajes
             this.total_tbox.Text = total_compra.ToString("N2");
             Form_Comprador comprador = new Form_Comprador(this);
             comprador.ShowDialog();
-            MessageBox.Show(this.dni_comprador + " " + this.tipo_tarjeta);
 
             
             /*--------------Insertamos y Mostramos Compra/Pasaje/Encomienda------------------*/
             stored_procedures stored_proc = new stored_procedures();
             
             this.cod_compra = stored_proc.insert_compra(this.dni_comprador, this.tipo_tarjeta, this.CantPasaj_numericUpDown.Value.ToString(), this.cant_totKg_tbox.Text, this.total_compra);
-            MessageBox.Show("Compra registrada CODIGO DE COMPRA: "+this.cod_compra);
+            MessageBox.Show("Compra registrada Correctamente. CODIGO DE COMPRA: "+this.cod_compra+" DNI del comprador:"+this.dni_comprador);
 
+            if (listas_pasajeros.Count > 0)
+            {
+                string cod_pasaje = "";
+                foreach (cargar_pasajero pasajero in listas_pasajeros)
+                {
+                    cod_pasaje = stored_proc.insert_pasaje(pasajero.butNro_tbox.Text, stored_proc.get_micro_patente(pasajero.viaje_cod), pasajero.DNI_Tbox.Text, this.cod_compra, pasajero.costo_pasaje, pasajero.viaje_cod);
+                    MessageBox.Show("Codigo de Pasaje: " + cod_pasaje + " Nro DNI pasajero: " + pasajero.DNI_Tbox.Text + "Nombre: " + pasajero.nombre_Tbox.Text + "Apellido: " + pasajero.apell_Tbox.Text + " Butaca Nro: " + pasajero.butNro_tbox.Text + "Piso: " + pasajero.piso_tbox.Text + "Tipo: " + pasajero.pos_but_tbox.Text);
+                }
+            }
 
+            if (listas_pasajeros.Count > 0)
+            {
+                string cod_encomienda = "";
+                foreach (Form_encomienda encomienda in listas_encomiendas)
+                {
+                    cod_encomienda = stored_proc.insert_paquete(this.cod_compra, Convert.ToDecimal(encomienda.precio_encomiendaTbox.Text), encomienda.peso_encom_tbox.Text, encomienda.viaje_cod);
+                    MessageBox.Show("Codigo del Paquete: " + cod_encomienda + " Nro DNI del Remitente: " + encomienda.DNI_Tbox.Text + "Nombre: " + encomienda.nombre_Tbox.Text + "Apellido: " + encomienda.apell_Tbox.Text + "Peso del Paquete: "+ encomienda.peso_encom_tbox.Text+" kg");
+                }
+            }
+            
 
             this.reset_formulario();
 

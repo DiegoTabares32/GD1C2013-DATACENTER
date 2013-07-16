@@ -90,12 +90,12 @@ namespace FrbaBus
             connect.execute_query_only(query);
         }
 
-        public string get_porcentaje(string viaj_id)
+        public decimal get_porcentaje(string viaj_id)
         {
             connection conexion = new connection();
             string query = " EXECUTE DATACENTER.get_porcentaje " + viaj_id;
             DataTable tabl_porc = conexion.execute_query(query);
-            return tabl_porc.Rows[0].ItemArray[0].ToString();
+            return Convert.ToDecimal(tabl_porc.Rows[0].ItemArray[0].ToString());
         }
 
         public string get_costo_encomienda(string viaj_id, string paq_kg)
@@ -110,16 +110,16 @@ namespace FrbaBus
         {
             connection conexion = new connection();
             string query = "EXECUTE DATACENTER.get_kg_disponibles " + viaj_id;
-            DataTable tabl_porc = conexion.execute_query(query);
-            return Convert.ToSingle(tabl_porc.Rows[0].ItemArray[0].ToString());
+            DataTable tabl_kg_disp = conexion.execute_query(query);
+            return Convert.ToSingle(tabl_kg_disp.Rows[0].ItemArray[0].ToString());
         }
 
         public char check_tipo_tarjeta(string tipo_id)
         {
             connection conexion = new connection();
             string query = "EXECUTE DATACENTER.check_tipo_tarjeta " + tipo_id;
-            DataTable tabl_porc = conexion.execute_query(query);
-            return Convert.ToChar(tabl_porc.Rows[0].ItemArray[0].ToString());
+            DataTable tabl_tip_tarj = conexion.execute_query(query);
+            return Convert.ToChar(tabl_tip_tarj.Rows[0].ItemArray[0].ToString());
         }
 
         public string insert_compra(string comprador_dni, string tipo_tarj_id, string cant_pasajes, string cant_total_kg, decimal costo_total)
@@ -138,8 +138,48 @@ namespace FrbaBus
             conexion.Close();
             return cod_compra;
         }
-    
 
+        public string insert_pasaje(string nro_butaca, string micro_patente, string cli_dni, string pas_compra, decimal pas_precio, string viaj_id)
+        {
+            connection connect = new connection();
+            SqlConnection conexion = connect.connector();
+            string query = "EXECUTE DATACENTER.insert_pasaje @nro_butaca, @micro_patente, @cli_dni, @pas_compra, @pas_precio, @viaj_id";
+
+            SqlCommand comando = new SqlCommand(query, conexion);
+            comando.Parameters.AddWithValue("@nro_butaca", nro_butaca);
+            comando.Parameters.AddWithValue("@micro_patente", micro_patente);
+            comando.Parameters.AddWithValue("@cli_dni", cli_dni);
+            comando.Parameters.AddWithValue("@pas_compra", pas_compra);
+            comando.Parameters.AddWithValue("@pas_precio", pas_precio);
+            comando.Parameters.AddWithValue("@viaj_id", viaj_id);
+            string cod_pasaje = comando.ExecuteScalar().ToString();
+            conexion.Close();
+            return cod_pasaje;
+        }
+
+        public string get_micro_patente(string viaje_id)
+        {
+            connection conexion = new connection();
+            string query = "EXECUTE DATACENTER.get_micro_patente " + viaje_id;
+            DataTable tabl_mic_pat = conexion.execute_query(query);
+            return tabl_mic_pat.Rows[0].ItemArray[0].ToString();
+        }
+
+        public string insert_paquete(string comp_id, decimal precio, string paq_kg, string viaj_id)
+        {
+            connection connect = new connection();
+            SqlConnection conexion = connect.connector();
+            string query = "EXECUTE DATACENTER.insert_paquete @comp_id, @precio, @paq_kg, @viaj_id";
+
+            SqlCommand comando = new SqlCommand(query, conexion);
+            comando.Parameters.AddWithValue("@comp_id", comp_id);
+            comando.Parameters.AddWithValue("@precio", precio);
+            comando.Parameters.AddWithValue("@paq_kg", paq_kg);
+            comando.Parameters.AddWithValue("@viaj_id", viaj_id);
+            string cod_paquete = comando.ExecuteScalar().ToString();
+            conexion.Close();
+            return cod_paquete;
+        }
     
 
     }

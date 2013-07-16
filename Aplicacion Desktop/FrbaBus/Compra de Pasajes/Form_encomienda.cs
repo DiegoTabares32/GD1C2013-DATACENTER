@@ -58,6 +58,7 @@ namespace FrbaBus.Compra_de_Pasajes
             if ((stored_proc.get_kg_disponibles(this.viaje_cod) - kg_a_ocupar) >= 0)
             {
                 MessageBox.Show("Se puede enviar Encomienda con este Peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.precio_encomiendaTbox.Text = stored_proc.get_costo_encomienda(this.viaje_cod, this.peso_encom_tbox.Text);
             }
             else
             {
