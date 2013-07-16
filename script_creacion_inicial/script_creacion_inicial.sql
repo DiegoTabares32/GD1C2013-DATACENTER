@@ -852,3 +852,108 @@ end
 go
 
 
+
+create procedure DATACENTER.registraDevolucion(@fechaDev datetime,@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
+as
+begin
+	declare @ultimoIdDev int
+	declare @idDev int
+	set @idDev = (select dev_id from DATACENTER.Devolucion where dev_comp_id=@nroCompra)
+	if (@idDev = null)
+	begin
+		set @ultimoIdDev = (select max(dev_id) from DATACENTER.Devolucion)
+		if @ultimoIdDev = null
+			set @idDev = 1
+		else
+			set @idDev = @ultimoIdDev + 1			
+	end
+
+	-- Agrego devolución efectiva
+	INSERT INTO DATACENTER.Devolucion(dev_id,dev_cod_PasPaq,dev_tipo_devuelto,dev_comp_id,dev_fecha,dev_motivo)
+	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,@fechaDev,@motivoDev)
+	
+	-- Actualizo el costo total de la compra y la cantidad de pasajes y total de kg
+	declare @costoTotal numeric(18,2)
+	set @costoTotal = (select comp_costo_total from DATACENTER.Compra where comp_id=@nroCompra)
+	declare @montoADescontar numeric(18,2)
+	
+	if (@tipoItem = 'Pasaje')
+	begin
+		set @montoADescontar = (select pas_precio from DATACENTER.Pasaje where pas_compra_id=@nroCompra)
+		declare @cantPasajes int
+		set @cantPasajes = (select comp_cant_pasajes from DATACENTER.Compra where comp_id=@nroCompra)
+		set @cantPasajes = @cantPasajes - 1
+		set @costoTotal = (select comp_costo_total from DATACENTER.Compra where comp_id=@nroCompra)
+		set @costoTotal = @costoTotal - @montoADescontar
+		
+		UPDATE DATACENTER.Compra
+		SET comp_cant_pasajes=@cantPasajes, comp_costo_total=@costoTotal
+		where comp_id=@nroCompra
+	end
+	else
+	begin
+		set @montoADescontar = (select paq_precio from DATACENTER.Paquete where paq_comp_id=@nroCompra)
+		set @costoTotal = (select comp_costo_total from DATACENTER.Compra where comp_id=@nroCompra)
+		set @costoTotal = @costoTotal - @montoADescontar
+		
+		UPDATE DATACENTER.Compra
+		SET comp_cant_total_kg=0, comp_costo_total=@costoTotal
+		where comp_id=@nroCompra
+	end
+
+end
+go
+
+
+create procedure cancelaViajesXMicro(@patente nvarchar(255),@fechaFS datetime, @fechaR datetime)
+as
+begin
+	declare @nroCompra int
+	declare @tipoItem nvarchar(255)
+	declare @codItem numeric(18,0)
+	declare @motivoDev nvarchar(255)
+	set @motivoDev='Se cancela el viaje por baja de micro.'
+
+	if (@fechaR <> null)
+	begin --Trata los casos de BAJAS DEFINITIVAS
+		declare cursorViajes cursor
+		for (
+			(select paq_comp_id,'Paquete'
+			 from DATACENTER.Viaje join DATACENTER.Paquete on (viaj_id=paq_viaj_id)
+			 where viaj_mic_patente=@patente and ((viaj_fecha_salida between @fechaFS and @fechaR) or (viaj_fecha_lleg_estimada between @fechaFS and @fechaR)))
+			union
+			(select pas_compra_id,'Pasaje'
+			 from DATACENTER.Viaje join DATACENTER.Pasaje on (viaj_id=pas_viaj_id)
+			 where viaj_mic_patente=@patente and ((viaj_fecha_salida between @fechaFS and @fechaR) or (viaj_fecha_lleg_estimada between @fechaFS and @fechaR)))
+
+			) 
+	end
+	else
+	begin -- Trata los casos de BAJA POR FUERA DE SERIVICIO
+		declare cursorViajes cursor
+		for (
+			(select paq_comp_id,'Paquete'
+			 from DATACENTER.Viaje join DATACENTER.Paquete on (viaj_id=paq_viaj_id)
+			 where viaj_mic_patente=@patente and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
+			union
+			(select pas_compra_id,'Pasaje'
+			 from DATACENTER.Viaje join DATACENTER.Pasaje on (viaj_id=pas_viaj_id)
+			 where viaj_mic_patente=@patente and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
+			) 	
+	end
+		
+	declare @fechaCancelacion datetime
+	set @fechaCancelacion = GETDATE();
+	
+	open cursorViajes
+	fetch cursorViajes into @nroCompra,@tipoItem
+	while (@@FETCH_STATUS = 0)
+	begin
+		exec DATACENTER.registraDevolucion @fechaCancelacion,@nroCompra,@tipoItem,@motivoDev
+		fetch cursorViajes into @nroCompra,@tipoItem
+	end
+
+	close cursorViajes
+	deallocate cursorViajes
+end
+go
