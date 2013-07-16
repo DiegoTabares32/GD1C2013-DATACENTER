@@ -20,6 +20,14 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void FormularioDeArribo_Load(object sender, EventArgs e)
         {
+            //Limpiamos todo
+            this.textBoxFechallegada.Clear();
+            this.textBoxHorallegada.Clear();
+            this.textBoxPatente.Clear();
+            //para que no puedan ingresar texto
+            this.comboBoxArribo.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.comboBoxOrigen.DropDownStyle = ComboBoxStyle.DropDownList;
+
             string query = "SELECT ciu_nombre FROM DATACENTER.Ciudad";
             connection conexion = new connection();
             DataTable table_ciu_orig = conexion.execute_query(query);
@@ -72,12 +80,8 @@ namespace FrbaBus.Registrar_LLegada_Micro
         }
 
         private void buttonLimpiar_Click(object sender, EventArgs e)
-        {
-            this.textBoxFechallegada.Clear();
-            this.textBoxHorallegada.Clear();
-            this.textBoxPatente.Clear();
-            this.comboBoxOrigen.ResetText();
-            this.comboBoxArribo.ResetText();
+        {                       
+            this.FormularioDeArribo_Load(sender, e);
         }
                
     }
