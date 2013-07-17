@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace FrbaBus.Registrar_LLegada_Micro
 {
@@ -14,9 +15,19 @@ namespace FrbaBus.Registrar_LLegada_Micro
         public llegadaMicros()
         {
             InitializeComponent();
-            string query = "create table DATACENTER.arribosCargados(id int identity primary key,fechayhora datetime,patente nvarchar(255),origen nvarchar(255),arribo nvarchar(255), viaje int)";
+            //Si la tabla auxiliar existe, la reseteo
             connection conexion = new connection();
-            conexion.execute_query(query);
+            string query = "drop table DATACENTER.arribosCargados";
+            string query2 = "create table DATACENTER.arribosCargados(id int identity primary key,fechayhora datetime,patente nvarchar(255),origen nvarchar(255),arribo nvarchar(255), viaje int)";
+            try
+            {//trato de crearla
+                conexion.execute_query(query2);
+            }
+            catch(SqlException)//si existia la borro y la vuelvo a crear para limpiar
+            {               
+                conexion.execute_query(query);
+                conexion.execute_query(query2);
+            }    
         }
                           
         private void buttonIngresarArribo_Click(object sender, EventArgs e)
