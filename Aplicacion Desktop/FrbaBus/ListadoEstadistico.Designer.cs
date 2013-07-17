@@ -133,7 +133,7 @@
             // ListadoEstadistico
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(284, 263);
             this.Controls.Add(this.textBoxAnio);
             this.Controls.Add(this.buttonMicrosDiasFueraServicio);
             this.Controls.Add(this.buttonDestinosConPasajesCancelados);
@@ -143,6 +143,7 @@
             this.Controls.Add(this.comboBoxSemestre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ListadoEstadistico";
             this.Text = "Listados Estadísticos TOP 5";

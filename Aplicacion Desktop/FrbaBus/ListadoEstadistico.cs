@@ -38,7 +38,7 @@ namespace FrbaBus
 
         private void buttonDestinosMasPasajesComprados_Click(object sender, EventArgs e)
         {
-            if (this.validarAnio()) { return; }
+            if (this.validarAnio()) { return; }            
             Top5DestinosMasPasajesComprados destinosMasPasajes = new Top5DestinosMasPasajesComprados(this.textBoxAnio.Text, comboBoxSemestre.Text);
             destinosMasPasajes.Show();
         }             

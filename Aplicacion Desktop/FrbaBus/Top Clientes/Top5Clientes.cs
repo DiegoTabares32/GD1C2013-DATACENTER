@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaBus;
 
 namespace FrbaBus.Top_Clientes
 {
     public partial class Top5Clientes : Form
     {
+        private Cargando mensaje;
         private funciones funciones;
         private string anio;
         private string semestre;
@@ -21,6 +23,8 @@ namespace FrbaBus.Top_Clientes
             this.funciones = new funciones();
             this.anio = anio;
             this.semestre = semestre;
+            this.mensaje = new Cargando();
+            this.mensaje.Show();
         }
 
         private void Top5Clientes_Load(object sender, EventArgs e)
@@ -28,6 +32,7 @@ namespace FrbaBus.Top_Clientes
             this.labelAnio.Text = this.anio;
             this.labelSemestre.Text = this.semestre;
             this.dataGridViewTop5Clientes.DataSource = funciones.top5Clientes(anio, semestre);
+            this.mensaje.Close();
         }
     }
 }
