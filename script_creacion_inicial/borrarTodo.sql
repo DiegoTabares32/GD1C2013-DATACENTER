@@ -53,6 +53,30 @@ DROP procedure DATACENTER.registrarPuntos
 
 DROP procedure DATACENTER.update_fecha_llegada
 
+DROP function DATACENTER.puntosParaSemestre
+
+DROP function DATACENTER.diasFueraDeServicio
+
+DROP function DATACENTER.sumaDias
+
+DROP FUNCTION DATACENTER.fechaFinSemestre
+
+DROP FUNCTION DATACENTER.fechaInicioSemestre
+
+DROP PROCEDURE DATACENTER.canjeaPremio
+
+DROP PROCEDURE DATACENTER.registraDevolucion
+
+DROP PROCEDURE DATACENTER.registrarNuevoMicro
+
+DROP PROCEDURE dbo.cancelaViajesXMicro
+
+DROP FUNCTION DATACENTER.estadoBaja
+
+DROP FUNCTION DATACENTER.microDisponible
+
+DROP FUNCTION DATACENTER.verificaStock
+
 DROP SCHEMA DATACENTER
 
 
