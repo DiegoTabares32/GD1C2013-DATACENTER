@@ -66,7 +66,9 @@ namespace FrbaBus
 
         private void buttonMicrosDiasFueraServicio_Click(object sender, EventArgs e)
         {
-            if (this.validarAnio()) { return; }            
+            if (this.validarAnio()) { return; }
+            MicrosDiasFueraServicio microsFueraServicio = new MicrosDiasFueraServicio(textBoxAnio.Text, comboBoxSemestre.Text);
+            microsFueraServicio.Show();
         }
 
         private bool validarAnio()

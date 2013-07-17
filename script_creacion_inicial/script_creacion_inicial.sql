@@ -1005,3 +1005,78 @@ begin
 			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre(@anio, @semestre) and DATACENTER.fechaFinSemestre(@anio, @semestre)
 			)
 end
+
+go
+--PARA EL TOP 5 MICROS CON DIAS FUERA DE SERVICIO. ESTABLECE SI LAS FECHAS CAEN EN EL SEMESTRE PARA SUMAR LOS DIAS
+create function DATACENTER.sumaDias(@fuera datetime, @reinicio datetime, @inicioSemestre datetime, @finSemestre datetime)
+returns bit
+begin
+	declare @condicion bit = 1 -- 1 verdadero (suma dias), 0 es falso (no suma)
+	if((@fuera is null) or (@fuera > @finSemestre) or (@reinicio < @inicioSemestre))
+	begin
+		set @condicion = 0
+		return @condicion
+	end
+	if((@fuera < @inicioSemestre) and (@reinicio is null))
+	begin
+		set @condicion = 1
+		return @condicion
+	end
+	if((@fuera < @inicioSemestre) and (@reinicio <= @finSemestre))
+	begin
+		set @condicion = 1
+		return @condicion
+	end
+	if((@fuera >= @inicioSemestre) and (@reinicio >= @finSemestre))
+	begin
+		set @condicion = 1
+		return @condicion
+	end
+	if((@fuera >= @inicioSemestre) and (@reinicio <= @finSemestre))
+	begin
+		set @condicion = 1
+		return @condicion
+	end
+	if((@fuera <= @inicioSemestre) and (@reinicio >= @finSemestre))
+	begin
+		set @condicion = 1
+		return @condicion
+	end
+	return @condicion
+end
+
+go
+
+--SUMO LOS DIAS QUE ESTUVO FUERA DE SERVICIO
+create function DATACENTER.diasFueraDeServicio(@fuera datetime, @reinicio datetime, @inicioSemestre datetime, @finSemestre datetime)
+returns int
+begin
+	declare @dias int = 0
+	if((@fuera <= @inicioSemestre)and (@reinicio is null))
+	begin
+		set @dias = datediff(d,@inicioSemestre, sysdatetime())
+		return @dias
+	end
+	if((@fuera <= @inicioSemestre) and (@reinicio >= @finSemestre))
+	begin
+		set @dias = datediff(d,@inicioSemestre, @finSemestre)
+		return @dias
+	end
+	if((@fuera <= @inicioSemestre) and (@reinicio <= @finSemestre))
+	begin
+		set @dias = datediff(d,@inicioSemestre,@reinicio)
+		return @dias
+	end
+	if((@fuera >= @inicioSemestre) and (@reinicio >= @finSemestre))
+	begin
+		set @dias = datediff(d,@fuera, @finSemestre)
+		return @dias
+	end
+	if((@fuera >= @inicioSemestre) and (@reinicio <= @finSemestre))
+	begin
+		set @dias = datediff(d,@fuera, @reinicio)
+	end
+	return @dias
+end
+
+GO
