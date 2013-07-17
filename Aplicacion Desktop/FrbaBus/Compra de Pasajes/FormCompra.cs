@@ -125,31 +125,45 @@ namespace FrbaBus.Compra_de_Pasajes
             
             //int contador_discapacitados= 0;
             bool sgte_acompañante = false;
+            string sexo;
+            funciones func = new funciones();
             for (i = 0; i < cant_pasajes; i++)
             {
                 cargar_pasajero pasajero = new cargar_pasajero(this.cod_viaje_pasaje, listas_pasajeros, sgte_acompañante );
                 pasajero.ShowDialog();
                 if (pasajero.discapacitado_checkB.Checked)
                 {
-                    sgte_acompañante = true;
-                    MessageBox.Show("Datos del Pasajero Ingresados A continuación Ingrese los datos del acompañante del pasajero Discapacitado", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (i != cant_pasajes - 1)//verificamos que ni sea el ultimo pasajero
+                    {
+                        DialogResult respuesta = MessageBox.Show("Datos Ingresados Correctamente. El pasajero Ingresado es discapacitado, ¿viaja con acompañante ?", "Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            sgte_acompañante = true;
+                            MessageBox.Show("Ingrese los datos del acompañante del pasajero Discapacitado", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
                 }
                 else
                 {
                     sgte_acompañante = false;
+                    /*----------Si no es discapacitado analizo si es Pensionado / Jubilado----------------*/
+                    
+                    if (pasajero.mascul_radioBut.Checked)
+                        sexo = "M";
+                    else
+                        sexo = "F";
+
+                    if (pasajero.pensionado_checkB.Checked | func.es_jubilado(pasajero.fec_nac_Tbox.Text,sexo))
+                        pasajero.costo_pasaje = pasajero.costo_pasaje / 2; //aplico descuento del 50%
+
                     if (cant_pasajes - 1 != i)
                     {
-                        MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Datos del Pasajero Ingresados Correctamente. A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         form_viaje.ShowDialog();
                     }
                 }
+                    
                 listas_pasajeros.Add(pasajero);
-                /*if (cant_pasajes - 1 != i)
-                {
-                    MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    form_viaje.ShowDialog();
-                }*/
-                
 
             }
 
@@ -174,6 +188,8 @@ namespace FrbaBus.Compra_de_Pasajes
             else
                 e.Handled = true;
         }
+
+
 
         private void selec_viaje_encom_button_Click(object sender, EventArgs e)
         {
@@ -290,7 +306,7 @@ namespace FrbaBus.Compra_de_Pasajes
         private void aceptar_boton_Click(object sender, EventArgs e)
         {
 
-            if (this.total_tbox.Text == "0")
+            if (this.cant_encomiendas_numUpdown.Value == 0 & this.CantPasaj_numericUpDown.Value == 0)
             {
                 MessageBox.Show("No se han Ingresado Datos Obligatorios para hacer la compra", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -304,7 +320,7 @@ namespace FrbaBus.Compra_de_Pasajes
             stored_procedures stored_proc = new stored_procedures();
             
             this.cod_compra = stored_proc.insert_compra(this.dni_comprador, this.tipo_tarjeta, this.CantPasaj_numericUpDown.Value.ToString(), this.cant_totKg_tbox.Text, this.total_compra);
-            MessageBox.Show("Compra registrada Correctamente. CODIGO DE COMPRA: "+this.cod_compra+" DNI del comprador:"+this.dni_comprador);
+            MessageBox.Show("Compra registrada Correctamente. Codigo de Compra: "+this.cod_compra+" DNI del comprador:"+this.dni_comprador);
 
             if (listas_pasajeros.Count > 0)
             {

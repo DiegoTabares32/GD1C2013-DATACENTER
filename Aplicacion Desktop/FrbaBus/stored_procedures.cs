@@ -78,15 +78,15 @@ namespace FrbaBus
             return connect.execute_query(query);
         }
 
-        public void update_Cliente(string cli_dni, string cli_nombre, string cli_apellido, string cli_dir, string cli_telefono, string cli_mail, string cli_fecha_nac, string cli_sexo, string cli_discapacitado)
+        public void update_Cliente(string cli_dni, string cli_nombre, string cli_apellido, string cli_dir, string cli_telefono, string cli_mail, string cli_fecha_nac, string cli_sexo, string cli_discapacitado, string condicion)
         {
-            query = "EXECUTE DATACENTER.update_Cliente "+cli_dni+",'"+cli_nombre+"','"+cli_apellido+"','"+cli_dir+"','"+cli_telefono+"','"+cli_mail+"','"+cli_fecha_nac+"','"+cli_sexo+"','"+cli_discapacitado+"'";
+            query = "EXECUTE DATACENTER.update_Cliente " + cli_dni + ",'" + cli_nombre + "','" + cli_apellido + "','" + cli_dir + "','" + cli_telefono + "','" + cli_mail + "','" + cli_fecha_nac + "','" + cli_sexo + "','" + cli_discapacitado + "','" + condicion + "'";
             connect.execute_query_only(query);
         }
 
-        public void insert_Cliente(string cli_dni, string cli_nombre, string cli_apellido, string cli_dir, string cli_telefono, string cli_mail, string cli_fecha_nac, string cli_sexo, string cli_discapacitado)
+        public void insert_Cliente(string cli_dni, string cli_nombre, string cli_apellido, string cli_dir, string cli_telefono, string cli_mail, string cli_fecha_nac, string cli_sexo, string cli_discapacitado, string condicion)
         {
-            query = "EXECUTE DATACENTER.insert_Cliente " + cli_dni + ",'" + cli_nombre + "','" + cli_apellido + "','" + cli_dir + "','" + cli_telefono + "','" + cli_mail + "','" + cli_fecha_nac + "','" + cli_sexo + "','" + cli_discapacitado + "'";
+            query = "EXECUTE DATACENTER.insert_Cliente " + cli_dni + ",'" + cli_nombre + "','" + cli_apellido + "','" + cli_dir + "','" + cli_telefono + "','" + cli_mail + "','" + cli_fecha_nac + "','" + cli_sexo + "','" + cli_discapacitado + "','"+condicion+"'";
             connect.execute_query_only(query);
         }
 

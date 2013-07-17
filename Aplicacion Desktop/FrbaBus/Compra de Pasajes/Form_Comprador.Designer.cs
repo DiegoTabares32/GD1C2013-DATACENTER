@@ -52,7 +52,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.cod_Seg_tbox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.fech_venc_tbox = new System.Windows.Forms.TextBox();
             this.tipoTarj_comboBox = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -63,6 +62,9 @@
             this.label17 = new System.Windows.Forms.Label();
             this.confirmar_boton = new System.Windows.Forms.Button();
             this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
+            this.jubilado_checkB = new System.Windows.Forms.CheckBox();
+            this.pensionado_checkB = new System.Windows.Forms.CheckBox();
+            this.fech_venc_tbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -246,6 +248,7 @@
             // nro_tarj_tbox
             // 
             this.nro_tarj_tbox.Location = new System.Drawing.Point(220, 376);
+            this.nro_tarj_tbox.MaxLength = 16;
             this.nro_tarj_tbox.Name = "nro_tarj_tbox";
             this.nro_tarj_tbox.Size = new System.Drawing.Size(145, 20);
             this.nro_tarj_tbox.TabIndex = 71;
@@ -263,6 +266,7 @@
             // cod_Seg_tbox
             // 
             this.cod_Seg_tbox.Location = new System.Drawing.Point(220, 418);
+            this.cod_Seg_tbox.MaxLength = 4;
             this.cod_Seg_tbox.Name = "cod_Seg_tbox";
             this.cod_Seg_tbox.Size = new System.Drawing.Size(145, 20);
             this.cod_Seg_tbox.TabIndex = 73;
@@ -276,14 +280,6 @@
             this.label13.Size = new System.Drawing.Size(161, 13);
             this.label13.TabIndex = 74;
             this.label13.Text = "Ingrese Fecha de Vencimiento(*)";
-            // 
-            // fech_venc_tbox
-            // 
-            this.fech_venc_tbox.Location = new System.Drawing.Point(220, 459);
-            this.fech_venc_tbox.Name = "fech_venc_tbox";
-            this.fech_venc_tbox.Size = new System.Drawing.Size(145, 20);
-            this.fech_venc_tbox.TabIndex = 75;
-            this.fech_venc_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fech_venc_tbox_KeyPress);
             // 
             // tipoTarj_comboBox
             // 
@@ -379,18 +375,49 @@
             // discapacitado_checkB
             // 
             this.discapacitado_checkB.AutoSize = true;
-            this.discapacitado_checkB.Location = new System.Drawing.Point(295, 311);
+            this.discapacitado_checkB.Location = new System.Drawing.Point(290, 294);
             this.discapacitado_checkB.Name = "discapacitado_checkB";
             this.discapacitado_checkB.Size = new System.Drawing.Size(97, 17);
             this.discapacitado_checkB.TabIndex = 85;
             this.discapacitado_checkB.Text = "Discapacitado ";
             this.discapacitado_checkB.UseVisualStyleBackColor = true;
             // 
+            // jubilado_checkB
+            // 
+            this.jubilado_checkB.AutoSize = true;
+            this.jubilado_checkB.Enabled = false;
+            this.jubilado_checkB.Location = new System.Drawing.Point(290, 317);
+            this.jubilado_checkB.Name = "jubilado_checkB";
+            this.jubilado_checkB.Size = new System.Drawing.Size(65, 17);
+            this.jubilado_checkB.TabIndex = 86;
+            this.jubilado_checkB.Text = "Jubilado";
+            this.jubilado_checkB.UseVisualStyleBackColor = true;
+            // 
+            // pensionado_checkB
+            // 
+            this.pensionado_checkB.AutoSize = true;
+            this.pensionado_checkB.Location = new System.Drawing.Point(290, 340);
+            this.pensionado_checkB.Name = "pensionado_checkB";
+            this.pensionado_checkB.Size = new System.Drawing.Size(82, 17);
+            this.pensionado_checkB.TabIndex = 87;
+            this.pensionado_checkB.Text = "Pensionado";
+            this.pensionado_checkB.UseVisualStyleBackColor = true;
+            // 
+            // fech_venc_tbox
+            // 
+            this.fech_venc_tbox.Location = new System.Drawing.Point(220, 459);
+            this.fech_venc_tbox.Name = "fech_venc_tbox";
+            this.fech_venc_tbox.Size = new System.Drawing.Size(145, 20);
+            this.fech_venc_tbox.TabIndex = 75;
+            this.fech_venc_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fech_venc_tbox_KeyPress);
+            // 
             // Form_Comprador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 725);
+            this.Controls.Add(this.pensionado_checkB);
+            this.Controls.Add(this.jubilado_checkB);
             this.Controls.Add(this.discapacitado_checkB);
             this.Controls.Add(this.confirmar_boton);
             this.Controls.Add(this.label17);
@@ -461,7 +488,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox cod_Seg_tbox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox fech_venc_tbox;
         private System.Windows.Forms.ComboBox tipoTarj_comboBox;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
@@ -472,5 +498,8 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button confirmar_boton;
         public System.Windows.Forms.CheckBox discapacitado_checkB;
+        public System.Windows.Forms.CheckBox jubilado_checkB;
+        public System.Windows.Forms.CheckBox pensionado_checkB;
+        private System.Windows.Forms.TextBox fech_venc_tbox;
     }
 }

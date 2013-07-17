@@ -45,7 +45,6 @@ namespace FrbaBus.Compra_de_Pasajes
             this.butNro_tbox.Clear();
             this.pos_but_tbox.Clear();
             this.piso_tbox.Clear();
-            this.discapacitado_checkB.Checked = false;
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -159,17 +158,30 @@ namespace FrbaBus.Compra_de_Pasajes
             else
                 discapacitado = "N";
 
+            //verificamos condicion
+            string condicion;
+            funciones func = new funciones();
+            if (this.pensionado_checkB.Checked | func.es_jubilado(this.fec_nac_Tbox.Text, sexo))
+            {
+                if (this.pensionado_checkB.Checked)
+                    condicion = "P";
+                else
+                    condicion = "J";
+            }
+            else
+                condicion = "N";
+
             //Actualizamos o Insertamos Cliente
             if (this.cliente_existente)
             {
 
-                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
+                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado, condicion);
 
             }
             else
             {
                 //Insertamos Cliente
-                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
+                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado,condicion);
 
             }
 
@@ -213,7 +225,16 @@ namespace FrbaBus.Compra_de_Pasajes
                     //controlamos si esta seteado el campo discapacitado
                     if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
                         this.discapacitado_checkB.Checked = true;
-                    
+
+                    //controlamos si es  jubilado y no es discapacitado
+                    if (table_campos_cli.Rows[0].ItemArray[8].ToString() == "J" & !this.discapacitado_checkB.Checked)
+                    {
+                        this.jubilado_checkB.Checked = true;
+                    }
+                    if (table_campos_cli.Rows[0].ItemArray[8].ToString() == "P" & !this.discapacitado_checkB.Checked)
+                    {
+                        this.pensionado_checkB.Checked = true;
+                    }
 
                 }
 
@@ -264,11 +285,6 @@ namespace FrbaBus.Compra_de_Pasajes
             select_butaca select_butaca = new select_butaca(this);
             select_butaca.ShowDialog();
         }
-
-
- 
-
-   
 
 
 

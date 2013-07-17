@@ -90,6 +90,37 @@ namespace FrbaBus
                 
         }
 
+        public bool es_jubilado(string fecha_nac, string sexo)
+        {
+            //calcula si la persona es jubilada
+            //este metodo es necesario cuando compra un pasaje un cliente que ya esta ingresado en la base y por lo tanto no se tiene informacion si es jubilado o no
+            bool es_jubilado = false;
+            try
+            {
+
+                DateTime fecha_nacimiento = Convert.ToDateTime(fecha_nac);
+                TimeSpan diferencia_fechas = DateTime.Today - fecha_nacimiento;
+                int edad = diferencia_fechas.Days / 365;
+                if (sexo == "M")
+                {
+                    if (edad >= 65)
+                        es_jubilado = true;
+
+                }
+                else
+                {
+                    if (edad >= 60)
+                        es_jubilado = true;
+                }
+                return es_jubilado;
+            }
+            catch (FormatException)
+            {
+
+                return es_jubilado;
+            }
+
+        }
       
 
   

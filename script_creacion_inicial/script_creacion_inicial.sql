@@ -63,7 +63,7 @@ cli_telefono nvarchar(255) NULL,
 cli_mail nvarchar(255) NULL, 
 cli_fecha_nac datetime NULL,
 cli_puntos_acum int NULL,
-cli_condicion char NULL,
+cli_condicion char NULL,     --puede ser J jubilado o P pensionado
 cli_discapacitado char NULL, --puede ser discap D o no N
 cli_sexo char NULL,
 FOREIGN KEY (cli_rol_id) REFERENCES DATACENTER.Rol (rol_id),
@@ -617,7 +617,7 @@ GO
 CREATE PROCEDURE DATACENTER.cargar_campos_cliente @cli_dni numeric(18,0)
 AS
 BEGIN 
-	SELECT C.cli_nombre, C.cli_apellido, C.cli_dir, C.cli_telefono, C.cli_mail , C.cli_fecha_nac, C.cli_sexo, C.cli_discapacitado
+	SELECT C.cli_nombre, C.cli_apellido, C.cli_dir, C.cli_telefono, C.cli_mail , C.cli_fecha_nac, C.cli_sexo, C.cli_discapacitado, C.cli_condicion
 	FROM DATACENTER.Cliente C
 	WHERE C.cli_dni = @cli_dni
 END
@@ -643,20 +643,44 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5)
+CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5), @condicion nvarchar(5)
 AS
 BEGIN
+	
+/*	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 65) AND @condicion <> 'P' AND @cli_sexo = 'M')
+		BEGIN
+			SET @condicion = 'J'
+		END
+	
+	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 60) AND @condicion <> 'P' AND @cli_sexo = 'F')
+		BEGIN
+			SET @condicion = 'J'
+		END*/
+		
+					
+	 
 	INSERT DATACENTER.Cliente (cli_dni, cli_rol_id, cli_nombre, cli_apellido, cli_dir, cli_telefono, cli_mail, cli_fecha_nac, cli_puntos_acum,  cli_sexo, cli_discapacitado)
 	VALUES (@cli_dni,2,@cli_nombre,@cli_apellido, @cli_dir, @cli_telefono,@cli_mail, convert(datetime,@cli_fecha_nac), 0,convert (char, @cli_sexo), CONVERT(char, @discapacitado))
 	
 END
 GO
 
-CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5)
+CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5), @condicion nvarchar (5)
 AS
 BEGIN
+/*
+	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 65) AND @condicion <> 'P' AND @cli_sexo = 'M')
+		BEGIN
+			SET @condicion = 'J'
+		END
+	
+	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 60) AND @condicion <> 'P' AND @cli_sexo = 'F')
+		BEGIN
+			SET @condicion = 'J'
+		END*/
+	
 	UPDATE DATACENTER.Cliente
-	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo), cli_discapacitado = convert (char, @discapacitado)
+	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo), cli_discapacitado = convert (char, @discapacitado), cli_condicion = convert(char, @condicion)
 	WHERE cli_dni=@cli_dni
 END
 GO

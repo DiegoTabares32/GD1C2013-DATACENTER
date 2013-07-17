@@ -56,6 +56,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.precio_encomiendaTbox = new System.Windows.Forms.TextBox();
             this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
+            this.pensionado_checkB = new System.Windows.Forms.CheckBox();
+            this.jubilado_checkB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -70,7 +72,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(181, 279);
+            this.label11.Location = new System.Drawing.Point(140, 279);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(110, 13);
             this.label11.TabIndex = 50;
@@ -270,6 +272,7 @@
             this.peso_encom_tbox.Name = "peso_encom_tbox";
             this.peso_encom_tbox.Size = new System.Drawing.Size(113, 20);
             this.peso_encom_tbox.TabIndex = 52;
+            this.peso_encom_tbox.Text = "0";
             this.peso_encom_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.peso_encom_tbox_KeyPress);
             // 
             // check_peso_encom_boton
@@ -293,10 +296,12 @@
             // 
             // precio_encomiendaTbox
             // 
+            this.precio_encomiendaTbox.Enabled = false;
             this.precio_encomiendaTbox.Location = new System.Drawing.Point(167, 412);
             this.precio_encomiendaTbox.Name = "precio_encomiendaTbox";
             this.precio_encomiendaTbox.Size = new System.Drawing.Size(114, 20);
             this.precio_encomiendaTbox.TabIndex = 55;
+            this.precio_encomiendaTbox.Text = "0";
             // 
             // discapacitado_checkB
             // 
@@ -308,11 +313,34 @@
             this.discapacitado_checkB.Text = "Discapacitado ";
             this.discapacitado_checkB.UseVisualStyleBackColor = true;
             // 
+            // pensionado_checkB
+            // 
+            this.pensionado_checkB.AutoSize = true;
+            this.pensionado_checkB.Location = new System.Drawing.Point(293, 339);
+            this.pensionado_checkB.Name = "pensionado_checkB";
+            this.pensionado_checkB.Size = new System.Drawing.Size(82, 17);
+            this.pensionado_checkB.TabIndex = 57;
+            this.pensionado_checkB.Text = "Pensionado";
+            this.pensionado_checkB.UseVisualStyleBackColor = true;
+            // 
+            // jubilado_checkB
+            // 
+            this.jubilado_checkB.AutoSize = true;
+            this.jubilado_checkB.Enabled = false;
+            this.jubilado_checkB.Location = new System.Drawing.Point(293, 289);
+            this.jubilado_checkB.Name = "jubilado_checkB";
+            this.jubilado_checkB.Size = new System.Drawing.Size(65, 17);
+            this.jubilado_checkB.TabIndex = 58;
+            this.jubilado_checkB.Text = "Jubilado";
+            this.jubilado_checkB.UseVisualStyleBackColor = true;
+            // 
             // Form_encomienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 515);
+            this.Controls.Add(this.jubilado_checkB);
+            this.Controls.Add(this.pensionado_checkB);
             this.Controls.Add(this.discapacitado_checkB);
             this.Controls.Add(this.precio_encomiendaTbox);
             this.Controls.Add(this.label13);
@@ -378,5 +406,7 @@
         private System.Windows.Forms.Label label13;
         public System.Windows.Forms.TextBox precio_encomiendaTbox;
         public System.Windows.Forms.CheckBox discapacitado_checkB;
+        public System.Windows.Forms.CheckBox pensionado_checkB;
+        public System.Windows.Forms.CheckBox jubilado_checkB;
     }
 }

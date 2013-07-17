@@ -38,6 +38,7 @@ namespace FrbaBus.Compra_de_Pasajes
             this.mascul_radioBut.Checked = false;
             this.fem_radButton.Checked = false;
             this.DNI_Tbox.Enabled = true;
+            this.discapacitado_checkB.Visible = true;
         }
         
 
@@ -127,6 +128,18 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
+            if (this.fech_venc_tbox.Text.Length != 4)
+            {
+                MessageBox.Show("Formato de Fecha de vencimiento Incorrecto ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (Convert.ToInt16(this.fech_venc_tbox.Text) > 1299)
+            {
+                MessageBox.Show("Formato Incorrecto en Fecha de Vencimiento ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
 
             if (error)
             {
@@ -147,19 +160,32 @@ namespace FrbaBus.Compra_de_Pasajes
             else
                 discapacitado = "N";
 
+            //verificamos condicion
+            string condicion;
+            funciones func = new funciones();
+            if (this.pensionado_checkB.Checked | func.es_jubilado(this.fec_nac_Tbox.Text, sexo))
+            {
+                if (this.pensionado_checkB.Checked)
+                    condicion = "P";
+                else
+                    condicion = "J";
+            }
+            else
+                condicion = "N";
+
             stored_procedures stored_proc = new stored_procedures();
 
             //Actualizamos o Insertamos Cliente
             if (this.cliente_existente)
             {
 
-                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo,discapacitado);
+                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo,discapacitado, condicion);
 
             }
             else
             {
                 //Insertamos Cliente
-                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
+                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado, condicion);
 
             }
 
@@ -240,6 +266,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 e.Handled = false;
             else
                 e.Handled = true;
+
         }
 
         private void confirmar_boton_Click(object sender, EventArgs e)
@@ -291,6 +318,16 @@ namespace FrbaBus.Compra_de_Pasajes
                     if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
                     {
                         this.discapacitado_checkB.Checked = true;
+                    }
+
+                    //controlamos si es  jubilado y no es discapacitado
+                    if (table_campos_cli.Rows[0].ItemArray[8].ToString() == "J" & !this.discapacitado_checkB.Checked)
+                    {
+                        this.jubilado_checkB.Checked = true;
+                    }
+                    if (table_campos_cli.Rows[0].ItemArray[8].ToString() == "P" & !this.discapacitado_checkB.Checked)
+                    {
+                        this.pensionado_checkB.Checked = true;
                     }
 
                 }

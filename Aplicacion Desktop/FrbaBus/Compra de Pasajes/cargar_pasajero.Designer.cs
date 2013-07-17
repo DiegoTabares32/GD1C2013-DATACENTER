@@ -59,6 +59,7 @@
             this.select_butaca_boton = new System.Windows.Forms.Button();
             this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
             this.jubilado_checkB = new System.Windows.Forms.CheckBox();
+            this.pensionado_checkB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -126,7 +127,7 @@
             // 
             // guardar_boton
             // 
-            this.guardar_boton.Location = new System.Drawing.Point(240, 503);
+            this.guardar_boton.Location = new System.Drawing.Point(238, 474);
             this.guardar_boton.Name = "guardar_boton";
             this.guardar_boton.Size = new System.Drawing.Size(122, 32);
             this.guardar_boton.TabIndex = 7;
@@ -136,7 +137,7 @@
             // 
             // limpiar_boton
             // 
-            this.limpiar_boton.Location = new System.Drawing.Point(15, 503);
+            this.limpiar_boton.Location = new System.Drawing.Point(15, 474);
             this.limpiar_boton.Name = "limpiar_boton";
             this.limpiar_boton.Size = new System.Drawing.Size(122, 32);
             this.limpiar_boton.TabIndex = 8;
@@ -194,7 +195,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(384, 542);
+            this.label8.Location = new System.Drawing.Point(383, 518);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 13);
             this.label8.TabIndex = 15;
@@ -261,7 +262,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 468);
+            this.label12.Location = new System.Drawing.Point(12, 442);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 13);
             this.label12.TabIndex = 22;
@@ -270,7 +271,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(143, 468);
+            this.label14.Location = new System.Drawing.Point(143, 438);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(50, 13);
             this.label14.TabIndex = 24;
@@ -279,7 +280,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(301, 465);
+            this.label15.Location = new System.Drawing.Point(301, 434);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(30, 13);
             this.label15.TabIndex = 25;
@@ -288,7 +289,7 @@
             // butNro_tbox
             // 
             this.butNro_tbox.Enabled = false;
-            this.butNro_tbox.Location = new System.Drawing.Point(83, 461);
+            this.butNro_tbox.Location = new System.Drawing.Point(83, 442);
             this.butNro_tbox.Name = "butNro_tbox";
             this.butNro_tbox.Size = new System.Drawing.Size(54, 20);
             this.butNro_tbox.TabIndex = 26;
@@ -296,7 +297,7 @@
             // pos_but_tbox
             // 
             this.pos_but_tbox.Enabled = false;
-            this.pos_but_tbox.Location = new System.Drawing.Point(199, 461);
+            this.pos_but_tbox.Location = new System.Drawing.Point(199, 438);
             this.pos_but_tbox.Name = "pos_but_tbox";
             this.pos_but_tbox.Size = new System.Drawing.Size(96, 20);
             this.pos_but_tbox.TabIndex = 27;
@@ -304,14 +305,14 @@
             // piso_tbox
             // 
             this.piso_tbox.Enabled = false;
-            this.piso_tbox.Location = new System.Drawing.Point(337, 458);
+            this.piso_tbox.Location = new System.Drawing.Point(337, 434);
             this.piso_tbox.Name = "piso_tbox";
             this.piso_tbox.Size = new System.Drawing.Size(36, 20);
             this.piso_tbox.TabIndex = 28;
             // 
             // select_butaca_boton
             // 
-            this.select_butaca_boton.Location = new System.Drawing.Point(387, 452);
+            this.select_butaca_boton.Location = new System.Drawing.Point(386, 425);
             this.select_butaca_boton.Name = "select_butaca_boton";
             this.select_butaca_boton.Size = new System.Drawing.Size(114, 29);
             this.select_butaca_boton.TabIndex = 29;
@@ -333,18 +334,29 @@
             // 
             this.jubilado_checkB.AutoSize = true;
             this.jubilado_checkB.Enabled = false;
-            this.jubilado_checkB.Location = new System.Drawing.Point(83, 413);
+            this.jubilado_checkB.Location = new System.Drawing.Point(221, 380);
             this.jubilado_checkB.Name = "jubilado_checkB";
             this.jubilado_checkB.Size = new System.Drawing.Size(65, 17);
             this.jubilado_checkB.TabIndex = 32;
             this.jubilado_checkB.Text = "Jubilado";
             this.jubilado_checkB.UseVisualStyleBackColor = true;
             // 
+            // pensionado_checkB
+            // 
+            this.pensionado_checkB.AutoSize = true;
+            this.pensionado_checkB.Location = new System.Drawing.Point(337, 380);
+            this.pensionado_checkB.Name = "pensionado_checkB";
+            this.pensionado_checkB.Size = new System.Drawing.Size(82, 17);
+            this.pensionado_checkB.TabIndex = 33;
+            this.pensionado_checkB.Text = "Pensionado";
+            this.pensionado_checkB.UseVisualStyleBackColor = true;
+            // 
             // cargar_pasajero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 564);
+            this.ClientSize = new System.Drawing.Size(512, 538);
+            this.Controls.Add(this.pensionado_checkB);
             this.Controls.Add(this.jubilado_checkB);
             this.Controls.Add(this.discapacitado_checkB);
             this.Controls.Add(this.select_butaca_boton);
@@ -416,5 +428,6 @@
         public System.Windows.Forms.TextBox DNI_Tbox;
         public System.Windows.Forms.CheckBox discapacitado_checkB;
         public System.Windows.Forms.CheckBox jubilado_checkB;
+        public System.Windows.Forms.CheckBox pensionado_checkB;
     }
 }
