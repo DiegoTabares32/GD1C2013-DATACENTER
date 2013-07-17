@@ -99,7 +99,7 @@ namespace FrbaBus
 
         public DataTable top5MicrosMasVacios(string anio, string semestre)
         {
-            string query = "select top 5 m.mic_patente as 'Patente', (m.mic_cant_butacas-COUNT(distinct p.pas_cod)) as 'Cantidad de Butacas Vacías' from DATACENTER.Micro m join DATACENTER.Pasaje p on p.pas_micro_patente = m.mic_patente join DATACENTER.Arribo a on a.arri_mic_patente = m.mic_patente and a.arri_viaj_id = p.pas_viaj_id and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + ") and DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ") group by m.mic_patente, m.mic_cant_butacas order by 2 desc";
+            string query = "select top 5 r.reco_destino as 'Destino' ,m.mic_patente as 'Patente', (m.mic_cant_butacas-COUNT(distinct p.pas_cod)) as 'Cantidad de Butacas Vacías' from DATACENTER.Micro m join DATACENTER.Pasaje p on p.pas_micro_patente = m.mic_patente join DATACENTER.Arribo a on a.arri_mic_patente = m.mic_patente and a.arri_viaj_id = p.pas_viaj_id and a.arri_fecha_llegada between DATACENTER.fechaInicioSemestre('"+anio+"',"+semestre+") and DATACENTER.fechaFinSemestre('"+anio+"',"+semestre+") join DATACENTER.Viaje v on v.viaj_id = p.pas_viaj_id join DATACENTER.Recorrido r on r.reco_cod = v.viaj_reco_cod group by r.reco_destino, m.mic_patente, m.mic_cant_butacas order by 3 desc";
             connection conexion = new connection();
             return conexion.execute_query(query);
         }
