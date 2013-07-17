@@ -55,6 +55,7 @@
             this.check_peso_encom_boton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.precio_encomiendaTbox = new System.Windows.Forms.TextBox();
+            this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -297,11 +298,22 @@
             this.precio_encomiendaTbox.Size = new System.Drawing.Size(114, 20);
             this.precio_encomiendaTbox.TabIndex = 55;
             // 
+            // discapacitado_checkB
+            // 
+            this.discapacitado_checkB.AutoSize = true;
+            this.discapacitado_checkB.Location = new System.Drawing.Point(293, 312);
+            this.discapacitado_checkB.Name = "discapacitado_checkB";
+            this.discapacitado_checkB.Size = new System.Drawing.Size(97, 17);
+            this.discapacitado_checkB.TabIndex = 56;
+            this.discapacitado_checkB.Text = "Discapacitado ";
+            this.discapacitado_checkB.UseVisualStyleBackColor = true;
+            // 
             // Form_encomienda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 515);
+            this.Controls.Add(this.discapacitado_checkB);
             this.Controls.Add(this.precio_encomiendaTbox);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.check_peso_encom_boton);
@@ -365,5 +377,6 @@
         public System.Windows.Forms.TextBox DNI_Tbox;
         private System.Windows.Forms.Label label13;
         public System.Windows.Forms.TextBox precio_encomiendaTbox;
+        public System.Windows.Forms.CheckBox discapacitado_checkB;
     }
 }

@@ -51,13 +51,14 @@
             this.fem_radButton = new System.Windows.Forms.RadioButton();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.butNro_tbox = new System.Windows.Forms.TextBox();
             this.pos_but_tbox = new System.Windows.Forms.TextBox();
             this.piso_tbox = new System.Windows.Forms.TextBox();
             this.select_butaca_boton = new System.Windows.Forms.Button();
+            this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
+            this.jubilado_checkB = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -125,7 +126,7 @@
             // 
             // guardar_boton
             // 
-            this.guardar_boton.Location = new System.Drawing.Point(254, 415);
+            this.guardar_boton.Location = new System.Drawing.Point(240, 503);
             this.guardar_boton.Name = "guardar_boton";
             this.guardar_boton.Size = new System.Drawing.Size(122, 32);
             this.guardar_boton.TabIndex = 7;
@@ -135,7 +136,7 @@
             // 
             // limpiar_boton
             // 
-            this.limpiar_boton.Location = new System.Drawing.Point(15, 415);
+            this.limpiar_boton.Location = new System.Drawing.Point(15, 503);
             this.limpiar_boton.Name = "limpiar_boton";
             this.limpiar_boton.Size = new System.Drawing.Size(122, 32);
             this.limpiar_boton.TabIndex = 8;
@@ -193,7 +194,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(291, 461);
+            this.label8.Location = new System.Drawing.Point(384, 542);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 13);
             this.label8.TabIndex = 15;
@@ -220,7 +221,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 312);
+            this.label10.Location = new System.Drawing.Point(80, 325);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 18;
@@ -260,24 +261,16 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 372);
+            this.label12.Location = new System.Drawing.Point(12, 468);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 13);
             this.label12.TabIndex = 22;
             this.label12.Text = "Butaca Nro:";
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(175, 380);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(0, 13);
-            this.label13.TabIndex = 23;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(142, 372);
+            this.label14.Location = new System.Drawing.Point(143, 468);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(50, 13);
             this.label14.TabIndex = 24;
@@ -286,7 +279,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(300, 372);
+            this.label15.Location = new System.Drawing.Point(301, 465);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(30, 13);
             this.label15.TabIndex = 25;
@@ -295,7 +288,7 @@
             // butNro_tbox
             // 
             this.butNro_tbox.Enabled = false;
-            this.butNro_tbox.Location = new System.Drawing.Point(82, 369);
+            this.butNro_tbox.Location = new System.Drawing.Point(83, 461);
             this.butNro_tbox.Name = "butNro_tbox";
             this.butNro_tbox.Size = new System.Drawing.Size(54, 20);
             this.butNro_tbox.TabIndex = 26;
@@ -303,7 +296,7 @@
             // pos_but_tbox
             // 
             this.pos_but_tbox.Enabled = false;
-            this.pos_but_tbox.Location = new System.Drawing.Point(198, 369);
+            this.pos_but_tbox.Location = new System.Drawing.Point(199, 461);
             this.pos_but_tbox.Name = "pos_but_tbox";
             this.pos_but_tbox.Size = new System.Drawing.Size(96, 20);
             this.pos_but_tbox.TabIndex = 27;
@@ -311,14 +304,14 @@
             // piso_tbox
             // 
             this.piso_tbox.Enabled = false;
-            this.piso_tbox.Location = new System.Drawing.Point(335, 369);
+            this.piso_tbox.Location = new System.Drawing.Point(337, 458);
             this.piso_tbox.Name = "piso_tbox";
             this.piso_tbox.Size = new System.Drawing.Size(36, 20);
             this.piso_tbox.TabIndex = 28;
             // 
             // select_butaca_boton
             // 
-            this.select_butaca_boton.Location = new System.Drawing.Point(386, 366);
+            this.select_butaca_boton.Location = new System.Drawing.Point(387, 452);
             this.select_butaca_boton.Name = "select_butaca_boton";
             this.select_butaca_boton.Size = new System.Drawing.Size(114, 29);
             this.select_butaca_boton.TabIndex = 29;
@@ -326,18 +319,40 @@
             this.select_butaca_boton.UseVisualStyleBackColor = true;
             this.select_butaca_boton.Click += new System.EventHandler(this.select_butaca_boton_Click);
             // 
+            // discapacitado_checkB
+            // 
+            this.discapacitado_checkB.AutoSize = true;
+            this.discapacitado_checkB.Location = new System.Drawing.Point(83, 380);
+            this.discapacitado_checkB.Name = "discapacitado_checkB";
+            this.discapacitado_checkB.Size = new System.Drawing.Size(97, 17);
+            this.discapacitado_checkB.TabIndex = 31;
+            this.discapacitado_checkB.Text = "Discapacitado ";
+            this.discapacitado_checkB.UseVisualStyleBackColor = true;
+            // 
+            // jubilado_checkB
+            // 
+            this.jubilado_checkB.AutoSize = true;
+            this.jubilado_checkB.Enabled = false;
+            this.jubilado_checkB.Location = new System.Drawing.Point(83, 413);
+            this.jubilado_checkB.Name = "jubilado_checkB";
+            this.jubilado_checkB.Size = new System.Drawing.Size(65, 17);
+            this.jubilado_checkB.TabIndex = 32;
+            this.jubilado_checkB.Text = "Jubilado";
+            this.jubilado_checkB.UseVisualStyleBackColor = true;
+            // 
             // cargar_pasajero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 483);
+            this.ClientSize = new System.Drawing.Size(512, 564);
+            this.Controls.Add(this.jubilado_checkB);
+            this.Controls.Add(this.discapacitado_checkB);
             this.Controls.Add(this.select_butaca_boton);
             this.Controls.Add(this.piso_tbox);
             this.Controls.Add(this.pos_but_tbox);
             this.Controls.Add(this.butNro_tbox);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.fem_radButton);
@@ -392,7 +407,6 @@
         public System.Windows.Forms.RadioButton fem_radButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button select_butaca_boton;
@@ -400,5 +414,7 @@
         public System.Windows.Forms.TextBox pos_but_tbox;
         public System.Windows.Forms.TextBox piso_tbox;
         public System.Windows.Forms.TextBox DNI_Tbox;
+        public System.Windows.Forms.CheckBox discapacitado_checkB;
+        public System.Windows.Forms.CheckBox jubilado_checkB;
     }
 }

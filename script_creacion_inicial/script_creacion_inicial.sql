@@ -64,6 +64,7 @@ cli_mail nvarchar(255) NULL,
 cli_fecha_nac datetime NULL,
 cli_puntos_acum int NULL,
 cli_condicion char NULL,
+cli_discapacitado char NULL, --puede ser discap D o no N
 cli_sexo char NULL,
 FOREIGN KEY (cli_rol_id) REFERENCES DATACENTER.Rol (rol_id),
 PRIMARY KEY (cli_dni))
@@ -229,7 +230,7 @@ CREATE TABLE DATACENTER.Compra
 (comp_id int IDENTITY (1,1) NOT NULL,
 comp_comprador_dni numeric (18,0) NOT NULL,
 comp_tipo_tarj_id int  NULL,
-comp_viaj_id int  NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
+comp_viaj_id int  NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
 comp_cant_pasajes int NULL,
 comp_cant_total_kg numeric (18,0) NULL, 
 comp_costo_total numeric (18,2) NULL,
@@ -237,7 +238,6 @@ comp_fecha_compra datetime NULL,
 comp_codigo_pas_paq numeric (18,0) NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
 FOREIGN KEY (comp_comprador_dni) REFERENCES DATACENTER.Cliente (cli_dni),
 FOREIGN KEY (comp_tipo_tarj_id) REFERENCES DATACENTER.TipoTarjeta (tipo_id),
---FOREIGN KEY (comp_viaj_id) REFERENCES DATACENTER.Viaje (viaj_id),
 PRIMARY KEY (comp_id)
 )
 GO
@@ -617,7 +617,7 @@ GO
 CREATE PROCEDURE DATACENTER.cargar_campos_cliente @cli_dni numeric(18,0)
 AS
 BEGIN 
-	SELECT C.cli_nombre, C.cli_apellido, C.cli_dir, C.cli_telefono, C.cli_mail , C.cli_fecha_nac, C.cli_sexo
+	SELECT C.cli_nombre, C.cli_apellido, C.cli_dir, C.cli_telefono, C.cli_mail , C.cli_fecha_nac, C.cli_sexo, C.cli_discapacitado
 	FROM DATACENTER.Cliente C
 	WHERE C.cli_dni = @cli_dni
 END
@@ -643,20 +643,20 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5)
+CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5)
 AS
 BEGIN
-	INSERT DATACENTER.Cliente (cli_dni, cli_rol_id, cli_nombre, cli_apellido, cli_dir, cli_telefono, cli_mail, cli_fecha_nac, cli_puntos_acum,  cli_sexo)
-	VALUES (@cli_dni,2,@cli_nombre,@cli_apellido, @cli_dir, @cli_telefono,@cli_mail, convert(datetime,@cli_fecha_nac), 0,convert (char, @cli_sexo))
+	INSERT DATACENTER.Cliente (cli_dni, cli_rol_id, cli_nombre, cli_apellido, cli_dir, cli_telefono, cli_mail, cli_fecha_nac, cli_puntos_acum,  cli_sexo, cli_discapacitado)
+	VALUES (@cli_dni,2,@cli_nombre,@cli_apellido, @cli_dir, @cli_telefono,@cli_mail, convert(datetime,@cli_fecha_nac), 0,convert (char, @cli_sexo), CONVERT(char, @discapacitado))
 	
 END
 GO
 
-CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5)
+CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5)
 AS
 BEGIN
 	UPDATE DATACENTER.Cliente
-	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo)
+	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo), cli_discapacitado = convert (char, @discapacitado)
 	WHERE cli_dni=@cli_dni
 END
 GO

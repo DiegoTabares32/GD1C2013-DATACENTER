@@ -120,18 +120,35 @@ namespace FrbaBus.Compra_de_Pasajes
             int i;
 
             //cargamos los datos de los pasajeros
-            this.tipo_viaje='P';
+            this.tipo_viaje='P'; //necesario porq encomienda y pasaje tienen mismo recorrido pero pueden realizarlo en distintos viajes
             select_viaje form_viaje = new select_viaje(this); //con esto me aseguro que siempre sea el mismo recorrido
+            
+            //int contador_discapacitados= 0;
+            bool sgte_acompañante = false;
             for (i = 0; i < cant_pasajes; i++)
             {
-                cargar_pasajero form_cargar_pas = new cargar_pasajero(this.cod_viaje_pasaje, listas_pasajeros);
-                form_cargar_pas.ShowDialog();
-                listas_pasajeros.Add(form_cargar_pas);
-                if (cant_pasajes - 1 != i)
+                cargar_pasajero pasajero = new cargar_pasajero(this.cod_viaje_pasaje, listas_pasajeros, sgte_acompañante );
+                pasajero.ShowDialog();
+                if (pasajero.discapacitado_checkB.Checked)
+                {
+                    sgte_acompañante = true;
+                    MessageBox.Show("Datos del Pasajero Ingresados A continuación Ingrese los datos del acompañante del pasajero Discapacitado", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    sgte_acompañante = false;
+                    if (cant_pasajes - 1 != i)
+                    {
+                        MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        form_viaje.ShowDialog();
+                    }
+                }
+                listas_pasajeros.Add(pasajero);
+                /*if (cant_pasajes - 1 != i)
                 {
                     MessageBox.Show("Datos del Pasajero Ingresados, A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     form_viaje.ShowDialog();
-                }
+                }*/
                 
 
             }

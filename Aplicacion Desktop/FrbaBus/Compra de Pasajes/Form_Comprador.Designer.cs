@@ -62,6 +62,7 @@
             this.aceptar_boton = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.confirmar_boton = new System.Windows.Forms.Button();
+            this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -375,11 +376,22 @@
             this.confirmar_boton.UseVisualStyleBackColor = true;
             this.confirmar_boton.Click += new System.EventHandler(this.confirmar_boton_Click);
             // 
+            // discapacitado_checkB
+            // 
+            this.discapacitado_checkB.AutoSize = true;
+            this.discapacitado_checkB.Location = new System.Drawing.Point(295, 311);
+            this.discapacitado_checkB.Name = "discapacitado_checkB";
+            this.discapacitado_checkB.Size = new System.Drawing.Size(97, 17);
+            this.discapacitado_checkB.TabIndex = 85;
+            this.discapacitado_checkB.Text = "Discapacitado ";
+            this.discapacitado_checkB.UseVisualStyleBackColor = true;
+            // 
             // Form_Comprador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 725);
+            this.Controls.Add(this.discapacitado_checkB);
             this.Controls.Add(this.confirmar_boton);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.aceptar_boton);
@@ -459,5 +471,6 @@
         private System.Windows.Forms.Button aceptar_boton;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button confirmar_boton;
+        public System.Windows.Forms.CheckBox discapacitado_checkB;
     }
 }

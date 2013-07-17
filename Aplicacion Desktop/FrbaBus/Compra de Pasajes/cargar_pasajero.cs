@@ -17,12 +17,14 @@ namespace FrbaBus.Compra_de_Pasajes
         public List<cargar_pasajero> listas_pasajeros;
         public string cod_pasaje = "";
         public decimal costo_pasaje = 0;
+        bool acompañante; //especifica si el pasajero es acompañante de un discapacitado
 
-        public cargar_pasajero(string cod_viaje, List<cargar_pasajero> listas_pasajeros)
+        public cargar_pasajero(string cod_viaje, List<cargar_pasajero> listas_pasajeros, bool acompañante)
         {
             InitializeComponent();
             this.viaje_cod = cod_viaje;
             this.listas_pasajeros = listas_pasajeros; //lo necesito para luego filtrar butacas
+            this.acompañante = acompañante;
         }
 
 
@@ -43,6 +45,7 @@ namespace FrbaBus.Compra_de_Pasajes
             this.butNro_tbox.Clear();
             this.pos_but_tbox.Clear();
             this.piso_tbox.Clear();
+            this.discapacitado_checkB.Checked = false;
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -118,6 +121,24 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
+            
+
+            if (this.discapacitado_checkB.Checked) //controlamos  q NO haya más de 2 discapacitados en la misma compra
+            {
+                int cont_discapacitados = 0;
+
+                foreach (cargar_pasajero pasajero in this.listas_pasajeros)
+                {
+                    if (pasajero.discapacitado_checkB.Checked)
+                        cont_discapacitados++;
+                }
+
+                if (cont_discapacitados == 1)
+                {
+                    MessageBox.Show("ERROR: NO se pueden comprar mas de 2 pasajes para personas discapacitadas en una misma compra", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error = true;
+                }
+            }
             if (error)
             {
                 this.refrescar();
@@ -130,22 +151,30 @@ namespace FrbaBus.Compra_de_Pasajes
                     sexo = "M";
                 else
                     sexo = "F";
+            
+            //verificamos si es discapacitado
+            string discapacitado;
+            if (this.discapacitado_checkB.Checked)
+                discapacitado = "D";
+            else
+                discapacitado = "N";
 
             //Actualizamos o Insertamos Cliente
             if (this.cliente_existente)
             {
 
-                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
+                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
 
             }
             else
             {
                 //Insertamos Cliente
-                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
+                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
 
             }
 
-            this.costo_pasaje= stored_proc.get_porcentaje(this.viaje_cod);
+            if (!(this.discapacitado_checkB.Checked | this.acompañante )) //si no es discapacitado ni acompañante de discapacitado le cobramos el pasaje
+                this.costo_pasaje= stored_proc.get_porcentaje(this.viaje_cod);
 
             this.Close();
 
@@ -180,6 +209,12 @@ namespace FrbaBus.Compra_de_Pasajes
                         this.mascul_radioBut.Checked = true;
                     if (table_campos_cli.Rows[0].ItemArray[6].ToString() == "F")
                         this.fem_radButton.Checked = true;
+                    MessageBox.Show(table_campos_cli.Rows[0].ItemArray[7].ToString());
+                    //controlamos si esta seteado el campo discapacitado
+                    if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
+                        this.discapacitado_checkB.Checked = true;
+                    
+
                 }
 
             }
@@ -229,6 +264,7 @@ namespace FrbaBus.Compra_de_Pasajes
             select_butaca select_butaca = new select_butaca(this);
             select_butaca.ShowDialog();
         }
+
 
  
 

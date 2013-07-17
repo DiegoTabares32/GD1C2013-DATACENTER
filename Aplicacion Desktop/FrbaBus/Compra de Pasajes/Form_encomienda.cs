@@ -143,17 +143,24 @@ namespace FrbaBus.Compra_de_Pasajes
             else
                 sexo = "F";
 
+            //verificamos si es discapacitado
+            string discapacitado;
+            if (this.discapacitado_checkB.Checked)
+                discapacitado = "D";
+            else
+                discapacitado = "N";
+
             //Actualizamos o Insertamos Cliente
             if (this.cliente_existente)
             {
 
-                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
+                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
 
             }
             else
             {
                 //Insertamos Cliente
-                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo);
+                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado);
 
             }
 
@@ -190,6 +197,14 @@ namespace FrbaBus.Compra_de_Pasajes
                         this.mascul_radioBut.Checked = true;
                     if (table_campos_cli.Rows[0].ItemArray[6].ToString() == "F")
                         this.fem_radButton.Checked = true;
+
+                    //controlamos si esta seteado el campo discapacitado
+                    MessageBox.Show(table_campos_cli.Rows[0].ItemArray[7].ToString());
+                    if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
+                    {
+                        this.discapacitado_checkB.Checked = true;
+                    }
+
                 }
 
             }
