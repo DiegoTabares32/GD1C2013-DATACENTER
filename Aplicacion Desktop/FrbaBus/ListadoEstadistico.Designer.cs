@@ -36,7 +36,7 @@
             this.buttonClientesConMasPuntosAcumulados = new System.Windows.Forms.Button();
             this.buttonDestinosConPasajesCancelados = new System.Windows.Forms.Button();
             this.buttonMicrosDiasFueraServicio = new System.Windows.Forms.Button();
-            this.textBoxAnio = new System.Windows.Forms.TextBox();
+            this.comboBoxAnio = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -122,19 +122,21 @@
             this.buttonMicrosDiasFueraServicio.UseVisualStyleBackColor = true;
             this.buttonMicrosDiasFueraServicio.Click += new System.EventHandler(this.buttonMicrosDiasFueraServicio_Click);
             // 
-            // textBoxAnio
+            // comboBoxAnio
             // 
-            this.textBoxAnio.Location = new System.Drawing.Point(128, 27);
-            this.textBoxAnio.MaxLength = 4;
-            this.textBoxAnio.Name = "textBoxAnio";
-            this.textBoxAnio.Size = new System.Drawing.Size(100, 20);
-            this.textBoxAnio.TabIndex = 9;
+            this.comboBoxAnio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAnio.FormattingEnabled = true;
+            this.comboBoxAnio.Location = new System.Drawing.Point(154, 27);
+            this.comboBoxAnio.Name = "comboBoxAnio";
+            this.comboBoxAnio.Size = new System.Drawing.Size(55, 21);
+            this.comboBoxAnio.Sorted = true;
+            this.comboBoxAnio.TabIndex = 9;
             // 
             // ListadoEstadistico
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(284, 263);
-            this.Controls.Add(this.textBoxAnio);
+            this.Controls.Add(this.comboBoxAnio);
             this.Controls.Add(this.buttonMicrosDiasFueraServicio);
             this.Controls.Add(this.buttonDestinosConPasajesCancelados);
             this.Controls.Add(this.buttonClientesConMasPuntosAcumulados);
@@ -163,6 +165,6 @@
         private System.Windows.Forms.Button buttonClientesConMasPuntosAcumulados;
         private System.Windows.Forms.Button buttonDestinosConPasajesCancelados;
         private System.Windows.Forms.Button buttonMicrosDiasFueraServicio;
-        private System.Windows.Forms.TextBox textBoxAnio;
+        private System.Windows.Forms.ComboBox comboBoxAnio;
     }
 }

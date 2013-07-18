@@ -21,6 +21,10 @@ namespace FrbaBus
 
         private void ListadoEstadistico_Load(object sender, EventArgs e)
         {
+            string query = "select DISTINCT(YEAR(comp_fecha_compra)) as 'año' FROM DATACENTER.Compra";
+            connection conexion = new connection();
+            DataTable anios = conexion.execute_query(query);
+
             DataTable tablaSemestre = new DataTable();
             tablaSemestre.Columns.Add("semestre", typeof(string));
 
@@ -33,53 +37,56 @@ namespace FrbaBus
             this.comboBoxSemestre.DataSource = tablaSemestre;
             this.comboBoxSemestre.DisplayMember = "semestre";
             this.comboBoxSemestre.ValueMember = "semestre";
-                                   
+
+            this.comboBoxAnio.DataSource = anios;
+            this.comboBoxAnio.DisplayMember = "año";
+                                               
         }
 
         private void buttonDestinosMasPasajesComprados_Click(object sender, EventArgs e)
         {
             if (this.validarAnio()) { return; }            
-            Top5DestinosMasPasajesComprados destinosMasPasajes = new Top5DestinosMasPasajesComprados(this.textBoxAnio.Text, comboBoxSemestre.Text);
+            Top5DestinosMasPasajesComprados destinosMasPasajes = new Top5DestinosMasPasajesComprados(this.comboBoxAnio.Text, comboBoxSemestre.Text);
             destinosMasPasajes.Show();
         }             
 
         private void buttonDestinosMicrosMasVacios_Click(object sender, EventArgs e)
         {
             if (this.validarAnio()) { return; }
-            MicrosMasButacasVacias microsVacios = new MicrosMasButacasVacias(this.textBoxAnio.Text,comboBoxSemestre.Text);
+            MicrosMasButacasVacias microsVacios = new MicrosMasButacasVacias(this.comboBoxAnio.Text,comboBoxSemestre.Text);
             microsVacios.Show();
         }
 
         private void buttonClientesConMasPuntosAcumulados_Click(object sender, EventArgs e)
         {
             if (this.validarAnio()) { return; }            
-            Top5Clientes clientes = new Top5Clientes(textBoxAnio.Text, comboBoxSemestre.Text);
+            Top5Clientes clientes = new Top5Clientes(comboBoxAnio.Text, comboBoxSemestre.Text);
             clientes.Show();
         }
 
         private void buttonDestinosConPasajesCancelados_Click(object sender, EventArgs e)
         {
             if (this.validarAnio()) { return; }
-            MasPasajesCancelados cancelados = new MasPasajesCancelados(textBoxAnio.Text, comboBoxSemestre.Text);
+            MasPasajesCancelados cancelados = new MasPasajesCancelados(comboBoxAnio.Text, comboBoxSemestre.Text);
             cancelados.Show();
         }
 
         private void buttonMicrosDiasFueraServicio_Click(object sender, EventArgs e)
         {
             if (this.validarAnio()) { return; }
-            MicrosDiasFueraServicio microsFueraServicio = new MicrosDiasFueraServicio(textBoxAnio.Text, comboBoxSemestre.Text);
+            MicrosDiasFueraServicio microsFueraServicio = new MicrosDiasFueraServicio(comboBoxAnio.Text, comboBoxSemestre.Text);
             microsFueraServicio.Show();
         }
 
         private bool validarAnio()
         {
             bool error = false;
-            if (textBoxAnio.Text == "")
+            if (comboBoxAnio.Text == "")
             {
                 MessageBox.Show("Debe especificar el año (AAAA)");
                 return error = true;
             }
-            char[] anio = textBoxAnio.Text.ToCharArray();
+            char[] anio = comboBoxAnio.Text.ToCharArray();
             if (anio.Length != 4)
             {
                 MessageBox.Show("El año debe ser de 4 digitos AAAA");

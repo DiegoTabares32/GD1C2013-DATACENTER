@@ -32,7 +32,7 @@ namespace FrbaBus.Top_Micros
             this.labelAnio.Text = this.anio;
             this.labelSemestre.Text = this.semestre;
             this.dataGridViewMicrosFueraServicio.DataSource = this.funciones.top5MicrosDiasFueraServicio(this.anio, this.semestre);
-            this.mensaje.Show();
+            this.mensaje.Close();
         }
     }
 }
