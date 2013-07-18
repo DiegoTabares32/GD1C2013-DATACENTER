@@ -64,11 +64,14 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void buttonProcesarArribos_Click(object sender, EventArgs e)
         {
+            Cargando cargando = new Cargando();
+            cargando.Show();
             string query = "INSERT INTO DATACENTER.Arribo (arri_fecha_llegada, arri_mic_patente, arri_viaj_id, arri_ciu_arribada) SELECT fechayhora, patente, viaje, arribo FROM DATACENTER.arribosCargados";
             connection conexion = new connection();
             conexion.execute_query(query);
             query = "delete DATACENTER.arribosCargados";
             conexion.execute_query(query);
+            cargando.Close();
         }
     }
 }

@@ -36,10 +36,12 @@
             this.labelorigen = new System.Windows.Forms.Label();
             this.labelarribo = new System.Windows.Forms.Label();
             this.textBoxFechallegada = new System.Windows.Forms.TextBox();
-            this.textBoxHorallegada = new System.Windows.Forms.TextBox();
             this.labelhora = new System.Windows.Forms.Label();
             this.buttonAceptar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.hora = new System.Windows.Forms.ComboBox();
+            this.minutos = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBoxPatente
@@ -110,21 +112,14 @@
             this.textBoxFechallegada.Size = new System.Drawing.Size(154, 20);
             this.textBoxFechallegada.TabIndex = 8;
             // 
-            // textBoxHorallegada
-            // 
-            this.textBoxHorallegada.Location = new System.Drawing.Point(178, 46);
-            this.textBoxHorallegada.Name = "textBoxHorallegada";
-            this.textBoxHorallegada.Size = new System.Drawing.Size(127, 20);
-            this.textBoxHorallegada.TabIndex = 9;
-            // 
             // labelhora
             // 
             this.labelhora.AutoSize = true;
-            this.labelhora.Location = new System.Drawing.Point(180, 30);
+            this.labelhora.Location = new System.Drawing.Point(192, 30);
             this.labelhora.Name = "labelhora";
-            this.labelhora.Size = new System.Drawing.Size(126, 13);
+            this.labelhora.Size = new System.Drawing.Size(115, 13);
             this.labelhora.TabIndex = 10;
-            this.labelhora.Text = "Hora de Llegada (hh:mm)";
+            this.labelhora.Text = "Hora        :       Minutos";
             // 
             // buttonAceptar
             // 
@@ -146,15 +141,42 @@
             this.buttonLimpiar.UseVisualStyleBackColor = true;
             this.buttonLimpiar.Click += new System.EventHandler(this.buttonLimpiar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(239, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(10, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = ":";
+            // 
+            // hora
+            // 
+            this.hora.FormattingEnabled = true;
+            this.hora.Location = new System.Drawing.Point(191, 47);
+            this.hora.Name = "hora";
+            this.hora.Size = new System.Drawing.Size(42, 21);
+            this.hora.TabIndex = 16;
+            // 
+            // minutos
+            // 
+            this.minutos.FormattingEnabled = true;
+            this.minutos.Location = new System.Drawing.Point(265, 47);
+            this.minutos.Name = "minutos";
+            this.minutos.Size = new System.Drawing.Size(42, 21);
+            this.minutos.TabIndex = 17;
+            // 
             // FormularioDeArribo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 107);
+            this.Controls.Add(this.minutos);
+            this.Controls.Add(this.hora);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.buttonAceptar);
             this.Controls.Add(this.labelhora);
-            this.Controls.Add(this.textBoxHorallegada);
             this.Controls.Add(this.textBoxFechallegada);
             this.Controls.Add(this.labelarribo);
             this.Controls.Add(this.labelorigen);
@@ -163,6 +185,7 @@
             this.Controls.Add(this.comboBoxArribo);
             this.Controls.Add(this.comboBoxOrigen);
             this.Controls.Add(this.textBoxPatente);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormularioDeArribo";
             this.Text = "Formulario De Arribo";
             this.Load += new System.EventHandler(this.FormularioDeArribo_Load);
@@ -181,9 +204,11 @@
         private System.Windows.Forms.Label labelorigen;
         private System.Windows.Forms.Label labelarribo;
         private System.Windows.Forms.TextBox textBoxFechallegada;
-        private System.Windows.Forms.TextBox textBoxHorallegada;
         private System.Windows.Forms.Label labelhora;
         private System.Windows.Forms.Button buttonAceptar;
         private System.Windows.Forms.Button buttonLimpiar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox hora;
+        private System.Windows.Forms.ComboBox minutos;
     }
 }

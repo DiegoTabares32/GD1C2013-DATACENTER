@@ -44,66 +44,34 @@ namespace FrbaBus
         }
 
         private void buttonDestinosMasPasajesComprados_Click(object sender, EventArgs e)
-        {
-            if (this.validarAnio()) { return; }            
+        {            
             Top5DestinosMasPasajesComprados destinosMasPasajes = new Top5DestinosMasPasajesComprados(this.comboBoxAnio.Text, comboBoxSemestre.Text);
             destinosMasPasajes.Show();
         }             
 
         private void buttonDestinosMicrosMasVacios_Click(object sender, EventArgs e)
-        {
-            if (this.validarAnio()) { return; }
+        {           
             MicrosMasButacasVacias microsVacios = new MicrosMasButacasVacias(this.comboBoxAnio.Text,comboBoxSemestre.Text);
             microsVacios.Show();
         }
 
         private void buttonClientesConMasPuntosAcumulados_Click(object sender, EventArgs e)
-        {
-            if (this.validarAnio()) { return; }            
+        {            
             Top5Clientes clientes = new Top5Clientes(comboBoxAnio.Text, comboBoxSemestre.Text);
             clientes.Show();
         }
 
         private void buttonDestinosConPasajesCancelados_Click(object sender, EventArgs e)
-        {
-            if (this.validarAnio()) { return; }
+        {            
             MasPasajesCancelados cancelados = new MasPasajesCancelados(comboBoxAnio.Text, comboBoxSemestre.Text);
             cancelados.Show();
         }
 
         private void buttonMicrosDiasFueraServicio_Click(object sender, EventArgs e)
-        {
-            if (this.validarAnio()) { return; }
+        {            
             MicrosDiasFueraServicio microsFueraServicio = new MicrosDiasFueraServicio(comboBoxAnio.Text, comboBoxSemestre.Text);
             microsFueraServicio.Show();
         }
-
-        private bool validarAnio()
-        {
-            bool error = false;
-            if (comboBoxAnio.Text == "")
-            {
-                MessageBox.Show("Debe especificar el año (AAAA)");
-                return error = true;
-            }
-            char[] anio = comboBoxAnio.Text.ToCharArray();
-            if (anio.Length != 4)
-            {
-                MessageBox.Show("El año debe ser de 4 digitos AAAA");
-                error = true;
-            }
-
-            int i;
-            for (i = 0; i < anio.Length; i++)
-            {
-                if (Char.IsLetter(anio.ElementAt(i)))
-                {
-                    MessageBox.Show("ERROR: El formato de año es numérico AAAA. Por ej: 2013");
-                    error = true;
-                    return error;
-                }
-            }
-            return error;
-        }
+               
     }
 }
