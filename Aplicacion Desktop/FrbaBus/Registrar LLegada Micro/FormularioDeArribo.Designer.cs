@@ -35,13 +35,13 @@
             this.labelpatente = new System.Windows.Forms.Label();
             this.labelorigen = new System.Windows.Forms.Label();
             this.labelarribo = new System.Windows.Forms.Label();
-            this.textBoxFechallegada = new System.Windows.Forms.TextBox();
             this.labelhora = new System.Windows.Forms.Label();
             this.buttonAceptar = new System.Windows.Forms.Button();
             this.buttonLimpiar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.hora = new System.Windows.Forms.ComboBox();
             this.minutos = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // textBoxPatente
@@ -104,14 +104,6 @@
             this.labelarribo.TabIndex = 7;
             this.labelarribo.Text = "Ciudad Arribada";
             // 
-            // textBoxFechallegada
-            // 
-            this.textBoxFechallegada.Location = new System.Drawing.Point(14, 46);
-            this.textBoxFechallegada.MaxLength = 10;
-            this.textBoxFechallegada.Name = "textBoxFechallegada";
-            this.textBoxFechallegada.Size = new System.Drawing.Size(154, 20);
-            this.textBoxFechallegada.TabIndex = 8;
-            // 
             // labelhora
             // 
             this.labelhora.AutoSize = true;
@@ -166,18 +158,28 @@
             this.minutos.Size = new System.Drawing.Size(42, 21);
             this.minutos.TabIndex = 17;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 46);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dateTimePicker1.Size = new System.Drawing.Size(166, 20);
+            this.dateTimePicker1.TabIndex = 18;
+            // 
             // FormularioDeArribo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(711, 107);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.minutos);
             this.Controls.Add(this.hora);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.buttonAceptar);
             this.Controls.Add(this.labelhora);
-            this.Controls.Add(this.textBoxFechallegada);
             this.Controls.Add(this.labelarribo);
             this.Controls.Add(this.labelorigen);
             this.Controls.Add(this.labelpatente);
@@ -203,12 +205,12 @@
         private System.Windows.Forms.Label labelpatente;
         private System.Windows.Forms.Label labelorigen;
         private System.Windows.Forms.Label labelarribo;
-        private System.Windows.Forms.TextBox textBoxFechallegada;
         private System.Windows.Forms.Label labelhora;
         private System.Windows.Forms.Button buttonAceptar;
         private System.Windows.Forms.Button buttonLimpiar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox hora;
         private System.Windows.Forms.ComboBox minutos;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

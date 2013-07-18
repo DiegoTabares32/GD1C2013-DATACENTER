@@ -22,7 +22,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
         private void FormularioDeArribo_Load(object sender, EventArgs e)
         {
             //Limpiamos todo
-            this.textBoxFechallegada.Clear();
+            this.dateTimePicker1.ResetText();
             
             this.textBoxPatente.Clear();
             //para que no puedan ingresar texto
@@ -68,44 +68,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
-            //Validaciones        
-            char[] fecha = textBoxFechallegada.Text.ToCharArray();
-            int i;
-            if (fecha.Length != 10)
-            {
-                MessageBox.Show("Formato de fecha inválido. Debe ser AAAA-MM-DD");
-            }
-            else
-            {                
-                for (i = 0; i < 4; i++)
-                {
-                    if (Char.IsLetter(fecha.ElementAt(i)))
-                    {
-                        MessageBox.Show("Formato de fecha inválido. Debe ser AAAA-MM-DD");
-                        return;
-                    }
-                }
-                if ((fecha.ElementAt(4) != '-') || (fecha.ElementAt(7) != '-'))
-                {
-                    MessageBox.Show("Formato de fecha inválido. Debe ser AAAA-MM-DD");
-                }
-                for (i = 5; i < 7; i++)
-                {
-                    if (Char.IsLetter(fecha.ElementAt(i)))
-                    {
-                        MessageBox.Show("Formato de fecha inválido. Debe ser AAAA-MM-DD");
-                        return;
-                    }
-                }
-                for (i = 8; i < 10; i++)
-                {
-                    if (Char.IsLetter(fecha.ElementAt(i)))
-                    {
-                        MessageBox.Show("Formato de fecha inválido. Debe ser AAAA-MM-DD");
-                        return;
-                    }
-                }
-            }                                    
+            //Validaciones                               
             
             if (textBoxPatente.Text == "")
             {
@@ -114,7 +77,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
             }
 
             char[] caracter = textBoxPatente.Text.ToCharArray();
-
+            int i;
             if (caracter.Length != 6)
             {
                 MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
@@ -154,7 +117,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
             }
             //LLENO UNA TABLA CON EL RESULTADO DE LOS VALORES INGRESADOS Y 
             //LOS AGREGO EN LA DATAGRID DE REGISTRO LLEGADA MICRO
-            string fechayhora = textBoxFechallegada.Text + " " + hora.Text +':'+ minutos.Text;
+            string fechayhora = dateTimePicker1.Text + " " + hora.Text +':'+ minutos.Text;
             string patente = textBoxPatente.Text;
             string origen = comboBoxOrigen.Text;
             string destino = comboBoxArribo.Text;
