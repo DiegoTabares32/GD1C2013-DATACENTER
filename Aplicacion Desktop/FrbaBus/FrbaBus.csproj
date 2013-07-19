@@ -129,6 +129,12 @@
     <Compile Include="Compra de Pasajes\Form_Comprador.Designer.cs">
       <DependentUpon>Form_Comprador.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra de Pasajes\Form_compra_Efectivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_compra_Efectivo.Designer.cs">
+      <DependentUpon>Form_compra_Efectivo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra de Pasajes\Form_encomienda.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de Pasajes\Form_Comprador.resx">
       <DependentUpon>Form_Comprador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\Form_compra_Efectivo.resx">
+      <DependentUpon>Form_compra_Efectivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de Pasajes\Form_encomienda.resx">
       <DependentUpon>Form_encomienda.cs</DependentUpon>

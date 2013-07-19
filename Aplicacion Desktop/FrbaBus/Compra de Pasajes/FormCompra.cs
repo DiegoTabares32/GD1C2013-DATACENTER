@@ -17,6 +17,7 @@ namespace FrbaBus.Compra_de_Pasajes
         public string cod_viaje_pasaje="";
         public string cod_viaje_encomienda = "";
         public char tipo_viaje; //indica si el viaje es por encomienda o pasaje 'E' 'P' solo para seleccionar viaje 
+        public bool compra_admin = false;
         decimal total_compra;
         string cod_compra;
         
@@ -370,14 +371,50 @@ namespace FrbaBus.Compra_de_Pasajes
                 return;
             }
             this.total_tbox.Text = total_compra.ToString("N2");
-            Form_Comprador comprador = new Form_Comprador(this);
-            comprador.ShowDialog();
 
-            //si cerraron el formulario de compras abortamos transaccion
-            if (!comprador.transaccion_compra_ok)
+            if (this.compra_admin)
             {
-                this.reset_formulario();
-                return;
+                //Si es administrador puede comprar en Efectivo o Tarjeta
+
+                DialogResult respuesta = MessageBox.Show("¿Desea comprar en efectivo?", "Compra Administrador", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (respuesta == DialogResult.Yes)
+                {
+                    Form_compra_Efectivo compra_efectivo = new Form_compra_Efectivo(this);
+                    compra_efectivo.ShowDialog();
+
+                    //si cerraron el formulario de compras abortamos transaccion
+                    if (!compra_efectivo.transaccion_compra_ok)
+                    {
+                        this.reset_formulario();
+                        return;
+                    }
+                }
+                else
+                {
+                    //compra con tarjeta
+                    Form_Comprador comprador = new Form_Comprador(this);
+                    comprador.ShowDialog();
+
+                    if (!comprador.transaccion_compra_ok)
+                    {
+                        this.reset_formulario();
+                        return;
+                    }
+                }
+
+            }
+            else
+            {
+                //Si no es Administrador compra con Tarjeta sin otra posibilidad
+                Form_Comprador comprador = new Form_Comprador(this);
+                comprador.ShowDialog();
+
+                //si cerraron el formulario de compras abortamos transaccion
+                if (!comprador.transaccion_compra_ok)
+                {
+                    this.reset_formulario();
+                    return;
+                }
             }
             
             /*--------------Insertamos y Mostramos Compra/Pasaje/Encomienda------------------*/

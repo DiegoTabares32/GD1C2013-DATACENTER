@@ -376,7 +376,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button login_boton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button select_boton;
         private System.Windows.Forms.Label label2;
@@ -396,7 +395,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox total_tbox;
         private System.Windows.Forms.Button aceptar_boton;
         private System.Windows.Forms.Button cancelar_boton;
         private System.Windows.Forms.Button carg_encom_boton;
@@ -406,5 +404,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        public System.Windows.Forms.Button login_boton;
+        public System.Windows.Forms.TextBox total_tbox;
     }
 }
