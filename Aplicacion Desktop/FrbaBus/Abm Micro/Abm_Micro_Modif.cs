@@ -51,10 +51,14 @@ namespace FrbaBus.Abm_Micro
                     return;
                 }
             }
+            //preparar patente para poder registrar nuevo micro
+            string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
+            string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
+            string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-            if (funciones.existePatente(textBoxPatente.Text))
+            if (!funciones.existePatente(nroPatente))
             {
-                MessageBox.Show("La patente ingresada ya existe en la Base de Datos");
+                MessageBox.Show("La patente ingresada no existe en la Base de Datos");
                 return;
             }
 
@@ -65,12 +69,7 @@ namespace FrbaBus.Abm_Micro
             }
 
             //Chequea si existen viajes ya asignados a ese micro
-
-            //preparar patente para poder registrar nuevo micro
-            string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
-            string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
-            string nroPatente = primerPartePatente + "-" + segundaPartePatente;
-
+                        
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query3 = "SELECT * FROM DATACENTER.EstadoMicro where est_mic_patente='" + nroPatente + "'";
@@ -128,6 +127,33 @@ namespace FrbaBus.Abm_Micro
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBoxPatente_KeyPress(object sender, KeyPressEventArgs e)
+        {            
+            //Para obligar a que sólo se introduzcan letras 
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+                if (Char.IsDigit(e.KeyChar)) //permitir teclas de control como retroceso 
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Char.IsControl(e.KeyChar))
+                    {
+                        e.Handled = false;
+                    }
+                    else
+                    {
+                        //el resto de teclas pulsadas se desactivan 
+                        e.Handled = true;
+                    }
+                }
+        
         }
     }
 }

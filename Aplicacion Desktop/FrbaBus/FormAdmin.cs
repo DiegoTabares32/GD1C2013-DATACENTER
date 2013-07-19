@@ -10,6 +10,8 @@ using FrbaBus.Abm_Rol;
 using FrbaBus.Compra_de_Pasajes;
 using FrbaBus.Registrar_LLegada_Micro;
 using FrbaBus.Abm_Micro;
+using FrbaBus.Canc_Dev_de_Pas_Enc;
+using FrbaBus.Canje_de_Ptos;
 
 namespace FrbaBus
 {
@@ -56,6 +58,30 @@ namespace FrbaBus
         {
             Abm_Micro_Alta altaMicro = new Abm_Micro_Alta();
             altaMicro.Show();
+        }
+
+        private void microToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Abm_Micro_Modif modifMicro = new Abm_Micro_Modif();
+            modifMicro.Show();
+        }
+
+        private void microToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            Abm_Micro_Baja bajaMicro = new Abm_Micro_Baja();
+            bajaMicro.Show();
+        }
+
+        private void registrarDevoluciónCancelaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CancelDevol cancelDevol = new CancelDevol();
+            cancelDevol.Show();
+        }
+
+        private void canjePremioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CanjeDePuntos canje = new CanjeDePuntos();
+            canje.Show();
         }
 
 

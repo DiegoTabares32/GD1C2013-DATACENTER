@@ -99,5 +99,31 @@ namespace FrbaBus.Abm_Micro
     
             this.Close();
         }
+
+        private void textBoxPatente_KeyPress(object sender, KeyPressEventArgs e)
+        {        
+            //Para obligar a que sólo se introduzcan letras 
+            if (Char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+                if (Char.IsDigit(e.KeyChar)) //permitir teclas de control como retroceso 
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    if (Char.IsControl(e.KeyChar))
+                    {
+                        e.Handled = false;
+                    }
+                    else
+                    {
+                        //el resto de teclas pulsadas se desactivan 
+                        e.Handled = true;
+                    }
+                }
+        }
     }
 }

@@ -64,6 +64,7 @@
             this.textBoxPatente.Name = "textBoxPatente";
             this.textBoxPatente.Size = new System.Drawing.Size(136, 20);
             this.textBoxPatente.TabIndex = 2;
+            this.textBoxPatente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPatente_KeyPress);
             // 
             // dateTimePickerFechaReingreso
             // 
