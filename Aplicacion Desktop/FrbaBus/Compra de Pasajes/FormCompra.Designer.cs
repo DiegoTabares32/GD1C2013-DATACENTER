@@ -119,6 +119,7 @@
             // 
             // ciu_orig_list
             // 
+            this.ciu_orig_list.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciu_orig_list.FormattingEnabled = true;
             this.ciu_orig_list.Location = new System.Drawing.Point(213, 140);
             this.ciu_orig_list.Name = "ciu_orig_list";
@@ -127,6 +128,7 @@
             // 
             // ciu_dest_list
             // 
+            this.ciu_dest_list.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ciu_dest_list.FormattingEnabled = true;
             this.ciu_dest_list.Location = new System.Drawing.Point(213, 179);
             this.ciu_dest_list.Name = "ciu_dest_list";

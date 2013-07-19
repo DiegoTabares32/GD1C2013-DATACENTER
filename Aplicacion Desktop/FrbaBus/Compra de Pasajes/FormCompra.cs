@@ -171,7 +171,7 @@ namespace FrbaBus.Compra_de_Pasajes
                             else
                                 sexo = "F";
 
-                            if (pasajero.pensionado_checkB.Checked | func.es_jubilado(pasajero.fec_nac_Tbox.Text, sexo))
+                            if (pasajero.pensionado_checkB.Checked | func.es_jubilado(pasajero.fecNacDateTimeP.Text, sexo))
                                 pasajero.costo_pasaje = pasajero.costo_pasaje / 2; //aplico descuento del 50%
 
                             if (cant_pasajes - 1 != i)
@@ -421,7 +421,7 @@ namespace FrbaBus.Compra_de_Pasajes
             stored_procedures stored_proc = new stored_procedures();
             
             this.cod_compra = stored_proc.insert_compra(this.dni_comprador, this.tipo_tarjeta, this.CantPasaj_numericUpDown.Value.ToString(), this.cant_totKg_tbox.Text, this.total_compra);
-            MessageBox.Show("Compra registrada Correctamente. Codigo de Compra: "+this.cod_compra+" DNI del comprador:"+this.dni_comprador);
+            MessageBox.Show("Compra registrada Correctamente. \n Codigo de Compra: " + this.cod_compra + "\n DNI del comprador:" + this.dni_comprador + "\n Total Compra $"+this.total_tbox.Text, "Compra");
 
             if (listas_pasajeros.Count > 0)
             {
@@ -429,7 +429,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 foreach (cargar_pasajero pasajero in listas_pasajeros)
                 {
                     cod_pasaje = stored_proc.insert_pasaje(pasajero.butNro_tbox.Text, stored_proc.get_micro_patente(pasajero.viaje_cod), pasajero.DNI_Tbox.Text, this.cod_compra, pasajero.costo_pasaje, pasajero.viaje_cod);
-                    MessageBox.Show("Codigo de Pasaje: " + cod_pasaje + " Nro DNI pasajero: " + pasajero.DNI_Tbox.Text + "Nombre: " + pasajero.nombre_Tbox.Text + "Apellido: " + pasajero.apell_Tbox.Text + " Butaca Nro: " + pasajero.butNro_tbox.Text + "Piso: " + pasajero.piso_tbox.Text + "Tipo: " + pasajero.pos_but_tbox.Text);
+                    MessageBox.Show("Pasaje Registado Correctamente. \n Codigo de Pasaje: " + cod_pasaje + "\n Nro DNI pasajero: " + pasajero.DNI_Tbox.Text + "\n Nombre: " + pasajero.nombre_Tbox.Text + "\n Apellido: " + pasajero.apell_Tbox.Text + "\n Butaca Nro: " + pasajero.butNro_tbox.Text + "\n Piso: " + pasajero.piso_tbox.Text + "\n Tipo: " + pasajero.pos_but_tbox.Text, "Pasaje");
                 }
             }
 
@@ -439,7 +439,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 foreach (Form_encomienda encomienda in listas_encomiendas)
                 {
                     cod_encomienda = stored_proc.insert_paquete(this.cod_compra, Convert.ToDecimal(encomienda.precio_encomiendaTbox.Text), encomienda.peso_encom_tbox.Text, encomienda.viaje_cod);
-                    MessageBox.Show("Codigo del Paquete: " + cod_encomienda + " Nro DNI del Remitente: " + encomienda.DNI_Tbox.Text + "Nombre: " + encomienda.nombre_Tbox.Text + "Apellido: " + encomienda.apell_Tbox.Text + "Peso del Paquete: "+ encomienda.peso_encom_tbox.Text+" kg");
+                    MessageBox.Show("Paquete Registrado Correctamente \n Codigo del Paquete: " + cod_encomienda + "\n Nro DNI del Remitente: " + encomienda.DNI_Tbox.Text + "\n Nombre: " + encomienda.nombre_Tbox.Text + "\n Apellido: " + encomienda.apell_Tbox.Text + "\n Peso del Paquete: " + encomienda.peso_encom_tbox.Text + " kg", "Paquete");
                 }
             }
             

@@ -45,7 +45,6 @@
             this.mail_Tbox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.fec_nac_Tbox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.mascul_radioBut = new System.Windows.Forms.RadioButton();
             this.fem_radButton = new System.Windows.Forms.RadioButton();
@@ -60,6 +59,7 @@
             this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
             this.jubilado_checkB = new System.Windows.Forms.CheckBox();
             this.pensionado_checkB = new System.Windows.Forms.CheckBox();
+            this.fecNacDateTimeP = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -210,15 +210,6 @@
             this.label9.TabIndex = 16;
             this.label9.Text = "Mail:";
             // 
-            // fec_nac_Tbox
-            // 
-            this.fec_nac_Tbox.Location = new System.Drawing.Point(138, 257);
-            this.fec_nac_Tbox.MaxLength = 10;
-            this.fec_nac_Tbox.Name = "fec_nac_Tbox";
-            this.fec_nac_Tbox.Size = new System.Drawing.Size(138, 20);
-            this.fec_nac_Tbox.TabIndex = 17;
-            this.fec_nac_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fec_nac_Tbox_KeyPress);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -351,11 +342,21 @@
             this.pensionado_checkB.Text = "Pensionado";
             this.pensionado_checkB.UseVisualStyleBackColor = true;
             // 
+            // fecNacDateTimeP
+            // 
+            this.fecNacDateTimeP.CustomFormat = "dd/MM/yyyy";
+            this.fecNacDateTimeP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.fecNacDateTimeP.Location = new System.Drawing.Point(160, 257);
+            this.fecNacDateTimeP.Name = "fecNacDateTimeP";
+            this.fecNacDateTimeP.Size = new System.Drawing.Size(96, 20);
+            this.fecNacDateTimeP.TabIndex = 34;
+            // 
             // cargar_pasajero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(512, 538);
+            this.Controls.Add(this.fecNacDateTimeP);
             this.Controls.Add(this.pensionado_checkB);
             this.Controls.Add(this.jubilado_checkB);
             this.Controls.Add(this.discapacitado_checkB);
@@ -370,7 +371,6 @@
             this.Controls.Add(this.fem_radButton);
             this.Controls.Add(this.mascul_radioBut);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.fec_nac_Tbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.mail_Tbox);
@@ -415,7 +415,6 @@
         public System.Windows.Forms.TextBox dir_Tbox;
         public System.Windows.Forms.TextBox tel_Tbox;
         public System.Windows.Forms.TextBox mail_Tbox;
-        public System.Windows.Forms.TextBox fec_nac_Tbox;
         public System.Windows.Forms.RadioButton mascul_radioBut;
         public System.Windows.Forms.RadioButton fem_radButton;
         private System.Windows.Forms.Label label11;
@@ -430,5 +429,6 @@
         public System.Windows.Forms.CheckBox discapacitado_checkB;
         public System.Windows.Forms.CheckBox jubilado_checkB;
         public System.Windows.Forms.CheckBox pensionado_checkB;
+        public System.Windows.Forms.DateTimePicker fecNacDateTimeP;
     }
 }

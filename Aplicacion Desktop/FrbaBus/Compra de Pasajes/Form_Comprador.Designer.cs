@@ -32,7 +32,6 @@
             this.fem_radButton = new System.Windows.Forms.RadioButton();
             this.mascul_radioBut = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
-            this.fec_nac_Tbox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.mail_Tbox = new System.Windows.Forms.TextBox();
             this.tel_Tbox = new System.Windows.Forms.TextBox();
@@ -64,7 +63,8 @@
             this.discapacitado_checkB = new System.Windows.Forms.CheckBox();
             this.jubilado_checkB = new System.Windows.Forms.CheckBox();
             this.pensionado_checkB = new System.Windows.Forms.CheckBox();
-            this.fech_venc_tbox = new System.Windows.Forms.TextBox();
+            this.fecNacDateTimeP = new System.Windows.Forms.DateTimePicker();
+            this.fecVencDateTimeP = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,15 +107,6 @@
             this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 66;
             this.label10.Text = "Sexo (*):";
-            // 
-            // fec_nac_Tbox
-            // 
-            this.fec_nac_Tbox.Location = new System.Drawing.Point(143, 255);
-            this.fec_nac_Tbox.MaxLength = 10;
-            this.fec_nac_Tbox.Name = "fec_nac_Tbox";
-            this.fec_nac_Tbox.Size = new System.Drawing.Size(138, 20);
-            this.fec_nac_Tbox.TabIndex = 65;
-            this.fec_nac_Tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fec_nac_Tbox_KeyPress);
             // 
             // label9
             // 
@@ -283,6 +274,7 @@
             // 
             // tipoTarj_comboBox
             // 
+            this.tipoTarj_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tipoTarj_comboBox.FormattingEnabled = true;
             this.tipoTarj_comboBox.Location = new System.Drawing.Point(220, 522);
             this.tipoTarj_comboBox.Name = "tipoTarj_comboBox";
@@ -356,7 +348,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(235, 482);
+            this.label17.Location = new System.Drawing.Point(217, 482);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(128, 13);
             this.label17.TabIndex = 83;
@@ -403,20 +395,31 @@
             this.pensionado_checkB.Text = "Pensionado";
             this.pensionado_checkB.UseVisualStyleBackColor = true;
             // 
-            // fech_venc_tbox
+            // fecNacDateTimeP
             // 
-            this.fech_venc_tbox.Location = new System.Drawing.Point(220, 459);
-            this.fech_venc_tbox.MaxLength = 4;
-            this.fech_venc_tbox.Name = "fech_venc_tbox";
-            this.fech_venc_tbox.Size = new System.Drawing.Size(145, 20);
-            this.fech_venc_tbox.TabIndex = 75;
-            this.fech_venc_tbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fech_venc_tbox_KeyPress);
+            this.fecNacDateTimeP.CustomFormat = "dd/MM/yyyy";
+            this.fecNacDateTimeP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.fecNacDateTimeP.Location = new System.Drawing.Point(147, 255);
+            this.fecNacDateTimeP.Name = "fecNacDateTimeP";
+            this.fecNacDateTimeP.Size = new System.Drawing.Size(96, 20);
+            this.fecNacDateTimeP.TabIndex = 116;
+            // 
+            // fecVencDateTimeP
+            // 
+            this.fecVencDateTimeP.CustomFormat = "MM-yy";
+            this.fecVencDateTimeP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.fecVencDateTimeP.Location = new System.Drawing.Point(218, 459);
+            this.fecVencDateTimeP.Name = "fecVencDateTimeP";
+            this.fecVencDateTimeP.Size = new System.Drawing.Size(73, 20);
+            this.fecVencDateTimeP.TabIndex = 117;
             // 
             // Form_Comprador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 725);
+            this.Controls.Add(this.fecVencDateTimeP);
+            this.Controls.Add(this.fecNacDateTimeP);
             this.Controls.Add(this.pensionado_checkB);
             this.Controls.Add(this.jubilado_checkB);
             this.Controls.Add(this.discapacitado_checkB);
@@ -429,7 +432,6 @@
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.tipoTarj_comboBox);
-            this.Controls.Add(this.fech_venc_tbox);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.cod_Seg_tbox);
             this.Controls.Add(this.label12);
@@ -439,7 +441,6 @@
             this.Controls.Add(this.fem_radButton);
             this.Controls.Add(this.mascul_radioBut);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.fec_nac_Tbox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.mail_Tbox);
             this.Controls.Add(this.tel_Tbox);
@@ -470,7 +471,6 @@
         public System.Windows.Forms.RadioButton fem_radButton;
         public System.Windows.Forms.RadioButton mascul_radioBut;
         private System.Windows.Forms.Label label10;
-        public System.Windows.Forms.TextBox fec_nac_Tbox;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.TextBox mail_Tbox;
         public System.Windows.Forms.TextBox tel_Tbox;
@@ -502,6 +502,7 @@
         public System.Windows.Forms.CheckBox discapacitado_checkB;
         public System.Windows.Forms.CheckBox jubilado_checkB;
         public System.Windows.Forms.CheckBox pensionado_checkB;
-        private System.Windows.Forms.TextBox fech_venc_tbox;
+        public System.Windows.Forms.DateTimePicker fecNacDateTimeP;
+        private System.Windows.Forms.DateTimePicker fecVencDateTimeP;
     }
 }

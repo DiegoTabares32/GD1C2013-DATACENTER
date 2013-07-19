@@ -30,7 +30,7 @@ namespace FrbaBus.Compra_de_Pasajes
             this.dir_Tbox.Clear();
             this.tel_Tbox.Clear();
             this.mail_Tbox.Clear();
-            this.fec_nac_Tbox.Clear();
+            this.fecNacDateTimeP.ResetText();
             this.mascul_radioBut.Checked = false;
             this.fem_radButton.Checked = false;
             this.DNI_Tbox.Enabled = true;
@@ -80,27 +80,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
-            if (this.fec_nac_Tbox.Text == "")
-            {
-                MessageBox.Show("Debe Ingresar Fecha de Nacimiento", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
-            }
-
-
-            if (this.fec_nac_Tbox.Text.Length >= 6)
-            {
-                if (this.fec_nac_Tbox.Text[2] != '/' | this.fec_nac_Tbox.Text[5] != '/')
-                {
-                    MessageBox.Show("Error en el formato de fecha. Formato obligatorio: dd/mm/aaaaa", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    error = true;
-
-                }
-            }
-            else
-            {
-                MessageBox.Show("Error en el formato de fecha. Formato obligatorio: dd/mm/aaaaa", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
-            }
+           
 
             if (!(this.mascul_radioBut.Checked | this.fem_radButton.Checked))
             {
@@ -130,7 +110,7 @@ namespace FrbaBus.Compra_de_Pasajes
             //verificamos condicion
             string condicion;
             funciones func = new funciones();
-            if (this.pensionado_checkB.Checked | func.es_jubilado(this.fec_nac_Tbox.Text, sexo))
+            if (this.pensionado_checkB.Checked | func.es_jubilado(this.fecNacDateTimeP.Text, sexo))
             {
                 if (this.pensionado_checkB.Checked)
                     condicion = "P";
@@ -146,13 +126,13 @@ namespace FrbaBus.Compra_de_Pasajes
             if (this.cliente_existente)
             {
 
-                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado, condicion);
+                stored_proc.update_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fecNacDateTimeP.Text, sexo, discapacitado, condicion);
 
             }
             else
             {
                 //Insertamos Cliente
-                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fec_nac_Tbox.Text, sexo, discapacitado, condicion);
+                stored_proc.insert_Cliente(this.DNI_Tbox.Text, this.nombre_Tbox.Text, this.apell_Tbox.Text, this.dir_Tbox.Text, this.tel_Tbox.Text, this.mail_Tbox.Text, this.fecNacDateTimeP.Text, sexo, discapacitado, condicion);
 
             }
 
@@ -184,7 +164,7 @@ namespace FrbaBus.Compra_de_Pasajes
                     this.dir_Tbox.Text = table_campos_cli.Rows[0].ItemArray[2].ToString();
                     this.tel_Tbox.Text = table_campos_cli.Rows[0].ItemArray[3].ToString();
                     this.mail_Tbox.Text = table_campos_cli.Rows[0].ItemArray[4].ToString();
-                    this.fec_nac_Tbox.Text = table_campos_cli.Rows[0].ItemArray[5].ToString().Substring(0, 10);
+                    this.fecNacDateTimeP.Text= table_campos_cli.Rows[0].ItemArray[5].ToString();
 
                     //controlo si esta ingresado el sexo
                     if (table_campos_cli.Rows[0].ItemArray[6].ToString() == "M")
@@ -254,6 +234,7 @@ namespace FrbaBus.Compra_de_Pasajes
             if (!this.transaccion_compra_ok)
                 MessageBox.Show("Transacción Abortada ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
 
 
 
