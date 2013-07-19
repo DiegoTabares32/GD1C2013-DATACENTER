@@ -1270,3 +1270,105 @@ begin
 end
 
 GO
+
+/*-------------------------------------------------------------------*/
+/*-------------------------STORED PROCEDURE (MATI)--------------------------*/
+CREATE PROCEDURE DATACENTER.insert_recorrido @cod numeric(18,0), @orig nvarchar(255), @dest nvarchar(255), @serv int, @pr_pas numeric(18,2), @pr_enco numeric(18,2)
+AS
+BEGIN
+  DECLARE @est CHAR
+  SET @est = 'H'
+  INSERT INTO DATACENTER.Recorrido
+  VALUES (@cod, @serv, @orig, @dest, @pr_pas, @pr_enco, @est)
+END
+GO
+
+/*-------------------------------------------------------------------*/
+/*-------------------------STORED PROCEDURE (MATI)--------------------------*/
+
+CREATE PROCEDURE DATACENTER.update_recorrido @cod numeric(18,0), @orig nvarchar(255), @dest nvarchar(255), @serv int, @pr_pas numeric(18,2), @pr_enco numeric(18,2)
+AS
+BEGIN
+
+  DECLARE @precio_pas NUMERIC(18,2),
+          @precio_enco NUMERIC(18,2)
+
+  UPDATE DATACENTER.Recorrido
+  SET reco_origen = @orig, reco_destino = @dest, reco_serv_id = @serv
+  WHERE reco_cod = @cod
+
+  SELECT @precio_pas = reco_precio_base_pasaje, @precio_enco = reco_precio_base_kg
+  FROM DATACENTER.Recorrido
+  WHERE reco_cod = @cod
+  
+  IF @precio_pas <> @pr_pas
+  UPDATE DATACENTER.Recorrido
+  SET reco_precio_base_pasaje = @pr_pas
+  WHERE reco_cod = @cod
+  
+  IF @precio_enco <> @pr_enco
+  UPDATE DATACENTER.Recorrido
+  SET reco_precio_base_kg = @pr_enco
+  WHERE reco_cod = @cod
+  
+END
+GO
+
+/*-------------------------------------------------------------------*/
+/*-------------------------STORED PROCEDURE (MATI)--------------------------*/
+CREATE PROCEDURE DATACENTER.update_estado_reco @cod NUMERIC(18,0), @estado_reco CHAR
+AS
+BEGIN
+
+  UPDATE DATACENTER.Recorrido
+  SET reco_estado = @estado_reco
+  WHERE reco_cod = @cod
+
+END
+GO
+
+/*-------------------------------------------------------------------*/
+/*-------------------------STORED PROCEDURE (MATI)--------------------------*/
+CREATE PROCEDURE DATACENTER.insert_viaje @fecha_sal DATETIME, @fecha_lleg DATETIME, @cod_reco NUMERIC(18,0), @patente NVARCHAR (255)
+AS
+BEGIN
+
+INSERT INTO DATACENTER.Viaje (viaj_mic_patente, viaj_reco_cod, viaj_fecha_salida, viaj_fecha_lleg_estimada)
+VALUES (@patente, @cod_reco, @fecha_sal, @fecha_lleg)
+
+END
+GO
+
+/*-------------------------------------------------------------------*/
+/*-------------------------TRIGGER (MATI)--------------------------*/
+CREATE TRIGGER DATACENTER.act_precio_reco
+ON DATACENTER.Recorrido
+AFTER UPDATE
+AS
+BEGIN
+
+  DECLARE @cod NUMERIC (18,0)
+  DECLARE @origen NVARCHAR(255)
+  DECLARE @destino NVARCHAR (255)
+  DECLARE @precio_pasa NUMERIC (18,2)
+  DECLARE @precio_enco NUMERIC (18,2)
+
+  SELECT @cod = reco_cod, @origen = reco_origen, @destino = reco_destino, @precio_pasa = reco_precio_base_pasaje, @precio_enco = reco_precio_base_kg
+  FROM inserted
+
+  IF UPDATE(reco_precio_base_pasaje)
+  BEGIN
+    UPDATE DATACENTER.Recorrido
+    SET reco_precio_base_pasaje = @precio_pasa
+    WHERE reco_origen = @origen AND reco_destino = @destino AND reco_cod <> @cod 
+  END
+  
+  IF UPDATE(reco_precio_base_kg)
+  BEGIN
+    UPDATE DATACENTER.Recorrido
+    SET reco_precio_base_kg = @precio_enco
+    WHERE reco_origen = @origen AND reco_destino = @destino AND reco_cod <> @cod 
+  END
+
+END
+GO
