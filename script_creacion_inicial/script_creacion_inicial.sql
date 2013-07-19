@@ -592,14 +592,14 @@ GO
 CREATE PROCEDURE DATACENTER.get_listado_viaje @ciu_origen nvarchar(255), @ciu_destino nvarchar(255), @fecha_salida nvarchar(255)
 AS
 BEGIN
-SELECT viaj_id,viaj_fecha_salida, reco_origen, reco_destino,serv_tipo, mic_cant_butacas -
+SELECT viaj_id,viaj_fecha_salida, reco_origen, reco_destino,serv_tipo, mic_cant_butacas + 1 -
 (
 	SELECT COUNT(pas_viaj_id)
 	FROM DATACENTER.Pasaje
 	WHERE pas_viaj_id = viaj_id
 ) AS butacas_Disponibles, mic_cant_kg_disponibles-
 (
-	SELECT SUM(paq_kg)
+	SELECT isnull(SUM(paq_kg),0)
 	FROM DATACENTER.Paquete
 	WHERE paq_viaj_id = viaj_id
 ) AS kg_Disponibles
@@ -610,7 +610,7 @@ WHERE reco_origen = @ciu_origen AND reco_destino= @ciu_destino
 	  AND DAY(viaj_fecha_salida) = DAY(@fecha_salida)
 	  AND MONTH(viaj_fecha_salida) = MONTH(@fecha_salida)
 	  AND YEAR(viaj_fecha_salida) = YEAR(@fecha_salida)
-	  
+	   
 END
 GO
 
@@ -646,19 +646,7 @@ GO
 CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5), @condicion nvarchar(5)
 AS
 BEGIN
-	
-/*	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 65) AND @condicion <> 'P' AND @cli_sexo = 'M')
-		BEGIN
-			SET @condicion = 'J'
-		END
-	
-	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 60) AND @condicion <> 'P' AND @cli_sexo = 'F')
-		BEGIN
-			SET @condicion = 'J'
-		END*/
-		
-					
-	 
+
 	INSERT DATACENTER.Cliente (cli_dni, cli_rol_id, cli_nombre, cli_apellido, cli_dir, cli_telefono, cli_mail, cli_fecha_nac, cli_puntos_acum,  cli_sexo, cli_discapacitado)
 	VALUES (@cli_dni,2,@cli_nombre,@cli_apellido, @cli_dir, @cli_telefono,@cli_mail, convert(datetime,@cli_fecha_nac), 0,convert (char, @cli_sexo), CONVERT(char, @discapacitado))
 	
@@ -668,16 +656,6 @@ GO
 CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5), @condicion nvarchar (5)
 AS
 BEGIN
-/*
-	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 65) AND @condicion <> 'P' AND @cli_sexo = 'M')
-		BEGIN
-			SET @condicion = 'J'
-		END
-	
-	IF ((DATEDIFF(YY, convert(datetime,@cli_fecha_nac), GETDATE())>= 60) AND @condicion <> 'P' AND @cli_sexo = 'F')
-		BEGIN
-			SET @condicion = 'J'
-		END*/
 	
 	UPDATE DATACENTER.Cliente
 	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo), cli_discapacitado = convert (char, @discapacitado), cli_condicion = convert(char, @condicion)
@@ -697,9 +675,9 @@ GO
 CREATE PROCEDURE DATACENTER.get_kg_disponibles @viaj_id int
 AS
 BEGIN
-	SELECT mic_cant_kg_disponibles
-	FROM DATACENTER.Viaje JOIN DATACENTER.Micro ON (viaj_mic_patente=mic_patente)
-	WHERE viaj_id = @viaj_id
+	SELECT mic_cant_kg_disponibles - (select SUM (paq_kg) from DATACENTER.Paquete where paq_viaj_id = @viaj_id)
+	FROM  DATACENTER.Viaje JOIN DATACENTER.Micro ON (mic_patente=viaj_mic_patente)
+	WHERE viaj_id= @viaj_id
 END
 GO
 

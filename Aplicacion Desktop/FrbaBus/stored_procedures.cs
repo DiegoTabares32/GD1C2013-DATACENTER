@@ -62,7 +62,7 @@ namespace FrbaBus
 
         public DataTable get_listado_viaje(string ciu_origen, string ciu_destino, string fecha_salida)
         {
-            query = "EXECUTE DATACENTER.get_listado_viaje '" + ciu_origen + "','" + ciu_destino + "','" + fecha_salida+"'";
+            query = "EXECUTE DATACENTER.get_listado_viaje '" + ciu_origen + "','" + ciu_destino + "','" + fecha_salida + "'";
             return connect.execute_query(query);
         }
 
@@ -106,12 +106,12 @@ namespace FrbaBus
             return tabl_porc.Rows[0].ItemArray[0].ToString();
         }
 
-        public Single get_kg_disponibles(string viaj_id)
+        public int get_kg_disponibles(string viaj_id)
         {
             connection conexion = new connection();
             string query = "EXECUTE DATACENTER.get_kg_disponibles " + viaj_id;
             DataTable tabl_kg_disp = conexion.execute_query(query);
-            return Convert.ToSingle(tabl_kg_disp.Rows[0].ItemArray[0].ToString());
+            return Convert.ToInt16(tabl_kg_disp.Rows[0].ItemArray[0].ToString());
         }
 
         public char check_tipo_tarjeta(string tipo_id)

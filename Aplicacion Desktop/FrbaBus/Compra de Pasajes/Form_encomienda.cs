@@ -15,6 +15,8 @@ namespace FrbaBus.Compra_de_Pasajes
         public List<Form_encomienda> listas_encomienda;
         bool cliente_existente = false;
         public string cod_encomienda = "";
+        public bool transacc_encomienda_ok=false;
+        bool peso_validado = false;
 
         public Form_encomienda(string viaje_cod, List<Form_encomienda> listas_encomienda)
         {
@@ -37,6 +39,10 @@ namespace FrbaBus.Compra_de_Pasajes
             this.DNI_Tbox.Enabled = true;
             this.peso_encom_tbox.Clear();
             this.peso_encom_tbox.Enabled = true; ;
+            this.jubilado_checkB.Checked = false;
+            this.discapacitado_checkB.Checked = false;
+            this.pensionado_checkB.Checked = false;
+            this.peso_validado = false;
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -46,13 +52,15 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void check_peso_encom_boton_Click(object sender, EventArgs e)
         {
-            if (this.peso_encom_tbox.Text == "0")
+            if (this.peso_encom_tbox.Text == "0" | this.peso_encom_tbox.Text == "")
             {
                 MessageBox.Show("Debe ingresar un Peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             int kg_a_ocupar = Convert.ToInt16(this.peso_encom_tbox.Text); //inicializo con peso actual
+            
+            //calculo peso de las encomiendas implicadas en la compra más el peso de la encomienda actual
             foreach (Form_encomienda encomienda in this.listas_encomienda)
             {
                 if (this.viaje_cod == encomienda.viaje_cod)
@@ -62,15 +70,18 @@ namespace FrbaBus.Compra_de_Pasajes
 
             //hacemos la diferencia con el peso disponible para ver si es posible enviar encomienda
             stored_procedures stored_proc = new stored_procedures();
-            if ((stored_proc.get_kg_disponibles(this.viaje_cod) - kg_a_ocupar) >= 0)
+            int kg_ocupados = stored_proc.get_kg_disponibles(this.viaje_cod);
+            if (( kg_ocupados - kg_a_ocupar) >= 0)
             {
                 MessageBox.Show("Se puede enviar Encomienda con este Peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.precio_encomiendaTbox.Text = stored_proc.get_costo_encomienda(this.viaje_cod, this.peso_encom_tbox.Text);
                 this.peso_encom_tbox.Enabled = false;
+                this.peso_validado = true;
             }
             else
             {
                 MessageBox.Show("El peso de la Encomienda supera los KG disponibles del micro, Imposible enviar Encomienda", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.refrescar();
             }
 
 
@@ -139,12 +150,24 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
+            if (this.peso_encom_tbox.Text == "0" | this.peso_encom_tbox.Text == "")
+            {
+                MessageBox.Show("Debe Ingresar peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+
+            if (!this.peso_validado)
+            {
+                MessageBox.Show("Debe Validar peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
 
             if (error)
             {
                 this.refrescar();
                 return;
             }
+
 
             stored_procedures stored_proc = new stored_procedures();
             string sexo;
@@ -187,6 +210,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             }
 
+            this.transacc_encomienda_ok = true;
             this.Close();
 
         }
@@ -222,7 +246,7 @@ namespace FrbaBus.Compra_de_Pasajes
                         this.fem_radButton.Checked = true;
 
                     //controlamos si esta seteado el campo discapacitado
-                    MessageBox.Show(table_campos_cli.Rows[0].ItemArray[7].ToString());
+
                     if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
                     {
                         this.discapacitado_checkB.Checked = true;
@@ -286,6 +310,15 @@ namespace FrbaBus.Compra_de_Pasajes
                 e.Handled = false;
             else
                 e.Handled = true;
+        }
+
+        private void Form_encomienda_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!transacc_encomienda_ok)
+            {
+                MessageBox.Show("Transacción Cancelada", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.transacc_encomienda_ok = false;
+            }
         }
 
   

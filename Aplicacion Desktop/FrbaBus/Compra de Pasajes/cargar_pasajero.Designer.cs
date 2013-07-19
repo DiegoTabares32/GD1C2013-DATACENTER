@@ -390,6 +390,7 @@
             this.Controls.Add(this.label1);
             this.Name = "cargar_pasajero";
             this.Text = "Pasajero";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.cargar_pasajero_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

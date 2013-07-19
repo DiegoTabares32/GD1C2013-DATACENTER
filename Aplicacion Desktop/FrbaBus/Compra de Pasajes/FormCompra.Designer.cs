@@ -83,6 +83,7 @@
             // 
             // fecha_tbox
             // 
+            this.fecha_tbox.Enabled = false;
             this.fecha_tbox.Location = new System.Drawing.Point(213, 45);
             this.fecha_tbox.Name = "fecha_tbox";
             this.fecha_tbox.Size = new System.Drawing.Size(150, 20);

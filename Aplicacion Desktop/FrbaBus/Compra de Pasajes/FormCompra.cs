@@ -19,11 +19,12 @@ namespace FrbaBus.Compra_de_Pasajes
         public char tipo_viaje; //indica si el viaje es por encomienda o pasaje 'E' 'P' solo para seleccionar viaje 
         decimal total_compra;
         string cod_compra;
+        
         //Colección de Pasajes una vez confirmada la compra los cargamos en la base
-        List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
+        public List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
 
         //Colección de Encomiendas una vez confirmada la compra las cargamos en la base
-        List<Form_encomienda> listas_encomiendas = new List<Form_encomienda>();
+        public List<Form_encomienda> listas_encomiendas = new List<Form_encomienda>();
 
         //Datos del Comprador
         public string dni_comprador = "";
@@ -32,7 +33,6 @@ namespace FrbaBus.Compra_de_Pasajes
         public FormCompra()
         {
             InitializeComponent();
-            this.fecha_tbox.Enabled = false;
         }
 
         private void login_boton_Click(object sender, EventArgs e)
@@ -45,8 +45,8 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void select_boton_Click(object sender, EventArgs e)
         {
-            select_fecha_viaje select_viaje = new select_fecha_viaje(this);
-            select_viaje.ShowDialog();
+            select_fecha_viaje fecha_viaje = new select_fecha_viaje(this);
+            fecha_viaje.ShowDialog();
         }
 
         private void FormCompra_Load(object sender, EventArgs e)
@@ -129,42 +129,79 @@ namespace FrbaBus.Compra_de_Pasajes
             funciones func = new funciones();
             for (i = 0; i < cant_pasajes; i++)
             {
-                cargar_pasajero pasajero = new cargar_pasajero(this.cod_viaje_pasaje, listas_pasajeros, sgte_acompañante );
-                pasajero.ShowDialog();
-                if (pasajero.discapacitado_checkB.Checked)
+                //chequeo que hayan seleccionado un viaje si NO selecciono nada salgo del ciclo
+                if (this.cod_viaje_pasaje != "")
                 {
-                    if (i != cant_pasajes - 1)//verificamos que ni sea el ultimo pasajero
+                    //cargo pasajero
+                    cargar_pasajero pasajero = new cargar_pasajero(this.cod_viaje_pasaje, listas_pasajeros, sgte_acompañante);
+                    pasajero.ShowDialog();
+
+                    //chequeo que n hayan cancelado el pasaje
+                    if (pasajero.transacc_pasaje_ok)
                     {
-                        DialogResult respuesta = MessageBox.Show("Datos Ingresados Correctamente. El pasajero Ingresado es discapacitado, ¿viaja con acompañante ?", "Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                        if (respuesta == DialogResult.Yes)
+                        //chequeo si es discapacitado el pasajero
+                        if (pasajero.discapacitado_checkB.Checked)
                         {
-                            sgte_acompañante = true;
-                            MessageBox.Show("Ingrese los datos del acompañante del pasajero Discapacitado", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if ((i != cant_pasajes - 1) & (form_viaje.cant_butacas_disponibles-1 != 0))//verificamos que no sea el ultimo pasajero 
+                            {
+                                //si NO es el ult pasajero y es discapacitado preguntamos si viaja con acompañanate o no
+                                DialogResult respuesta = MessageBox.Show("Datos Ingresados Correctamente. El pasajero Ingresado es discapacitado, ¿viaja con acompañante ?", "Compra", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                if (respuesta == DialogResult.Yes)
+                                {
+                                    sgte_acompañante = true;
+                                    MessageBox.Show("Ingrese los datos del acompañante del pasajero Discapacitado", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    //form_viaje.but_a_reservar++;
+                                }
+                                //else
+                                //{
+                                   // MessageBox.Show("A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    //form_viaje.but_a_reservar++;
+                                    //form_viaje.ShowDialog();
+                                //}
+                            }
                         }
+                        else
+                        {
+                            sgte_acompañante = false;
+                            /*----------Si no es discapacitado analizo si es Pensionado / Jubilado----------------*/
+
+                            if (pasajero.mascul_radioBut.Checked)
+                                sexo = "M";
+                            else
+                                sexo = "F";
+
+                            if (pasajero.pensionado_checkB.Checked | func.es_jubilado(pasajero.fec_nac_Tbox.Text, sexo))
+                                pasajero.costo_pasaje = pasajero.costo_pasaje / 2; //aplico descuento del 50%
+
+                            if (cant_pasajes - 1 != i)
+                            {
+                                MessageBox.Show("Datos del Pasajero Ingresados Correctamente. A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                               // form_viaje.but_a_reservar++;
+                                //form_viaje.ShowDialog();
+                            }
+                        }
+
+                        
+                        //si se ingreso correctamente el pasaje lo cargamos en la coleccion de pasajeros
+                        listas_pasajeros.Add(pasajero);
+                        if (!sgte_acompañante & (cant_pasajes -1 != i))
+                            form_viaje.ShowDialog();
                     }
                 }
                 else
-                {
-                    sgte_acompañante = false;
-                    /*----------Si no es discapacitado analizo si es Pensionado / Jubilado----------------*/
-                    
-                    if (pasajero.mascul_radioBut.Checked)
-                        sexo = "M";
-                    else
-                        sexo = "F";
+                    break; //si salieron de seleccionar un viaje salimos y se computan los pasajes cargados hasta el momento
+                
+            }
 
-                    if (pasajero.pensionado_checkB.Checked | func.es_jubilado(pasajero.fec_nac_Tbox.Text,sexo))
-                        pasajero.costo_pasaje = pasajero.costo_pasaje / 2; //aplico descuento del 50%
-
-                    if (cant_pasajes - 1 != i)
-                    {
-                        MessageBox.Show("Datos del Pasajero Ingresados Correctamente. A continuación debe seleccionar viaje del siguiente Pasajero", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        form_viaje.ShowDialog();
-                    }
-                }
-                    
-                listas_pasajeros.Add(pasajero);
-
+            if (this.CantPasaj_numericUpDown.Value != this.listas_pasajeros.Count)
+            {
+                //si se cancelo algun pasaje actualizamos la cant_pasajes
+                this.CantPasaj_numericUpDown.Value = this.listas_pasajeros.Count;
+            }
+            if (this.listas_pasajeros.Count == 0)
+            {
+                //se cancelaron todos los pasajes
+                return;
             }
 
             /*---------Una vez cargados todos los pasajes calculo el costo total-------*/
@@ -241,16 +278,38 @@ namespace FrbaBus.Compra_de_Pasajes
             select_viaje form_viaje = new select_viaje(this); //con esto aseguro que sea siempre el mismo recorrido NO dejo q me setee mas los campos de ciu_origen y dest
             for (i = 0; i < cant_encomiendas; i++)
             {
-                Form_encomienda form_encom = new Form_encomienda(this.cod_viaje_encomienda, this.listas_encomiendas);
-                form_encom.ShowDialog();
-                listas_encomiendas.Add(form_encom);
-                if (cant_encomiendas - 1 != i)
+                //chequeo que hayan seleccionado un viaje si NO selecciono nada salgo del ciclo
+                if (this.cod_viaje_encomienda != "")
                 {
-                    MessageBox.Show("Datos de la Encomienda Ingresados, A continuación debe seleccionar viaje de la siguiente Encomienda", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    form_viaje.ShowDialog();
-                }
-                
+                    Form_encomienda form_encom = new Form_encomienda(this.cod_viaje_encomienda, this.listas_encomiendas);
+                    form_encom.ShowDialog();
 
+                    if (form_encom.transacc_encomienda_ok)
+                    {
+                        listas_encomiendas.Add(form_encom);
+                        if (cant_encomiendas - 1 != i)
+                        {
+                            MessageBox.Show("Datos de la Encomienda Ingresados, A continuación debe seleccionar viaje de la siguiente Encomienda", "Comprar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            form_viaje.ShowDialog();
+                            
+                        }
+                    }
+                }
+                else
+                    break;
+
+            }
+
+            if (this.cant_encomiendas_numUpdown.Value != listas_encomiendas.Count)
+            {
+                //actualizamos cant de encomiendas si se cancelo algun ingreso de encomienda
+                this.cant_encomiendas_numUpdown.Value = listas_encomiendas.Count;
+            }
+
+            if (listas_encomiendas.Count == 0)
+            {
+                //si se cancelaron todas las encomiendas retornamos
+                return;
             }
             stored_procedures stored_proc = new stored_procedures();
             decimal sub_total_compra_encomienda = 0;
@@ -270,7 +329,6 @@ namespace FrbaBus.Compra_de_Pasajes
         private void reset_formulario()
         {
             this.fecha_tbox.Clear();
-            this.fecha_tbox.Enabled = true;
             this.ciu_orig_list.SelectedIndex = 0;
             this.ciu_dest_list.SelectedIndex = 0;
             this.ciu_orig_list.Enabled = true;
@@ -306,7 +364,7 @@ namespace FrbaBus.Compra_de_Pasajes
         private void aceptar_boton_Click(object sender, EventArgs e)
         {
 
-            if (this.cant_encomiendas_numUpdown.Value == 0 & this.CantPasaj_numericUpDown.Value == 0)
+            if (this.listas_encomiendas.Count == 0 & this.listas_pasajeros.Count == 0)
             {
                 MessageBox.Show("No se han Ingresado Datos Obligatorios para hacer la compra", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -315,6 +373,12 @@ namespace FrbaBus.Compra_de_Pasajes
             Form_Comprador comprador = new Form_Comprador(this);
             comprador.ShowDialog();
 
+            //si cerraron el formulario de compras abortamos transaccion
+            if (!comprador.transaccion_compra_ok)
+            {
+                this.reset_formulario();
+                return;
+            }
             
             /*--------------Insertamos y Mostramos Compra/Pasaje/Encomienda------------------*/
             stored_procedures stored_proc = new stored_procedures();
@@ -332,7 +396,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 }
             }
 
-            if (listas_pasajeros.Count > 0)
+            if (listas_encomiendas.Count > 0)
             {
                 string cod_encomienda = "";
                 foreach (Form_encomienda encomienda in listas_encomiendas)

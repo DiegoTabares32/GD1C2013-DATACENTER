@@ -358,9 +358,9 @@
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(235, 482);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(130, 13);
+            this.label17.Size = new System.Drawing.Size(128, 13);
             this.label17.TabIndex = 83;
-            this.label17.Text = "Formato de Fecha DDMM";
+            this.label17.Text = "Formato de Fecha MMAA";
             // 
             // confirmar_boton
             // 
@@ -368,7 +368,7 @@
             this.confirmar_boton.Name = "confirmar_boton";
             this.confirmar_boton.Size = new System.Drawing.Size(139, 31);
             this.confirmar_boton.TabIndex = 84;
-            this.confirmar_boton.Text = "Confirmar Tipo Tarjeta";
+            this.confirmar_boton.Text = "Verificar tipo Tarjeta";
             this.confirmar_boton.UseVisualStyleBackColor = true;
             this.confirmar_boton.Click += new System.EventHandler(this.confirmar_boton_Click);
             // 
@@ -406,6 +406,7 @@
             // fech_venc_tbox
             // 
             this.fech_venc_tbox.Location = new System.Drawing.Point(220, 459);
+            this.fech_venc_tbox.MaxLength = 4;
             this.fech_venc_tbox.Name = "fech_venc_tbox";
             this.fech_venc_tbox.Size = new System.Drawing.Size(145, 20);
             this.fech_venc_tbox.TabIndex = 75;
@@ -456,6 +457,7 @@
             this.Name = "Form_Comprador";
             this.Text = "Form_Comprador";
             this.Load += new System.EventHandler(this.Form_Comprador_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Comprador_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

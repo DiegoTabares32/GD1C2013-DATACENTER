@@ -13,6 +13,7 @@ namespace FrbaBus.Compra_de_Pasajes
     {
 
         bool cliente_existente = false;
+        public bool transacc_pasaje_ok = false;
         public string viaje_cod;
         public List<cargar_pasajero> listas_pasajeros;
         public string cod_pasaje = "";
@@ -45,6 +46,9 @@ namespace FrbaBus.Compra_de_Pasajes
             this.butNro_tbox.Clear();
             this.pos_but_tbox.Clear();
             this.piso_tbox.Clear();
+            this.jubilado_checkB.Checked = false;
+            this.pensionado_checkB.Checked = false;
+            this.discapacitado_checkB.Checked = false;
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -188,6 +192,7 @@ namespace FrbaBus.Compra_de_Pasajes
             if (!(this.discapacitado_checkB.Checked | this.acompañante )) //si no es discapacitado ni acompañante de discapacitado le cobramos el pasaje
                 this.costo_pasaje= stored_proc.get_porcentaje(this.viaje_cod);
 
+            this.transacc_pasaje_ok = true;
             this.Close();
 
         }
@@ -221,7 +226,7 @@ namespace FrbaBus.Compra_de_Pasajes
                         this.mascul_radioBut.Checked = true;
                     if (table_campos_cli.Rows[0].ItemArray[6].ToString() == "F")
                         this.fem_radButton.Checked = true;
-                    MessageBox.Show(table_campos_cli.Rows[0].ItemArray[7].ToString());
+
                     //controlamos si esta seteado el campo discapacitado
                     if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
                         this.discapacitado_checkB.Checked = true;
@@ -284,6 +289,15 @@ namespace FrbaBus.Compra_de_Pasajes
 
             select_butaca select_butaca = new select_butaca(this);
             select_butaca.ShowDialog();
+        }
+
+        private void cargar_pasajero_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.transacc_pasaje_ok)
+            {
+                MessageBox.Show("Transacción Cancelada", "Cargar Pasajero", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.transacc_pasaje_ok = false;
+            }
         }
 
 

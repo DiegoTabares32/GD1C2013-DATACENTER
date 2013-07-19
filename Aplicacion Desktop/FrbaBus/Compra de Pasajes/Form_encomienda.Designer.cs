@@ -371,6 +371,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form_encomienda";
             this.Text = "Encomienda";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_encomienda_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

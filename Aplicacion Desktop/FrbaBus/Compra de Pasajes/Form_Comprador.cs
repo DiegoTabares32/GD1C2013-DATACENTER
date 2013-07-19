@@ -13,6 +13,8 @@ namespace FrbaBus.Compra_de_Pasajes
     {
         FormCompra form_compra;
         bool cliente_existente = false;
+        bool tarj_verificada = false;
+        public bool transaccion_compra_ok = false;
 
         public Form_Comprador(FormCompra form_compra )
         {
@@ -39,6 +41,10 @@ namespace FrbaBus.Compra_de_Pasajes
             this.fem_radButton.Checked = false;
             this.DNI_Tbox.Enabled = true;
             this.discapacitado_checkB.Visible = true;
+            this.discapacitado_checkB.Checked = false;
+            this.jubilado_checkB.Checked = false;
+            this.pensionado_checkB.Checked = false;
+            this.tarj_verificada = false;
         }
         
 
@@ -134,11 +140,26 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
-            if (Convert.ToInt16(this.fech_venc_tbox.Text) > 1299)
+            try
+            {
+                if (Convert.ToInt16(this.fech_venc_tbox.Text) > 1299)
+                {
+                    MessageBox.Show("Formato Incorrecto en Fecha de Vencimiento ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error = true;
+                }
+            }
+            catch
             {
                 MessageBox.Show("Formato Incorrecto en Fecha de Vencimiento ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
+
+            if (!tarj_verificada)
+            {
+                MessageBox.Show("Debe verificar Tipo de Tarjeta ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+            }
+            
 
 
             if (error)
@@ -191,6 +212,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             this.form_compra.dni_comprador = this.DNI_Tbox.Text;
             this.form_compra.tipo_tarjeta = this.tipoTarj_comboBox.SelectedValue.ToString();
+            this.transaccion_compra_ok = true;
             this.Close();
         }
 
@@ -281,6 +303,8 @@ namespace FrbaBus.Compra_de_Pasajes
             else
                 this.cant_cuot_numericUpDown.Enabled = false;
 
+            this.tarj_verificada = true;
+
         }
 
         private void DNI_Tbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -314,7 +338,6 @@ namespace FrbaBus.Compra_de_Pasajes
                         this.fem_radButton.Checked = true;
 
                     //controlamos si esta seteado el campo discapacitado
-                    MessageBox.Show(table_campos_cli.Rows[0].ItemArray[7].ToString());
                     if (table_campos_cli.Rows[0].ItemArray[7].ToString() == "D")
                     {
                         this.discapacitado_checkB.Checked = true;
@@ -335,8 +358,11 @@ namespace FrbaBus.Compra_de_Pasajes
             }
         }
 
-
-
+        private void Form_Comprador_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!this.transaccion_compra_ok)
+                MessageBox.Show("Transacción Abortada ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
     }
 }
