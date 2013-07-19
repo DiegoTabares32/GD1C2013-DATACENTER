@@ -410,8 +410,8 @@ group by Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Marca, Tipo_Se
 go
 
 			-- AHORA SI REALIZAMOS LA MIGRACION EN BASE A LOS CAMPOS NECESARIOS --
-insert into DATACENTER.Micro(mic_patente, mic_modelo, mic_cant_kg_disponibles, mic_cant_butacas, mic_marc_id, mic_serv_id)
-select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, marc_Id, serv_Id
+insert into DATACENTER.Micro(mic_patente, mic_modelo, mic_cant_kg_disponibles, mic_cant_butacas, mic_marc_id, mic_serv_id, mic_fecha_alta)
+select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, marc_Id, serv_Id, GETDATE()
 from micros_migrados join DATACENTER.Marca on Micro_Marca = marc_nombre join DATACENTER.Servicio on Micro_Tipo_Serv = serv_tipo
 go
 
@@ -850,22 +850,21 @@ end
 go
 
 
-
-create procedure DATACENTER.registraDevolucion(@fechaDev datetime,@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
+create procedure DATACENTER.registraDevolucionParcial(@fechaDev datetime,@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
 as
 begin
 	declare @ultimoIdDev int
 	declare @idDev int
-	set @idDev = (select dev_id from DATACENTER.Devolucion where dev_comp_id=@nroCompra)
-	if (@idDev = null)
+	set @idDev = 1;
+	if ((select COUNT(*) from DATACENTER.Devolucion where dev_comp_id=@nroCompra) = 0)
 	begin
 		set @ultimoIdDev = (select max(dev_id) from DATACENTER.Devolucion)
-		if @ultimoIdDev = null
-			set @idDev = 1
-		else
+		if @ultimoIdDev <> null
 			set @idDev = @ultimoIdDev + 1			
 	end
-
+	else
+		set @idDev = (select top 1 dev_id from DATACENTER.Devolucion where dev_comp_id=@nroCompra)
+	
 	-- Agrego devolución efectiva
 	INSERT INTO DATACENTER.Devolucion(dev_id,dev_cod_PasPaq,dev_tipo_devuelto,dev_comp_id,dev_fecha,dev_motivo)
 	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,@fechaDev,@motivoDev)
@@ -899,6 +898,34 @@ begin
 		where comp_id=@nroCompra
 	end
 
+end
+go
+
+
+create procedure DATACENTER.registraDevolucionTotal(@fechaDev datetime,@nroCompra int,@motivoDev nvarchar(255))
+as
+begin
+	declare @tipoItem nvarchar(255)
+	declare @codItem numeric(18,0)
+	declare cursorItems cursor
+	for (
+		(select 'Paquete', paq_cod
+		 from DATACENTER.Paquete 
+		 where paq_comp_id=@nroCompra)
+		union
+		(select 'Pasaje', pas_cod
+		 from DATACENTER.Pasaje
+		 where pas_compra_id=@nroCompra)
+		) 
+	open cursorItems
+	fetch cursorItems into @tipoItem,@codItem
+	while (@@FETCH_STATUS = 0)
+	begin
+		exec DATACENTER.registraDevolucionParcial @fechaDev,@nroCompra,@tipoItem,@codItem,@motivoDev
+		fetch cursorItems into @tipoItem,@codItem
+	end
+	close cursorItems
+	deallocate cursorItems
 end
 go
 
