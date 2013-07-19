@@ -134,6 +134,7 @@ reco_origen nvarchar(255) NOT NULL,
 reco_destino nvarchar(255) NOT NULL,
 reco_precio_base_kg numeric(18,2) NULL,
 reco_precio_base_pasaje numeric (18,2) NULL,
+reco_estado CHAR NULL,  -- ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡OJO QUE ESTE CAMPO ES NUEVO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 FOREIGN KEY (reco_serv_id) REFERENCES DATACENTER.Servicio (serv_id),
 FOREIGN KEY (reco_origen) REFERENCES DATACENTER.Ciudad (ciu_nombre),
 FOREIGN KEY (reco_destino) REFERENCES DATACENTER.Ciudad (ciu_nombre),

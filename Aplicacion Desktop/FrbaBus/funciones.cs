@@ -182,8 +182,23 @@ namespace FrbaBus
             }
 
         }
-      
 
+        public bool son_todos_numeros(string codigo)
+        {
+            int i;
+            int tamaño = codigo.Length;
+            bool result = true;
+            for (i = 0; i < tamaño; i++)
+            {
+                if (char.IsNumber(codigo, i) == false)
+                {
+                    result = false;
+                    return result;
+                }
+            }
+
+            return result;
+        }
   
     }
 }

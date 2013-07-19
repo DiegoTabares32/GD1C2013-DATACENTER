@@ -180,7 +180,33 @@ namespace FrbaBus
             conexion.Close();
             return cod_paquete;
         }
-    
+        public void insert_recorrido(string cod_ins, string orig_ins, string dest_ins, int serv_ins, decimal pr_paq_ins, decimal pr_enco_ins)
+        {
+            connection connect = new connection();
+
+            query = "EXECUTE DATACENTER.insert_recorrido " + "'" + cod_ins + "'" + ", " + "'" + orig_ins + "'" + ", " + "'" + dest_ins + "'" + ", " + serv_ins + ", " + pr_paq_ins + ", " + pr_enco_ins;
+            connect.execute_query_only(query);
+        }
+
+        public void insert_viaje(string fecha_sal, string fehca_lleg, string cod_reco_ins, string pat_mic_ins)
+        {
+            connection conexion = new connection();
+
+            query = "EXECUTE DATACENTER.insert_viaje " + fecha_sal + ", " + fehca_lleg + ", " + cod_reco_ins + ", " + pat_mic_ins;
+            conexion.execute_query_only(query);
+        }
+
+        public void update_recorrido(string cod_act, string orig_act, string dest_act, int serv_act, decimal pr_paq_act, decimal pr_enco_act)
+        {
+            query = "EXECUTE DATACENTER.update_recorrido " + "'" + cod_act + "'" + ", " + "'" + orig_act + "'" + ", " + "'" + dest_act + "'" + ", " + serv_act + ", " + pr_paq_act + ", " + pr_enco_act;
+            connect.execute_query_only(query);
+        }
+
+        public void update_estado_reco(string cod, char estado_act)
+        {
+            query = "EXECUTE DATACENTER.update_estado_reco " + "'" + cod + "'" + "," + "'" + estado_act + "'";
+            connect.execute_query_only(query);
+        }
 
     }
 }
