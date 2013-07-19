@@ -63,7 +63,8 @@ cli_telefono nvarchar(255) NULL,
 cli_mail nvarchar(255) NULL, 
 cli_fecha_nac datetime NULL,
 cli_puntos_acum int NULL,
-cli_condicion char NULL,
+cli_condicion char NULL,     --puede ser J jubilado o P pensionado
+cli_discapacitado char NULL, --puede ser discap D o no N
 cli_sexo char NULL,
 FOREIGN KEY (cli_rol_id) REFERENCES DATACENTER.Rol (rol_id),
 PRIMARY KEY (cli_dni))
@@ -82,7 +83,9 @@ PRIMARY KEY (prem_id)
 GO
 
 /*------------------------------------------------------------------*/
+
 /*-------------------CREAMOS TABLA CANJE----------------------------*/
+
 
 CREATE TABLE DATACENTER.Canje
 (canj_id int NOT NULL,
@@ -92,8 +95,7 @@ canj_cant_retirada int NULL,
 canj_fecha datetime NULL
 FOREIGN KEY (canj_cli_dni) REFERENCES DATACENTER.Cliente (cli_dni),
 FOREIGN KEY (canj_prem_id) REFERENCES DATACENTER.Premio (prem_id),
-PRIMARY KEY (canj_id, canj_prem_id)
-)
+PRIMARY KEY (canj_id, canj_prem_id))
 GO
 
 /*------------------------------------------------------------------*/
@@ -218,7 +220,7 @@ CREATE TABLE DATACENTER.Compra
 (comp_id int IDENTITY (1,1) NOT NULL,
 comp_comprador_dni numeric (18,0) NOT NULL,
 comp_tipo_tarj_id int  NULL,
-comp_viaj_id int  NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
+comp_viaj_id int  NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
 comp_cant_pasajes int NULL,
 comp_cant_total_kg numeric (18,0) NULL, 
 comp_costo_total numeric (18,2) NULL,
@@ -226,12 +228,16 @@ comp_fecha_compra datetime NULL,
 comp_codigo_pas_paq numeric (18,0) NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
 FOREIGN KEY (comp_comprador_dni) REFERENCES DATACENTER.Cliente (cli_dni),
 FOREIGN KEY (comp_tipo_tarj_id) REFERENCES DATACENTER.TipoTarjeta (tipo_id),
---FOREIGN KEY (comp_viaj_id) REFERENCES DATACENTER.Viaje (viaj_id),
 PRIMARY KEY (comp_id)
 )
 GO
+<<<<<<< .mine
 
 /*------------------------------------------------------------------*/
+=======
+/*------------------------------------------------------------------*/
+
+>>>>>>> .theirs
 /*---------------------CREAMOS TABLA PASAJE-------------------------*/
 
 CREATE TABLE DATACENTER.Pasaje
@@ -360,6 +366,30 @@ INSERT INTO
 DATACENTER.Premio(prem_nombre, prem_costo_puntos, prem_stock)
 VALUES ('Notebook Lenovo G470', 150, 30)
 GO
+
+--AGREGAMOS TIPO DE TARJETA
+--H Habilitada para comprar en cuotas
+--D Deshabilitada para comprar en cuotas
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Mastercard', 'H')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('American Express', 'D')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Visa', 'H')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Italcred', 'D')
+
+INSERT INTO 
+DATACENTER.TipoTarjeta (tipo_descripcion, tipo_cuotas)
+VALUES ('Cabal', 'H')
 
 /*------------------------------------------------------------------*/
 /*-----------------MIGRACION DE CLIENTES----------------------------*/
@@ -556,18 +586,22 @@ BEGIN
 	WHERE rol_id = @rol_id
 END
 GO
+<<<<<<< .mine
 
+=======
+
+>>>>>>> .theirs
 CREATE PROCEDURE DATACENTER.get_listado_viaje @ciu_origen nvarchar(255), @ciu_destino nvarchar(255), @fecha_salida nvarchar(255)
 AS
 BEGIN
-SELECT viaj_id,viaj_fecha_salida, reco_origen, reco_destino,serv_tipo, mic_cant_butacas -
+SELECT viaj_id,viaj_fecha_salida, reco_origen, reco_destino,serv_tipo, mic_cant_butacas + 1 -
 (
 	SELECT COUNT(pas_viaj_id)
 	FROM DATACENTER.Pasaje
 	WHERE pas_viaj_id = viaj_id
 ) AS butacas_Disponibles, mic_cant_kg_disponibles-
 (
-	SELECT SUM(paq_kg)
+	SELECT isnull(SUM(paq_kg),0)
 	FROM DATACENTER.Paquete
 	WHERE paq_viaj_id = viaj_id
 ) AS kg_Disponibles
@@ -578,10 +612,28 @@ WHERE reco_origen = @ciu_origen AND reco_destino= @ciu_destino
 	  AND DAY(viaj_fecha_salida) = DAY(@fecha_salida)
 	  AND MONTH(viaj_fecha_salida) = MONTH(@fecha_salida)
 	  AND YEAR(viaj_fecha_salida) = YEAR(@fecha_salida)
+	   
+END
+GO
 
+CREATE PROCEDURE DATACENTER.cargar_campos_cliente @cli_dni numeric(18,0)
+AS
+BEGIN 
+	SELECT C.cli_nombre, C.cli_apellido, C.cli_dir, C.cli_telefono, C.cli_mail , C.cli_fecha_nac, C.cli_sexo, C.cli_discapacitado, C.cli_condicion
+	FROM DATACENTER.Cliente C
+	WHERE C.cli_dni = @cli_dni
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_butacas @cod_viaje int
+AS
+BEGIN
+SELECT but_nro AS Nro_Butaca, but_tipo AS Tipo, but_piso AS Nro_Piso
+FROM DATACENTER.Viaje JOIN DATACENTER.Micro ON (viaj_mic_patente = mic_patente)
+	 JOIN DATACENTER.Butaca ON (mic_patente = but_mic_patente)
+WHERE viaj_id = @cod_viaje AND NOT but_nro IN (select pas_nro_butaca from DATACENTER.Pasaje where pas_viaj_id=@cod_viaje)
 END
 
-GO
 
 CREATE FUNCTION DATACENTER.estado_puntos(@inicio datetime, @fin datetime2)
 RETURNS nvarchar(10)
@@ -597,6 +649,120 @@ BEGIN
 		SET @estado = 'VENCIDOS'
 	END
 	RETURN @estado
+END
+GO
+
+
+CREATE PROCEDURE DATACENTER.get_porcentaje @viaj_id int
+AS
+BEGIN
+	SELECT reco_precio_base_pasaje+((serv_porc_adicional *reco_precio_base_pasaje)/ 100)
+		   FROM DATACENTER.Recorrido JOIN DATACENTER.Viaje ON (reco_cod=viaj_reco_cod)
+				JOIN DATACENTER.Servicio ON (reco_serv_id=serv_id)
+		   WHERE viaj_id=@viaj_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.insert_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5), @condicion nvarchar(5)
+AS
+BEGIN
+
+	INSERT DATACENTER.Cliente (cli_dni, cli_rol_id, cli_nombre, cli_apellido, cli_dir, cli_telefono, cli_mail, cli_fecha_nac, cli_puntos_acum,  cli_sexo, cli_discapacitado)
+	VALUES (@cli_dni,2,@cli_nombre,@cli_apellido, @cli_dir, @cli_telefono,@cli_mail, convert(datetime,@cli_fecha_nac), 0,convert (char, @cli_sexo), CONVERT(char, @discapacitado))
+	
+END
+GO
+
+CREATE PROCEDURE DATACENTER.update_Cliente @cli_dni numeric(18,0),@cli_nombre nvarchar(255), @cli_apellido nvarchar(255), @cli_dir nvarchar(255), @cli_telefono nvarchar(255), @cli_mail nvarchar(255), @cli_fecha_nac nvarchar(255), @cli_sexo nvarchar(5), @discapacitado nvarchar(5), @condicion nvarchar (5)
+AS
+BEGIN
+	
+	UPDATE DATACENTER.Cliente
+	SET cli_nombre = @cli_nombre, cli_apellido=@cli_apellido, cli_dir=@cli_dir, cli_telefono=@cli_telefono, cli_mail=@cli_mail, cli_fecha_nac=convert(datetime,@cli_fecha_nac), cli_sexo=convert (char, @cli_sexo), cli_discapacitado = convert (char, @discapacitado), cli_condicion = convert(char, @condicion)
+	WHERE cli_dni=@cli_dni
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_costo_encomienda @viaj_id int, @paq_kg nvarchar(255)
+AS
+BEGIN
+	SELECT reco_precio_base_kg * convert(numeric(18,0),@paq_kg)
+		   FROM DATACENTER.Recorrido JOIN DATACENTER.Viaje ON (reco_cod=viaj_reco_cod)
+		   WHERE viaj_id=@viaj_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_kg_disponibles @viaj_id int
+AS
+BEGIN
+	SELECT mic_cant_kg_disponibles - (select SUM (paq_kg) from DATACENTER.Paquete where paq_viaj_id = @viaj_id)
+	FROM  DATACENTER.Viaje JOIN DATACENTER.Micro ON (mic_patente=viaj_mic_patente)
+	WHERE viaj_id= @viaj_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.check_tipo_tarjeta @tipo_id int
+AS
+BEGIN
+	SELECT tipo_cuotas 
+	FROM DATACENTER.TipoTarjeta 
+	WHERE tipo_id = @tipo_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.insert_compra (@comprador_dni numeric(18,0), @tipo_tarj_id int, @cant_pasajes int, @cant_total_kg numeric(18,0), @costo_total numeric(18,2))
+AS
+BEGIN 
+	IF (@tipo_tarj_id = 0)
+	BEGIN
+		INSERT INTO DATACENTER.Compra(comp_comprador_dni,comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
+		VALUES
+		(@comprador_dni, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+	END
+	ELSE
+	BEGIN
+		INSERT INTO DATACENTER.Compra(comp_comprador_dni, comp_tipo_tarj_id, comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
+		VALUES
+		(@comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+	END
+	SELECT @@IDENTITY AS Id_compra_Ingresado
+END
+GO
+
+CREATE PROCEDURE DATACENTER.insert_pasaje(@nro_butaca numeric(18,0),@micro_patente nvarchar(255), @cli_dni numeric(18,0), @pas_compra int, @pas_precio numeric(18,2), @viaj_id int)
+AS
+BEGIN 
+	DECLARE @pas_codigo numeric(18,0)
+	SET @pas_codigo = (SELECT MAX(pas_cod) FROM DATACENTER.Pasaje) + 1
+	INSERT INTO 
+	DATACENTER.Pasaje(pas_cod,pas_nro_butaca,pas_micro_patente, pas_cli_dni, pas_compra_id, pas_precio, pas_viaj_id)	
+	VALUES
+	(@pas_codigo, @nro_butaca,@micro_patente, @cli_dni, @pas_compra, @pas_precio, @viaj_id)
+	
+	SELECT @pas_codigo
+END
+GO
+
+CREATE PROCEDURE DATACENTER.get_micro_patente (@viaje_id int)
+AS
+BEGIN
+	SELECT viaj_mic_patente
+	FROM DATACENTER.Viaje
+	WHERE viaj_id = @viaje_id
+END
+GO
+
+CREATE PROCEDURE DATACENTER.insert_paquete (@comp_id int, @precio numeric(18,2), @paq_kg numeric(18,0), @viaj_id int)
+AS
+BEGIN 
+	DECLARE @paquete_cod numeric(18,0)
+	SET @paquete_cod = (SELECT MAX(paq_cod) FROM DATACENTER.Paquete) + 1
+	INSERT INTO 
+	DATACENTER.Paquete(paq_cod, paq_comp_id, paq_precio, paq_kg, paq_viaj_id)	
+	VALUES
+	(@paquete_cod , @comp_id, @precio, @paq_kg, @viaj_id)	
+	
+	SELECT @paquete_cod
 END
 GO
 
@@ -865,7 +1031,7 @@ begin
 	else
 		set @idDev = (select top 1 dev_id from DATACENTER.Devolucion where dev_comp_id=@nroCompra)
 	
-	-- Agrego devoluciÃ³n efectiva
+	-- Agrego devolución efectiva
 	INSERT INTO DATACENTER.Devolucion(dev_id,dev_cod_PasPaq,dev_tipo_devuelto,dev_comp_id,dev_fecha,dev_motivo)
 	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,@fechaDev,@motivoDev)
 	

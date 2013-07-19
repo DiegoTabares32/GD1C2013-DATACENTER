@@ -22,18 +22,38 @@ namespace FrbaBus.Login
             InitializeComponent();
         }
 
+        private void limpiar()
+        {
+            this.username_textbox.Text = "";
+            this.passw_textbox.Text = "";
+        }
+
         private void login_button_Click(object sender, EventArgs e)
         {
             /*-----Controlamos que no halla textBoxs en blanco*/
+            
+            bool error = false;
 
-            if (this.username_textbox.Text == "" | this.passw_textbox.Text == "")
+            if (this.username_textbox.Text == "" )
             {
-                MessageBox.Show("Error: los campos NO pueden estar vacio");
-                this.username_textbox.Text = "";
-                this.passw_textbox.Text = "";
-                return;
+                MessageBox.Show("Debe Ingresar username", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
+                
+            }
+            
+            if (this.passw_textbox.Text == "")
+            {
+                MessageBox.Show("Debe Ingresar password", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                error = true;
             }
 
+            if (error)
+            {
+                this.limpiar();
+                return;
+            }
+                
+            
             /*------------------------------------------------*/
             //el administrador ingreso usuario y contraseña 
             connection conexion = new connection();
@@ -47,7 +67,7 @@ namespace FrbaBus.Login
                 //verificamos que el Rol administrador NO este inhabilitado
                 if (administrador.Rows[0].ItemArray[3].ToString() != "H")
                 {
-                    MessageBox.Show("ERROR: ROL ADMINISTRADOR INHABILITADO");
+                    MessageBox.Show("Rol Administrador Inhabilitado", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -55,9 +75,8 @@ namespace FrbaBus.Login
                 cant_fallidas = Convert.ToInt16(administrador.Rows[0].ItemArray[2].ToString());
                 if ( cant_fallidas == 3)
                 {
-                    MessageBox.Show("USUARIO INHABILITADO");
-                    this.username_textbox.Text = "";
-                    this.passw_textbox.Text = "";
+                    MessageBox.Show("Superada la cantidad Máxima de intentos por loguearse, Usuario Inhabilitado ", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.limpiar();
                     return;
                 }
                 
@@ -70,7 +89,7 @@ namespace FrbaBus.Login
 
                     //limpiamos cant_intentos
                     cant_fallidas = 0;
-                    DataTable retorno_update = procedure.update_cant_intentos_fallidos(username_textbox.Text, cant_fallidas);
+                    procedure.update_cant_intentos_fallidos(username_textbox.Text, cant_fallidas);
 
                     
 
@@ -85,18 +104,18 @@ namespace FrbaBus.Login
                 {
                     cant_fallidas++;
                     //Se debe actualizar el campo adm_cant_intentos de la base de datos
-                    DataTable retorno_update = procedure.update_cant_intentos_fallidos(username_textbox.Text, cant_fallidas);
-                    
-                    
-                   
-                    MessageBox.Show("El nombre de usuario o la contraseña introducidos no son correctos");
+                    procedure.update_cant_intentos_fallidos(username_textbox.Text, cant_fallidas);
+
+
+
+                    MessageBox.Show("Password Incorrecto", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     
                 }
             }
             else
             { //NO EXISTE EL USERNAME entonces NO podemos descontar cant_intentos_fallidos
 
-                MessageBox.Show("El nombre de usuario o la contraseña introducidos no son correctos");
+                MessageBox.Show("Username Incorrecto", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
             

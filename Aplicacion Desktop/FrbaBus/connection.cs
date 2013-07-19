@@ -18,7 +18,7 @@ namespace FrbaBus
             {
                 connect.ConnectionString = get_string_connection();
                 connect.Open(); //abrimos conexion
-                MessageBox.Show("Conectado");
+                //MessageBox.Show("Conectado");
 
             }
             catch (SqlException ex) //Capturamos algun error que pudo darse al querer conectarse
@@ -47,9 +47,28 @@ namespace FrbaBus
             //volcamos la informacion resultado de ejecutar la consulta en un data table
             DataTable tabla=new DataTable();
             //tabla.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            data_adapter.Fill(tabla);
+            try
+            {
+                data_adapter.Fill(tabla);
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("Error al llenar el DataTable");
+            }
             return tabla;
             
+        }
+
+        public void execute_query_only(string query)
+        {
+            SqlConnection conexion = this.connector();
+            SqlCommand comando = new SqlCommand(query,conexion); //sqlcommand almacena una instruccion sql que luego ejecutar executenonquery
+            int cant_filas_afectadas = comando.ExecuteNonQuery(); //ejecuta la query y devuelve filas afectadas 
+            if (cant_filas_afectadas == 0)
+            {
+                MessageBox.Show("Fallo operacion al tratar de modificar la BD");
+            }
+            conexion.Close();
         }
 
 

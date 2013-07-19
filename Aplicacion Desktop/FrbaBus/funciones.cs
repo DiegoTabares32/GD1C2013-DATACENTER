@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using FrbaBus.Abm_Rol;
 
 namespace FrbaBus
 {
@@ -52,6 +53,16 @@ namespace FrbaBus
         public bool existeDni(DataTable tabla_puntos)
         {
             return tabla_puntos.Rows.Count > 0;
+
+        public bool check_func_activa(string id_rol , string id_func)
+        {
+            bool func_activa =false;
+            connection conexion = new connection();
+            string query = "SELECT fxrol_func_id FROM DATACENTER.FuncionalidadPorRol WHERE fxrol_rol_id = "+id_rol+" and fxrol_func_id = "+id_func;
+            DataTable table_rol = conexion.execute_query(query);
+            if (table_rol.Rows.Count > 0)
+                func_activa = true;
+            return func_activa;
         }
 
         public bool existePatente(string patente)
@@ -110,5 +121,70 @@ namespace FrbaBus
             connection conexion = new connection();
             return conexion.execute_query(query);           
         }
+    }
+}
+
+        public bool check_cambio_nomb_est_rol(string id_rol, char estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
+        {
+            
+            if (!(this.check_estado_rol(id_rol, estado_actual_rol) & nomb_rol_BD == nomb_rol_ingresado))
+            {
+                return true; //devuelve true si existen cambios
+            }
+            return false;
+        }
+
+
+        public bool check_estado_rol(string id_rol, char estado_actual_rol) //devuelve TRUE si el estado del ROL en la
+        {                                                                   //BD es igual al seleccionado
+            bool estado_rol = false;
+            if (this.get_estado_BD(id_rol) == estado_actual_rol)
+                estado_rol = true;
+            return estado_rol;
+        }
+
+        public char get_estado_BD(string id_rol)
+        {
+            connection conexion = new connection();
+            string query = "SELECT rol_estado FROM DATACENTER.Rol WHERE rol_id =" + id_rol;
+            DataTable table_rol = conexion.execute_query(query);
+            return (Convert.ToChar(table_rol.Rows[0].ItemArray[0].ToString()));
+                
+        }
+
+        public bool es_jubilado(string fecha_nac, string sexo)
+        {
+            //calcula si la persona es jubilada
+            //este metodo es necesario cuando compra un pasaje un cliente que ya esta ingresado en la base y por lo tanto no se tiene informacion si es jubilado o no
+            bool es_jubilado = false;
+            try
+            {
+
+                DateTime fecha_nacimiento = Convert.ToDateTime(fecha_nac);
+                TimeSpan diferencia_fechas = DateTime.Today - fecha_nacimiento;
+                int edad = diferencia_fechas.Days / 365;
+                if (sexo == "M")
+                {
+                    if (edad >= 65)
+                        es_jubilado = true;
+
+                }
+                else
+                {
+                    if (edad >= 60)
+                        es_jubilado = true;
+                }
+                return es_jubilado;
+            }
+            catch (FormatException)
+            {
+
+                return es_jubilado;
+            }
+
+        }
+      
+
+  
     }
 }
