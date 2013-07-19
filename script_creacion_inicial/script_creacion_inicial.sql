@@ -231,13 +231,13 @@ FOREIGN KEY (comp_tipo_tarj_id) REFERENCES DATACENTER.TipoTarjeta (tipo_id),
 PRIMARY KEY (comp_id)
 )
 GO
-<<<<<<< .mine
+
 
 /*------------------------------------------------------------------*/
-=======
+
 /*------------------------------------------------------------------*/
 
->>>>>>> .theirs
+
 /*---------------------CREAMOS TABLA PASAJE-------------------------*/
 
 CREATE TABLE DATACENTER.Pasaje
@@ -586,11 +586,8 @@ BEGIN
 	WHERE rol_id = @rol_id
 END
 GO
-<<<<<<< .mine
 
-=======
 
->>>>>>> .theirs
 CREATE PROCEDURE DATACENTER.get_listado_viaje @ciu_origen nvarchar(255), @ciu_destino nvarchar(255), @fecha_salida nvarchar(255)
 AS
 BEGIN
@@ -634,6 +631,7 @@ FROM DATACENTER.Viaje JOIN DATACENTER.Micro ON (viaj_mic_patente = mic_patente)
 WHERE viaj_id = @cod_viaje AND NOT but_nro IN (select pas_nro_butaca from DATACENTER.Pasaje where pas_viaj_id=@cod_viaje)
 END
 
+go
 
 CREATE FUNCTION DATACENTER.estado_puntos(@inicio datetime, @fin datetime2)
 RETURNS nvarchar(10)
@@ -1031,7 +1029,7 @@ begin
 	else
 		set @idDev = (select top 1 dev_id from DATACENTER.Devolucion where dev_comp_id=@nroCompra)
 	
-	-- Agrego devolución efectiva
+	-- Agrego devolucin efectiva
 	INSERT INTO DATACENTER.Devolucion(dev_id,dev_cod_PasPaq,dev_tipo_devuelto,dev_comp_id,dev_fecha,dev_motivo)
 	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,@fechaDev,@motivoDev)
 	
@@ -1140,7 +1138,7 @@ begin
 	fetch cursorViajes into @nroCompra,@tipoItem
 	while (@@FETCH_STATUS = 0)
 	begin
-		exec DATACENTER.registraDevolucion @fechaCancelacion,@nroCompra,@tipoItem,@motivoDev
+		exec DATACENTER.registraDevolucionParcial @fechaCancelacion,@nroCompra,@tipoItem,@motivoDev
 		fetch cursorViajes into @nroCompra,@tipoItem
 	end
 
