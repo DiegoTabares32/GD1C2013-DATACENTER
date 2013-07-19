@@ -33,11 +33,11 @@ namespace FrbaBus.Abm_Micro
             string query1;
             if (fechaReing != null)
             {
-                query1 = "SELECT DATACENTER.microDisponible('" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("yyy/MM/dd") + "','" + fechaReing.Value.ToString("yyy/MM/dd") + "')";
+                query1 = "SELECT DATACENTER.microDisponible('" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "','" + fechaReing.Value.ToString("dd/MM/yyyy HH:mm") + "')";
             }
             else
             {
-                query1 = "SELECT DATACENTER.microDisponible('" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("yyy/MM/dd") + "','" + null + "')";
+                query1 = "SELECT DATACENTER.microDisponible('" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "','" + null + "')";
             }
             connection connect1 = new connection();
             DataTable microReemplazante = connect1.execute_query(query1);
@@ -60,11 +60,11 @@ namespace FrbaBus.Abm_Micro
                 string query3;
                 if (fechaReing == null)
                 {
-                    query3 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + microReemplazante.Rows[0].ItemArray[0].ToString() + "' WHERE viaj_mic_patente='" + patenteConGuion + "' and (viaj_fecha_salida>='" + fechaFueraServ.Value.ToString("yyyy/MM/dd") + "' or viaj_fecha_lleg_estimada>='" + fechaFueraServ.Value.ToString("yyyy/MM/dd") + "')";
+                    query3 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + microReemplazante.Rows[0].ItemArray[0].ToString() + "' WHERE viaj_mic_patente='" + patenteConGuion + "' and (viaj_fecha_salida>='" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "' or viaj_fecha_lleg_estimada>='" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "')";
                 }
                 else
                 {
-                    query3 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + microReemplazante.Rows[0].ItemArray[0].ToString() + "' WHERE viaj_mic_patente='" + patenteConGuion + "' and ((viaj_fecha_salida>='" + fechaFueraServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_salida<='" + fechaReing.Value.ToString("yyyy/MM/dd") + "') or (viaj_fecha_lleg_estimada>='" + fechaFueraServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_lleg_estimada<='" + fechaReing.Value.ToString("yyyy/MM/dd") + "'))";
+                    query3 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + microReemplazante.Rows[0].ItemArray[0].ToString() + "' WHERE viaj_mic_patente='" + patenteConGuion + "' and ((viaj_fecha_salida>='" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "' and viaj_fecha_salida<='" + fechaReing.Value.ToString("dd/MM/yyyy HH:mm") + "') or (viaj_fecha_lleg_estimada>='" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "' and viaj_fecha_lleg_estimada<='" + fechaReing.Value.ToString("dd/MM/yyyy HH:mm") + "'))";
                 }
                 connection connect3 = new connection();
                 connect3.execute_query(query3);
@@ -82,7 +82,7 @@ namespace FrbaBus.Abm_Micro
             //Hacer devoluciones por los viajes y encomiendas que tenían asignado el micro para la fecha en que se da de baja
 
             //consulta a ejecutar para cancelar todos los viajes de ese micro en la fecha requerida
-            string query2 = "exec cancelaViajesXMicro '"+patenteConGuion+"','"+fechaFueraServ.Value.ToString("yyyy/MM/dd")+"','"+fechaReing.Value.ToString("yyyy/MM/dd")+"'";
+            string query2 = "exec cancelaViajesXMicro '" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "','" + fechaReing.Value.ToString("dd/MM/yyyy HH:mm") + "'";
             connection connect2 = new connection();
             connect2.execute_query(query2);
 
