@@ -14,18 +14,18 @@ namespace FrbaBus
         public SqlConnection connector()
         {
             SqlConnection connect = new SqlConnection();
-            try
-            {
+          //  try
+          //  {
                 connect.ConnectionString = get_string_connection();
                 connect.Open(); //abrimos conexion
                 //MessageBox.Show("Conectado");
 
-            }
-            catch (SqlException ex) //Capturamos algun error que pudo darse al querer conectarse
-            {
-                MessageBox.Show("Error al conectar con la base datos--" + ex.Message);
+            //}
+         //   catch (SqlException ex) //Capturamos algun error que pudo darse al querer conectarse
+            //{
+              //  MessageBox.Show("Error al conectar con la base datos--" + ex.Message);
 
-            }
+//            }
             return connect;
 
         }
@@ -47,14 +47,14 @@ namespace FrbaBus
             //volcamos la informacion resultado de ejecutar la consulta en un data table
             DataTable tabla=new DataTable();
             //tabla.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            try
-            {
+            //try
+            //{
                 data_adapter.Fill(tabla);
-            }
-            catch (SqlException)
-            {
-                MessageBox.Show("Error al llenar el DataTable");
-            }
+            //}
+            //catch (SqlException)
+            //{
+                //MessageBox.Show("Error al llenar el DataTable");
+            //}
             return tabla;
             
         }

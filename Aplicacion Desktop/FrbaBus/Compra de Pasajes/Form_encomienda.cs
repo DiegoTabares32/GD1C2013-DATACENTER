@@ -43,6 +43,7 @@ namespace FrbaBus.Compra_de_Pasajes
             this.pensionado_checkB.Checked = false;
             this.peso_validado = false;
             this.fecNacDateTimeP.ResetText();
+            this.precio_encomiendaTbox.Clear();
         }
 
         private void limpiar_boton_Click(object sender, EventArgs e)
@@ -52,12 +53,18 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void check_peso_encom_boton_Click(object sender, EventArgs e)
         {
-            if (this.peso_encom_tbox.Text == "0" | this.peso_encom_tbox.Text == "")
+            if (this.peso_encom_tbox.Text == "")
             {
                 MessageBox.Show("Debe ingresar un Peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            if (Convert.ToInt16(this.peso_encom_tbox.Text) == 0)
+            {
+                MessageBox.Show("Debe ingresar un Peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
             int kg_a_ocupar = Convert.ToInt16(this.peso_encom_tbox.Text); //inicializo con peso actual
             
             //calculo peso de las encomiendas implicadas en la compra más el peso de la encomienda actual
@@ -129,11 +136,6 @@ namespace FrbaBus.Compra_de_Pasajes
                 error = true;
             }
 
-            if (this.peso_encom_tbox.Text == "0" | this.peso_encom_tbox.Text == "")
-            {
-                MessageBox.Show("Debe Ingresar peso", "Encomienda", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                error = true;
-            }
 
             if (!this.peso_validado)
             {
@@ -142,10 +144,7 @@ namespace FrbaBus.Compra_de_Pasajes
             }
 
             if (error)
-            {
-                this.refrescar();
                 return;
-            }
 
 
             stored_procedures stored_proc = new stored_procedures();

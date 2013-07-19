@@ -67,7 +67,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.calendario_viajes);
             this.Name = "select_fecha_viaje";
-            this.Text = "select_fecha_viaje";
+            this.Text = "Seleccionar Fecha de Viaje";
             this.ResumeLayout(false);
             this.PerformLayout();
 

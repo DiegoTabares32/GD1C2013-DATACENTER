@@ -302,6 +302,11 @@
             // cant_cuot_numericUpDown
             // 
             this.cant_cuot_numericUpDown.Location = new System.Drawing.Point(218, 585);
+            this.cant_cuot_numericUpDown.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
             this.cant_cuot_numericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -456,7 +461,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form_Comprador";
-            this.Text = "Form_Comprador";
+            this.Text = "Compra con Tarjeta";
             this.Load += new System.EventHandler(this.Form_Comprador_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Comprador_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.cant_cuot_numericUpDown)).EndInit();

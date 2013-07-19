@@ -51,7 +51,6 @@
             this.name_rol.Name = "name_rol";
             this.name_rol.Size = new System.Drawing.Size(146, 20);
             this.name_rol.TabIndex = 1;
-            this.name_rol.TextChanged += new System.EventHandler(this.name_rol_TextChanged);
             // 
             // label2
             // 

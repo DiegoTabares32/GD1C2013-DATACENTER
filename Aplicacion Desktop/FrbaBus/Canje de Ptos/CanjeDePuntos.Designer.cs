@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.tablaPremios = new System.Windows.Forms.DataGridView();
+            this.buttonAceptar = new System.Windows.Forms.Button();
+            this.labelDniCliente = new System.Windows.Forms.Label();
+            this.labelFecha = new System.Windows.Forms.Label();
+            this.dateTimePickerFecha = new System.Windows.Forms.DateTimePicker();
+            this.textBoxDniCliente = new System.Windows.Forms.TextBox();
+            this.buttonBuscar = new System.Windows.Forms.Button();
+            this.buttonCancelar = new System.Windows.Forms.Button();
             this.Selección = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Premio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Puntos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Aceptar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dniCliente = new System.Windows.Forms.TextBox();
-            this.Buscar = new System.Windows.Forms.Button();
-            this.Cancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tablaPremios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,8 +55,71 @@
             this.Puntos});
             this.tablaPremios.Location = new System.Drawing.Point(29, 67);
             this.tablaPremios.Name = "tablaPremios";
-            this.tablaPremios.Size = new System.Drawing.Size(442, 215);
+            this.tablaPremios.Size = new System.Drawing.Size(520, 215);
             this.tablaPremios.TabIndex = 0;
+            // 
+            // buttonAceptar
+            // 
+            this.buttonAceptar.Location = new System.Drawing.Point(453, 298);
+            this.buttonAceptar.Name = "buttonAceptar";
+            this.buttonAceptar.Size = new System.Drawing.Size(75, 23);
+            this.buttonAceptar.TabIndex = 3;
+            this.buttonAceptar.Text = "Aceptar";
+            this.buttonAceptar.UseVisualStyleBackColor = true;
+            this.buttonAceptar.Click += new System.EventHandler(this.buttonAceptar_Click);
+            // 
+            // labelDniCliente
+            // 
+            this.labelDniCliente.AutoSize = true;
+            this.labelDniCliente.Location = new System.Drawing.Point(27, 16);
+            this.labelDniCliente.Name = "labelDniCliente";
+            this.labelDniCliente.Size = new System.Drawing.Size(64, 13);
+            this.labelDniCliente.TabIndex = 4;
+            this.labelDniCliente.Text = "DNI Cliente:";
+            // 
+            // labelFecha
+            // 
+            this.labelFecha.AutoSize = true;
+            this.labelFecha.Location = new System.Drawing.Point(27, 40);
+            this.labelFecha.Name = "labelFecha";
+            this.labelFecha.Size = new System.Drawing.Size(40, 13);
+            this.labelFecha.TabIndex = 5;
+            this.labelFecha.Text = "Fecha:";
+            // 
+            // dateTimePickerFecha
+            // 
+            this.dateTimePickerFecha.Location = new System.Drawing.Point(97, 37);
+            this.dateTimePickerFecha.Name = "dateTimePickerFecha";
+            this.dateTimePickerFecha.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerFecha.TabIndex = 6;
+            // 
+            // textBoxDniCliente
+            // 
+            this.textBoxDniCliente.Location = new System.Drawing.Point(96, 12);
+            this.textBoxDniCliente.Name = "textBoxDniCliente";
+            this.textBoxDniCliente.Size = new System.Drawing.Size(201, 20);
+            this.textBoxDniCliente.TabIndex = 7;
+            this.textBoxDniCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dniCliente_KeyPress);
+            // 
+            // buttonBuscar
+            // 
+            this.buttonBuscar.Location = new System.Drawing.Point(317, 9);
+            this.buttonBuscar.Name = "buttonBuscar";
+            this.buttonBuscar.Size = new System.Drawing.Size(75, 23);
+            this.buttonBuscar.TabIndex = 8;
+            this.buttonBuscar.Text = "Buscar";
+            this.buttonBuscar.UseVisualStyleBackColor = true;
+            this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
+            // 
+            // buttonCancelar
+            // 
+            this.buttonCancelar.Location = new System.Drawing.Point(358, 297);
+            this.buttonCancelar.Name = "buttonCancelar";
+            this.buttonCancelar.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancelar.TabIndex = 9;
+            this.buttonCancelar.Text = "Cancelar";
+            this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
             // Selección
             // 
@@ -75,6 +138,7 @@
             this.Premio.Frozen = true;
             this.Premio.HeaderText = "Premio";
             this.Premio.Name = "Premio";
+            this.Premio.Width = 180;
             // 
             // Puntos
             // 
@@ -82,87 +146,21 @@
             this.Puntos.HeaderText = "Puntos";
             this.Puntos.Name = "Puntos";
             // 
-            // Aceptar
-            // 
-            this.Aceptar.Location = new System.Drawing.Point(397, 297);
-            this.Aceptar.Name = "Aceptar";
-            this.Aceptar.Size = new System.Drawing.Size(75, 23);
-            this.Aceptar.TabIndex = 3;
-            this.Aceptar.Text = "Aceptar";
-            this.Aceptar.UseVisualStyleBackColor = true;
-            this.Aceptar.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "DNI Cliente:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Fecha:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(97, 37);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 6;
-            // 
-            // dniCliente
-            // 
-            this.dniCliente.Location = new System.Drawing.Point(96, 12);
-            this.dniCliente.Name = "dniCliente";
-            this.dniCliente.Size = new System.Drawing.Size(201, 20);
-            this.dniCliente.TabIndex = 7;
-            this.dniCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dniCliente_KeyPress);
-            // 
-            // Buscar
-            // 
-            this.Buscar.Location = new System.Drawing.Point(317, 9);
-            this.Buscar.Name = "Buscar";
-            this.Buscar.Size = new System.Drawing.Size(75, 23);
-            this.Buscar.TabIndex = 8;
-            this.Buscar.Text = "Buscar";
-            this.Buscar.UseVisualStyleBackColor = true;
-            this.Buscar.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // Cancelar
-            // 
-            this.Cancelar.Location = new System.Drawing.Point(302, 296);
-            this.Cancelar.Name = "Cancelar";
-            this.Cancelar.Size = new System.Drawing.Size(75, 23);
-            this.Cancelar.TabIndex = 9;
-            this.Cancelar.Text = "Cancelar";
-            this.Cancelar.UseVisualStyleBackColor = true;
-            this.Cancelar.Click += new System.EventHandler(this.button3_Click);
-            // 
             // CanjeDePuntos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 334);
-            this.Controls.Add(this.Cancelar);
-            this.Controls.Add(this.Buscar);
-            this.Controls.Add(this.dniCliente);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.Aceptar);
+            this.ClientSize = new System.Drawing.Size(580, 334);
+            this.Controls.Add(this.buttonCancelar);
+            this.Controls.Add(this.buttonBuscar);
+            this.Controls.Add(this.textBoxDniCliente);
+            this.Controls.Add(this.dateTimePickerFecha);
+            this.Controls.Add(this.labelFecha);
+            this.Controls.Add(this.labelDniCliente);
+            this.Controls.Add(this.buttonAceptar);
             this.Controls.Add(this.tablaPremios);
             this.Name = "CanjeDePuntos";
             this.Text = "Canje De Puntos";
-            this.Load += new System.EventHandler(this.CanjeDePuntos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tablaPremios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -172,16 +170,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView tablaPremios;
-        private System.Windows.Forms.Button Aceptar;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox dniCliente;
-        private System.Windows.Forms.Button Buscar;
+        private System.Windows.Forms.Button buttonAceptar;
+        private System.Windows.Forms.Label labelDniCliente;
+        private System.Windows.Forms.Label labelFecha;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFecha;
+        private System.Windows.Forms.TextBox textBoxDniCliente;
+        private System.Windows.Forms.Button buttonBuscar;
+        private System.Windows.Forms.Button buttonCancelar;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Selección;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Premio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Puntos;
-        private System.Windows.Forms.Button Cancelar;
     }
 }

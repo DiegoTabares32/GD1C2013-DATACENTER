@@ -58,6 +58,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.buttonConsultaPuntos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cant_encomiendas_numUpdown)).BeginInit();
             this.SuspendLayout();
@@ -331,11 +332,23 @@
             this.label11.TabIndex = 83;
             this.label11.Text = "Seleccione Viaje para Encomienda :";
             // 
+            // buttonConsultaPuntos
+            // 
+            this.buttonConsultaPuntos.AutoSize = true;
+            this.buttonConsultaPuntos.Location = new System.Drawing.Point(457, 52);
+            this.buttonConsultaPuntos.Name = "buttonConsultaPuntos";
+            this.buttonConsultaPuntos.Size = new System.Drawing.Size(109, 31);
+            this.buttonConsultaPuntos.TabIndex = 84;
+            this.buttonConsultaPuntos.Text = "Consulta de Puntos";
+            this.buttonConsultaPuntos.UseVisualStyleBackColor = true;
+            this.buttonConsultaPuntos.Click += new System.EventHandler(this.buttonConsultaPuntos_Click);
+            // 
             // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(582, 706);
+            this.Controls.Add(this.buttonConsultaPuntos);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label16);
@@ -408,5 +421,6 @@
         private System.Windows.Forms.Label label11;
         public System.Windows.Forms.Button login_boton;
         public System.Windows.Forms.TextBox total_tbox;
+        private System.Windows.Forms.Button buttonConsultaPuntos;
     }
 }

@@ -36,6 +36,9 @@
             this.bajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estadisticaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarArriboToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.microToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,17 +48,20 @@
             this.altaToolStripMenuItem,
             this.modificaciónToolStripMenuItem,
             this.bajaToolStripMenuItem,
-            this.compraToolStripMenuItem});
+            this.compraToolStripMenuItem,
+            this.estadisticaToolStripMenuItem,
+            this.registrarArriboToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(418, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(549, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolToolStripMenuItem});
+            this.rolToolStripMenuItem,
+            this.microToolStripMenuItem});
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
             this.altaToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.altaToolStripMenuItem.Text = "Alta";
@@ -63,7 +69,7 @@
             // rolToolStripMenuItem
             // 
             this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
-            this.rolToolStripMenuItem.Size = new System.Drawing.Size(91, 22);
+            this.rolToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rolToolStripMenuItem.Text = "Rol";
             this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
             // 
@@ -99,19 +105,40 @@
             // facturaciónToolStripMenuItem
             // 
             this.facturaciónToolStripMenuItem.Name = "facturaciónToolStripMenuItem";
-            this.facturaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.facturaciónToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.facturaciónToolStripMenuItem.Text = "Facturación";
             this.facturaciónToolStripMenuItem.Click += new System.EventHandler(this.facturaciónToolStripMenuItem_Click);
+            // 
+            // estadisticaToolStripMenuItem
+            // 
+            this.estadisticaToolStripMenuItem.Name = "estadisticaToolStripMenuItem";
+            this.estadisticaToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.estadisticaToolStripMenuItem.Text = "Estadistica";
+            this.estadisticaToolStripMenuItem.Click += new System.EventHandler(this.estadisticaToolStripMenuItem_Click);
+            // 
+            // registrarArriboToolStripMenuItem
+            // 
+            this.registrarArriboToolStripMenuItem.Name = "registrarArriboToolStripMenuItem";
+            this.registrarArriboToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.registrarArriboToolStripMenuItem.Text = "Registrar Arribo";
+            this.registrarArriboToolStripMenuItem.Click += new System.EventHandler(this.registrarArriboToolStripMenuItem_Click);
+            // 
+            // microToolStripMenuItem
+            // 
+            this.microToolStripMenuItem.Name = "microToolStripMenuItem";
+            this.microToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.microToolStripMenuItem.Text = "Micro";
+            this.microToolStripMenuItem.Click += new System.EventHandler(this.microToolStripMenuItem_Click);
             // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 262);
+            this.ClientSize = new System.Drawing.Size(549, 68);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormAdmin";
-            this.Text = "Administrador";
+            this.Text = "Menu Administrador";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -129,5 +156,8 @@
         private System.Windows.Forms.ToolStripMenuItem rolToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem compraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem facturaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estadisticaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registrarArriboToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem microToolStripMenuItem;
     }
 }

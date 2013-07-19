@@ -115,14 +115,11 @@ namespace FrbaBus.Compra_de_Pasajes
                 MessageBox.Show("Debe verificar Tipo de Tarjeta ", "Comprador", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
-            
+
 
 
             if (error)
-            {
-                this.refrescar();
                 return;
-            }
 
             string sexo;
             if (this.mascul_radioBut.Checked)

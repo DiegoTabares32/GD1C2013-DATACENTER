@@ -89,10 +89,7 @@ namespace FrbaBus.Compra_de_Pasajes
             }
 
             if (error)
-            {
-                this.refrescar();
                 return;
-            }
 
             string sexo;
             if (this.mascul_radioBut.Checked)

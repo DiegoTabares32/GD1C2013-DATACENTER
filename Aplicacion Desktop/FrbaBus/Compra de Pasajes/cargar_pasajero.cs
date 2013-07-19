@@ -123,10 +123,7 @@ namespace FrbaBus.Compra_de_Pasajes
                 }
             }
             if (error)
-            {
-                this.refrescar();
                 return;
-            }
 
             stored_procedures stored_proc = new stored_procedures();
             string sexo;

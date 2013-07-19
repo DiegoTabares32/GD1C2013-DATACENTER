@@ -69,17 +69,35 @@
     <Compile Include="Abm Micro\Abm_Micro_Alta.Designer.cs">
       <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Micro\Abm_Micro_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Micro\Abm_Micro_Baja.Designer.cs">
+      <DependentUpon>Abm_Micro_Baja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Micro\Abm_Micro_Modif.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Micro\Abm_Micro_Modif.Designer.cs">
       <DependentUpon>Abm_Micro_Modif.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Micro\Abm_Micro_OpPorConcretar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Micro\Abm_Micro_OpPorConcretar.Designer.cs">
+      <DependentUpon>Abm_Micro_OpPorConcretar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Micro\Butaca_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Micro\Butaca_Alta.Designer.cs">
       <DependentUpon>Butaca_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Micro\Patente_Alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Micro\Patente_Alta.Designer.cs">
+      <DependentUpon>Patente_Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Permisos\Form1.cs">
       <SubType>Form</SubType>
@@ -96,14 +114,26 @@
     <Compile Include="Abm Rol\Abm_Rol_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\Abm_Rol_Alta.Designer.cs">
+    <Compile Include="Abm Rol\Abm_Rol_Alta.designer.cs">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cancelar Viaje\Form1.cs">
+    <Compile Include="Abm Rol\Abm_Rol_Busqueda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Cancelar Viaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Rol\Abm_Rol_Busqueda.Designer.cs">
+      <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\Abm_Rol_Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\Abm_Rol_Modif.Designer.cs">
+      <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CancelacionDevolución\Cancel_Devol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CancelacionDevolución\Cancel_Devol.designer.cs">
+      <DependentUpon>Cancel_Devol.cs</DependentUpon>
     </Compile>
     <Compile Include="Canje de Ptos\CanjeDePuntos.cs">
       <SubType>Form</SubType>
@@ -117,11 +147,53 @@
     <Compile Include="Cargando.Designer.cs">
       <DependentUpon>Cargando.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra de Pasajes\Form1.cs">
+    <Compile Include="Compra de Pasajes\cargar_pasajero.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra de Pasajes\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra de Pasajes\cargar_pasajero.Designer.cs">
+      <DependentUpon>cargar_pasajero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\FormCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\FormCompra.Designer.cs">
+      <DependentUpon>FormCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_Comprador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_Comprador.Designer.cs">
+      <DependentUpon>Form_Comprador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_compra_Efectivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_compra_Efectivo.Designer.cs">
+      <DependentUpon>Form_compra_Efectivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_encomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\Form_encomienda.Designer.cs">
+      <DependentUpon>Form_encomienda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\select_butaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\select_butaca.Designer.cs">
+      <DependentUpon>select_butaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\select_fecha_viaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\select_fecha_viaje.Designer.cs">
+      <DependentUpon>select_fecha_viaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra de Pasajes\select_viaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra de Pasajes\select_viaje.Designer.cs">
+      <DependentUpon>select_viaje.cs</DependentUpon>
     </Compile>
     <Compile Include="connection.cs" />
     <Compile Include="Consulta Puntos Adquiridos\Abm_Consulta_Puntos.cs">
@@ -135,12 +207,6 @@
     </Compile>
     <Compile Include="FormAdmin.Designer.cs">
       <DependentUpon>FormAdmin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormCompra.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormCompra.Designer.cs">
-      <DependentUpon>FormCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="funciones.cs" />
     <Compile Include="GenerarViaje\Form1.cs">
@@ -166,11 +232,20 @@
     <EmbeddedResource Include="Abm Micro\Abm_Micro_Alta.resx">
       <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Micro\Abm_Micro_Baja.resx">
+      <DependentUpon>Abm_Micro_Baja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Micro\Abm_Micro_Modif.resx">
       <DependentUpon>Abm_Micro_Modif.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Micro\Abm_Micro_OpPorConcretar.resx">
+      <DependentUpon>Abm_Micro_OpPorConcretar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Micro\Butaca_Alta.resx">
       <DependentUpon>Butaca_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Micro\Patente_Alta.resx">
+      <DependentUpon>Patente_Alta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Alta.resx">
       <DependentUpon>Abm_Reco_Alta.cs</DependentUpon>
@@ -178,20 +253,50 @@
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Abm_Rol_Busqueda.resx">
+      <DependentUpon>Abm_Rol_Busqueda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\Abm_Rol_Modif.resx">
+      <DependentUpon>Abm_Rol_Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CancelacionDevolución\Cancel_Devol.resx">
+      <DependentUpon>Cancel_Devol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Canje de Ptos\CanjeDePuntos.resx">
       <DependentUpon>CanjeDePuntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cargando.resx">
       <DependentUpon>Cargando.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\cargar_pasajero.resx">
+      <DependentUpon>cargar_pasajero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\FormCompra.resx">
+      <DependentUpon>FormCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\Form_Comprador.resx">
+      <DependentUpon>Form_Comprador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\Form_compra_Efectivo.resx">
+      <DependentUpon>Form_compra_Efectivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\Form_encomienda.resx">
+      <DependentUpon>Form_encomienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\select_butaca.resx">
+      <DependentUpon>select_butaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\select_fecha_viaje.resx">
+      <DependentUpon>select_fecha_viaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra de Pasajes\select_viaje.resx">
+      <DependentUpon>select_viaje.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta Puntos Adquiridos\Abm_Consulta_Puntos.resx">
       <DependentUpon>Abm_Consulta_Puntos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormCompra.resx">
-      <DependentUpon>FormCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>

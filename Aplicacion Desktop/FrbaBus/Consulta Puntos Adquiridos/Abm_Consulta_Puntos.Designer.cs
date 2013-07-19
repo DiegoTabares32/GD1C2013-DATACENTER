@@ -251,6 +251,7 @@
             this.Controls.Add(this.labelDni);
             this.Name = "Abm_Consulta_Puntos";
             this.Text = "Consulta de Puntos";
+
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPuntosDetallados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCanjesRealizados)).EndInit();
             this.ResumeLayout(false);

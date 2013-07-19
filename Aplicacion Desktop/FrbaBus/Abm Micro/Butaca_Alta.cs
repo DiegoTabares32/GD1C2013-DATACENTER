@@ -11,13 +11,19 @@ namespace FrbaBus.Abm_Micro
 {
     public partial class FormButacaAlta : Form
     {
+        private int cantButacas;
+        private string patenteMic;
+
         public FormButacaAlta()
         {
             InitializeComponent();
         }
 
-        public int cantButacas;
-        public string patente;
+        internal void pasaDatosMicro(int cantidadButacas, String patMicro)
+        {
+            cantButacas = cantidadButacas;
+            patenteMic = patMicro;
+        }
 
         private void FormButacaAlta_Load(object sender, EventArgs e)
         {
@@ -66,15 +72,13 @@ namespace FrbaBus.Abm_Micro
 
                     //consulta a ejecutar para registrar nueva butaca
                     string query1 = "INSERT INTO DATACENTER.Butaca(but_nro,but_mic_patente,but_tipo,but_piso) VALUES ('" +
-                                    dataGridViewButacas.Rows[i].Cells[0].Value.ToString() + "','" + patente + "','" + dataGridViewButacas.Rows[i].Cells[1].Value.ToString() + "','" + dataGridViewButacas.Rows[i].Cells[2].Value.ToString() + "')";
-
-                    //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+                                    dataGridViewButacas.Rows[i].Cells[0].Value.ToString() + "','" + patenteMic + "','" + dataGridViewButacas.Rows[i].Cells[1].Value.ToString() + "','" + dataGridViewButacas.Rows[i].Cells[2].Value.ToString() + "')";
                     connection connect1 = new connection();
                     connect1.execute_query(query1);
-
+                
                 }
             }
-            catch (NullReferenceException)
+            catch(NullReferenceException)
             {
                 MessageBox.Show("Debe cargar todas las butacas");
                 return;

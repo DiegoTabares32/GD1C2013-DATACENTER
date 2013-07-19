@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaBus.Login;
+using FrbaBus.Consulta_Puntos_Adquiridos;
 
 namespace FrbaBus.Compra_de_Pasajes
 {
@@ -455,6 +456,12 @@ namespace FrbaBus.Compra_de_Pasajes
                 e.Handled = false;
             else
                 e.Handled = true;
+        }
+
+        private void buttonConsultaPuntos_Click(object sender, EventArgs e)
+        {
+            Abm_Consulta_Puntos consulta = new Abm_Consulta_Puntos();
+            consulta.Show();
         }
   
     }

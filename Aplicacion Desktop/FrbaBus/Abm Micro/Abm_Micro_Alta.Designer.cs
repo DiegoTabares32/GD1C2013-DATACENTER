@@ -160,6 +160,7 @@
             this.comboBoxServicio.Name = "comboBoxServicio";
             this.comboBoxServicio.Size = new System.Drawing.Size(137, 21);
             this.comboBoxServicio.TabIndex = 14;
+            this.comboBoxServicio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxServicio_KeyPress);
             // 
             // comboBoxMarca
             // 
@@ -168,6 +169,7 @@
             this.comboBoxMarca.Name = "comboBoxMarca";
             this.comboBoxMarca.Size = new System.Drawing.Size(137, 21);
             this.comboBoxMarca.TabIndex = 15;
+            this.comboBoxMarca.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxMarca_KeyPress);
             // 
             // labelFechaAlta
             // 
@@ -193,6 +195,7 @@
             this.buttonCancelar.TabIndex = 18;
             this.buttonCancelar.Text = "Cancelar";
             this.buttonCancelar.UseVisualStyleBackColor = true;
+            this.buttonCancelar.Click += new System.EventHandler(this.buttonCancelar_Click);
             // 
             // Abm_Micro_Alta
             // 

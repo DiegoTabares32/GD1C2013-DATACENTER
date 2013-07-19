@@ -53,6 +53,7 @@ namespace FrbaBus
         public bool existeDni(DataTable tabla_puntos)
         {
             return tabla_puntos.Rows.Count > 0;
+        }
 
         public bool check_func_activa(string id_rol , string id_func)
         {
@@ -120,9 +121,7 @@ namespace FrbaBus
             string query = "select	top 5 m.mic_patente as 'Patente', sum(DATACENTER.diasFueraDeServicio(e.est_fecha_fuera_serv, e.est_fecha_reingreso, DATACENTER.fechaInicioSemestre('"+anio+"',"+semestre+"), DATACENTER.fechaFinSemestre('"+anio+"',"+semestre+"))) as 'Dias Fuera de Servicio' from DATACENTER.Micro m join DATACENTER.EstadoMicro e on m.mic_patente = e.est_mic_patente where (DATACENTER.sumaDias(e.est_fecha_fuera_serv, e.est_fecha_reingreso, DATACENTER.fechaInicioSemestre('"+anio+"',"+semestre+"), DATACENTER.fechaFinSemestre('"+anio+"',"+semestre+")) = 1) group by m.mic_patente order by 2 desc";
             connection conexion = new connection();
             return conexion.execute_query(query);           
-        }
-    }
-}
+        }  
 
         public bool check_cambio_nomb_est_rol(string id_rol, char estado_actual_rol, string nomb_rol_ingresado, string nomb_rol_BD)
         {

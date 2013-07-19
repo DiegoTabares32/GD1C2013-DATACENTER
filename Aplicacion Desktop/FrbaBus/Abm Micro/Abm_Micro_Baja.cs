@@ -9,16 +9,16 @@ using System.Windows.Forms;
 
 namespace FrbaBus.Abm_Micro
 {
-    public partial class Abm_Micro_Modif : Form
+    public partial class Abm_Micro_Baja : Form
     {
         private funciones funciones;
 
-        public Abm_Micro_Modif()
+        public Abm_Micro_Baja()
         {
             InitializeComponent();
             this.funciones = new funciones();
         }
-
+  
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
             if (textBoxPatente.Text == "")
@@ -58,12 +58,6 @@ namespace FrbaBus.Abm_Micro
                 return;
             }
 
-            if (dateTimePickerFechaReingreso.Value < dateTimePickerFechaBajaTemporaria.Value)
-            {
-                MessageBox.Show("ERROR: La fecha de baja no puede ser anterior a la de reingreso.");
-                return;
-            }
-
             //Chequea si existen viajes ya asignados a ese micro
 
             //preparar patente para poder registrar nuevo micro
@@ -71,31 +65,14 @@ namespace FrbaBus.Abm_Micro
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-
-            //consulta a ejecutar para saber si existen viajes asociados al micro
-            string query3 = "SELECT * FROM DATACENTER.EstadoMicro where est_mic_patente='" + nroPatente + "'";
+            string query3 = "SELECT DATACENTER.estadoBaja('"+dateTimePickerFechaBajaDefinitiva.Value.ToString("yyyy/MM/dd")+"','"+nroPatente+"')";
             connection connect3 = new connection();
-            DataTable estadosDelMicro = connect3.execute_query(query3);
-
-            for(i=0;i<estadosDelMicro.Rows.Count;i++)
+            DataTable estadoBajaMicro = connect3.execute_query(query3);
+            
+            if (estadoBajaMicro.Rows[0].ItemArray[0].ToString() != "0")
             {
-                if (Convert.ToDateTime(dateTimePickerFechaBajaTemporaria.Value.ToString()) >= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[2].ToString()))
-                {
-                    if (Convert.ToDateTime(dateTimePickerFechaBajaTemporaria.Value.ToString()) <= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[3].ToString()))
-                    {
-                        MessageBox.Show("ERROR: Para ese rango de fechas ya se registra una baja del micro");
-                        return;
-                    }
-                }
-
-                if (Convert.ToDateTime(dateTimePickerFechaReingreso.Value.ToString()) >= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[2].ToString()))
-                {
-                    if (Convert.ToDateTime(dateTimePickerFechaReingreso.Value.ToString()) <= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[3].ToString()))
-                    {
-                        MessageBox.Show("ERROR: Para ese rango de fechas ya se registra una baja del micro");
-                        return;
-                    }
-                }
+                MessageBox.Show("ERROR: Para esa fecha el micro ya está dado de baja.");
+                return;
             }
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
@@ -104,12 +81,10 @@ namespace FrbaBus.Abm_Micro
             DataTable cantViajes = connect1.execute_query(query1);
 
             //consulta a ejecutar para agregar nuevo registro por micro fuera de servicio (en EstadoMicro)
-            string query2 = "INSERT INTO DATACENTER.EstadoMicro(est_mic_patente,est_fecha_fuera_serv,est_fecha_reingreso) VALUES ('"
-                            + nroPatente + "','" + dateTimePickerFechaBajaTemporaria.Value.ToString("yyyy/MM/dd") + "','" + dateTimePickerFechaReingreso.Value.ToString("yyyy/MM/dd") + "')";
+            string query2 = "UPDATE DATACENTER.Micro SET mic_fecha_baja_def='"+dateTimePickerFechaBajaDefinitiva.Value.ToString("yyyy/MM/dd")+"' where mic_patente='"+nroPatente+"'";
             connection connect2 = new connection();
             connect2.execute_query(query2);
-
-
+            
             if (Convert.ToInt32(cantViajes.Rows[0].ItemArray[0].ToString()) == 0)
             {
                 MessageBox.Show("La operación se ha realizado con éxito.");
@@ -120,7 +95,7 @@ namespace FrbaBus.Abm_Micro
             {
                 // Direcciona a formulario de OPERACIÓN POR CONCRETAR ya que tenía viajes asociados
                 Abm_Micro_OpPorConcretar form_OpPorConcretar = new Abm_Micro_OpPorConcretar();
-                form_OpPorConcretar.pasaPatente(nroPatente, dateTimePickerFechaBajaTemporaria, dateTimePickerFechaReingreso);
+                form_OpPorConcretar.pasaPatente(nroPatente, dateTimePickerFechaBajaDefinitiva, null);
                 form_OpPorConcretar.ShowDialog();
             }
         }

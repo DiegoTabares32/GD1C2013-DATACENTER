@@ -65,7 +65,9 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
 
             this.dataGridViewPuntosDetallados.Columns.Clear();
             this.dataGridViewCanjesRealizados.Columns.Clear();
+            
         }
+
 
     }
 }

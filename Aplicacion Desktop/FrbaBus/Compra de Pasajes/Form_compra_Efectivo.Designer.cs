@@ -335,7 +335,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form_compra_Efectivo";
-            this.Text = "Form_compra_Efectivo";
+            this.Text = "Compra en Efectivo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_compra_Efectivo_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
