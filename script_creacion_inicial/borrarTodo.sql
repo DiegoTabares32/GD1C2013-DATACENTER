@@ -65,7 +65,9 @@ DROP FUNCTION DATACENTER.fechaInicioSemestre
 
 DROP PROCEDURE DATACENTER.canjeaPremio
 
-DROP PROCEDURE DATACENTER.registraDevolucion
+DROP PROCEDURE DATACENTER.registraDevolucionParcial
+
+DROP PROCEDURE DATACENTER.registraDevolucionTotal
 
 DROP PROCEDURE DATACENTER.registrarNuevoMicro
 
