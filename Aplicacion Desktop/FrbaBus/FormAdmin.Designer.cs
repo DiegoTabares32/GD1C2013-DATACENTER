@@ -34,15 +34,19 @@
             this.microToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rolToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.microToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.bajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.microToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.compraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarArriboToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.microToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.microToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarDevoluciónCancelaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canjePremioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recorridoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recorridoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.recorridoToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarViajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,10 +60,11 @@
             this.estadisticaToolStripMenuItem,
             this.registrarArriboToolStripMenuItem,
             this.registrarDevoluciónCancelaciónToolStripMenuItem,
-            this.canjePremioToolStripMenuItem});
+            this.canjePremioToolStripMenuItem,
+            this.generarViajeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(728, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(791, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -67,7 +72,8 @@
             // 
             this.altaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rolToolStripMenuItem,
-            this.microToolStripMenuItem});
+            this.microToolStripMenuItem,
+            this.recorridoToolStripMenuItem});
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
             this.altaToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.altaToolStripMenuItem.Text = "Alta";
@@ -75,14 +81,14 @@
             // rolToolStripMenuItem
             // 
             this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
-            this.rolToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.rolToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rolToolStripMenuItem.Text = "Rol";
             this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
             // 
             // microToolStripMenuItem
             // 
             this.microToolStripMenuItem.Name = "microToolStripMenuItem";
-            this.microToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.microToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.microToolStripMenuItem.Text = "Micro";
             this.microToolStripMenuItem.Click += new System.EventHandler(this.microToolStripMenuItem_Click);
             // 
@@ -90,7 +96,8 @@
             // 
             this.modificaciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rolToolStripMenuItem1,
-            this.microToolStripMenuItem1});
+            this.microToolStripMenuItem1,
+            this.recorridoToolStripMenuItem1});
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
             this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
@@ -102,13 +109,28 @@
             this.rolToolStripMenuItem1.Text = "Rol";
             this.rolToolStripMenuItem1.Click += new System.EventHandler(this.rolToolStripMenuItem1_Click);
             // 
+            // microToolStripMenuItem1
+            // 
+            this.microToolStripMenuItem1.Name = "microToolStripMenuItem1";
+            this.microToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.microToolStripMenuItem1.Text = "Micro";
+            this.microToolStripMenuItem1.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
+            // 
             // bajaToolStripMenuItem
             // 
             this.bajaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.microToolStripMenuItem2});
+            this.microToolStripMenuItem2,
+            this.recorridoToolStripMenuItem2});
             this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
             this.bajaToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.bajaToolStripMenuItem.Text = "Baja";
+            // 
+            // microToolStripMenuItem2
+            // 
+            this.microToolStripMenuItem2.Name = "microToolStripMenuItem2";
+            this.microToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.microToolStripMenuItem2.Text = "Micro";
+            this.microToolStripMenuItem2.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
             // 
             // compraToolStripMenuItem
             // 
@@ -139,20 +161,6 @@
             this.registrarArriboToolStripMenuItem.Text = "Registrar Arribo";
             this.registrarArriboToolStripMenuItem.Click += new System.EventHandler(this.registrarArriboToolStripMenuItem_Click);
             // 
-            // microToolStripMenuItem1
-            // 
-            this.microToolStripMenuItem1.Name = "microToolStripMenuItem1";
-            this.microToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.microToolStripMenuItem1.Text = "Micro";
-            this.microToolStripMenuItem1.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
-            // 
-            // microToolStripMenuItem2
-            // 
-            this.microToolStripMenuItem2.Name = "microToolStripMenuItem2";
-            this.microToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.microToolStripMenuItem2.Text = "Micro";
-            this.microToolStripMenuItem2.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
-            // 
             // registrarDevoluciónCancelaciónToolStripMenuItem
             // 
             this.registrarDevoluciónCancelaciónToolStripMenuItem.Name = "registrarDevoluciónCancelaciónToolStripMenuItem";
@@ -167,11 +175,38 @@
             this.canjePremioToolStripMenuItem.Text = "Canje Premio";
             this.canjePremioToolStripMenuItem.Click += new System.EventHandler(this.canjePremioToolStripMenuItem_Click);
             // 
+            // recorridoToolStripMenuItem
+            // 
+            this.recorridoToolStripMenuItem.Name = "recorridoToolStripMenuItem";
+            this.recorridoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recorridoToolStripMenuItem.Text = "Recorrido";
+            this.recorridoToolStripMenuItem.Click += new System.EventHandler(this.recorridoToolStripMenuItem_Click);
+            // 
+            // recorridoToolStripMenuItem1
+            // 
+            this.recorridoToolStripMenuItem1.Name = "recorridoToolStripMenuItem1";
+            this.recorridoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.recorridoToolStripMenuItem1.Text = "Recorrido";
+            this.recorridoToolStripMenuItem1.Click += new System.EventHandler(this.recorridoToolStripMenuItem1_Click);
+            // 
+            // recorridoToolStripMenuItem2
+            // 
+            this.recorridoToolStripMenuItem2.Name = "recorridoToolStripMenuItem2";
+            this.recorridoToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.recorridoToolStripMenuItem2.Text = "Recorrido";
+            // 
+            // generarViajeToolStripMenuItem
+            // 
+            this.generarViajeToolStripMenuItem.Name = "generarViajeToolStripMenuItem";
+            this.generarViajeToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.generarViajeToolStripMenuItem.Text = "Generar Viaje";
+            this.generarViajeToolStripMenuItem.Click += new System.EventHandler(this.generarViajeToolStripMenuItem_Click);
+            // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(728, 68);
+            this.ClientSize = new System.Drawing.Size(791, 68);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormAdmin";
@@ -200,5 +235,9 @@
         private System.Windows.Forms.ToolStripMenuItem microToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem registrarDevoluciónCancelaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem canjePremioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recorridoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recorridoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem recorridoToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem generarViajeToolStripMenuItem;
     }
 }

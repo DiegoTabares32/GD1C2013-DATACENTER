@@ -108,8 +108,32 @@
     <Compile Include="Abm Recorrido\Abm_Reco_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Recorrido\Abm_Reco_Alta.Designer.cs">
+    <Compile Include="Abm Recorrido\Abm_Reco_Alta.designer.cs">
       <DependentUpon>Abm_Reco_Alta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Baja.Designer.cs">
+      <DependentUpon>Abm_Reco_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Modificacion.Designer.cs">
+      <DependentUpon>Abm_Reco_Modificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Seleccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Seleccion.Designer.cs">
+      <DependentUpon>Abm_Reco_Seleccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_SelecDel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_SelecDel.Designer.cs">
+      <DependentUpon>Abm_Reco_SelecDel.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\Abm_Rol_Alta.cs">
       <SubType>Form</SubType>
@@ -209,11 +233,23 @@
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="funciones.cs" />
-    <Compile Include="GenerarViaje\Form1.cs">
+    <Compile Include="GenerarViaje\Alta_Viaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarViaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GenerarViaje\Alta_Viaje.Designer.cs">
+      <DependentUpon>Alta_Viaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerarViaje\Seleccion_Micro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerarViaje\Seleccion_Micro.Designer.cs">
+      <DependentUpon>Seleccion_Micro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenerarViaje\Seleccion_Reco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenerarViaje\Seleccion_Reco.Designer.cs">
+      <DependentUpon>Seleccion_Reco.cs</DependentUpon>
     </Compile>
     <Compile Include="ListadoEstadistico.cs">
       <SubType>Form</SubType>
@@ -249,6 +285,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Alta.resx">
       <DependentUpon>Abm_Reco_Alta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Baja.resx">
+      <DependentUpon>Abm_Reco_Baja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Modificacion.resx">
+      <DependentUpon>Abm_Reco_Modificacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Seleccion.resx">
+      <DependentUpon>Abm_Reco_Seleccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Recorrido\Abm_Reco_SelecDel.resx">
+      <DependentUpon>Abm_Reco_SelecDel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
@@ -298,6 +346,15 @@
     <EmbeddedResource Include="FormAdmin.resx">
       <DependentUpon>FormAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GenerarViaje\Alta_Viaje.resx">
+      <DependentUpon>Alta_Viaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerarViaje\Seleccion_Micro.resx">
+      <DependentUpon>Seleccion_Micro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenerarViaje\Seleccion_Reco.resx">
+      <DependentUpon>Seleccion_Reco.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListadoEstadistico.resx">
       <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
@@ -341,7 +398,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

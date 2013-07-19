@@ -12,6 +12,8 @@ using FrbaBus.Registrar_LLegada_Micro;
 using FrbaBus.Abm_Micro;
 using FrbaBus.Canc_Dev_de_Pas_Enc;
 using FrbaBus.Canje_de_Ptos;
+using FrbaBus.Abm_Recorrido;
+using FrbaBus.GenerarViaje;
 
 namespace FrbaBus
 {
@@ -82,6 +84,23 @@ namespace FrbaBus
         {
             CanjeDePuntos canje = new CanjeDePuntos();
             canje.Show();
+        }
+
+        private void recorridoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Abm_Reco_Alta altaReco = new Abm_Reco_Alta();
+            altaReco.Show();
+        }
+
+        private void recorridoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void generarViajeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Alta_Viaje altaViaje = new Alta_Viaje();
+            altaViaje.Show();
         }
 
 
