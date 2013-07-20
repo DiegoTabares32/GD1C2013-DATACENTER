@@ -456,6 +456,11 @@ INSERT INTO DATACENTER.Recorrido(reco_cod, reco_serv_id, reco_origen, reco_desti
 	ORDER BY 1
 GO
 
+/*------------------------------------------------------------------*/
+/*----------------HABILITAMOS LOS RECORRIDOS-----------------------------*/
+UPDATE DATACENTER.Recorrido
+SET reco_estado = 'H'
+
 CREATE FUNCTION DATACENTER.get_id_viaje (@mic_patente nvarchar(255), @reco_cod numeric(18,0), @fecha_salida datetime, @fecha_lleg_estimada datetime, @fecha_llegada datetime)
 RETURNS int
 BEGIN

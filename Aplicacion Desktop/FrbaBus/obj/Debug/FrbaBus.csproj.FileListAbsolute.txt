@@ -80,3 +80,6 @@ C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTE
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.pdb
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe.config
+C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TRABAJO PRACTICO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe.config
+C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TRABAJO PRACTICO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.exe
+C:\Users\Matías Zimmermann\Documents\Facultad\Gestion De Datos\TRABAJO PRACTICO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
