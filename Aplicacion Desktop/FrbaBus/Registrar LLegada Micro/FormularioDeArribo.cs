@@ -117,7 +117,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
             }
             //LLENO UNA TABLA CON EL RESULTADO DE LOS VALORES INGRESADOS Y 
             //LOS AGREGO EN LA DATAGRID DE REGISTRO LLEGADA MICRO
-            string fechayhora = dateTimePicker1.Text + " " + hora.Text +':'+ minutos.Text;
+            string fechayhora = dateTimePicker1.Text.ToString().Substring(0, 10) + " " + hora.Text +':'+ minutos.Text;
             string patente = textBoxPatente.Text;
             string origen = comboBoxOrigen.Text;
             string destino = comboBoxArribo.Text;
