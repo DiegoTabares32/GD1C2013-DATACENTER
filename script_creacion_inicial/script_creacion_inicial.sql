@@ -134,7 +134,7 @@ reco_origen nvarchar(255) NOT NULL,
 reco_destino nvarchar(255) NOT NULL,
 reco_precio_base_kg numeric(18,2) NULL,
 reco_precio_base_pasaje numeric (18,2) NULL,
-reco_estado CHAR NULL,  -- ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡OJO QUE ESTE CAMPO ES NUEVO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+reco_estado CHAR NULL,  -- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½OJO QUE ESTE CAMPO ES NUEVO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 FOREIGN KEY (reco_serv_id) REFERENCES DATACENTER.Servicio (serv_id),
 FOREIGN KEY (reco_origen) REFERENCES DATACENTER.Ciudad (ciu_nombre),
 FOREIGN KEY (reco_destino) REFERENCES DATACENTER.Ciudad (ciu_nombre),
@@ -460,6 +460,7 @@ GO
 /*----------------HABILITAMOS LOS RECORRIDOS-----------------------------*/
 UPDATE DATACENTER.Recorrido
 SET reco_estado = 'H'
+GO
 
 CREATE FUNCTION DATACENTER.get_id_viaje (@mic_patente nvarchar(255), @reco_cod numeric(18,0), @fecha_salida datetime, @fecha_lleg_estimada datetime, @fecha_llegada datetime)
 RETURNS int
@@ -715,20 +716,20 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATACENTER.insert_compra (@comprador_dni numeric(18,0), @tipo_tarj_id int, @cant_pasajes int, @cant_total_kg numeric(18,0), @costo_total numeric(18,2))
+CREATE PROCEDURE DATACENTER.insert_compra (@comprador_dni numeric(18,0), @tipo_tarj_id int, @cant_pasajes int, @cant_total_kg numeric(18,0), @costo_total numeric(18,2), @fecha_actual datetime)
 AS
 BEGIN 
 	IF (@tipo_tarj_id = 0)
 	BEGIN
 		INSERT INTO DATACENTER.Compra(comp_comprador_dni,comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
 		VALUES
-		(@comprador_dni, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+		(@comprador_dni, @cant_pasajes, @cant_total_kg,@costo_total, @fecha_actual)
 	END
 	ELSE
 	BEGIN
 		INSERT INTO DATACENTER.Compra(comp_comprador_dni, comp_tipo_tarj_id, comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
 		VALUES
-		(@comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+		(@comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg,@costo_total, @fecha_actual)
 	END
 	SELECT @@IDENTITY AS Id_compra_Ingresado
 END
@@ -771,7 +772,7 @@ BEGIN
 END
 GO
 
-create function DATACENTER.totalPuntosVencidos(@dni numeric(18,0))
+create function DATACENTER.totalPuntosVencidos(@dni numeric(18,0), @FECHA_SISTEMA DATETIME)--AGREGADA LA FECHA DEL SISTEMA
 returns int
 as
 begin
@@ -779,13 +780,14 @@ begin
 			from DATACENTER.Paquete p join DATACENTER.Arribo a 
 			on a.arri_viaj_id = p.paq_viaj_id join DATACENTER.Compra c on c.comp_id = p.paq_comp_id and c.comp_comprador_dni = @dni join DATACENTER.Viaje v 
 			on v.viaj_id = a.arri_viaj_id 
-			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')
+			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, @FECHA_SISTEMA) = 'VENCIDOS')
 			+
 			(SELECT ISNULL(SUM(cast(round((p.pas_precio/5),0) as numeric(18,0))),0) 
 			FROM DATACENTER.Arribo a JOIN DATACENTER.Pasaje p 
 			ON p.pas_viaj_id = a.arri_viaj_id and p.pas_cli_dni = @dni 
-			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, SYSDATETIME()) = 'VENCIDOS')			
+			WHERE DATACENTER.estado_puntos(A.arri_fecha_llegada, @FECHA_SISTEMA) = 'VENCIDOS')			
 end
+
 
 go
 
@@ -848,7 +850,7 @@ create procedure DATACENTER.actualizarPuntos(@dni numeric(18,0))
 as
 begin
 	update DATACENTER.Cliente
-	set cli_puntos_acum = ((select DATACENTER.totalPuntos(@dni))-(select DATACENTER.totalPuntosVencidos(@dni)))
+	set cli_puntos_acum = ((select DATACENTER.totalPuntos(@dni))-(select DATACENTER.totalPuntosVencidos(@dni, @FECHA_SISTEMA)))
 	where cli_dni = @dni
 end
 
@@ -861,7 +863,7 @@ on DATACENTER.Arribo
 after insert
 as
 begin
-	declare @fechaLlegada datetime = SYSDATETIME(), @patente nvarchar(255) = '', @viaje int = 0, @destino nvarchar(255) = ''
+	declare @fechaLlegada datetime = '', @patente nvarchar(255) = '', @viaje int = 0, @destino nvarchar(255) = ''
 	declare @fetch int = 0
 	declare cur cursor
 	for select i.arri_fecha_llegada, i.arri_mic_patente, i.arri_viaj_id, i.arri_ciu_arribada from inserted i
@@ -1244,13 +1246,13 @@ end
 go
 
 --SUMO LOS DIAS QUE ESTUVO FUERA DE SERVICIO
-create function DATACENTER.diasFueraDeServicio(@fuera datetime, @reinicio datetime, @inicioSemestre datetime, @finSemestre datetime)
+create function DATACENTER.diasFueraDeServicio(@fuera datetime, @reinicio datetime, @inicioSemestre datetime, @finSemestre datetime, @FECHA_SISTEMA DATETIME)
 returns int
 begin
 	declare @dias int = 0
 	if((@fuera <= @inicioSemestre)and (@reinicio is null))
 	begin
-		set @dias = datediff(d,@inicioSemestre, sysdatetime())
+		set @dias = datediff(d,@inicioSemestre, @FECHA_SISTEMA)
 		return @dias
 	end
 	if((@fuera <= @inicioSemestre) and (@reinicio >= @finSemestre))

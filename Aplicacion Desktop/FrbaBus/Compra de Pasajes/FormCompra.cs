@@ -426,8 +426,8 @@ namespace FrbaBus.Compra_de_Pasajes
             
             /*--------------Insertamos y Mostramos Compra/Pasaje/Encomienda------------------*/
             stored_procedures stored_proc = new stored_procedures();
-            
-            this.cod_compra = stored_proc.insert_compra(this.dni_comprador, this.tipo_tarjeta, this.CantPasaj_numericUpDown.Value.ToString(), this.cant_totKg_tbox.Text, this.total_compra);
+
+            this.cod_compra = stored_proc.insert_compra(this.dni_comprador, this.tipo_tarjeta, this.CantPasaj_numericUpDown.Value.ToString(), this.cant_totKg_tbox.Text, this.total_compra, this.fechaDelSistema);
             MessageBox.Show("Compra registrada Correctamente. \n Codigo de Compra: " + this.cod_compra + "\n DNI del comprador:" + this.dni_comprador + "\n Total Compra $"+this.total_tbox.Text, "Compra");
 
             if (listas_pasajeros.Count > 0)
