@@ -81,10 +81,12 @@ namespace FrbaBus
             return conexion.execute_query(query);
         }
 
-        public string totalPuntosVencidos(string dni)
+         public string totalPuntosVencidos(string dni)
         {
+            DateTimePicker datetimepicker = new DateTimePicker();
+            datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
             connection conexion = new connection();
-            string query = "SELECT DATACENTER.totalPuntosVencidos(" + dni + ", '" + (System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString() + "')";
+            string query = "SELECT DATACENTER.totalPuntosVencidos(" + dni + ", '" + datetimepicker.Value.ToString("dd/MM/yyyy HH:mm") + "')";
             return conexion.execute_query(query).Rows[0].ItemArray.ElementAt(0).ToString();
         }
 
