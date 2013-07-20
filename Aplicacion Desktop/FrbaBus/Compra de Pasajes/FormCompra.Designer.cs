@@ -272,7 +272,7 @@
             this.cancelar_boton.Name = "cancelar_boton";
             this.cancelar_boton.Size = new System.Drawing.Size(115, 24);
             this.cancelar_boton.TabIndex = 31;
-            this.cancelar_boton.Text = "Cancelar";
+            this.cancelar_boton.Text = "Limpiar";
             this.cancelar_boton.UseVisualStyleBackColor = true;
             this.cancelar_boton.Click += new System.EventHandler(this.cancelar_boton_Click);
             // 
