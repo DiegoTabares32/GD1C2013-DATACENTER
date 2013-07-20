@@ -24,8 +24,8 @@ namespace FrbaBus.Compra_de_Pasajes
         private void select_viaje_Load(object sender, EventArgs e)
         {
             stored_procedures stored_prod = new stored_procedures();
-            
-            DataTable listado_viaje = stored_prod.get_listado_viaje(this.compra_form.ciu_orig_list.Text, this.compra_form.ciu_dest_list.Text, this.compra_form.fecha_tbox.Text);
+            MessageBox.Show(this.compra_form.fechaViajeDateTimeP.Text);
+            DataTable listado_viaje = stored_prod.get_listado_viaje(this.compra_form.ciu_orig_list.Text, this.compra_form.ciu_dest_list.Text, this.compra_form.fechaViajeDateTimeP.Text);
             
             /*-----------ACTUALIZAMOS KG A MOSTRAR--------------------------------------------*/
             int cant_kg_enBD = 0;

@@ -55,7 +55,6 @@ C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTE
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_compra_Efectivo.resources
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_encomienda.resources
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_butaca.resources
-C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_fecha_viaje.resources
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_viaje.resources
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Consulta_Puntos_Adquiridos.Abm_Consulta_Puntos.resources
 C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormAdmin.resources

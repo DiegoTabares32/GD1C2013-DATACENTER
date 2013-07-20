@@ -30,7 +30,6 @@
         {
             this.login_boton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.fecha_tbox = new System.Windows.Forms.TextBox();
             this.select_boton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +37,7 @@
             this.ciu_dest_list = new System.Windows.Forms.ComboBox();
             this.busc_viaje_boton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.fechaActualDateTimeP = new System.Windows.Forms.DateTimePicker();
+            this.fechaViajeDateTimeP = new System.Windows.Forms.DateTimePicker();
             this.cargar_pas_boton = new System.Windows.Forms.Button();
             this.CantPasaj_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
@@ -78,17 +77,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(38, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 13);
+            this.label1.Size = new System.Drawing.Size(150, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Ingrese Fecha de Viaje (*):";
-            // 
-            // fecha_tbox
-            // 
-            this.fecha_tbox.Enabled = false;
-            this.fecha_tbox.Location = new System.Drawing.Point(213, 45);
-            this.fecha_tbox.Name = "fecha_tbox";
-            this.fecha_tbox.Size = new System.Drawing.Size(150, 20);
-            this.fecha_tbox.TabIndex = 3;
+            this.label1.Text = "Seleccione Fecha de Viaje (*):";
             // 
             // select_boton
             // 
@@ -155,12 +146,12 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Ingrese Cantidad de Pasajes a comprar:";
             // 
-            // fechaActualDateTimeP
+            // fechaViajeDateTimeP
             // 
-            this.fechaActualDateTimeP.Location = new System.Drawing.Point(41, 8);
-            this.fechaActualDateTimeP.Name = "fechaActualDateTimeP";
-            this.fechaActualDateTimeP.Size = new System.Drawing.Size(200, 20);
-            this.fechaActualDateTimeP.TabIndex = 16;
+            this.fechaViajeDateTimeP.Location = new System.Drawing.Point(194, 52);
+            this.fechaViajeDateTimeP.Name = "fechaViajeDateTimeP";
+            this.fechaViajeDateTimeP.Size = new System.Drawing.Size(200, 20);
+            this.fechaViajeDateTimeP.TabIndex = 16;
             // 
             // cargar_pas_boton
             // 
@@ -368,13 +359,12 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CantPasaj_numericUpDown);
             this.Controls.Add(this.cargar_pas_boton);
-            this.Controls.Add(this.fechaActualDateTimeP);
+            this.Controls.Add(this.fechaViajeDateTimeP);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.busc_viaje_boton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ciu_dest_list);
-            this.Controls.Add(this.fecha_tbox);
             this.Controls.Add(this.select_boton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ciu_orig_list);
@@ -395,10 +385,8 @@
         private System.Windows.Forms.Button select_boton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.TextBox fecha_tbox;
         private System.Windows.Forms.Button busc_viaje_boton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker fechaActualDateTimeP;
         private System.Windows.Forms.Button cargar_pas_boton;
         public System.Windows.Forms.ComboBox ciu_orig_list;
         public System.Windows.Forms.ComboBox ciu_dest_list;
@@ -422,5 +410,6 @@
         public System.Windows.Forms.Button login_boton;
         public System.Windows.Forms.TextBox total_tbox;
         private System.Windows.Forms.Button buttonConsultaPuntos;
+        public System.Windows.Forms.DateTimePicker fechaViajeDateTimeP;
     }
 }
