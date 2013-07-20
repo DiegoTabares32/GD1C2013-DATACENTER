@@ -91,7 +91,7 @@
             // 
             // dateTimePickerSalida
             // 
-            this.dateTimePickerSalida.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePickerSalida.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateTimePickerSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerSalida.Location = new System.Drawing.Point(160, 18);
             this.dateTimePickerSalida.MaxDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
@@ -99,11 +99,12 @@
             this.dateTimePickerSalida.Name = "dateTimePickerSalida";
             this.dateTimePickerSalida.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerSalida.TabIndex = 5;
-            this.dateTimePickerSalida.Value = new System.DateTime(2013, 7, 1, 0, 0, 0, 0);
+            this.dateTimePickerSalida.Value = new System.DateTime(2013, 7, 19, 0, 0, 0, 0);
+            this.dateTimePickerSalida.ValueChanged += new System.EventHandler(this.dateTimePickerSalida_ValueChanged);
             // 
             // dateTimePickerLlegada
             // 
-            this.dateTimePickerLlegada.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePickerLlegada.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateTimePickerLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerLlegada.Location = new System.Drawing.Point(160, 57);
             this.dateTimePickerLlegada.MaxDate = new System.DateTime(2023, 7, 2, 0, 0, 0, 0);
@@ -111,7 +112,7 @@
             this.dateTimePickerLlegada.Name = "dateTimePickerLlegada";
             this.dateTimePickerLlegada.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerLlegada.TabIndex = 6;
-            this.dateTimePickerLlegada.Value = new System.DateTime(2013, 7, 18, 0, 0, 0, 0);
+            this.dateTimePickerLlegada.Value = new System.DateTime(2013, 7, 19, 0, 0, 0, 0);
             // 
             // textBoxFecLleg
             // 

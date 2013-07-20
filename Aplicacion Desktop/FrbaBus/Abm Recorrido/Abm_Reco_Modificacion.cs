@@ -11,6 +11,8 @@ namespace FrbaBus.Abm_Recorrido
 {
     public partial class Abm_Reco_Modificacion : Form
     {
+        bool modificacion = false; // me indica si modificaron servicio, origen o destino
+        bool modif_precio = false; // me indica si modificaron algun precio
         string Tipo_Servicio;
         string Ciu_Origen;
         string Ciu_Destino;
@@ -79,7 +81,19 @@ namespace FrbaBus.Abm_Recorrido
 
             if (comboBoxOrigen.Text == comboBoxDestino.Text)
             {
-                MessageBox.Show("Error: La ciudad de origen y la ciudad de destino deben ser distintas");
+                MessageBox.Show("ERROR: La ciudad de origen y la ciudad de destino deben ser distintas");
+                codigo_error = 1;
+            }
+
+            if (numUpDownPrPas.Value == 0 || numUpDownPrEnco.Value == 0)
+            {
+                MessageBox.Show("ERROR: El precio de debe ser distinto de 0");
+                codigo_error = 1;
+            }
+
+            if (modificacion == false || modif_precio == false || Tipo_Servicio == comboBoxTipoServ.Text.ToString() || Ciu_Origen == comboBoxOrigen.Text.ToString() || Ciu_Destino == comboBoxDestino.Text.ToString())
+            {
+                MessageBox.Show("ERROR: Usted no ha modificado nada");
                 codigo_error = 1;
             }
 
@@ -92,6 +106,17 @@ namespace FrbaBus.Abm_Recorrido
 
             DataTable tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen =" + "'" + comboBoxOrigen.Text + "'" + " AND " + "reco_destino =" + "'" + comboBoxDestino.Text + "'" + " AND " + "reco_serv_id =" + comboBoxTipoServ.SelectedValue);
             if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido ingresado ya esta en la BD
+            {
+                MessageBox.Show("ERROR: YA EXISTE ESTE RECORRIDO CON ESTE SERVICIO");
+                codigo_error = 1;
+            }
+
+            if (modificacion == true)
+            tablaRecorridos.Clear();
+            string reco_cod = textBoxCodReco.Text.ToString();
+            string fecha_ayer = DateTime.Now.ToString("yyyy:MM:dd HH:mm"); // ESTO SE CAMBIA POR LA FECHA DEL CONFIG!!!
+            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Viaje WHERE viaj_reco_cod = " + "'" + reco_cod + "'" + " AND viaj_fecha_salida >= " + );
+            if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido tiene viajes asociados que se estan realizando en este momento o que estan programados de hoy en adelante
             {
                 MessageBox.Show("ERROR: YA EXISTE ESTE RECORRIDO CON ESTE SERVICIO");
                 codigo_error = 1;
@@ -116,5 +141,34 @@ namespace FrbaBus.Abm_Recorrido
             limpiar();
             return;
         }
+
+        private void comboBoxTipoServ_SelectedValueChanged(object sender, EventArgs e)
+        {
+            modificacion = true;
+        }
+
+        private void comboBoxOrigen_SelectedValueChanged(object sender, EventArgs e)
+        {
+            modificacion = true;
+        }
+
+        private void comboBoxDestino_SelectedValueChanged(object sender, EventArgs e)
+        {
+            modificacion = true;
+        }
+
+        private void numUpDownPrPas_ValueChanged(object sender, EventArgs e)
+        {
+            modif_precio = true;
+        }
+
+        private void numUpDownPrEnco_ValueChanged(object sender, EventArgs e)
+        {
+            modif_precio = true;
+        }
+
+
+
+
     }
 }

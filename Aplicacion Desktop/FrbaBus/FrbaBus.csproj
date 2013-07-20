@@ -236,19 +236,19 @@
     <Compile Include="GenerarViaje\Alta_Viaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarViaje\Alta_Viaje.Designer.cs">
+    <Compile Include="GenerarViaje\Alta_Viaje.designer.cs">
       <DependentUpon>Alta_Viaje.cs</DependentUpon>
     </Compile>
     <Compile Include="GenerarViaje\Seleccion_Micro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarViaje\Seleccion_Micro.Designer.cs">
+    <Compile Include="GenerarViaje\Seleccion_Micro.designer.cs">
       <DependentUpon>Seleccion_Micro.cs</DependentUpon>
     </Compile>
     <Compile Include="GenerarViaje\Seleccion_Reco.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GenerarViaje\Seleccion_Reco.Designer.cs">
+    <Compile Include="GenerarViaje\Seleccion_Reco.designer.cs">
       <DependentUpon>Seleccion_Reco.cs</DependentUpon>
     </Compile>
     <Compile Include="ListadoEstadistico.cs">

@@ -42,7 +42,10 @@ namespace FrbaBus.GenerarViaje
 
         private void botonSelMicro_Click(object sender, EventArgs e)
         {
-            Seleccion_Micro sel_micro = new Seleccion_Micro(serv_reco);
+            string dia_prox = dateTimePickerSalida.Value.AddDays(1).ToString("yyyy-MM-dd HH:mm");
+            string dia_ant = dateTimePickerSalida.Value.AddDays(-1).ToString("yyyy-MM-dd HH:mm");
+            string fecha_sal = dateTimePickerSalida.Value.ToString("yyyy-MM-dd HH:mm");
+            Seleccion_Micro sel_micro = new Seleccion_Micro(serv_reco, fecha_sal, dia_ant, dia_prox);
             DialogResult pat = sel_micro.ShowDialog(); //abrimos el formulario sel_micro como cuadro de dialogo para poder retornar el codigo
 
             if (pat == DialogResult.OK)
@@ -100,6 +103,12 @@ namespace FrbaBus.GenerarViaje
             MessageBox.Show("¡VIAJE AGREGADO CORRECTAMENTE!");
             limpiar();
             return;
+        }
+
+        private void dateTimePickerSalida_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerLlegada.MaxDate = dateTimePickerSalida.Value.AddDays(1);
+            dateTimePickerLlegada.MinDate = dateTimePickerSalida.Value;
         }
     }
 }

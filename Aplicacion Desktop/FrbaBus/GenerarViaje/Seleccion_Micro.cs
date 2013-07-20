@@ -14,11 +14,17 @@ namespace FrbaBus.GenerarViaje
         public string patente = "";
         string pat_micro = "";
         string tipo_serv_reco = "";
+        string fecha_salida = "";
+        string dia_despues;
+        string dia_antes = "";
 
-        public Seleccion_Micro(string serv)
+        public Seleccion_Micro(string serv, string fecha, string dia_ant, string dia_prox)
         {
             InitializeComponent();
             tipo_serv_reco = serv; // Es el tipo de servicio que tiene que tener el micro
+            fecha_salida = fecha;
+            dia_despues = dia_prox;
+            dia_antes = dia_ant;
         }
 
         private void limpiar()
@@ -105,9 +111,18 @@ namespace FrbaBus.GenerarViaje
                 query = query + condicion;
             }
 
+            //FILTRO DE MICROS DISPONIBLES PARA REALIZAR EL VIAJE
+            
+            query = query + " AND mic_fecha_baja_def IS NULL AND NOT EXISTS (SELECT 1 FROM DATACENTER.EstadoMicro WHERE est_mic_patente = mic_patente AND est_fecha_reingreso >= CONVERT(datetime, " + "'" + fecha_salida + "'" + ", 121)" + " AND est_fecha_fuera_serv IS NOT NULL) AND NOT EXISTS (SELECT 1 FROM DATACENTER.Viaje WHERE viaj_mic_patente = mic_patente AND viaj_fecha_salida BETWEEN CONVERT(datetime, " + "'" + dia_antes + "'" + ", 121) AND  CONVERT(datetime, " + "'" + dia_despues + "'" + ", 121))";
+
             //ANTES DE ESTO DEBO RESOLVER EL STRING Q LE VOY A MANDAR COMO QUERY A LA CONEXION    
             connection conexion = new connection();
             DataTable tabla_micro_sel = conexion.execute_query(query);
+
+            if (tabla_micro_sel.Rows.Count == 0)
+            {
+                MessageBox.Show("ERROR: NO EXISTE UN MICRO CON ESTAS CARACTERISTICAS");
+            }
 
             this.Patentes.DataPropertyName = tabla_micro_sel.Columns[0].ToString();
             this.Tipo_Serv.DataPropertyName = tabla_micro_sel.Columns[1].ToString();

@@ -118,6 +118,7 @@
             this.comboBoxTipoServ.Name = "comboBoxTipoServ";
             this.comboBoxTipoServ.Size = new System.Drawing.Size(132, 21);
             this.comboBoxTipoServ.TabIndex = 7;
+            this.comboBoxTipoServ.SelectedValueChanged += new System.EventHandler(this.comboBoxTipoServ_SelectedValueChanged);
             // 
             // comboBoxOrigen
             // 
@@ -126,6 +127,7 @@
             this.comboBoxOrigen.Name = "comboBoxOrigen";
             this.comboBoxOrigen.Size = new System.Drawing.Size(132, 21);
             this.comboBoxOrigen.TabIndex = 8;
+            this.comboBoxOrigen.SelectedValueChanged += new System.EventHandler(this.comboBoxOrigen_SelectedValueChanged);
             // 
             // comboBoxDestino
             // 
@@ -134,6 +136,7 @@
             this.comboBoxDestino.Name = "comboBoxDestino";
             this.comboBoxDestino.Size = new System.Drawing.Size(132, 21);
             this.comboBoxDestino.TabIndex = 9;
+            this.comboBoxDestino.SelectedValueChanged += new System.EventHandler(this.comboBoxDestino_SelectedValueChanged);
             // 
             // numUpDownPrPas
             // 
@@ -147,6 +150,7 @@
             this.numUpDownPrPas.Name = "numUpDownPrPas";
             this.numUpDownPrPas.Size = new System.Drawing.Size(120, 20);
             this.numUpDownPrPas.TabIndex = 10;
+            this.numUpDownPrPas.ValueChanged += new System.EventHandler(this.numUpDownPrPas_ValueChanged);
             // 
             // numUpDownPrEnco
             // 
@@ -160,6 +164,7 @@
             this.numUpDownPrEnco.Name = "numUpDownPrEnco";
             this.numUpDownPrEnco.Size = new System.Drawing.Size(120, 20);
             this.numUpDownPrEnco.TabIndex = 11;
+            this.numUpDownPrEnco.ValueChanged += new System.EventHandler(this.numUpDownPrEnco_ValueChanged);
             // 
             // botonLimpiar
             // 
