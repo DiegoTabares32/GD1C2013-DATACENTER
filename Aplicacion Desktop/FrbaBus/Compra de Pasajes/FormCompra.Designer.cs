@@ -38,7 +38,7 @@
             this.ciu_dest_list = new System.Windows.Forms.ComboBox();
             this.busc_viaje_boton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.fechaActualDateTimeP = new System.Windows.Forms.DateTimePicker();
             this.cargar_pas_boton = new System.Windows.Forms.Button();
             this.CantPasaj_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
@@ -155,12 +155,12 @@
             this.label5.TabIndex = 15;
             this.label5.Text = "Ingrese Cantidad de Pasajes a comprar:";
             // 
-            // dateTimePicker1
+            // fechaActualDateTimeP
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(41, 8);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 16;
+            this.fechaActualDateTimeP.Location = new System.Drawing.Point(41, 8);
+            this.fechaActualDateTimeP.Name = "fechaActualDateTimeP";
+            this.fechaActualDateTimeP.Size = new System.Drawing.Size(200, 20);
+            this.fechaActualDateTimeP.TabIndex = 16;
             // 
             // cargar_pas_boton
             // 
@@ -368,7 +368,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CantPasaj_numericUpDown);
             this.Controls.Add(this.cargar_pas_boton);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.fechaActualDateTimeP);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.busc_viaje_boton);
             this.Controls.Add(this.label1);
@@ -398,7 +398,7 @@
         public System.Windows.Forms.TextBox fecha_tbox;
         private System.Windows.Forms.Button busc_viaje_boton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker fechaActualDateTimeP;
         private System.Windows.Forms.Button cargar_pas_boton;
         public System.Windows.Forms.ComboBox ciu_orig_list;
         public System.Windows.Forms.ComboBox ciu_dest_list;

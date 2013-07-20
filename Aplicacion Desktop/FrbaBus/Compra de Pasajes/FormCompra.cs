@@ -21,6 +21,9 @@ namespace FrbaBus.Compra_de_Pasajes
         public bool compra_admin = false;
         decimal total_compra;
         string cod_compra;
+        //fecha del sistema
+        DateTime fechaDelSistema = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+
         
         //Colección de Pasajes una vez confirmada la compra los cargamos en la base
         public List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
@@ -73,6 +76,9 @@ namespace FrbaBus.Compra_de_Pasajes
             this.sub_tot_encom_tbox.Text = "0";
             this.sub_total_pasaj_tbox.Text = "0";
             this.total_tbox.Text="0";
+
+            this.fechaActualDateTimeP.Value = fechaDelSistema;
+
 
         }
 

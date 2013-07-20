@@ -27,6 +27,5 @@ namespace FrbaBus.Compra_de_Pasajes
 
 
 
-
     }
 }
