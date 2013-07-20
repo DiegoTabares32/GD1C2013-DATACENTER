@@ -460,6 +460,7 @@ GO
 /*----------------HABILITAMOS LOS RECORRIDOS-----------------------------*/
 UPDATE DATACENTER.Recorrido
 SET reco_estado = 'H'
+GO
 
 CREATE FUNCTION DATACENTER.get_id_viaje (@mic_patente nvarchar(255), @reco_cod numeric(18,0), @fecha_salida datetime, @fecha_lleg_estimada datetime, @fecha_llegada datetime)
 RETURNS int
@@ -715,20 +716,20 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATACENTER.insert_compra (@comprador_dni numeric(18,0), @tipo_tarj_id int, @cant_pasajes int, @cant_total_kg numeric(18,0), @costo_total numeric(18,2))
+CREATE PROCEDURE DATACENTER.insert_compra (@comprador_dni numeric(18,0), @tipo_tarj_id int, @cant_pasajes int, @cant_total_kg numeric(18,0), @costo_total numeric(18,2), @fecha_actual datetime)
 AS
 BEGIN 
 	IF (@tipo_tarj_id = 0)
 	BEGIN
 		INSERT INTO DATACENTER.Compra(comp_comprador_dni,comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
 		VALUES
-		(@comprador_dni, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+		(@comprador_dni, @cant_pasajes, @cant_total_kg,@costo_total, @fecha_actual)
 	END
 	ELSE
 	BEGIN
 		INSERT INTO DATACENTER.Compra(comp_comprador_dni, comp_tipo_tarj_id, comp_cant_pasajes, comp_cant_total_kg,comp_costo_total,  comp_fecha_compra)
 		VALUES
-		(@comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg,@costo_total, GETDATE())
+		(@comprador_dni, @tipo_tarj_id, @cant_pasajes, @cant_total_kg,@costo_total, @fecha_actual)
 	END
 	SELECT @@IDENTITY AS Id_compra_Ingresado
 END
