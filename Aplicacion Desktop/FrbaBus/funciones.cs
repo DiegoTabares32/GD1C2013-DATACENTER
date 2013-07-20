@@ -84,7 +84,7 @@ namespace FrbaBus
         public string totalPuntosVencidos(string dni)
         {
             connection conexion = new connection();
-            string query = "SELECT DATACENTER.totalPuntosVencidos("+dni+")";
+            string query = "SELECT DATACENTER.totalPuntosVencidos(" + dni + ", '" + (System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString() + "')";
             return conexion.execute_query(query).Rows[0].ItemArray.ElementAt(0).ToString();
         }
 
