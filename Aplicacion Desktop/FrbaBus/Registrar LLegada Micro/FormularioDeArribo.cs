@@ -23,7 +23,7 @@ namespace FrbaBus.Registrar_LLegada_Micro
         {
             //Limpiamos todo
             this.dateTimePicker1.ResetText();
-            
+            this.dateTimePicker1.Text = (System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString();
             this.textBoxPatente.Clear();
             //para que no puedan ingresar texto
             this.comboBoxArribo.DropDownStyle = ComboBoxStyle.DropDownList;
