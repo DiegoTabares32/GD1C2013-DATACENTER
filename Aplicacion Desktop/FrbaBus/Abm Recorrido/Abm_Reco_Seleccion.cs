@@ -118,11 +118,9 @@ namespace FrbaBus.Abm_Recorrido
                 }
 
                 abm_reco_mod.textBoxEstado.Text = estado_a_mandar;
-
-                /*
-                abm_rol_mod.rol_nomb_mod = this.roles_dataGrid.CurrentRow.Cells[2].Value.ToString();*/
+                
                 abm_reco_mod.ShowDialog();
-                //cuando retorna de la modificacion refrescamos la pantalla
+
                 this.Close();
             }
 

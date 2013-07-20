@@ -115,10 +115,10 @@ namespace FrbaBus.Abm_Recorrido
             tablaRecorridos.Clear();
             string reco_cod = textBoxCodReco.Text.ToString();
             string fecha_ayer = DateTime.Now.ToString("yyyy:MM:dd HH:mm"); // ESTO SE CAMBIA POR LA FECHA DEL CONFIG!!!
-            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Viaje WHERE viaj_reco_cod = " + "'" + reco_cod + "'" + " AND viaj_fecha_salida >= " + );
+            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Viaje WHERE viaj_reco_cod = " + "'" + reco_cod + "'" + " AND viaj_fecha_salida >= " + "CONVERT(datetime, " + "'" + fecha_ayer + "'" + ", 121)");
             if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido tiene viajes asociados que se estan realizando en este momento o que estan programados de hoy en adelante
             {
-                MessageBox.Show("ERROR: YA EXISTE ESTE RECORRIDO CON ESTE SERVICIO");
+                MessageBox.Show("ERROR: No se puede modificar el tipo de servicio, el origen, o el destino de un recorrido que tenga viajes asociados (que se esten realizando o esten programados de hoy en adelante).");
                 codigo_error = 1;
             }
 
