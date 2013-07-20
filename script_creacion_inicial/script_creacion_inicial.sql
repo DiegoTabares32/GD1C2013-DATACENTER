@@ -846,7 +846,7 @@ begin
 end
 go
 
-create procedure DATACENTER.actualizarPuntos(@dni numeric(18,0))
+create procedure DATACENTER.actualizarPuntos(@dni numeric(18,0), @FECHA_SISTEMA datetime)
 as
 begin
 	update DATACENTER.Cliente
@@ -1022,7 +1022,6 @@ begin
 end
 go
 
-
 create procedure DATACENTER.registraDevolucionParcial(@fechaDev datetime,@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
 as
 begin
@@ -1049,7 +1048,7 @@ begin
 	
 	if (@tipoItem = 'Pasaje')
 	begin
-		set @montoADescontar = (select pas_precio from DATACENTER.Pasaje where pas_compra_id=@nroCompra)
+		set @montoADescontar = (select pas_precio from DATACENTER.Pasaje where pas_compra_id=@nroCompra and pas_cod=@codItem)
 		declare @cantPasajes int
 		set @cantPasajes = (select comp_cant_pasajes from DATACENTER.Compra where comp_id=@nroCompra)
 		set @cantPasajes = @cantPasajes - 1
@@ -1059,16 +1058,22 @@ begin
 		UPDATE DATACENTER.Compra
 		SET comp_cant_pasajes=@cantPasajes, comp_costo_total=@costoTotal
 		where comp_id=@nroCompra
+		
+		DELETE FROM DATACENTER.Pasaje
+		where pas_compra_id=@nroCompra and pas_cod=@codItem
 	end
 	else
 	begin
-		set @montoADescontar = (select paq_precio from DATACENTER.Paquete where paq_comp_id=@nroCompra)
+		set @montoADescontar = (select paq_precio from DATACENTER.Paquete where paq_comp_id=@nroCompra and paq_cod=@codItem)
 		set @costoTotal = (select comp_costo_total from DATACENTER.Compra where comp_id=@nroCompra)
 		set @costoTotal = @costoTotal - @montoADescontar
 		
 		UPDATE DATACENTER.Compra
 		SET comp_cant_total_kg=0, comp_costo_total=@costoTotal
 		where comp_id=@nroCompra
+		
+		DELETE FROM DATACENTER.Paquete
+		where paq_comp_id=@nroCompra and paq_cod=@codItem
 	end
 
 end
@@ -1089,7 +1094,7 @@ begin
 		(select 'Pasaje', pas_cod
 		 from DATACENTER.Pasaje
 		 where pas_compra_id=@nroCompra)
-		) 
+	)
 	open cursorItems
 	fetch cursorItems into @tipoItem,@codItem
 	while (@@FETCH_STATUS = 0)

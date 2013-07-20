@@ -111,7 +111,7 @@ namespace FrbaBus.Canc_Dev_de_Pas_Enc
                 }
 
                 //consulta a ejecutar para registrar nueva devolución
-                string query5 = "exec DATACENTER.registraDevolucionParcial '" + dateTimePickerCancDev.Value.ToString("dd/MM/yyyy HH:mm") + "'," + textBoxNroCompra.Text + ",'" + tipoItem + "'," + textBoxCodPasEnc.Text + ",'" + textBoxMotivoDeCanc.Text + "'";
+                string query5 = "exec DATACENTER.registraDevolucionParcial '" + dateTimePickerCancDev.Value.ToString("yyyy/MM/dd HH:mm") + "'," + textBoxNroCompra.Text + ",'" + tipoItem + "'," + textBoxCodPasEnc.Text + ",'" + textBoxMotivoDeCanc.Text + "'";
                 connection connect5 = new connection();
                 connect5.execute_query(query5);
 
@@ -125,7 +125,7 @@ namespace FrbaBus.Canc_Dev_de_Pas_Enc
             else
             {
                 //consulta a ejecutar para registrar nueva devolución
-                string query5 = "exec DATACENTER.registraDevolucionTotal '" + dateTimePickerCancDev.Value.ToString("dd/MM/yyyy HH:mm") + "'," + textBoxNroCompra.Text + ",'" + textBoxMotivoDeCanc.Text + "'";
+                string query5 = "exec DATACENTER.registraDevolucionTotal '" + dateTimePickerCancDev.Value.ToString("yyyy/MM/dd HH:mm") + "'," + textBoxNroCompra.Text + ",'" + textBoxMotivoDeCanc.Text + "'";
                 connection connect5 = new connection();
                 connect5.execute_query(query5);
 
