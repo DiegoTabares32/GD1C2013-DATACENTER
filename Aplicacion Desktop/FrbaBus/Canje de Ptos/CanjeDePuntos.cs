@@ -114,11 +114,13 @@ namespace FrbaBus.Canje_de_Ptos
                             return;
                         }
 
+                        string fechaSistema = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+
                         //consulta para actualizar por canje por premio (Actualiza stock del premio-Agrega canje nuevo)
-                        string query3 = "exec DATACENTER.canjeaPremio '" + tablaPremios.Rows[i].Cells[2].Value.ToString()+"','"+textBoxDniCliente.Text+"','"+disponeStock.Rows[0].ItemArray[0].ToString()+"','"+tablaPremios.Rows[i].Cells[1].Value.ToString()+"','"+idCanjeNuevo+"'";
+                        string query3 = "exec DATACENTER.canjeaPremio '" + tablaPremios.Rows[i].Cells[2].Value.ToString()+"','"+textBoxDniCliente.Text+"','"+disponeStock.Rows[0].ItemArray[0].ToString()+"','"+tablaPremios.Rows[i].Cells[1].Value.ToString()+"','"+idCanjeNuevo+"','"+fechaSistema+"'";
                         connection connect3 = new connection();
                         connect3.execute_query(query3);
-                        
+        
                     }
                 }
                 
