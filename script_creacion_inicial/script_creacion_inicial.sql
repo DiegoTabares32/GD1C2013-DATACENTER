@@ -846,7 +846,7 @@ begin
 end
 go
 
-create procedure DATACENTER.actualizarPuntos(@dni numeric(18,0))
+create procedure DATACENTER.actualizarPuntos(@dni numeric(18,0), @FECHA_SISTEMA datetime)
 as
 begin
 	update DATACENTER.Cliente
