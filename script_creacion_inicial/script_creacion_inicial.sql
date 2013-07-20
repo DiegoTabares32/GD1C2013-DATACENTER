@@ -1108,7 +1108,7 @@ end
 go
 
 
-create procedure cancelaViajesXMicro(@patente nvarchar(255),@fechaFS datetime, @fechaR datetime)
+create procedure DATACENTER.cancelaViajesXMicro(@patente nvarchar(255),@fechaFS datetime, @fechaR datetime, @fechaSist datetime)
 as
 begin
 	declare @nroCompra int
@@ -1144,15 +1144,12 @@ begin
 			 where viaj_mic_patente=@patente and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
 			) 	
 	end
-		
-	declare @fechaCancelacion datetime
-	set @fechaCancelacion = GETDATE();
-	
+			
 	open cursorViajes
 	fetch cursorViajes into @nroCompra,@tipoItem
 	while (@@FETCH_STATUS = 0)
 	begin
-		exec DATACENTER.registraDevolucionParcial @fechaCancelacion,@nroCompra,@tipoItem,@motivoDev
+		exec DATACENTER.registraDevolucionParcial @fechaSist,@nroCompra,@tipoItem,@motivoDev
 		fetch cursorViajes into @nroCompra,@tipoItem
 	end
 
@@ -1160,7 +1157,6 @@ begin
 	deallocate cursorViajes
 end
 go
-
 CREATE FUNCTION DATACENTER.fechaInicioSemestre(@anio nvarchar(6),@semestre int)
 returns datetime
 begin
