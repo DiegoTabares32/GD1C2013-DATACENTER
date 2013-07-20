@@ -29,3 +29,54 @@ C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion D
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Micros.MicrosMasButacasVacias.resources
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Micros.MicrosDiasFueraServicio.resources
 C:\Users\Diego\Desktop\UTN\Gestión de Datos\TP\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Cargando.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.exe
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_Alta.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_Baja.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_Modif.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_OpPorConcretar.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.FormButacaAlta.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Patente_Alta.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Alta.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Baja.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Modificacion.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_Seleccion.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Recorrido.Abm_Reco_SelecDel.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Alta.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Busqueda.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Modif.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Canc_Dev_de_Pas_Enc.CancelDevol.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Canje_de_Ptos.CanjeDePuntos.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Cargando.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.cargar_pasajero.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.FormCompra.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_Comprador.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_compra_Efectivo.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.Form_encomienda.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_butaca.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Compra_de_Pasajes.select_viaje.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Consulta_Puntos_Adquiridos.Abm_Consulta_Puntos.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormAdmin.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.GenerarViaje.Alta_Viaje.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.GenerarViaje.Seleccion_Micro.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.GenerarViaje.Seleccion_Reco.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.ListadoEstadistico.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Login.login.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.FormularioDeArribo.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.InfoMicro.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.llegadaMicros.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Registrar_LLegada_Micro.RegistrosCargados.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Clientes.Top5Clientes.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Destinos.MasPasajesCancelados.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Destinos.Top5DestinosMasPasajesComprados.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Micros.MicrosDiasFueraServicio.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Top_Micros.MicrosMasButacasVacias.resources
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\Top Destinos\MasPasajesComprados.resx
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\Top Destinos\MasPasajesComprados.cs
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\Top Destinos\MasPasajesComprados.Designer.cs
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.pdb
+C:\Users\Franco\Documents\Repo_GitHub\DATACENTER-CENTRALIZADO\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe.config

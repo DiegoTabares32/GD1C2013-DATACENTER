@@ -610,6 +610,7 @@ WHERE reco_origen = @ciu_origen AND reco_destino= @ciu_destino
 	  AND DAY(viaj_fecha_salida) = DAY(@fecha_salida)
 	  AND MONTH(viaj_fecha_salida) = MONTH(@fecha_salida)
 	  AND YEAR(viaj_fecha_salida) = YEAR(@fecha_salida)
+	  AND reco_estado = 'H'
 	   
 END
 GO

@@ -21,6 +21,9 @@ namespace FrbaBus.Compra_de_Pasajes
         public bool compra_admin = false;
         decimal total_compra;
         string cod_compra;
+        //fecha del sistema
+        DateTime fechaDelSistema = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+
         
         //Colección de Pasajes una vez confirmada la compra los cargamos en la base
         public List<cargar_pasajero> listas_pasajeros = new List<cargar_pasajero>();
@@ -47,8 +50,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void select_boton_Click(object sender, EventArgs e)
         {
-            select_fecha_viaje fecha_viaje = new select_fecha_viaje(this);
-            fecha_viaje.ShowDialog();
+            this.fechaViajeDateTimeP.Enabled = false;
         }
 
         private void FormCompra_Load(object sender, EventArgs e)
@@ -74,6 +76,9 @@ namespace FrbaBus.Compra_de_Pasajes
             this.sub_total_pasaj_tbox.Text = "0";
             this.total_tbox.Text="0";
 
+            this.fechaViajeDateTimeP.Value = fechaDelSistema;
+
+
         }
 
         private void busc_viaje_boton_Click(object sender, EventArgs e)
@@ -81,7 +86,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             bool error = false;
 
-            if (this.fecha_tbox.Text == "")
+            if (this.fechaViajeDateTimeP.Enabled)
             {
                 MessageBox.Show("Debe Seleccionar Fecha", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
@@ -236,7 +241,7 @@ namespace FrbaBus.Compra_de_Pasajes
             bool error = false;
 
 
-            if (this.fecha_tbox.Text == "")
+            if (this.fechaViajeDateTimeP.Enabled)
             {
                 MessageBox.Show("Debe Seleccionar Fecha", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
@@ -330,7 +335,8 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void reset_formulario()
         {
-            this.fecha_tbox.Clear();
+            this.fechaViajeDateTimeP.Enabled =true;
+            this.fechaViajeDateTimeP.Value = fechaDelSistema;
             this.ciu_orig_list.SelectedIndex = 0;
             this.ciu_dest_list.SelectedIndex = 0;
             this.ciu_orig_list.Enabled = true;
