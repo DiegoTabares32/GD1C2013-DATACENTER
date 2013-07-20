@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +34,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
                 return;
             }
 
-            string query = "exec DATACENTER.actualizarPuntos "+ textBoxDni.Text + "Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDni.Text;
+            string query = "exec DATACENTER.actualizarPuntos " + textBoxDni.Text + ", '" + (System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString() + "' Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDni.Text;
             connection connect = new connection();
             DataTable tabla_puntos = connect.execute_query(query);
             
@@ -48,7 +48,7 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
             string puntosVencidos = this.funciones.totalPuntosVencidos(textBoxDni.Text);
             this.labelResultadoPuntosVencidos.Text = puntosVencidos;
             //Lleno la tabla de canjes 
-            string query2 = "SELECT	prem_nombre AS 'Premio', prem_costo_Puntos AS 'Puntos', canj_fecha AS 'Fecha', canj_cant_retirada AS 'Cantidad' FROM DATACENTER.Canje join DATACENTER.Premio on canj_prem_Id = prem_Id WHERE canj_cli_Dni = " + textBoxDni.Text;
+            string query2 = "SELECT    prem_nombre AS 'Premio', prem_costo_Puntos AS 'Puntos', canj_fecha AS 'Fecha', canj_cant_retirada AS 'Cantidad' FROM DATACENTER.Canje join DATACENTER.Premio on canj_prem_Id = prem_Id WHERE canj_cli_Dni = " + textBoxDni.Text;
             DataTable tabla_canje = connect.execute_query(query2);
 
             this.dataGridViewCanjesRealizados.DataSource = tabla_canje;
