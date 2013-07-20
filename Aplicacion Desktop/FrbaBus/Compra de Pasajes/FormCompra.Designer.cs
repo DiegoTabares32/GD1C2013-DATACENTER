@@ -83,11 +83,11 @@
             // 
             // select_boton
             // 
-            this.select_boton.Location = new System.Drawing.Point(246, 89);
+            this.select_boton.Location = new System.Drawing.Point(213, 89);
             this.select_boton.Name = "select_boton";
-            this.select_boton.Size = new System.Drawing.Size(118, 26);
+            this.select_boton.Size = new System.Drawing.Size(151, 26);
             this.select_boton.TabIndex = 4;
-            this.select_boton.Text = "Seleccionar Fecha";
+            this.select_boton.Text = "Confirmar Fecha de Viaje";
             this.select_boton.UseVisualStyleBackColor = true;
             this.select_boton.Click += new System.EventHandler(this.select_boton_Click);
             // 
@@ -272,7 +272,7 @@
             this.cancelar_boton.Name = "cancelar_boton";
             this.cancelar_boton.Size = new System.Drawing.Size(115, 24);
             this.cancelar_boton.TabIndex = 31;
-            this.cancelar_boton.Text = "Cancelar";
+            this.cancelar_boton.Text = "Limpiar";
             this.cancelar_boton.UseVisualStyleBackColor = true;
             this.cancelar_boton.Click += new System.EventHandler(this.cancelar_boton_Click);
             // 
