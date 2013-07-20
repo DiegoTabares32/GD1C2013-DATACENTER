@@ -33,8 +33,10 @@ namespace FrbaBus.Consulta_Puntos_Adquiridos
                 MessageBox.Show("Ingresar sólo números. Ej: 99999999");
                 return;
             }
+            DateTimePicker datetimepicker = new DateTimePicker();
+            datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
 
-            string query = "exec DATACENTER.actualizarPuntos " + textBoxDni.Text + ", '" + (System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString() + "' Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDni.Text;
+            string query = "exec DATACENTER.actualizarPuntos " + textBoxDni.Text + ", '" + datetimepicker.Value.ToString("dd/MM/yyyy HH:mm") + "' Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDni.Text;
             connection connect = new connection();
             DataTable tabla_puntos = connect.execute_query(query);
             
