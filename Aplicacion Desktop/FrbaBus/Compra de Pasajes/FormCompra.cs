@@ -88,7 +88,7 @@ namespace FrbaBus.Compra_de_Pasajes
 
             if (this.fechaViajeDateTimeP.Enabled)
             {
-                MessageBox.Show("Debe Seleccionar Fecha", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe Confirmar Fecha de viaje", "Compra", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 error = true;
             }
 

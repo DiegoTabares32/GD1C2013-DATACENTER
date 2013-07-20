@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.Sql;
+using System.Configuration;
 
 namespace FrbaBus
 {
@@ -18,7 +19,6 @@ namespace FrbaBus
             {
                 connect.ConnectionString = get_string_connection();
                 connect.Open(); //abrimos conexion
-                MessageBox.Show("Conectado");
 
             }
             catch (SqlException ex) //Capturamos algun error que pudo darse al querer conectarse
@@ -32,8 +32,10 @@ namespace FrbaBus
 
         public string get_string_connection()
         {
-            string string_connect = @"Data Source=localhost\SQLSERVER2008;Initial Catalog=GD1C2013;User ID=gd; PASSWORD=gd2013"; //va el @ porque sino tira un warning escape sequences con @se ignora
-            return string_connect;
+            //string string_connect = @"Data Source=localhost\SQLSERVER2008;Initial Catalog=GD1C2013;User ID=gd; PASSWORD=gd2013"; //va el @ porque sino tira un warning escape sequences con @se ignora
+            //obtenemos la cadena de conexion del XML
+            string connection_string = ConfigurationManager.ConnectionStrings["FrbaBusConnectionString"].ToString();
+            return connection_string;;
         }
 
         public DataTable execute_query(string query)
