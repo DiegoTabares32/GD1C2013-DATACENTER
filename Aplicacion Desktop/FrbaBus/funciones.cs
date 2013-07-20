@@ -120,7 +120,9 @@ namespace FrbaBus
 
         public DataTable top5MicrosDiasFueraServicio(string anio, string semestre)
         {
-            string query = "select    top 5 m.mic_patente as 'Patente', sum(DATACENTER.diasFueraDeServicio(e.est_fecha_fuera_serv, e.est_fecha_reingreso, DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + "), DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + "), '" + (System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString() + "')) as 'Dias Fuera de Servicio' from DATACENTER.Micro m join DATACENTER.EstadoMicro e on m.mic_patente = e.est_mic_patente where (DATACENTER.sumaDias(e.est_fecha_fuera_serv, e.est_fecha_reingreso, DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + "), DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ")) = 1) group by m.mic_patente order by 2 desc";
+            DateTimePicker datetimepicker = new DateTimePicker();
+            datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+            string query = "select    top 5 m.mic_patente as 'Patente', sum(DATACENTER.diasFueraDeServicio(e.est_fecha_fuera_serv, e.est_fecha_reingreso, DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + "), DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + "), '" + datetimepicker.Value.ToString("dd/MM/yyyy HH:mm") + "')) as 'Dias Fuera de Servicio' from DATACENTER.Micro m join DATACENTER.EstadoMicro e on m.mic_patente = e.est_mic_patente where (DATACENTER.sumaDias(e.est_fecha_fuera_serv, e.est_fecha_reingreso, DATACENTER.fechaInicioSemestre('" + anio + "'," + semestre + "), DATACENTER.fechaFinSemestre('" + anio + "'," + semestre + ")) = 1) group by m.mic_patente order by 2 desc";
             connection conexion = new connection();
             return conexion.execute_query(query);           
         }   
