@@ -73,7 +73,9 @@ namespace FrbaBus.Abm_Micro
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-            string query1 = "exec DATACENTER.registrarNuevoMicro '" + nroPatente + "','" + patenteAReemplazar + "'";
+            string fechaSistema = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+
+            string query1 = "exec DATACENTER.registrarNuevoMicro '" + nroPatente + "','" + patenteAReemplazar + "','" + fechaSistema +"'";
             connection connect1 = new connection();
             connect1.execute_query(query1);
 
