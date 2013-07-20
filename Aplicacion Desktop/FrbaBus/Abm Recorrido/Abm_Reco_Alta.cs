@@ -70,6 +70,12 @@ namespace FrbaBus.Abm_Recorrido
                 codigo_error = 1;
             }
 
+            if (numUpDownPrPas.Value == 0 || numUpDownPrEnco.Value == 0)
+            {
+                MessageBox.Show("ERROR: El precio de debe ser distinto de 0");
+                codigo_error = 1;
+            }
+
             if (codigo_error == 1)
             {
                 return;
