@@ -209,7 +209,7 @@ viaj_reco_cod numeric(18,0) NOT NULL,
 viaj_fecha_salida datetime NULL,
 viaj_fecha_lleg_estimada datetime NULL,
 viaj_fecha_llegada datetime NULL,
-viaj_estado CHAR NULL,   -- OJO QUE ES UN CAMPO NUEVO!!!!!!!!!!
+viaj_estado CHAR NULL DEFAULT 'H',   --En la migracion suponemos todos los viajes habilitados
 FOREIGN KEY (viaj_mic_patente) REFERENCES DATACENTER.Micro (mic_patente), 
 FOREIGN KEY (viaj_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
 PRIMARY KEY (viaj_id)
