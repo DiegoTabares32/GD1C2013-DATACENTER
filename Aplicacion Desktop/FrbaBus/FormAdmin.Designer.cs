@@ -40,11 +40,11 @@
             this.bajaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.baja_micro = new System.Windows.Forms.ToolStripMenuItem();
             this.baja_reco = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarArriboMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.compra_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.facturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarDevoluciónCancelacionMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.estadisticaMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarArriboMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.canjePremioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.generarViajeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
@@ -81,7 +81,7 @@
             // alta_rol
             // 
             this.alta_rol.Name = "alta_rol";
-            this.alta_rol.Size = new System.Drawing.Size(152, 22);
+            this.alta_rol.Size = new System.Drawing.Size(125, 22);
             this.alta_rol.Text = "Rol";
             this.alta_rol.Visible = false;
             this.alta_rol.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
@@ -89,7 +89,7 @@
             // alta_micro
             // 
             this.alta_micro.Name = "alta_micro";
-            this.alta_micro.Size = new System.Drawing.Size(152, 22);
+            this.alta_micro.Size = new System.Drawing.Size(125, 22);
             this.alta_micro.Text = "Micro";
             this.alta_micro.Visible = false;
             this.alta_micro.Click += new System.EventHandler(this.microToolStripMenuItem_Click);
@@ -97,7 +97,7 @@
             // alta_recorrido
             // 
             this.alta_recorrido.Name = "alta_recorrido";
-            this.alta_recorrido.Size = new System.Drawing.Size(152, 22);
+            this.alta_recorrido.Size = new System.Drawing.Size(125, 22);
             this.alta_recorrido.Text = "Recorrido";
             this.alta_recorrido.Visible = false;
             this.alta_recorrido.Click += new System.EventHandler(this.recorridoToolStripMenuItem_Click);
@@ -115,7 +115,7 @@
             // modif_rol
             // 
             this.modif_rol.Name = "modif_rol";
-            this.modif_rol.Size = new System.Drawing.Size(152, 22);
+            this.modif_rol.Size = new System.Drawing.Size(125, 22);
             this.modif_rol.Text = "Rol";
             this.modif_rol.Visible = false;
             this.modif_rol.Click += new System.EventHandler(this.rolToolStripMenuItem1_Click);
@@ -123,7 +123,7 @@
             // modif_micro
             // 
             this.modif_micro.Name = "modif_micro";
-            this.modif_micro.Size = new System.Drawing.Size(152, 22);
+            this.modif_micro.Size = new System.Drawing.Size(125, 22);
             this.modif_micro.Text = "Micro";
             this.modif_micro.Visible = false;
             this.modif_micro.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
@@ -131,7 +131,7 @@
             // modif_reco
             // 
             this.modif_reco.Name = "modif_reco";
-            this.modif_reco.Size = new System.Drawing.Size(152, 22);
+            this.modif_reco.Size = new System.Drawing.Size(125, 22);
             this.modif_reco.Text = "Recorrido";
             this.modif_reco.Visible = false;
             this.modif_reco.Click += new System.EventHandler(this.recorridoToolStripMenuItem1_Click);
@@ -148,7 +148,7 @@
             // baja_micro
             // 
             this.baja_micro.Name = "baja_micro";
-            this.baja_micro.Size = new System.Drawing.Size(152, 22);
+            this.baja_micro.Size = new System.Drawing.Size(125, 22);
             this.baja_micro.Text = "Micro";
             this.baja_micro.Visible = false;
             this.baja_micro.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
@@ -156,9 +156,17 @@
             // baja_reco
             // 
             this.baja_reco.Name = "baja_reco";
-            this.baja_reco.Size = new System.Drawing.Size(152, 22);
+            this.baja_reco.Size = new System.Drawing.Size(125, 22);
             this.baja_reco.Text = "Recorrido";
             this.baja_reco.Visible = false;
+            // 
+            // registrarArriboMenu
+            // 
+            this.registrarArriboMenu.Name = "registrarArriboMenu";
+            this.registrarArriboMenu.Size = new System.Drawing.Size(101, 20);
+            this.registrarArriboMenu.Text = "Registrar Arribo";
+            this.registrarArriboMenu.Visible = false;
+            this.registrarArriboMenu.Click += new System.EventHandler(this.registrarArriboToolStripMenuItem_Click);
             // 
             // compra_menu
             // 
@@ -172,7 +180,7 @@
             // facturaciónToolStripMenuItem
             // 
             this.facturaciónToolStripMenuItem.Name = "facturaciónToolStripMenuItem";
-            this.facturaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.facturaciónToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.facturaciónToolStripMenuItem.Text = "Facturación";
             this.facturaciónToolStripMenuItem.Click += new System.EventHandler(this.facturaciónToolStripMenuItem_Click);
             // 
@@ -191,13 +199,6 @@
             this.estadisticaMenu.Text = "Estadistica";
             this.estadisticaMenu.Visible = false;
             this.estadisticaMenu.Click += new System.EventHandler(this.estadisticaToolStripMenuItem_Click);
-            // 
-            // registrarArriboMenu
-            // 
-            this.registrarArriboMenu.Name = "registrarArriboMenu";
-            this.registrarArriboMenu.Size = new System.Drawing.Size(101, 20);
-            this.registrarArriboMenu.Text = "Registrar Arribo";
-            this.registrarArriboMenu.Click += new System.EventHandler(this.registrarArriboToolStripMenuItem_Click);
             // 
             // canjePremioMenu
             // 
