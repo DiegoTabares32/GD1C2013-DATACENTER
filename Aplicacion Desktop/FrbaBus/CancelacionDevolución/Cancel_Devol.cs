@@ -11,6 +11,8 @@ namespace FrbaBus.Canc_Dev_de_Pas_Enc
 {
     public partial class CancelDevol : Form
     {
+        DateTime fechaDelSistema = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+
         public CancelDevol()
         {
             InitializeComponent();
@@ -167,6 +169,8 @@ namespace FrbaBus.Canc_Dev_de_Pas_Enc
             comboBoxAlcance.DataSource = tablaAlcance;
             comboBoxAlcance.DisplayMember = "tipo_alcance";
             comboBoxAlcance.ValueMember = "tipo_alcance";
+
+            dateTimePickerCancDev.Value = fechaDelSistema;
 
         }
 

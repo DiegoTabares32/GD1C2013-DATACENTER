@@ -238,5 +238,13 @@ namespace FrbaBus
             conexion.execute_query_only(query);
         }
 
+        public void update_fecha_alta_micro(string fecha_alta)
+        {
+            connection conexion = new connection();
+            string query = "EXECUTE DATACENTER.update_fecha_alta_micro '"+fecha_alta+"'";
+            conexion.execute_query(query);
+            
+        }
+
     }
 }

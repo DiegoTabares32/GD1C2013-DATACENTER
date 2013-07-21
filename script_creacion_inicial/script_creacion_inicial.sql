@@ -1505,3 +1505,15 @@ BEGIN
 
 END
 GO
+
+/*------------------------AGREGADO PARA LA ACTUALIZACION DE FECHA DE ALTA DE MICRO --------------------*/
+CREATE PROCEDURE DATACENTER.update_fecha_alta_micro (@fecha_alta nvarchar(255))
+AS
+BEGIN
+	--Verificamos si alguna fecha de alta es null de serlo actualizamos
+	IF (select count(mic_patente) from DATACENTER.Micro where  mic_fecha_alta IS NULL ) != 0
+	BEGIN
+			UPDATE DATACENTER.Micro
+			SET mic_fecha_alta = CONVERT(datetime, @fecha_alta, 121)
+	END
+END

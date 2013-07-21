@@ -38,6 +38,10 @@ namespace FrbaBus.Compra_de_Pasajes
         public FormCompra()
         {
             InitializeComponent();
+            /*-------------------------ACTUALIZACION DE FECHA DE ALTA DE MICRO--------------*/
+            stored_procedures stored = new stored_procedures();
+            stored.update_fecha_alta_micro(fechaDelSistema.ToString("yyyy-MM-dd HH:mm"));
+
         }
 
         private void login_boton_Click(object sender, EventArgs e)
