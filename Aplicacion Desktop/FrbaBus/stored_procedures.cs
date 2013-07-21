@@ -182,32 +182,60 @@ namespace FrbaBus
             conexion.Close();
             return cod_paquete;
         }
-        public void insert_recorrido(string cod_ins, string orig_ins, string dest_ins, int serv_ins, decimal pr_paq_ins, decimal pr_enco_ins)
-        {
-            connection connect = new connection();
 
-            query = "EXECUTE DATACENTER.insert_recorrido " + "'" + cod_ins + "'" + ", " + "'" + orig_ins + "'" + ", " + "'" + dest_ins + "'" + ", " + serv_ins + ", " + pr_paq_ins + ", " + pr_enco_ins;
-            connect.execute_query_only(query);
-        }
-
-        public void insert_viaje(string fecha_sal, string fehca_lleg, string cod_reco_ins, string pat_mic_ins)
+        /*-----------------------------CAMBIADO----------------------------*/
+        public void insert_recorrido(string cod_ins, string orig_ins, string dest_ins, int serv_ins, decimal pr_pas_ins, decimal pr_enco_ins)
         {
             connection conexion = new connection();
 
-            query = "EXECUTE DATACENTER.insert_viaje " + fecha_sal + ", " + fehca_lleg + ", " + cod_reco_ins + ", " + pat_mic_ins;
+            string precioPas = pr_pas_ins.ToString();
+            string precioPasConPunto = precioPas.Replace(",", ".");
+            string precioEnco = pr_enco_ins.ToString();
+            string precioEncoConPunto = precioPas.Replace(",", ".");
+
+            query = "EXECUTE DATACENTER.insert_recorrido " + "'" + cod_ins + "'" + ", " + "'" + orig_ins + "'" + ", " + "'" + dest_ins + "'" + ", " + serv_ins + ", " + precioPasConPunto + ", " + precioEncoConPunto;
             conexion.execute_query_only(query);
         }
 
-        public void update_recorrido(string cod_act, string orig_act, string dest_act, int serv_act, decimal pr_paq_act, decimal pr_enco_act)
+        /*-----------------------------CAMBIADO-----------------------------*/
+        public void insert_viaje(string fecha_sal, string fecha_lleg, string cod_reco_ins, string pat_mic_ins)
         {
-            query = "EXECUTE DATACENTER.update_recorrido " + "'" + cod_act + "'" + ", " + "'" + orig_act + "'" + ", " + "'" + dest_act + "'" + ", " + serv_act + ", " + pr_paq_act + ", " + pr_enco_act;
-            connect.execute_query_only(query);
+            connection conexion = new connection();
+
+            query = "EXECUTE DATACENTER.insert_viaje " + "'" + fecha_sal + "'" + ", " + "'" + fecha_lleg + "'" + ", " + "'" + cod_reco_ins + "'" + ", " + "'" + pat_mic_ins + "'";
+            conexion.execute_query_only(query);
+        }
+
+        /*---------------------------CAMBIADO--------------------------*/
+        public void update_recorrido(string cod_act, string orig_act, string dest_act, int serv_act, decimal pr_pas_act, decimal pr_enco_act)
+        {
+            connection conexion = new connection();
+
+            string precioPas = pr_pas_act.ToString();
+            string precioPasConPunto = precioPas.Replace(",", ".");
+            string precioEnco = pr_enco_act.ToString();
+            string precioEncoConPunto = precioEnco.Replace(",", ".");
+            query = "EXECUTE DATACENTER.update_recorrido " + "'" + cod_act + "'" + ", " + "'" + orig_act + "'" + ", " + "'" + dest_act + "'" + ", " + serv_act + ", " + "'" + precioPasConPunto + "'" + ", " + "'" + precioEncoConPunto + "'";
+            conexion.execute_query_only(query);
         }
 
         public void update_estado_reco(string cod, char estado_act)
         {
-            query = "EXECUTE DATACENTER.update_estado_reco " + "'" + cod + "'" + "," + "'" + estado_act + "'";
-            connect.execute_query_only(query);
+            connection conexion = new connection();
+
+            string fecha_hoy = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+            DateTime fecha_hoy2 = Convert.ToDateTime(fecha_hoy);
+            string fecha = fecha_hoy2.ToString("yyyy-MM-dd HH:mm");
+
+            query = "EXECUTE DATACENTER.update_estado_reco " + "'" + cod + "'" + ", " + "'" + estado_act + "'" + ", " + "'" + fecha + "'";
+            conexion.execute_query_only(query);
+        }
+
+        public void habilitar_estado_reco(string cod, char estado_act)
+        {
+            connection conexion = new connection();
+            query = "EXECUTE DATACENTER.habilitar_estado_reco " + "'" + cod + "'" + ", " + "'" + estado_act + "'";
+            conexion.execute_query_only(query);
         }
 
     }
