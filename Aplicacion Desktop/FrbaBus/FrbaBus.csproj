@@ -115,26 +115,38 @@
     <Compile Include="Abm Recorrido\Abm_Reco_Baja.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Recorrido\Abm_Reco_Baja.Designer.cs">
+    <Compile Include="Abm Recorrido\Abm_Reco_Baja.designer.cs">
       <DependentUpon>Abm_Reco_Baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Habilitar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_Habilitar.designer.cs">
+      <DependentUpon>Abm_Reco_Habilitar.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Recorrido\Abm_Reco_Modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Recorrido\Abm_Reco_Modificacion.Designer.cs">
+    <Compile Include="Abm Recorrido\Abm_Reco_Modificacion.designer.cs">
       <DependentUpon>Abm_Reco_Modificacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Recorrido\Abm_Reco_Seleccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Recorrido\Abm_Reco_Seleccion.Designer.cs">
+    <Compile Include="Abm Recorrido\Abm_Reco_Seleccion.designer.cs">
       <DependentUpon>Abm_Reco_Seleccion.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Recorrido\Abm_Reco_SelecDel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Recorrido\Abm_Reco_SelecDel.Designer.cs">
+    <Compile Include="Abm Recorrido\Abm_Reco_SelecDel.designer.cs">
       <DependentUpon>Abm_Reco_SelecDel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_SelecHab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Recorrido\Abm_Reco_SelecHab.designer.cs">
+      <DependentUpon>Abm_Reco_SelecHab.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\Abm_Rol_Alta.cs">
       <SubType>Form</SubType>
@@ -284,6 +296,9 @@
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Baja.resx">
       <DependentUpon>Abm_Reco_Baja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Habilitar.resx">
+      <DependentUpon>Abm_Reco_Habilitar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Modificacion.resx">
       <DependentUpon>Abm_Reco_Modificacion.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_SelecDel.resx">
       <DependentUpon>Abm_Reco_SelecDel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Recorrido\Abm_Reco_SelecHab.resx">
+      <DependentUpon>Abm_Reco_SelecHab.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>

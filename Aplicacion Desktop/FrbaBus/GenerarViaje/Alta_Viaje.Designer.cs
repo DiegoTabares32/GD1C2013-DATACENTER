@@ -95,11 +95,11 @@
             this.dateTimePickerSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerSalida.Location = new System.Drawing.Point(160, 18);
             this.dateTimePickerSalida.MaxDate = new System.DateTime(2023, 7, 1, 0, 0, 0, 0);
-            this.dateTimePickerSalida.MinDate = new System.DateTime(2013, 7, 1, 0, 0, 0, 0);
+            this.dateTimePickerSalida.MinDate = new System.DateTime(2003, 7, 1, 0, 0, 0, 0);
             this.dateTimePickerSalida.Name = "dateTimePickerSalida";
             this.dateTimePickerSalida.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerSalida.TabIndex = 5;
-            this.dateTimePickerSalida.Value = new System.DateTime(2013, 7, 19, 0, 0, 0, 0);
+            this.dateTimePickerSalida.Value = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerSalida.ValueChanged += new System.EventHandler(this.dateTimePickerSalida_ValueChanged);
             // 
             // dateTimePickerLlegada
@@ -108,11 +108,11 @@
             this.dateTimePickerLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerLlegada.Location = new System.Drawing.Point(160, 57);
             this.dateTimePickerLlegada.MaxDate = new System.DateTime(2023, 7, 2, 0, 0, 0, 0);
-            this.dateTimePickerLlegada.MinDate = new System.DateTime(2013, 7, 1, 0, 0, 0, 0);
+            this.dateTimePickerLlegada.MinDate = new System.DateTime(2003, 7, 2, 0, 0, 0, 0);
             this.dateTimePickerLlegada.Name = "dateTimePickerLlegada";
             this.dateTimePickerLlegada.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerLlegada.TabIndex = 6;
-            this.dateTimePickerLlegada.Value = new System.DateTime(2013, 7, 19, 0, 0, 0, 0);
+            this.dateTimePickerLlegada.Value = new System.DateTime(2012, 1, 1, 0, 0, 0, 0);
             // 
             // textBoxFecLleg
             // 
@@ -201,6 +201,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Alta_Viaje";
             this.Text = "Alta_Viaje";
+            this.Load += new System.EventHandler(this.Alta_Viaje_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

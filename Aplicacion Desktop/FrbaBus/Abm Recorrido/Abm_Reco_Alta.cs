@@ -90,19 +90,16 @@ namespace FrbaBus.Abm_Recorrido
             if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el codigo ingresado ya esta en la BD
             {
                 MessageBox.Show("ERROR: EL CODIGO DE RECORRIDO QUE INGRESASTE YA EXISTE");
-                limpiar();
                 codigo_error = 1;
             }
             
-            tablaRecorridos.Clear();
+            tablaRecorridos.Clear(); // Limpia el dataTable
             tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen ="+"'"+comboBoxCiuOrigen.Text+"'"+" AND "+"reco_destino ="+"'"+comboBoxCiuDestino.Text+"'"+" AND "+"reco_serv_id ="+comboBoxTipoServ.SelectedValue);
             if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido ingresado ya esta en la BD
             {
                 MessageBox.Show("ERROR: YA EXISTE ESTE RECORRIDO CON ESTE SERVICIO");
-                limpiar();
                 codigo_error = 1;
             }
-
 
             tablaRecorridos.Clear();
             string precioPas = numUpDownPrPas.Value.ToString();
@@ -112,20 +109,17 @@ namespace FrbaBus.Abm_Recorrido
             if (tablaRecorridos.Rows.Count == 0) // Se cumple cuando hay un mismo recorrido en la BD, pero con otro tipo de servicio, y estos recorridos tienen distinto precio, cosa que no tiene que pasar
             {
                 MessageBox.Show("ERROR: EL PRECIO BASE DEL PASAJE QUE INGRESASTE NO COINCIDE CON EL PRECIO QUE ESTA ESTABLECIDO PARA EL PAR ORIGEN-DESTINO ELEGIDOS");
-                //limpiar();
                 codigo_error = 1;
             }
 
-
             tablaRecorridos.Clear();
-            string precioEnco = numUpDownPrPas.Value.ToString();
+            string precioEnco = numUpDownPrEnco.Value.ToString();
             string precioEncoConPunto = precioEnco.Replace(",", ".");
             tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen =" + "'" + comboBoxCiuOrigen.Text + "'" + " AND " + "reco_destino =" + "'" + comboBoxCiuDestino.Text + "'" + " AND " + "reco_serv_id <>" + comboBoxTipoServ.SelectedValue + " AND " + "reco_precio_base_Kg =" + precioEncoConPunto);
 
             if (tablaRecorridos.Rows.Count == 0) // Se cumple cuando hay un mismo recorrido en la BD, pero con otro tipo de servicio, y estos recorridos tienen distinto precio, cosa que no tiene que pasar
             {
                 MessageBox.Show("ERROR: EL PRECIO BASE DE KG QUE INGRESASTE NO COINCIDE CON EL PRECIO QUE ESTA ESTABLECIDO PARA EL PAR ORIGEN-DESTINO ELEGIDOS");
-                //limpiar();
                 codigo_error = 1;
             }
 
@@ -142,7 +136,7 @@ namespace FrbaBus.Abm_Recorrido
                 decimal pr_pas_ins = numUpDownPrPas.Value;
                 decimal pr_enco_ins = numUpDownPrEnco.Value;
                 stored_procedures procedure = new stored_procedures();
-                procedure.insert_recorrido(cod_ins,orig_ins,dest_ins,serv_ins,pr_pas_ins,pr_enco_ins);
+                procedure.insert_recorrido(cod_ins,orig_ins,dest_ins,serv_ins,pr_pas_ins,pr_enco_ins); // Los decimales los convierte el procedure para mandarlos bien.
                 MessageBox.Show("¡RECORRIDO AGREGADO CORRECTAMENTE!");
                 limpiar();
                 return;
@@ -173,6 +167,12 @@ namespace FrbaBus.Abm_Recorrido
             comboBoxTipoServ.DataSource = tabla_servicios;
             comboBoxTipoServ.DisplayMember = "serv_tipo";
             comboBoxTipoServ.ValueMember = "serv_id";
+        }
+
+        private void botonRehab_Click(object sender, EventArgs e)
+        {
+            Abm_Reco_SelecHab selHab = new Abm_Reco_SelecHab();
+            selHab.Show();
         }
 
 

@@ -118,7 +118,7 @@
             this.comboBoxTipoServ.Name = "comboBoxTipoServ";
             this.comboBoxTipoServ.Size = new System.Drawing.Size(132, 21);
             this.comboBoxTipoServ.TabIndex = 7;
-            this.comboBoxTipoServ.SelectedValueChanged += new System.EventHandler(this.comboBoxTipoServ_SelectedValueChanged);
+            this.comboBoxTipoServ.SelectedIndexChanged += new System.EventHandler(this.comboBoxTipoServ_SelectedIndexChanged);
             // 
             // comboBoxOrigen
             // 

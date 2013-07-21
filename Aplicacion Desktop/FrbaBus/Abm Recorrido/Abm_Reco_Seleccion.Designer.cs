@@ -34,13 +34,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridReco = new System.Windows.Forms.DataGridView();
-            this.comboBoxOrigen = new System.Windows.Forms.ComboBox();
-            this.comboBoxDestino = new System.Windows.Forms.ComboBox();
-            this.comboBoxTipoServ = new System.Windows.Forms.ComboBox();
-            this.botonLimpiar = new System.Windows.Forms.Button();
-            this.botonBuscar = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxEstado = new System.Windows.Forms.ComboBox();
             this.Cod_Reco = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo_Serv = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ciu_Origen = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +42,13 @@
             this.Precio_Base_Kg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.comboBoxOrigen = new System.Windows.Forms.ComboBox();
+            this.comboBoxDestino = new System.Windows.Forms.ComboBox();
+            this.comboBoxTipoServ = new System.Windows.Forms.ComboBox();
+            this.botonLimpiar = new System.Windows.Forms.Button();
+            this.botonBuscar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxEstado = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridReco)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +67,7 @@
             this.textBoxCodReco.Name = "textBoxCodReco";
             this.textBoxCodReco.Size = new System.Drawing.Size(100, 20);
             this.textBoxCodReco.TabIndex = 1;
+            this.textBoxCodReco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCodReco_KeyPress);
             // 
             // label2
             // 
@@ -116,6 +117,57 @@
             this.dataGridReco.Size = new System.Drawing.Size(846, 291);
             this.dataGridReco.TabIndex = 6;
             this.dataGridReco.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridReco_CellContentClick);
+            // 
+            // Cod_Reco
+            // 
+            this.Cod_Reco.HeaderText = "Cod_Reco";
+            this.Cod_Reco.Name = "Cod_Reco";
+            this.Cod_Reco.ReadOnly = true;
+            // 
+            // Tipo_Serv
+            // 
+            this.Tipo_Serv.HeaderText = "Tipo_Serv";
+            this.Tipo_Serv.Name = "Tipo_Serv";
+            this.Tipo_Serv.ReadOnly = true;
+            // 
+            // Ciu_Origen
+            // 
+            this.Ciu_Origen.HeaderText = "Ciu_Origen";
+            this.Ciu_Origen.Name = "Ciu_Origen";
+            this.Ciu_Origen.ReadOnly = true;
+            // 
+            // Ciu_Destino
+            // 
+            this.Ciu_Destino.HeaderText = "Ciu_Destino";
+            this.Ciu_Destino.Name = "Ciu_Destino";
+            this.Ciu_Destino.ReadOnly = true;
+            // 
+            // Precio_Base_Pasaje
+            // 
+            this.Precio_Base_Pasaje.HeaderText = "Precio_Base_Pasaje";
+            this.Precio_Base_Pasaje.Name = "Precio_Base_Pasaje";
+            this.Precio_Base_Pasaje.ReadOnly = true;
+            this.Precio_Base_Pasaje.Width = 120;
+            // 
+            // Precio_Base_Kg
+            // 
+            this.Precio_Base_Kg.HeaderText = "Precio_Base_Kg";
+            this.Precio_Base_Kg.Name = "Precio_Base_Kg";
+            this.Precio_Base_Kg.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccion";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
+            this.Seleccionar.Text = "Seleccionar";
+            this.Seleccionar.UseColumnTextForButtonValue = true;
             // 
             // comboBoxOrigen
             // 
@@ -172,6 +224,7 @@
             // 
             // comboBoxEstado
             // 
+            this.comboBoxEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEstado.FormattingEnabled = true;
             this.comboBoxEstado.Items.AddRange(new object[] {
             "Habilitado",
@@ -181,57 +234,6 @@
             this.comboBoxEstado.Size = new System.Drawing.Size(129, 21);
             this.comboBoxEstado.TabIndex = 13;
             this.comboBoxEstado.SelectedIndexChanged += new System.EventHandler(this.comboBoxEstado_SelectedIndexChanged_1);
-            // 
-            // Cod_Reco
-            // 
-            this.Cod_Reco.HeaderText = "Cod_Reco";
-            this.Cod_Reco.Name = "Cod_Reco";
-            this.Cod_Reco.ReadOnly = true;
-            // 
-            // Tipo_Serv
-            // 
-            this.Tipo_Serv.HeaderText = "Tipo_Serv";
-            this.Tipo_Serv.Name = "Tipo_Serv";
-            this.Tipo_Serv.ReadOnly = true;
-            // 
-            // Ciu_Origen
-            // 
-            this.Ciu_Origen.HeaderText = "Ciu_Origen";
-            this.Ciu_Origen.Name = "Ciu_Origen";
-            this.Ciu_Origen.ReadOnly = true;
-            // 
-            // Ciu_Destino
-            // 
-            this.Ciu_Destino.HeaderText = "Ciu_Destino";
-            this.Ciu_Destino.Name = "Ciu_Destino";
-            this.Ciu_Destino.ReadOnly = true;
-            // 
-            // Precio_Base_Pasaje
-            // 
-            this.Precio_Base_Pasaje.HeaderText = "Precio_Base_Pasaje";
-            this.Precio_Base_Pasaje.Name = "Precio_Base_Pasaje";
-            this.Precio_Base_Pasaje.ReadOnly = true;
-            this.Precio_Base_Pasaje.Width = 120;
-            // 
-            // Precio_Base_Kg
-            // 
-            this.Precio_Base_Kg.HeaderText = "Precio_Base_Kg";
-            this.Precio_Base_Kg.Name = "Precio_Base_Kg";
-            this.Precio_Base_Kg.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccion";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
-            this.Seleccionar.Text = "Seleccionar";
-            this.Seleccionar.UseColumnTextForButtonValue = true;
             // 
             // Abm_Reco_Seleccion
             // 

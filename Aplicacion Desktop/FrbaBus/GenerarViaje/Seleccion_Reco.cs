@@ -15,7 +15,7 @@ namespace FrbaBus.GenerarViaje
         string codigo = "";
         string servicio = "";
        
-        public string[] cod_y_serv = new string[2];
+        public string[] cod_y_serv = new string[2]; // ES UN ARRAY QUE VOY A DEVOLVER PARA PODER TENER EL CODIGO Y EL SERVICIO EN EL FORMULARIO DE ALTA_VIAJE
 
         public Seleccion_Reco()
         {
@@ -43,7 +43,7 @@ namespace FrbaBus.GenerarViaje
                 return;
             }
 
-            string query = "SELECT reco_cod, serv_tipo, reco_origen, reco_destino, reco_precio_base_pasaje, reco_precio_base_kg, reco_estado FROM DATACENTER.Recorrido JOIN DATACENTER.Servicio ON reco_serv_id = serv_id WHERE reco_estado = 'H'";
+            string query = "SELECT reco_cod, serv_tipo, reco_origen, reco_destino, reco_precio_base_pasaje, reco_precio_base_kg, reco_estado FROM DATACENTER.Recorrido JOIN DATACENTER.Servicio ON reco_serv_id = serv_id WHERE reco_estado = 'H'"; // MUESTRA SOLAMENTE LOS RECORRIDOS HABILITADOS
             //ESTA QUERY ASI COMO ESTA CORRESPONDE A TODOS LOS CAMPOS VACIOS...
             string condicion = "";
 
@@ -85,6 +85,11 @@ namespace FrbaBus.GenerarViaje
             this.Estado.DataPropertyName = tabla_reco_busq.Columns[6].ToString();
             //cargamos el data_grid con el resultado de la busqueda
             this.dataGridReco.DataSource = tabla_reco_busq;
+
+            if (tabla_reco_busq.Rows.Count == 0)
+            {
+                MessageBox.Show("ERROR: No existen recorridos con estas caracteristicas");
+            }
         }
 
 

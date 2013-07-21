@@ -43,6 +43,8 @@
             this.numUpDownPrPas = new System.Windows.Forms.NumericUpDown();
             this.numUpDownPrEnco = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
+            this.botonRehab = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownPrPas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownPrEnco)).BeginInit();
             this.SuspendLayout();
@@ -102,7 +104,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 201);
+            this.label6.Location = new System.Drawing.Point(12, 201);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(139, 13);
             this.label6.TabIndex = 6;
@@ -133,7 +135,7 @@
             // 
             // botonAceptar
             // 
-            this.botonAceptar.Location = new System.Drawing.Point(191, 270);
+            this.botonAceptar.Location = new System.Drawing.Point(149, 270);
             this.botonAceptar.Name = "botonAceptar";
             this.botonAceptar.Size = new System.Drawing.Size(107, 41);
             this.botonAceptar.TabIndex = 13;
@@ -143,7 +145,7 @@
             // 
             // botonRefrescar
             // 
-            this.botonRefrescar.Location = new System.Drawing.Point(60, 270);
+            this.botonRefrescar.Location = new System.Drawing.Point(15, 270);
             this.botonRefrescar.Name = "botonRefrescar";
             this.botonRefrescar.Size = new System.Drawing.Size(106, 41);
             this.botonRefrescar.TabIndex = 14;
@@ -180,17 +182,38 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(84, 242);
+            this.label7.Location = new System.Drawing.Point(12, 233);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(199, 13);
             this.label7.TabIndex = 17;
             this.label7.Text = "Los campos con un \" * \" son obligatorios";
             // 
+            // botonRehab
+            // 
+            this.botonRehab.Location = new System.Drawing.Point(149, 374);
+            this.botonRehab.Name = "botonRehab";
+            this.botonRehab.Size = new System.Drawing.Size(107, 41);
+            this.botonRehab.TabIndex = 18;
+            this.botonRehab.Text = "Habilitar Recorrido Existente";
+            this.botonRehab.UseVisualStyleBackColor = true;
+            this.botonRehab.Click += new System.EventHandler(this.botonRehab_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 349);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(365, 13);
+            this.label8.TabIndex = 19;
+            this.label8.Text = "Para volver a habilitar un recorrido que fue dado de baja clickee este boton:";
+            // 
             // Abm_Reco_Alta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 323);
+            this.ClientSize = new System.Drawing.Size(407, 442);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.botonRehab);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.numUpDownPrEnco);
             this.Controls.Add(this.numUpDownPrPas);
@@ -234,5 +257,7 @@
         private System.Windows.Forms.NumericUpDown numUpDownPrPas;
         private System.Windows.Forms.NumericUpDown numUpDownPrEnco;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button botonRehab;
+        private System.Windows.Forms.Label label8;
     }
 }

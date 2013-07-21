@@ -11,8 +11,8 @@ namespace FrbaBus.Abm_Recorrido
 {
     public partial class Abm_Reco_Modificacion : Form
     {
-        bool modificacion = false; // me indica si modificaron servicio, origen o destino
-        bool modif_precio = false; // me indica si modificaron algun precio
+        public bool modificacion; // me indica si modificaron servicio, origen o destino
+        public bool modif_precio; // me indica si modificaron algun precio
         string Tipo_Servicio;
         string Ciu_Origen;
         string Ciu_Destino;
@@ -62,6 +62,9 @@ namespace FrbaBus.Abm_Recorrido
             comboBoxDestino.DisplayMember = "ciu_nombre";
             comboBoxDestino.ValueMember = "ciu_nombre";
             comboBoxDestino.Text = Ciu_Destino;
+
+            modif_precio = false;
+            modificacion = false;
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -91,7 +94,7 @@ namespace FrbaBus.Abm_Recorrido
                 codigo_error = 1;
             }
 
-            if (modificacion == false || modif_precio == false || Tipo_Servicio == comboBoxTipoServ.Text.ToString() || Ciu_Origen == comboBoxOrigen.Text.ToString() || Ciu_Destino == comboBoxDestino.Text.ToString())
+            if (modificacion == false && modif_precio == false) // Tipo_Servicio == comboBoxTipoServ.SelectedText.ToString() || Ciu_Origen == comboBoxOrigen.SelectedText.ToString() || Ciu_Destino == comboBoxDestino.SelectedText.ToString())
             {
                 MessageBox.Show("ERROR: Usted no ha modificado nada");
                 codigo_error = 1;
@@ -101,25 +104,31 @@ namespace FrbaBus.Abm_Recorrido
             {
                 return;
             }
-
+            
             connection conexion = new connection();
-
+            /*
             DataTable tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen =" + "'" + comboBoxOrigen.Text + "'" + " AND " + "reco_destino =" + "'" + comboBoxDestino.Text + "'" + " AND " + "reco_serv_id =" + comboBoxTipoServ.SelectedValue);
             if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido ingresado ya esta en la BD
             {
                 MessageBox.Show("ERROR: YA EXISTE ESTE RECORRIDO CON ESTE SERVICIO");
                 codigo_error = 1;
             }
+            */
 
             if (modificacion == true)
-            tablaRecorridos.Clear();
-            string reco_cod = textBoxCodReco.Text.ToString();
-            string fecha_ayer = DateTime.Now.ToString("yyyy:MM:dd HH:mm"); // ESTO SE CAMBIA POR LA FECHA DEL CONFIG!!!
-            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Viaje WHERE viaj_reco_cod = " + "'" + reco_cod + "'" + " AND viaj_fecha_salida >= " + "CONVERT(datetime, " + "'" + fecha_ayer + "'" + ", 121)");
-            if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido tiene viajes asociados que se estan realizando en este momento o que estan programados de hoy en adelante
             {
-                MessageBox.Show("ERROR: No se puede modificar el tipo de servicio, el origen, o el destino de un recorrido que tenga viajes asociados (que se esten realizando o esten programados de hoy en adelante).");
-                codigo_error = 1;
+                //tablaRecorridos.Clear()
+                string reco_cod = textBoxCodReco.Text.ToString();
+                string fecha_hoy = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+                DateTime fecha_hoy2 = Convert.ToDateTime(fecha_hoy);
+                string fecha_ayer = fecha_hoy2.AddDays(-1).ToString("yyyy-MM-dd HH:mm");
+
+                DataTable tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Viaje WHERE viaj_reco_cod = " + "'" + reco_cod + "'" + " AND viaj_fecha_salida >= " + "CONVERT(datetime, " + "'" + fecha_ayer + "'" + ", 121)");
+                if (tablaRecorridos.Rows.Count >= 1) // Se cumple cuando el recorrido tiene viajes asociados que se estan realizando en este momento o que estan programados de hoy en adelante
+                {
+                    MessageBox.Show("ERROR: No se puede modificar el tipo de servicio, el origen, o el destino de un recorrido que tenga viajes asociados (que se esten realizando o esten programados de hoy en adelante).");
+                    codigo_error = 1;
+                }
             }
 
             if (codigo_error == 1)
@@ -133,18 +142,13 @@ namespace FrbaBus.Abm_Recorrido
             string orig_act = comboBoxOrigen.Text.ToString();
             string dest_act = comboBoxDestino.Text.ToString();
             int serv_act = (int)comboBoxTipoServ.SelectedValue;
-            decimal pr_paq_act = numUpDownPrPas.Value;
+            decimal pr_pas_act = numUpDownPrPas.Value;
             decimal pr_enco_act = numUpDownPrEnco.Value;
             stored_procedures procedure = new stored_procedures();
-            procedure.update_recorrido(cod_act, orig_act, dest_act, serv_act, pr_paq_act, pr_enco_act);
+            procedure.update_recorrido(cod_act, orig_act, dest_act, serv_act, pr_pas_act, pr_enco_act);
             MessageBox.Show("¡RECORRIDO ACTUALIZADO CORRECTAMENTE!");
             limpiar();
             return;
-        }
-
-        private void comboBoxTipoServ_SelectedValueChanged(object sender, EventArgs e)
-        {
-            modificacion = true;
         }
 
         private void comboBoxOrigen_SelectedValueChanged(object sender, EventArgs e)
@@ -165,6 +169,11 @@ namespace FrbaBus.Abm_Recorrido
         private void numUpDownPrEnco_ValueChanged(object sender, EventArgs e)
         {
             modif_precio = true;
+        }
+
+        private void comboBoxTipoServ_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            modificacion = true;
         }
 
 

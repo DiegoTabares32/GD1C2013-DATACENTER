@@ -12,7 +12,7 @@ namespace FrbaBus.GenerarViaje
     public partial class Alta_Viaje : Form
     {
         string serv_reco = "";
-
+            
         public Alta_Viaje()
         {
             InitializeComponent();
@@ -20,10 +20,14 @@ namespace FrbaBus.GenerarViaje
 
         private void limpiar()
         {
-            dateTimePickerSalida.ResetText();
-            dateTimePickerLlegada.ResetText();
+            string fechaDeHoy = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+            DateTime fecha_hoy = Convert.ToDateTime(fechaDeHoy);
+            dateTimePickerSalida.Value = fecha_hoy;
+            //dateTimePickerSalida.MinDate = fecha_hoy;
+            dateTimePickerLlegada.Value = fecha_hoy;
             textBoxReco.Clear();
             textBoxMicro.Clear();
+            botonSelMicro.Enabled = false;
         }
 
 
@@ -63,11 +67,12 @@ namespace FrbaBus.GenerarViaje
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             this.limpiar();
-            botonSelMicro.Enabled = false;
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
+            string fechaDeHoy = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+            DateTime fecha_hoy = Convert.ToDateTime(fechaDeHoy);
             int codigo_error = 0; // el 0 es que no tiene errores y el 1 es que SI tiene errores!
 
             if (textBoxReco.Text == "")
@@ -82,20 +87,34 @@ namespace FrbaBus.GenerarViaje
                 MessageBox.Show("ERROR: DEBE SELECCIONAR UN MICRO");
             }
 
-            /*
-             * ACA TENDRIA QUE VALIDAR EL TEMA
-             * DE LAS FECHAS, PARA QUE INGRESE
-             * CORRECTAMENTE TODO Y NO SE INSERTE
-             * NADA INCORRECTO EN LA BASE.
-             */
+            if (dateTimePickerSalida.Value <= fecha_hoy)
+            {
+                codigo_error = 1;
+                MessageBox.Show("ERROR: La fecha de salida debe ser posterior a la fecha y hora actual: " + fecha_hoy.ToString("yyyy-MM-dd HH:mm"));
+                dateTimePickerSalida.Value = fecha_hoy;
+            }
+
+            if (dateTimePickerSalida.Value >= dateTimePickerLlegada.Value)
+            {
+                codigo_error = 1;
+                MessageBox.Show("ERROR: La fecha de llegada debe ser posterior a la fecha de salida");
+                dateTimePickerLlegada.Value = dateTimePickerSalida.Value.AddMinutes(1);
+            }
+
+            if (dateTimePickerLlegada.Value > dateTimePickerSalida.Value.AddDays(1))
+            {
+                codigo_error = 1;
+                MessageBox.Show("ERROR: la fecha de llegada debe ser dentro de las 24hs proximas a la fecha de salida");
+                dateTimePickerLlegada.Value = dateTimePickerSalida.Value.AddDays(1);
+            }
 
             if (codigo_error == 1)
             {
                 return;
             }
 
-            string fecha_sal_ins = dateTimePickerSalida.Text.ToString();
-            string fehca_lleg_ins = dateTimePickerLlegada.Text.ToString();
+            string fecha_sal_ins = dateTimePickerSalida.Value.ToString("yyyy-MM-dd HH:mm");
+            string fehca_lleg_ins = dateTimePickerLlegada.Value.ToString("yyyy-MM-dd HH:mm");
             string cod_reco_ins = textBoxReco.Text.ToString();
             string pat_mic_ins = textBoxMicro.Text.ToString();
             stored_procedures procedure = new stored_procedures();
@@ -107,8 +126,20 @@ namespace FrbaBus.GenerarViaje
 
         private void dateTimePickerSalida_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePickerLlegada.MaxDate = dateTimePickerSalida.Value.AddDays(1);
-            dateTimePickerLlegada.MinDate = dateTimePickerSalida.Value;
+            dateTimePickerLlegada.Value = dateTimePickerSalida.Value;
+            //dateTimePickerLlegada.MinDate = dateTimePickerSalida.Value;
+            //dateTimePickerLlegada.MaxDate = dateTimePickerSalida.Value.AddDays(1);
+            
+        }
+
+        private void Alta_Viaje_Load(object sender, EventArgs e)
+        {
+            string fechaDeHoy = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+            DateTime fecha_hoy = Convert.ToDateTime(fechaDeHoy);
+            //dateTimePickerSalida.MinDate = fecha_hoy;
+            dateTimePickerSalida.Value = fecha_hoy;
+            //dateTimePickerLlegada.MinDate = fecha_hoy.AddMinutes(1);
+            dateTimePickerLlegada.Value = fecha_hoy.AddMinutes(1);
         }
     }
 }

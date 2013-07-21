@@ -1,6 +1,6 @@
 ﻿namespace FrbaBus.Abm_Recorrido
 {
-    partial class Abm_Reco_SelecDel
+    partial class Abm_Reco_SelecHab
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.textBoxEstado = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.comboBoxTipoServ = new System.Windows.Forms.ComboBox();
@@ -47,27 +49,43 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxCodReco = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxEstado = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridReco)).BeginInit();
             this.SuspendLayout();
             // 
+            // textBoxEstado
+            // 
+            this.textBoxEstado.Location = new System.Drawing.Point(533, 6);
+            this.textBoxEstado.Name = "textBoxEstado";
+            this.textBoxEstado.ReadOnly = true;
+            this.textBoxEstado.Size = new System.Drawing.Size(100, 20);
+            this.textBoxEstado.TabIndex = 37;
+            this.textBoxEstado.Text = "Deshabilitado";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(484, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 36;
+            this.label5.Text = "Estado:";
+            // 
             // botonBuscar
             // 
-            this.botonBuscar.Location = new System.Drawing.Point(884, 310);
+            this.botonBuscar.Location = new System.Drawing.Point(887, 311);
             this.botonBuscar.Name = "botonBuscar";
             this.botonBuscar.Size = new System.Drawing.Size(139, 45);
-            this.botonBuscar.TabIndex = 22;
+            this.botonBuscar.TabIndex = 35;
             this.botonBuscar.Text = "Buscar";
             this.botonBuscar.UseVisualStyleBackColor = true;
             this.botonBuscar.Click += new System.EventHandler(this.botonBuscar_Click);
             // 
             // botonLimpiar
             // 
-            this.botonLimpiar.Location = new System.Drawing.Point(884, 225);
+            this.botonLimpiar.Location = new System.Drawing.Point(887, 226);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(139, 45);
-            this.botonLimpiar.TabIndex = 21;
+            this.botonLimpiar.TabIndex = 34;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
@@ -75,26 +93,26 @@
             // comboBoxTipoServ
             // 
             this.comboBoxTipoServ.FormattingEnabled = true;
-            this.comboBoxTipoServ.Location = new System.Drawing.Point(102, 51);
+            this.comboBoxTipoServ.Location = new System.Drawing.Point(105, 52);
             this.comboBoxTipoServ.Name = "comboBoxTipoServ";
             this.comboBoxTipoServ.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxTipoServ.TabIndex = 20;
+            this.comboBoxTipoServ.TabIndex = 33;
             // 
             // comboBoxDestino
             // 
             this.comboBoxDestino.FormattingEnabled = true;
-            this.comboBoxDestino.Location = new System.Drawing.Point(332, 50);
+            this.comboBoxDestino.Location = new System.Drawing.Point(335, 51);
             this.comboBoxDestino.Name = "comboBoxDestino";
             this.comboBoxDestino.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxDestino.TabIndex = 19;
+            this.comboBoxDestino.TabIndex = 32;
             // 
             // comboBoxOrigen
             // 
             this.comboBoxOrigen.FormattingEnabled = true;
-            this.comboBoxOrigen.Location = new System.Drawing.Point(332, 5);
+            this.comboBoxOrigen.Location = new System.Drawing.Point(335, 6);
             this.comboBoxOrigen.Name = "comboBoxOrigen";
             this.comboBoxOrigen.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxOrigen.TabIndex = 18;
+            this.comboBoxOrigen.TabIndex = 31;
             // 
             // dataGridReco
             // 
@@ -110,12 +128,12 @@
             this.Precio_Base_Kg,
             this.Estado_Reco,
             this.Seleccionar});
-            this.dataGridReco.Location = new System.Drawing.Point(12, 90);
+            this.dataGridReco.Location = new System.Drawing.Point(15, 91);
             this.dataGridReco.Name = "dataGridReco";
             this.dataGridReco.ReadOnly = true;
             this.dataGridReco.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridReco.Size = new System.Drawing.Size(866, 291);
-            this.dataGridReco.TabIndex = 17;
+            this.dataGridReco.TabIndex = 30;
             this.dataGridReco.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridReco_CellContentClick);
             // 
             // Cod_Reco
@@ -172,70 +190,52 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(249, 53);
+            this.label4.Location = new System.Drawing.Point(252, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 13);
-            this.label4.TabIndex = 16;
+            this.label4.TabIndex = 29;
             this.label4.Text = "Ciudad Destino:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(249, 8);
+            this.label3.Location = new System.Drawing.Point(252, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 15;
+            this.label3.TabIndex = 28;
             this.label3.Text = "Ciudad Origen:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 54);
+            this.label2.Location = new System.Drawing.Point(12, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 14;
+            this.label2.TabIndex = 27;
             this.label2.Text = "Tipo de Servicio:";
             // 
             // textBoxCodReco
             // 
-            this.textBoxCodReco.Location = new System.Drawing.Point(119, 5);
+            this.textBoxCodReco.Location = new System.Drawing.Point(122, 6);
             this.textBoxCodReco.Name = "textBoxCodReco";
             this.textBoxCodReco.Size = new System.Drawing.Size(104, 20);
-            this.textBoxCodReco.TabIndex = 13;
+            this.textBoxCodReco.TabIndex = 26;
             this.textBoxCodReco.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCodReco_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 8);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 13);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 25;
             this.label1.Text = "Codigo de Recorrido:";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(481, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 23;
-            this.label5.Text = "Estado:";
-            // 
-            // textBoxEstado
-            // 
-            this.textBoxEstado.Location = new System.Drawing.Point(530, 5);
-            this.textBoxEstado.Name = "textBoxEstado";
-            this.textBoxEstado.ReadOnly = true;
-            this.textBoxEstado.Size = new System.Drawing.Size(100, 20);
-            this.textBoxEstado.TabIndex = 24;
-            this.textBoxEstado.Text = "Habilitado";
-            // 
-            // Abm_Reco_SelecDel
+            // Abm_Reco_SelecHab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 394);
+            this.ClientSize = new System.Drawing.Size(1048, 411);
             this.Controls.Add(this.textBoxEstado);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.botonBuscar);
@@ -249,9 +249,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxCodReco);
             this.Controls.Add(this.label1);
-            this.Name = "Abm_Reco_SelecDel";
-            this.Text = "Abm_Reco_SelecDel";
-            this.Load += new System.EventHandler(this.Abm_Reco_SelecDel_Load);
+            this.Name = "Abm_Reco_SelecHab";
+            this.Text = "Abm_Reco_SelecHab";
+            this.Load += new System.EventHandler(this.Abm_Reco_SelecHab_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridReco)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -260,18 +260,13 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.ComboBox comboBoxTipoServ;
         private System.Windows.Forms.ComboBox comboBoxDestino;
         private System.Windows.Forms.ComboBox comboBoxOrigen;
         private System.Windows.Forms.DataGridView dataGridReco;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxCodReco;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cod_Reco;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo_Serv;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ciu_Origen;
@@ -280,7 +275,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_Base_Kg;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado_Reco;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
-        private System.Windows.Forms.TextBox textBoxEstado;
-
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxCodReco;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox textBoxEstado;
     }
 }

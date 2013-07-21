@@ -119,11 +119,6 @@ namespace FrbaBus.GenerarViaje
             connection conexion = new connection();
             DataTable tabla_micro_sel = conexion.execute_query(query);
 
-            if (tabla_micro_sel.Rows.Count == 0)
-            {
-                MessageBox.Show("ERROR: NO EXISTE UN MICRO CON ESTAS CARACTERISTICAS");
-            }
-
             this.Patentes.DataPropertyName = tabla_micro_sel.Columns[0].ToString();
             this.Tipo_Serv.DataPropertyName = tabla_micro_sel.Columns[1].ToString();
             this.Marca.DataPropertyName = tabla_micro_sel.Columns[2].ToString();
@@ -131,6 +126,18 @@ namespace FrbaBus.GenerarViaje
             this.Cant_Butacas.DataPropertyName = tabla_micro_sel.Columns[4].ToString();
             //cargamos el data_grid con el resultado de la busqueda
             this.dataGridMicro.DataSource = tabla_micro_sel;
+
+            bool flag_entro = false;
+            if (tabla_micro_sel.Rows.Count == 0 && textBoxPatente.Text == "" && comboBoxMarca.Text == "" && textBoxCantBut.Text == "")
+            {
+                flag_entro = true;
+                MessageBox.Show("ERROR: No hay ningun micro disponible actualmente para realizar este tipo de recorrido");
+            }
+
+            if (tabla_micro_sel.Rows.Count == 0 && flag_entro == false)
+            {
+                MessageBox.Show("ERROR: No existen micros con las caracteristicas que esta buscando");
+            }
         }
 
         private void dataGridMicro_CellContentClick(object sender, DataGridViewCellEventArgs e)

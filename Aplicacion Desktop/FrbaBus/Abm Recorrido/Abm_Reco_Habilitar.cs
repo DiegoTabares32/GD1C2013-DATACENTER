@@ -9,25 +9,25 @@ using System.Windows.Forms;
 
 namespace FrbaBus.Abm_Recorrido
 {
-    public partial class Abm_Reco_Baja : Form
+    public partial class Abm_Reco_Habilitar : Form
     {
-        String Estado;
+        String estado;
 
-        public Abm_Reco_Baja(string est)
+        public Abm_Reco_Habilitar(string est)
         {
-            Estado = est;
+            estado = est;
             InitializeComponent();
             comboBoxEstado.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void Abm_Reco_Baja_Load(object sender, EventArgs e)
+        private void Abm_Reco_Habilitar_Load(object sender, EventArgs e)
         {
-            comboBoxEstado.Text = Estado;
+            comboBoxEstado.Text = estado;
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            if (comboBoxEstado.Text == Estado)
+            if (comboBoxEstado.Text == estado)
             {
                 MessageBox.Show("ERROR: No Cambió el estado del recorrido");
                 return;
@@ -37,10 +37,12 @@ namespace FrbaBus.Abm_Recorrido
             string est = comboBoxEstado.Text.ToString();
             Char estado_act = est[0];
             stored_procedures procedure = new stored_procedures();
-            procedure.update_estado_reco(cod, estado_act); // ESTE PROCEDURE ES EL QUE SER EL ENCARGADO DE "ELIMINAR" LOS VIAJES!!!!!!!!!!!
-            MessageBox.Show("¡RECORRIDO DADO DE BAJA CORRECTAMENTE!");
+            procedure.habilitar_estado_reco(cod, estado_act); // ESTE PROCEDURE ES EL ENCARGADO DE REAHBILITAR RECOS!!!!!!!!!!!
+            MessageBox.Show("¡RECORRIDO HABILITADO CORRECTAMENTE!");
             this.Close();
         }
+
+
 
 
     }

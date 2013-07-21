@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace FrbaBus.Abm_Recorrido
 {
-    public partial class Abm_Reco_SelecDel : Form
+    public partial class Abm_Reco_SelecHab : Form
     {
         //-----ATRIBUTOS--------
-        char estado_reco = 'H';
+        char estado_reco = 'D';
         //----------------------
 
-        public Abm_Reco_SelecDel()
+        public Abm_Reco_SelecHab()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace FrbaBus.Abm_Recorrido
             comboBoxTipoServ.ResetText();
         }
 
-        private void Abm_Reco_SelecDel_Load(object sender, EventArgs e)
+        private void Abm_Reco_SelecHab_Load(object sender, EventArgs e)
         {
             connection conexion = new connection();
 
@@ -61,19 +61,18 @@ namespace FrbaBus.Abm_Recorrido
             if (e.ColumnIndex == 0)
             {
                 string estado_a_mandar;
-                estado_a_mandar = "Habilitado";
-                
-                Abm_Reco_Baja abm_reco_baja = new Abm_Reco_Baja(estado_a_mandar); // SIEMPRE VA A MANDAR HABILITADOS, NUNCA DESHABILITADOS
+                estado_a_mandar = "Deshabilitado";
 
-                abm_reco_baja.textBoxCodReco.Text = this.dataGridReco.CurrentRow.Cells[1].Value.ToString();
-                
-                abm_reco_baja.ShowDialog();
-                
+                Abm_Reco_Habilitar abm_reco_hab = new Abm_Reco_Habilitar(estado_a_mandar); // SIEMPRE VA A MANDAR DESHABILITADOS, NUNCA DESHABILITADOS
+
+                abm_reco_hab.textBoxCodReco.Text = this.dataGridReco.CurrentRow.Cells[1].Value.ToString();
+
+                abm_reco_hab.ShowDialog();
+
                 this.limpiar();
                 //cuando retorna de la modificacion refrescamos la pantalla
                 // podria ir un close
             }
-
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -116,7 +115,7 @@ namespace FrbaBus.Abm_Recorrido
             }
 
             query = query + condicion; // LE AGREGO A LA QUERY TODOS LOS FILTROS
-             
+
             connection conexion = new connection();
             DataTable tabla_reco_busq = conexion.execute_query(query);
             this.Cod_Reco.DataPropertyName = tabla_reco_busq.Columns[0].ToString();
@@ -128,11 +127,11 @@ namespace FrbaBus.Abm_Recorrido
             this.Estado_Reco.DataPropertyName = tabla_reco_busq.Columns[6].ToString();
             //cargamos el data_grid con el resultado de la busqueda
             this.dataGridReco.DataSource = tabla_reco_busq;
-
         }
 
         private void textBoxCodReco_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             //Para obligar a que sólo se introduzcan números
             if (Char.IsDigit(e.KeyChar))
             {
@@ -149,9 +148,6 @@ namespace FrbaBus.Abm_Recorrido
                     e.Handled = true;
                 }
         }
-
-
-
 
 
 
