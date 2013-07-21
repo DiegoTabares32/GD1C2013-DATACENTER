@@ -115,7 +115,7 @@
             // modif_rol
             // 
             this.modif_rol.Name = "modif_rol";
-            this.modif_rol.Size = new System.Drawing.Size(125, 22);
+            this.modif_rol.Size = new System.Drawing.Size(152, 22);
             this.modif_rol.Text = "Rol";
             this.modif_rol.Visible = false;
             this.modif_rol.Click += new System.EventHandler(this.rolToolStripMenuItem1_Click);
@@ -123,7 +123,7 @@
             // modif_micro
             // 
             this.modif_micro.Name = "modif_micro";
-            this.modif_micro.Size = new System.Drawing.Size(125, 22);
+            this.modif_micro.Size = new System.Drawing.Size(152, 22);
             this.modif_micro.Text = "Micro";
             this.modif_micro.Visible = false;
             this.modif_micro.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
@@ -131,7 +131,7 @@
             // modif_reco
             // 
             this.modif_reco.Name = "modif_reco";
-            this.modif_reco.Size = new System.Drawing.Size(125, 22);
+            this.modif_reco.Size = new System.Drawing.Size(152, 22);
             this.modif_reco.Text = "Recorrido";
             this.modif_reco.Visible = false;
             this.modif_reco.Click += new System.EventHandler(this.recorridoToolStripMenuItem1_Click);
@@ -148,7 +148,7 @@
             // baja_micro
             // 
             this.baja_micro.Name = "baja_micro";
-            this.baja_micro.Size = new System.Drawing.Size(125, 22);
+            this.baja_micro.Size = new System.Drawing.Size(152, 22);
             this.baja_micro.Text = "Micro";
             this.baja_micro.Visible = false;
             this.baja_micro.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
@@ -156,9 +156,10 @@
             // baja_reco
             // 
             this.baja_reco.Name = "baja_reco";
-            this.baja_reco.Size = new System.Drawing.Size(125, 22);
+            this.baja_reco.Size = new System.Drawing.Size(152, 22);
             this.baja_reco.Text = "Recorrido";
             this.baja_reco.Visible = false;
+            this.baja_reco.Click += new System.EventHandler(this.baja_reco_Click);
             // 
             // registrarArriboMenu
             // 

@@ -104,7 +104,8 @@ namespace FrbaBus
 
         private void recorridoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
+            Abm_Reco_Seleccion selec_Reco = new Abm_Reco_Seleccion();
+            selec_Reco.Show();
         }
 
         private void generarViajeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -161,6 +162,12 @@ namespace FrbaBus
                 }
 
             }
+        }
+
+        private void baja_reco_Click(object sender, EventArgs e)
+        {
+            Abm_Reco_SelecDel selec_reco_del = new Abm_Reco_SelecDel();
+            selec_reco_del.Show();
         }
 
 
