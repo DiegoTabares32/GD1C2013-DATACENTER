@@ -1127,9 +1127,11 @@ end
 go
 
 
-create procedure DATACENTER.registraDevolucionTotal(@fechaDev datetime,@nroCompra int,@motivoDev nvarchar(255))
+create procedure DATACENTER.registraDevolucionTotal(@fechaDev_recibida nvarchar(255),@nroCompra int,@motivoDev nvarchar(255))
 as
 begin
+	declare @fechaDev datetime
+	SET @fechaDev = CONVERT ( datetime, @fechaDev, 121)
 	declare @tipoItem nvarchar(255)
 	declare @codItem numeric(18,0)
 	declare cursorItems cursor
