@@ -12,6 +12,9 @@ namespace FrbaBus.Abm_Recorrido
 {
     public partial class Abm_Reco_Alta : Form
     {
+        /*--ATRIBUTOS--*/
+        char estado = 'H';
+
         public Abm_Reco_Alta()
         {
             InitializeComponent();
@@ -85,7 +88,7 @@ namespace FrbaBus.Abm_Recorrido
 
             connection conexion = new connection();
 
-            DataTable tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_cod = "+"'"+textBoxCodReco.Text+"'");
+            DataTable tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_cod = " + "'" + textBoxCodReco.Text + "'");
 
             if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el codigo ingresado ya esta en la BD
             {
@@ -94,8 +97,8 @@ namespace FrbaBus.Abm_Recorrido
             }
             
             tablaRecorridos.Clear(); // Limpia el dataTable
-            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen = "+"'"+comboBoxCiuOrigen.Text+"'"+" AND "+"reco_destino = "+"'"+comboBoxCiuDestino.Text+"'"+" AND "+"reco_serv_id = "+comboBoxTipoServ.SelectedValue);
-            if (tablaRecorridos.Rows.Count == 1) // Se cumple cuando el recorrido ingresado ya esta en la BD
+            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen = "+"'"+comboBoxCiuOrigen.Text+"'"+" AND "+"reco_destino = "+"'"+comboBoxCiuDestino.Text+"'"+" AND "+"reco_serv_id = "+comboBoxTipoServ.SelectedValue + " AND reco_estado = " + "'" + estado + "'");
+            if (tablaRecorridos.Rows.Count >= 1) // Se cumple cuando el recorrido ingresado ya esta en la BD
             {
                 MessageBox.Show("ERROR: YA EXISTE ESTE RECORRIDO CON ESTE SERVICIO");
                 codigo_error = 1;
@@ -105,7 +108,7 @@ namespace FrbaBus.Abm_Recorrido
             tablaRecorridos.Clear();
             string precioPas = numUpDownPrPas.Value.ToString();
             string precioPasConPunto = precioPas.Replace(",",".");
-            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen = " + "'" + comboBoxCiuOrigen.Text + "'" + " AND " + "reco_destino = " + "'" + comboBoxCiuDestino.Text + "'" + " AND " + "reco_serv_id <> " + comboBoxTipoServ.SelectedValue + " AND " + "reco_precio_base_pasaje <> " + precioPasConPunto);
+            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen = " + "'" + comboBoxCiuOrigen.Text + "'" + " AND " + "reco_destino = " + "'" + comboBoxCiuDestino.Text + "'" + " AND " + "reco_serv_id <> " + comboBoxTipoServ.SelectedValue + " AND " + "reco_precio_base_pasaje <> " + precioPasConPunto + " AND reco_estado = " + "'" + estado + "'");
      
             if (tablaRecorridos.Rows.Count > 0) // Se cumple cuando hay un mismo recorrido en la BD, pero con otro tipo de servicio, y estos recorridos tienen distinto precio, cosa que no tiene que pasar
             {
@@ -116,7 +119,7 @@ namespace FrbaBus.Abm_Recorrido
             tablaRecorridos.Clear();
             string precioEnco = numUpDownPrEnco.Value.ToString();
             string precioEncoConPunto = precioEnco.Replace(",", ".");
-            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen = " + "'" + comboBoxCiuOrigen.Text + "'" + " AND " + "reco_destino = " + "'" + comboBoxCiuDestino.Text + "'" + " AND " + "reco_serv_id <> " + comboBoxTipoServ.SelectedValue + " AND " + "reco_precio_base_Kg <> " + precioEncoConPunto);
+            tablaRecorridos = conexion.execute_query("SELECT 1 FROM DATACENTER.Recorrido WHERE reco_origen = " + "'" + comboBoxCiuOrigen.Text + "'" + " AND " + "reco_destino = " + "'" + comboBoxCiuDestino.Text + "'" + " AND " + "reco_serv_id <> " + comboBoxTipoServ.SelectedValue + " AND " + "reco_precio_base_Kg <> " + precioEncoConPunto + " AND reco_estado = " + "'" + estado + "'");
 
             if (tablaRecorridos.Rows.Count > 0) // Se cumple cuando hay un mismo recorrido en la BD, pero con otro tipo de servicio, y estos recorridos tienen distinto precio, cosa que no tiene que pasar
             {
@@ -175,11 +178,5 @@ namespace FrbaBus.Abm_Recorrido
             Abm_Reco_SelecHab selHab = new Abm_Reco_SelecHab();
             selHab.Show();
         }
-
-
-
-
-
-
     }
 }
