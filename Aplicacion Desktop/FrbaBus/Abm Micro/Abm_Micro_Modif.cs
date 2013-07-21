@@ -104,7 +104,7 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para agregar nuevo registro por micro fuera de servicio (en EstadoMicro)
             string query2 = "INSERT INTO DATACENTER.EstadoMicro(est_mic_patente,est_fecha_fuera_serv,est_fecha_reingreso) VALUES ('"
-                            + nroPatente + "','" + dateTimePickerFechaBajaTemporaria.Value.ToString("dd/MM/yyyy HH:mm") + "','" + dateTimePickerFechaReingreso.Value.ToString("dd/MM/yyyy HH:mm") + "')";
+                            + nroPatente + "','" + dateTimePickerFechaBajaTemporaria.Value.ToString("yyyy/MM/dd HH:mm") + "','" + dateTimePickerFechaReingreso.Value.ToString("yyyy/MM/dd HH:mm") + "')";
             connection connect2 = new connection();
             connect2.execute_query(query2);
 

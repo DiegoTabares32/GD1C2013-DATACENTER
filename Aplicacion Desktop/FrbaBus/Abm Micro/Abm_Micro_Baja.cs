@@ -65,7 +65,7 @@ namespace FrbaBus.Abm_Micro
 
             //Chequea si existen viajes ya asignados a ese micro
 
-            string query3 = "SELECT DATACENTER.estadoBaja('"+dateTimePickerFechaBajaDefinitiva.Value.ToString("dd/MM/yyyy HH:mm")+"','"+nroPatente+"')";
+            string query3 = "SELECT DATACENTER.estadoBaja('"+dateTimePickerFechaBajaDefinitiva.Value.ToString("yyyy/MM/dd HH:mm")+"','"+nroPatente+"')";
             connection connect3 = new connection();
             DataTable estadoBajaMicro = connect3.execute_query(query3);
             
@@ -81,7 +81,7 @@ namespace FrbaBus.Abm_Micro
             DataTable cantViajes = connect1.execute_query(query1);
 
             //consulta a ejecutar para agregar nuevo registro por micro fuera de servicio (en EstadoMicro)
-            string query2 = "UPDATE DATACENTER.Micro SET mic_fecha_baja_def='" + dateTimePickerFechaBajaDefinitiva.Value.ToString("dd/MM/yyyy HH:mm") + "' where mic_patente='" + nroPatente + "'";
+            string query2 = "UPDATE DATACENTER.Micro SET mic_fecha_baja_def='" + dateTimePickerFechaBajaDefinitiva.Value.ToString("yyyy/MM/dd HH:mm") + "' where mic_patente='" + nroPatente + "'";
             connection connect2 = new connection();
             connect2.execute_query(query2);
             
