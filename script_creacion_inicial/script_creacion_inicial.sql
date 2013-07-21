@@ -1339,8 +1339,8 @@ AS
 BEGIN
   DECLARE @est CHAR
   SET @est = 'H'
-  INSERT INTO DATACENTER.Recorrido
-  VALUES (@cod, @serv, @orig, @dest, @pr_pas, @pr_enco, @est)
+  INSERT INTO DATACENTER.Recorrido (reco_cod, reco_serv_id, reco_origen, reco_destino, reco_precio_base_pasaje, reco_precio_base_kg, reco_estado)
+  VALUES ( @cod, @serv, @orig, @dest, @pr_pas, @pr_enco, @est)
 END
 GO
 

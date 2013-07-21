@@ -191,8 +191,9 @@ namespace FrbaBus
             string precioPas = pr_pas_ins.ToString();
             string precioPasConPunto = precioPas.Replace(",", ".");
             string precioEnco = pr_enco_ins.ToString();
-            string precioEncoConPunto = precioPas.Replace(",", ".");
+            string precioEncoConPunto = precioEnco.Replace(",", ".");
 
+            //EL ESTADO_RECO LO ASIGNO DIRECTAMENTE EN LA BASE, TODOS LOS RECOS NUEVOS SE INSERTAN HABILITADOS
             query = "EXECUTE DATACENTER.insert_recorrido " + "'" + cod_ins + "'" + ", " + "'" + orig_ins + "'" + ", " + "'" + dest_ins + "'" + ", " + serv_ins + ", " + precioPasConPunto + ", " + precioEncoConPunto;
             conexion.execute_query_only(query);
         }
