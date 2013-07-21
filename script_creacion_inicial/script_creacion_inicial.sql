@@ -339,6 +339,10 @@ INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se auto
 VALUES ('Generar Viaje')
 GO
 
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Consultar Puntos Pasajero Frecuente')
+GO
+
 --AGREGAMOS ROLES
 
 INSERT INTO DATACENTER.Rol(rol_nombre, rol_estado) --no ponemos ID ya que se autoincrementa
