@@ -1069,7 +1069,7 @@ begin
 end
 go
 
-create procedure DATACENTER.registraDevolucionParcial(@fechaDev datetime,@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
+create procedure DATACENTER.registraDevolucionParcial(@fechaDev nvarchar(255),@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
 as
 begin
 	declare @ultimoIdDev int
@@ -1086,7 +1086,7 @@ begin
 	
 	-- Agrego devolucin efectiva
 	INSERT INTO DATACENTER.Devolucion(dev_id,dev_cod_PasPaq,dev_tipo_devuelto,dev_comp_id,dev_fecha,dev_motivo)
-	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,@fechaDev,@motivoDev)
+	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,CONVERT(datetime,@fechaDev,121) ,@motivoDev)
 	
 	-- Actualizo el costo total de la compra y la cantidad de pasajes y total de kg
 	declare @costoTotal numeric(18,2)
@@ -1127,11 +1127,9 @@ end
 go
 
 
-create procedure DATACENTER.registraDevolucionTotal(@fechaDev_recibida nvarchar(255),@nroCompra int,@motivoDev nvarchar(255))
+create procedure DATACENTER.registraDevolucionTotal(@fechaDev nvarchar(255),@nroCompra int,@motivoDev nvarchar(255))
 as
 begin
-	declare @fechaDev datetime
-	SET @fechaDev = CONVERT ( datetime, @fechaDev, 121)
 	declare @tipoItem nvarchar(255)
 	declare @codItem numeric(18,0)
 	declare cursorItems cursor
