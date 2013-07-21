@@ -942,7 +942,7 @@ end
 go
 
 
-create procedure DATACENTER.canjeaPremio(@premNombre nvarchar(255),@dniCliente numeric(18,0),@nuevoStock int,@premCantidad int,@idCanjeNuevo int)
+create procedure DATACENTER.canjeaPremio(@premNombre nvarchar(255),@dniCliente numeric(18,0),@nuevoStock int,@premCantidad int,@idCanjeNuevo int,@fechaSist datetime)
 as
 begin
 	declare @idPremio int
@@ -953,7 +953,7 @@ begin
 	where prem_nombre=@premNombre
 
 	INSERT INTO DATACENTER.Canje(canj_id,canj_cli_dni,canj_prem_id,canj_cant_retirada,canj_fecha)
-	VALUES (@idCanjeNuevo,@dniCliente,@idPremio,@premCantidad,GETDATE())
+	VALUES (@idCanjeNuevo,@dniCliente,@idPremio,@premCantidad,@fechaSist)
 end
 go
 
@@ -1035,7 +1035,7 @@ end
 go
 
 
-create procedure DATACENTER.registrarNuevoMicro(@patenteNueva nvarchar(255),@patenteAReemplazar nvarchar(255))
+create procedure DATACENTER.registrarNuevoMicro(@patenteNueva nvarchar(255),@patenteAReemplazar nvarchar(255),@fechaSist datetime)
 as
 begin
 	declare @micMarcaId int
@@ -1051,7 +1051,7 @@ begin
 	set @micModelo = (select mic_modelo from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
 	
 	INSERT INTO DATACENTER.Micro(mic_patente,mic_marc_id,mic_serv_id,mic_cant_butacas,mic_cant_kg_disponibles,mic_modelo,mic_fecha_alta,mic_fecha_baja_def)
-	VALUES (@patenteNueva,@micMarcaId,@micServId,@micCantButacas,@micCantKg,@micModelo,GETDATE(),null)
+	VALUES (@patenteNueva,@micMarcaId,@micServId,@micCantButacas,@micCantKg,@micModelo,@fechaSist,null)
 end
 go
 
@@ -1069,7 +1069,7 @@ begin
 end
 go
 
-create procedure DATACENTER.registraDevolucionParcial(@fechaDev datetime,@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
+create procedure DATACENTER.registraDevolucionParcial(@fechaDev nvarchar(255),@nroCompra int,@tipoItem nvarchar(255),@codItem numeric(18,0),@motivoDev nvarchar(255))
 as
 begin
 	declare @ultimoIdDev int
@@ -1086,7 +1086,7 @@ begin
 	
 	-- Agrego devolucin efectiva
 	INSERT INTO DATACENTER.Devolucion(dev_id,dev_cod_PasPaq,dev_tipo_devuelto,dev_comp_id,dev_fecha,dev_motivo)
-	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,@fechaDev,@motivoDev)
+	VALUES (@idDev,@codItem,@tipoItem,@nroCompra,CONVERT(datetime,@fechaDev,121) ,@motivoDev)
 	
 	-- Actualizo el costo total de la compra y la cantidad de pasajes y total de kg
 	declare @costoTotal numeric(18,2)
@@ -1127,7 +1127,7 @@ end
 go
 
 
-create procedure DATACENTER.registraDevolucionTotal(@fechaDev datetime,@nroCompra int,@motivoDev nvarchar(255))
+create procedure DATACENTER.registraDevolucionTotal(@fechaDev nvarchar(255),@nroCompra int,@motivoDev nvarchar(255))
 as
 begin
 	declare @tipoItem nvarchar(255)

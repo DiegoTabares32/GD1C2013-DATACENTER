@@ -27,8 +27,12 @@ namespace FrbaBus.Canje_de_Ptos
                 return;
             }
 
+            DateTimePicker datetimepicker = new DateTimePicker();
+            datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+
             //consulta a ejecutar para actualizar y obtener los puntos del cliente
-            string query1 = "exec DATACENTER.actualizarPuntos " + textBoxDniCliente.Text + "Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDniCliente.Text;
+            string query1 = "exec DATACENTER.actualizarPuntos " + textBoxDniCliente.Text + ",'" + datetimepicker.Value.ToString("yyyy/MM/dd HH:mm") + "' Select c.cli_puntos_acum from DATACENTER.Cliente c where c.cli_dni = " + textBoxDniCliente.Text;
+            
             connection connect1 = new connection();
             DataTable ptos_acum = connect1.execute_query(query1);
             ptosAcumulados = ptos_acum.Rows[0].ItemArray[0].ToString();
@@ -114,10 +118,11 @@ namespace FrbaBus.Canje_de_Ptos
                             return;
                         }
 
-                        string fechaSistema = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+                        DateTimePicker datetimepicker = new DateTimePicker();
+                        datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());                        
 
                         //consulta para actualizar por canje por premio (Actualiza stock del premio-Agrega canje nuevo)
-                        string query3 = "exec DATACENTER.canjeaPremio '" + tablaPremios.Rows[i].Cells[2].Value.ToString()+"','"+textBoxDniCliente.Text+"','"+disponeStock.Rows[0].ItemArray[0].ToString()+"','"+tablaPremios.Rows[i].Cells[1].Value.ToString()+"','"+idCanjeNuevo+"','"+fechaSistema+"'";
+                        string query3 = "exec DATACENTER.canjeaPremio '" + tablaPremios.Rows[i].Cells[2].Value.ToString() + "','" + textBoxDniCliente.Text + "','" + disponeStock.Rows[0].ItemArray[0].ToString() + "','" + tablaPremios.Rows[i].Cells[1].Value.ToString() + "','" + idCanjeNuevo + "','" + datetimepicker.Value.ToString("yyyy/MM/dd HH:mm") + "'";
                         connection connect3 = new connection();
                         connect3.execute_query(query3);
         

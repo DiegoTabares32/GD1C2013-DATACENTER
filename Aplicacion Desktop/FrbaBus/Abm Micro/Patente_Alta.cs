@@ -73,9 +73,10 @@ namespace FrbaBus.Abm_Micro
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-            string fechaSistema = System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"].ToString();
+            DateTimePicker datetimepicker = new DateTimePicker();
+            datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
 
-            string query1 = "exec DATACENTER.registrarNuevoMicro '" + nroPatente + "','" + patenteAReemplazar + "','" + fechaSistema +"'";
+            string query1 = "exec DATACENTER.registrarNuevoMicro '" + nroPatente + "','" + patenteAReemplazar + "','" + datetimepicker.Value.ToString("yyyy/MM/dd HH:mm") + "'";
             connection connect1 = new connection();
             connect1.execute_query(query1);
 
@@ -88,11 +89,11 @@ namespace FrbaBus.Abm_Micro
             string query2;
             if (fechaRein == null)
             {
-                query2 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + nroPatente + "' WHERE viaj_mic_patente='" + patenteAReemplazar + "' and (viaj_fecha_salida>='" + fechaFServ.Value.ToString("dd/MM/yyyy HH:mm") + "' or viaj_fecha_lleg_estimada>='" + fechaFServ.Value.ToString("dd/MM/yyyy HH:mm") + "')";
+                query2 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + nroPatente + "' WHERE viaj_mic_patente='" + patenteAReemplazar + "' and (viaj_fecha_salida>='" + fechaFServ.Value.ToString("yyyy/MM/dd HH:mm") + "' or viaj_fecha_lleg_estimada>='" + fechaFServ.Value.ToString("yyyy/MM/dd HH:mm") + "')";
             }
             else
             {
-                query2 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + nroPatente + "' WHERE viaj_mic_patente='" + patenteAReemplazar + "' and ((viaj_fecha_salida>='" + fechaFServ.Value.ToString("dd/MM/yyyy HH:mm") + "' and viaj_fecha_salida<='" + fechaRein.Value.ToString("dd/MM/yyyy HH:mm") + "') or (viaj_fecha_lleg_estimada>='" + fechaFServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_lleg_estimada<='" + fechaRein.Value.ToString("dd/MM/yyyy HH:mm") + "'))";
+                query2 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + nroPatente + "' WHERE viaj_mic_patente='" + patenteAReemplazar + "' and ((viaj_fecha_salida>='" + fechaFServ.Value.ToString("yyyy/MM/dd HH:mm") + "' and viaj_fecha_salida<='" + fechaRein.Value.ToString("yyyy/MM/dd HH:mm") + "') or (viaj_fecha_lleg_estimada>='" + fechaFServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_lleg_estimada<='" + fechaRein.Value.ToString("yyyy/MM/dd HH:mm") + "'))";
             }
             connection connect2 = new connection();
             connect2.execute_query(query2);

@@ -48,7 +48,7 @@ namespace FrbaBus
             
             //volcamos la informacion resultado de ejecutar la consulta en un data table
             DataTable tabla=new DataTable();
-            tabla.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            //tabla.Locale = System.Globalization.CultureInfo.InvariantCulture;
             try
             {
                 data_adapter.Fill(tabla);
