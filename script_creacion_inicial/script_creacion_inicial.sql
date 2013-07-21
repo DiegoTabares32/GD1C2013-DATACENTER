@@ -134,7 +134,7 @@ reco_origen nvarchar(255) NOT NULL,
 reco_destino nvarchar(255) NOT NULL,
 reco_precio_base_kg numeric(18,2) NULL,
 reco_precio_base_pasaje numeric (18,2) NULL,
-reco_estado CHAR NULL,  -- �����������������������������������OJO QUE ESTE CAMPO ES NUEVO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+reco_estado CHAR NULL,
 FOREIGN KEY (reco_serv_id) REFERENCES DATACENTER.Servicio (serv_id),
 FOREIGN KEY (reco_origen) REFERENCES DATACENTER.Ciudad (ciu_nombre),
 FOREIGN KEY (reco_destino) REFERENCES DATACENTER.Ciudad (ciu_nombre),
@@ -209,6 +209,7 @@ viaj_reco_cod numeric(18,0) NOT NULL,
 viaj_fecha_salida datetime NULL,
 viaj_fecha_lleg_estimada datetime NULL,
 viaj_fecha_llegada datetime NULL,
+viaj_estado CHAR NULL,   -- OJO QUE ES UN CAMPO NUEVO!!!!!!!!!!
 FOREIGN KEY (viaj_mic_patente) REFERENCES DATACENTER.Micro (mic_patente), 
 FOREIGN KEY (viaj_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
 PRIMARY KEY (viaj_id)
@@ -489,7 +490,7 @@ go
 
 			-- AHORA SI REALIZAMOS LA MIGRACION EN BASE A LOS CAMPOS NECESARIOS --
 insert into DATACENTER.Micro(mic_patente, mic_modelo, mic_cant_kg_disponibles, mic_cant_butacas, mic_marc_id, mic_serv_id, mic_fecha_alta)
-select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, marc_Id, serv_Id, GETDATE()
+select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, marc_Id, serv_Id, NULL -- SE LO SETEO A NULL Y DESPUES VEO!!!!!
 from micros_migrados join DATACENTER.Marca on Micro_Marca = marc_nombre join DATACENTER.Servicio on Micro_Tipo_Serv = serv_tipo
 go
 
@@ -663,7 +664,7 @@ WHERE reco_origen = @ciu_origen AND reco_destino= @ciu_destino
 	  AND DAY(viaj_fecha_salida) = DAY(@fecha_salida)
 	  AND MONTH(viaj_fecha_salida) = MONTH(@fecha_salida)
 	  AND YEAR(viaj_fecha_salida) = YEAR(@fecha_salida)
-	  AND reco_estado = 'H'
+	  AND viaj_estado = 'H'
 	   
 END
 GO
@@ -1106,8 +1107,8 @@ begin
 		SET comp_cant_pasajes=@cantPasajes, comp_costo_total=@costoTotal
 		where comp_id=@nroCompra
 		
-		DELETE FROM DATACENTER.Pasaje
-		where pas_compra_id=@nroCompra and pas_cod=@codItem
+		--DELETE FROM DATACENTER.Pasaje
+		--where pas_compra_id=@nroCompra and pas_cod=@codItem
 	end
 	else
 	begin
@@ -1119,8 +1120,8 @@ begin
 		SET comp_cant_total_kg=0, comp_costo_total=@costoTotal
 		where comp_id=@nroCompra
 		
-		DELETE FROM DATACENTER.Paquete
-		where paq_comp_id=@nroCompra and paq_cod=@codItem
+		--DELETE FROM DATACENTER.Paquete
+		--where paq_comp_id=@nroCompra and paq_cod=@codItem
 	end
 
 end
@@ -1350,13 +1351,14 @@ BEGIN
           @precio_enco NUMERIC(18,2)
 
   UPDATE DATACENTER.Recorrido
-  SET reco_origen = @orig, reco_destino = @dest, reco_serv_id = @serv
+  SET reco_origen = @orig, reco_destino = @dest, reco_serv_id = @serv, reco_precio_base_pasaje = @pr_pas, reco_precio_base_kg = @pr_enco
   WHERE reco_cod = @cod
-
+ 
   SELECT @precio_pas = reco_precio_base_pasaje, @precio_enco = reco_precio_base_kg
   FROM DATACENTER.Recorrido
   WHERE reco_cod = @cod
   
+ 
   IF @precio_pas <> @pr_pas
   UPDATE DATACENTER.Recorrido
   SET reco_precio_base_pasaje = @pr_pas
@@ -1367,12 +1369,87 @@ BEGIN
   SET reco_precio_base_kg = @pr_enco
   WHERE reco_cod = @cod
   
+  
 END
 GO
 
 /*-------------------------------------------------------------------*/
 /*-------------------------STORED PROCEDURE (MATI)--------------------------*/
-CREATE PROCEDURE DATACENTER.update_estado_reco @cod NUMERIC(18,0), @estado_reco CHAR
+CREATE PROCEDURE DATACENTER.update_estado_reco @cod NUMERIC(18,0), @estado_reco CHAR, @fechaSist NVARCHAR(255)
+AS
+BEGIN
+
+  UPDATE DATACENTER.Recorrido
+  SET reco_estado = @estado_reco
+  WHERE reco_cod = @cod
+  
+  DECLARE @fechaHoy DATETIME
+  SET @fechaHoy = CONVERT(DATETIME, @fechaSist, 121)
+  
+  UPDATE DATACENTER.Viaje
+  SET viaj_estado = 'D'
+  WHERE viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy
+  
+  DECLARE @tipo_item_pas NVARCHAR(255)
+  SET @tipo_item_pas = 'Pasaje'
+  
+  
+  DECLARE @tipo_item_paq NVARCHAR(255)
+  SET @tipo_item_paq = 'Paquete'
+  
+  DECLARE @motivo NVARCHAR(255)
+  SET @motivo = 'Baja de recorrido'
+  
+  DECLARE @compra_id INT
+  DECLARE @pas_cod NUMERIC(18,0)
+  DECLARE cur_viaj_pas CURSOR
+  FOR (SELECT pas_compra_id, pas_cod
+       FROM DATACENTER.viaje JOIN DATACENTER.Pasaje ON pas_viaj_id = viaj_id
+       WHERE viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy)
+       
+  OPEN cur_viaj_pas
+  
+  FETCH FROM cur_viaj_pas
+  INTO @compra_id, @pas_cod
+
+  WHILE @@FETCH_STATUS = 0
+    BEGIN
+      EXEC DATACENTER.registraDevolucionParcial @fechaHoy, @compra_id, @tipo_item_pas, @pas_cod, @motivo
+      FETCH FROM cur_viaj_pas
+      INTO @compra_id, @pas_cod
+    END
+  
+  CLOSE cur_viaj_pas
+  DEALLOCATE cur_viaj_pas
+  
+  
+  DECLARE @paq_cod NUMERIC(18,0)
+  DECLARE cur_viaj_paq CURSOR
+  FOR (SELECT paq_comp_id, paq_cod
+       FROM DATACENTER.viaje JOIN DATACENTER.Paquete ON paq_viaj_id = viaj_id
+       WHERE viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy)
+       
+  OPEN cur_viaj_paq
+  
+  FETCH FROM cur_viaj_paq
+  INTO @compra_id, @paq_cod
+
+  WHILE @@FETCH_STATUS = 0
+    BEGIN
+      EXEC DATACENTER.registraDevolucionParcial @fechaHoy, @compra_id, @tipo_item_paq, @paq_cod, @motivo
+      FETCH FROM cur_viaj_paq
+      INTO @compra_id, @paq_cod
+    END
+  
+  CLOSE cur_viaj_paq
+  DEALLOCATE cur_viaj_paq
+  
+END
+GO
+
+/*-------------------------------------------------------------------*/
+/*-------------------------STORED PROCEDURE (MATI)--------------------------*/ 
+CREATE PROCEDURE DATACENTER.habilitar_estado_reco @cod NUMERIC(18,0), @estado_reco CHAR
 AS
 BEGIN
 
@@ -1381,7 +1458,7 @@ BEGIN
   WHERE reco_cod = @cod
 
 END
-GO
+GO -- NUEVOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 /*-------------------------------------------------------------------*/
 /*-------------------------STORED PROCEDURE (MATI)--------------------------*/
