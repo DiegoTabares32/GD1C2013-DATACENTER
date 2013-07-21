@@ -19,10 +19,20 @@ namespace FrbaBus
 {
     public partial class FormAdmin : Form
     {
+
+        string id_rol;
+
         public FormAdmin()
         {
             InitializeComponent();
         }
+
+        public FormAdmin(string id_rol)
+        {
+            InitializeComponent();
+            this.id_rol = id_rol;
+        }
+
 
         private void rolToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -101,6 +111,56 @@ namespace FrbaBus
         {
             Alta_Viaje altaViaje = new Alta_Viaje();
             altaViaje.Show();
+        }
+
+        private void FormAdmin_Load(object sender, EventArgs e)
+        {
+            connection connect = new connection();
+            string query = "SELECT fxrol_func_id FROM DATACENTER.FuncionalidadPorRol WHERE fxrol_rol_id = " + id_rol;
+            DataTable funcionalidades_Rol= connect.execute_query(query);
+
+            foreach (DataRow funcionalidad in funcionalidades_Rol.Rows)
+            {
+                switch (funcionalidad.ItemArray[0].ToString())
+                {
+                    case "1" :
+                        alta_rol.Visible= true;
+                        modif_rol.Visible= true;
+                        break;
+                    case "2":
+                        alta_micro.Visible = true;
+                        baja_micro.Visible = true;
+                        modif_micro.Visible = true;
+                        break;
+                    case "3":
+                        alta_recorrido.Visible = true;
+                        baja_reco.Visible = true;
+                        modif_reco.Visible = true;
+                        break;
+                    case "4":
+                        compra_menu.Visible = true;
+                        break;
+                    case "5":
+                        estadisticaMenu.Visible = true;
+                        break;
+                    case "6":
+                        registrarArriboMenu.Visible = true;
+                        break;
+                    case "7":
+                        registrarDevoluciónCancelacionMenu.Visible = true;
+                        break;
+                    case "8":
+                        canjePremioMenu.Visible = true;
+                        break;
+                    case "9":
+                        generarViajeMenu.Visible = true;
+                        break;
+                    default:
+                        MessageBox.Show("Funcionalidad Inexistente");
+                        break;
+                }
+
+            }
         }
 
 

@@ -38,20 +38,20 @@ PRIMARY KEY (fxrol_rol_id, fxrol_func_id)
 GO
 
 
-/*------------------------------------------------------------------*/
-/*-----------------CREAMOS TABLA ADMINISTRADOR----------------------*/
+/*--------------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA USUARIO NO CLIENTE-------------------------*/
 
-CREATE TABLE DATACENTER.Administrador
-(adm_username nvarchar(255) NOT NULL,
-adm_password nvarchar(255) NOT NULL, --FALTA CIFRADO DE CLAVE
-adm_cant_intentos int NOT NULL, 
-adm_rol_id int NOT NULL, 
-PRIMARY KEY (adm_username),
-FOREIGN KEY (adm_rol_id) REFERENCES DATACENTER.Rol (rol_id))
+CREATE TABLE DATACENTER.Usuario
+(usu_username nvarchar(255) NOT NULL,
+usu_password nvarchar(255) NOT NULL, 
+usu_cant_intentos int NOT NULL, 
+usu_rol_id int NOT NULL, 
+PRIMARY KEY (usu_username),
+FOREIGN KEY (usu_rol_id) REFERENCES DATACENTER.Rol (rol_id))
 GO
 
-/*------------------------------------------------------------------*/
-/*-----------------CREAMOS TABLA CLIENTE----------------------------*/
+/*--------------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA USUARIO CLIENTE----------------------------*/
 
 CREATE TABLE DATACENTER.Cliente
 (cli_dni numeric(18,0) NOT NULL,
@@ -303,7 +303,11 @@ GO
 
 --AGREGAMOS FUNCIONALIDADES 
 INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
-VALUES ('Comprar')
+VALUES ('ABM Rol')
+GO
+
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('ABM Micro')
 GO
 
 INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
@@ -311,7 +315,27 @@ VALUES ('ABM Recorrido')
 GO
 
 INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
-VALUES ('ABM Micro')
+VALUES ('Compra')
+GO
+
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Estadisticas')
+GO
+
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Registrar Arribo')
+GO
+
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Registrar Devolucion/Cancelacion')
+GO
+
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Canje Premio')
+GO
+
+INSERT INTO DATACENTER.Funcionalidad(func_nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Generar Viaje')
 GO
 
 --AGREGAMOS ROLES
@@ -339,20 +363,43 @@ VALUES (1, 3, 'H') --H HABILITADO D DESHABILITADO
 GO
 
 INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
-VALUES (2, 1, 'H') --H HABILITADO D DESHABILITADO
+VALUES (1, 4, 'H') --H HABILITADO D DESHABILITADO
+GO
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (1, 5, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (1, 6, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (1, 7, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (1, 8, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (1, 9, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (2, 4, 'H') --H HABILITADO D DESHABILITADO
 GO
 
 ----INSERTAMOS ADMINISTRADORES 
-INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
+INSERT INTO DATACENTER.Usuario(usu_username, usu_password, usu_cant_intentos, usu_rol_id)
 VALUES ('frann96','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
-INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
+INSERT INTO DATACENTER.Usuario(usu_username, usu_password, usu_cant_intentos, usu_rol_id)
 VALUES ('dieguito12','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
-INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
+INSERT INTO DATACENTER.Usuario(usu_username, usu_password, usu_cant_intentos, usu_rol_id)
 VALUES ('maty32','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
-INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
+INSERT INTO DATACENTER.Usuario(usu_username, usu_password, usu_cant_intentos, usu_rol_id)
 VALUES ('ani18','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
 
@@ -541,12 +588,12 @@ GO
 /*-------------------------------------------------------------------*/
 /*-------------------------STORED PROCEDURE--------------------------*/
 
-CREATE PROCEDURE DATACENTER.update_cant_intentos_fallidos @adm_username nvarchar(255), @cant_intentos int
+CREATE PROCEDURE DATACENTER.update_cant_intentos_fallidos @usu_username nvarchar(255), @cant_intentos int
 AS
 BEGIN
-	UPDATE DATACENTER.Administrador
-	SET adm_cant_intentos = @cant_intentos
-	WHERE adm_username = @adm_username
+	UPDATE DATACENTER.Usuario
+	SET usu_cant_intentos = @cant_intentos
+	WHERE usu_username = @usu_username
 END
 GO
 
