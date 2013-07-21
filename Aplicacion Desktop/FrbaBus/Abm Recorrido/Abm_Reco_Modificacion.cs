@@ -147,7 +147,7 @@ namespace FrbaBus.Abm_Recorrido
             stored_procedures procedure = new stored_procedures();
             procedure.update_recorrido(cod_act, orig_act, dest_act, serv_act, pr_pas_act, pr_enco_act);
             MessageBox.Show("¡RECORRIDO ACTUALIZADO CORRECTAMENTE!");
-            limpiar();
+            this.Close();
             return;
         }
 

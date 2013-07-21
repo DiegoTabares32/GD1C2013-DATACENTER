@@ -187,6 +187,7 @@
             // 
             // comboBoxTipoServ
             // 
+            this.comboBoxTipoServ.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipoServ.FormattingEnabled = true;
             this.comboBoxTipoServ.Location = new System.Drawing.Point(105, 52);
             this.comboBoxTipoServ.Name = "comboBoxTipoServ";

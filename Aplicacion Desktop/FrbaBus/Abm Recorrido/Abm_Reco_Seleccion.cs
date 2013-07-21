@@ -25,7 +25,7 @@ namespace FrbaBus.Abm_Recorrido
             textBoxCodReco.Clear();
             comboBoxOrigen.ResetText();
             comboBoxDestino.ResetText();
-            comboBoxTipoServ.ResetText();
+            comboBoxTipoServ.SelectedIndex = -1;
             comboBoxEstado.SelectedIndex = -1;
         }
 
@@ -36,13 +36,6 @@ namespace FrbaBus.Abm_Recorrido
 
         private void botonBuscar_Click(object sender, EventArgs e)
         {
-
-            if (comboBoxTipoServ.SelectedValue == null) //ESTO CONTROLA QUE NO ME PONGAN UN SERVICIO QUE NO EXISTE EN EL COMBOBOX, PORQ SINO EXPLOTA TODO PQ ESTOY TRABAJANDO CON EL VALUEMEMBER, ENTONCES EL SQL ROMPE AL INTENTAR HACER LA CONVERSION DE TIPO
-            {
-                MessageBox.Show("ERROR. EL TIPO DE SERVICIO ES INCORRECTO");
-                return;
-            }
-
             string query = "SELECT reco_cod, serv_tipo, reco_origen, reco_destino, reco_precio_base_pasaje, reco_precio_base_kg, reco_estado FROM DATACENTER.Recorrido JOIN DATACENTER.Servicio ON reco_serv_id = serv_id WHERE 1 = 1";
             //ESTA QUERY ASI COMO ESTA CORRESPONDE A TODOS LOS CAMPOS VACIOS...
             string condicion = "";
@@ -52,7 +45,7 @@ namespace FrbaBus.Abm_Recorrido
                 condicion = condicion + " AND " + "reco_cod = " + "'" + textBoxCodReco.Text.ToString() + "'";
             }
 
-            if (comboBoxTipoServ.Text != "")
+            if (comboBoxTipoServ.SelectedIndex != -1)
             {
                 condicion = condicion + " AND " + "serv_tipo = " + "'" + comboBoxTipoServ.Text.ToString() + "'";
             }
@@ -121,7 +114,7 @@ namespace FrbaBus.Abm_Recorrido
                 
                 abm_reco_mod.ShowDialog();
 
-                this.Close();
+                //this.Close();
             }
 
         }

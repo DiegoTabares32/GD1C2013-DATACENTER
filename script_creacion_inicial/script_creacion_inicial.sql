@@ -1390,10 +1390,6 @@ BEGIN
   DECLARE @fechaHoy DATETIME
   SET @fechaHoy = CONVERT(DATETIME, @fechaSist, 121)
   
-  UPDATE DATACENTER.Viaje
-  SET viaj_estado = 'D'
-  WHERE viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy
-  
   DECLARE @tipo_item_pas NVARCHAR(255)
   SET @tipo_item_pas = 'Pasaje'
   
@@ -1409,7 +1405,7 @@ BEGIN
   DECLARE cur_viaj_pas CURSOR
   FOR (SELECT pas_compra_id, pas_cod
        FROM DATACENTER.viaje JOIN DATACENTER.Pasaje ON pas_viaj_id = viaj_id
-       WHERE viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy)
+       WHERE viaj_estado <> 'D' AND viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy)
        
   OPEN cur_viaj_pas
   
@@ -1431,7 +1427,7 @@ BEGIN
   DECLARE cur_viaj_paq CURSOR
   FOR (SELECT paq_comp_id, paq_cod
        FROM DATACENTER.viaje JOIN DATACENTER.Paquete ON paq_viaj_id = viaj_id
-       WHERE viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy)
+       WHERE viaj_estado <> 'D' AND viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy)
        
   OPEN cur_viaj_paq
   
@@ -1447,6 +1443,10 @@ BEGIN
   
   CLOSE cur_viaj_paq
   DEALLOCATE cur_viaj_paq
+  
+  UPDATE DATACENTER.Viaje
+  SET viaj_estado = 'D'
+  WHERE viaj_estado <> 'D' AND viaj_reco_cod = @cod AND viaj_fecha_salida >= @fechaHoy
   
 END
 GO
