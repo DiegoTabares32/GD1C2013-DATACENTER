@@ -124,12 +124,12 @@ namespace FrbaBus.Registrar_LLegada_Micro
             //ACA PIDO LA INFORMACION DEL MICRO
             string query1 = "select m.mic_nro as 'N° Micro', m.mic_patente as 'Patente', s.serv_tipo as 'Servicio', m.mic_modelo as 'Modelo', ma.marc_nombre as 'Marca', m.mic_fecha_alta as 'Fecha de alta', m.mic_cant_kg_disponibles as 'Capacidad (Kg)', m.mic_cant_butacas as 'Cantidad de Butacas' from DATACENTER.Micro m join DATACENTER.Servicio s on s.serv_id = m.mic_serv_id join DATACENTER.Marca ma on ma.marc_id = m.mic_marc_id where m.mic_patente = '" + nroPatente + "'";
             //VOY CARGARDO LOS REGISTROS INSERTADOS EN UNA TABLA PARA DESPUES INSETARLOS EN ARRIBO
-            connection conexion = new connection();
-            string querySeleccionViajeId = "select v.viaj_id from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '" + comboBoxOrigen.Text + "' and v.viaj_mic_patente = '" + nroPatente + "' where DATEDIFF(HH, v.viaj_fecha_salida, '" + fechayhora + "' ) BETWEEN 0 AND 24";
+             connection conexion = new connection();
+            string querySeleccionViajeId = "select v.viaj_id from DATACENTER.Recorrido r join DATACENTER.Viaje v on v.viaj_reco_cod = r.reco_cod and r.reco_origen = '" + comboBoxOrigen.Text + "' and v.viaj_mic_patente = '" + nroPatente + "' and v.viaj_estado = 'H' where DATEDIFF(HH, v.viaj_fecha_salida, '" + fechayhora + "' ) BETWEEN 0 AND 24";
             DataTable resultadoSeleccionViajeId = conexion.execute_query(querySeleccionViajeId);
             if(resultadoSeleccionViajeId.Rows.Count != 1)
             {
-                MessageBox.Show("La Ciudad de Origen es incorrecta!");
+                MessageBox.Show("Datos erróneos. La Ciudad de Origen es incorrecta o bien el registro que intenta cargar puede tener el viaje DESHABILITADO!");
                 return;
             }
             string registroYaCargado = "select a.arri_viaj_id from DATACENTER.Arribo a where a.arri_viaj_id = " + resultadoSeleccionViajeId.Rows[0].ItemArray.ElementAt(0).ToString();
