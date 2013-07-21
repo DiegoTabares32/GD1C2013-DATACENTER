@@ -970,7 +970,7 @@ begin
 	set @micCantButacas = (select mic_cant_butacas from DATACENTER.Micro where mic_patente=@patente)
 	
 	declare cursorPatentes cursor
-	for select mic_patente,viaj_fecha_salida,viaj_fecha_lleg_estimada from DATACENTER.Micro join DATACENTER.Viaje on (mic_patente=viaj_mic_patente) where mic_patente<>@patente and mic_marc_id=@micMarcaId and mic_serv_id=@micServId and mic_cant_butacas>=@micCantButacas
+	for select mic_patente,viaj_fecha_salida,viaj_fecha_lleg_estimada from DATACENTER.Micro join DATACENTER.Viaje on (mic_patente=viaj_mic_patente) where viaj_estado='H' and mic_patente<>@patente and mic_marc_id=@micMarcaId and mic_serv_id=@micServId and mic_cant_butacas>=@micCantButacas
 	open cursorPatentes
 	declare @ocupado int
 	set @ocupado=0
@@ -1171,11 +1171,11 @@ begin
 		for (
 			(select paq_comp_id,'Paquete'
 			 from DATACENTER.Viaje join DATACENTER.Paquete on (viaj_id=paq_viaj_id)
-			 where viaj_mic_patente=@patente and ((viaj_fecha_salida between @fechaFS and @fechaR) or (viaj_fecha_lleg_estimada between @fechaFS and @fechaR)))
+			 where viaj_mic_patente=@patente and viaj_estado='H' and ((viaj_fecha_salida between @fechaFS and @fechaR) or (viaj_fecha_lleg_estimada between @fechaFS and @fechaR)))
 			union
 			(select pas_compra_id,'Pasaje'
 			 from DATACENTER.Viaje join DATACENTER.Pasaje on (viaj_id=pas_viaj_id)
-			 where viaj_mic_patente=@patente and ((viaj_fecha_salida between @fechaFS and @fechaR) or (viaj_fecha_lleg_estimada between @fechaFS and @fechaR)))
+			 where viaj_mic_patente=@patente and viaj_estado='H' and ((viaj_fecha_salida between @fechaFS and @fechaR) or (viaj_fecha_lleg_estimada between @fechaFS and @fechaR)))
 
 			) 
 	end
@@ -1185,11 +1185,11 @@ begin
 		for (
 			(select paq_comp_id,'Paquete'
 			 from DATACENTER.Viaje join DATACENTER.Paquete on (viaj_id=paq_viaj_id)
-			 where viaj_mic_patente=@patente and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
+			 where viaj_mic_patente=@patente and viaj_estado='H' and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
 			union
 			(select pas_compra_id,'Pasaje'
 			 from DATACENTER.Viaje join DATACENTER.Pasaje on (viaj_id=pas_viaj_id)
-			 where viaj_mic_patente=@patente and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
+			 where viaj_mic_patente=@patente and viaj_estado='H' and ((viaj_fecha_salida > @fechaFS) or (viaj_fecha_lleg_estimada > @fechaFS)))
 			) 	
 	end
 			
