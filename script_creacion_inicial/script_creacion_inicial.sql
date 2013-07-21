@@ -942,7 +942,7 @@ end
 go
 
 
-create procedure DATACENTER.canjeaPremio(@premNombre nvarchar(255),@dniCliente numeric(18,0),@nuevoStock int,@premCantidad int,@idCanjeNuevo int)
+create procedure DATACENTER.canjeaPremio(@premNombre nvarchar(255),@dniCliente numeric(18,0),@nuevoStock int,@premCantidad int,@idCanjeNuevo int,@fechaSist datetime)
 as
 begin
 	declare @idPremio int
@@ -953,7 +953,7 @@ begin
 	where prem_nombre=@premNombre
 
 	INSERT INTO DATACENTER.Canje(canj_id,canj_cli_dni,canj_prem_id,canj_cant_retirada,canj_fecha)
-	VALUES (@idCanjeNuevo,@dniCliente,@idPremio,@premCantidad,GETDATE())
+	VALUES (@idCanjeNuevo,@dniCliente,@idPremio,@premCantidad,@fechaSist)
 end
 go
 
@@ -1035,7 +1035,7 @@ end
 go
 
 
-create procedure DATACENTER.registrarNuevoMicro(@patenteNueva nvarchar(255),@patenteAReemplazar nvarchar(255))
+create procedure DATACENTER.registrarNuevoMicro(@patenteNueva nvarchar(255),@patenteAReemplazar nvarchar(255),@fechaSist datetime)
 as
 begin
 	declare @micMarcaId int
@@ -1051,7 +1051,7 @@ begin
 	set @micModelo = (select mic_modelo from DATACENTER.Micro where mic_patente=@patenteAReemplazar)
 	
 	INSERT INTO DATACENTER.Micro(mic_patente,mic_marc_id,mic_serv_id,mic_cant_butacas,mic_cant_kg_disponibles,mic_modelo,mic_fecha_alta,mic_fecha_baja_def)
-	VALUES (@patenteNueva,@micMarcaId,@micServId,@micCantButacas,@micCantKg,@micModelo,GETDATE(),null)
+	VALUES (@patenteNueva,@micMarcaId,@micServId,@micCantButacas,@micCantKg,@micModelo,@fechaSist,null)
 end
 go
 
