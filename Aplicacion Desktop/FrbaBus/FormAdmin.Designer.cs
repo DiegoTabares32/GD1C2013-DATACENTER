@@ -29,188 +29,202 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.altaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.microToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rolToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.microToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.bajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.microToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.compraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alta_menu = new System.Windows.Forms.ToolStripMenuItem();
+            this.alta_rol = new System.Windows.Forms.ToolStripMenuItem();
+            this.alta_micro = new System.Windows.Forms.ToolStripMenuItem();
+            this.alta_recorrido = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificacionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.modif_rol = new System.Windows.Forms.ToolStripMenuItem();
+            this.modif_micro = new System.Windows.Forms.ToolStripMenuItem();
+            this.modif_reco = new System.Windows.Forms.ToolStripMenuItem();
+            this.bajaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.baja_micro = new System.Windows.Forms.ToolStripMenuItem();
+            this.baja_reco = new System.Windows.Forms.ToolStripMenuItem();
+            this.compra_menu = new System.Windows.Forms.ToolStripMenuItem();
             this.facturaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estadisticaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarArriboToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarDevoluciónCancelaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.canjePremioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recorridoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recorridoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.recorridoToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.generarViajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarDevoluciónCancelacionMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.estadisticaMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarArriboMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.canjePremioMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarViajeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.altaToolStripMenuItem,
-            this.modificaciónToolStripMenuItem,
-            this.bajaToolStripMenuItem,
-            this.compraToolStripMenuItem,
-            this.estadisticaToolStripMenuItem,
-            this.registrarArriboToolStripMenuItem,
-            this.registrarDevoluciónCancelaciónToolStripMenuItem,
-            this.canjePremioToolStripMenuItem,
-            this.generarViajeToolStripMenuItem});
+            this.alta_menu,
+            this.modificacionMenu,
+            this.bajaMenu,
+            this.registrarArriboMenu,
+            this.compra_menu,
+            this.registrarDevoluciónCancelacionMenu,
+            this.estadisticaMenu,
+            this.canjePremioMenu,
+            this.generarViajeMenu});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(791, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(845, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // altaToolStripMenuItem
+            // alta_menu
             // 
-            this.altaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolToolStripMenuItem,
-            this.microToolStripMenuItem,
-            this.recorridoToolStripMenuItem});
-            this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.altaToolStripMenuItem.Text = "Alta";
+            this.alta_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alta_rol,
+            this.alta_micro,
+            this.alta_recorrido});
+            this.alta_menu.Name = "alta_menu";
+            this.alta_menu.Size = new System.Drawing.Size(40, 20);
+            this.alta_menu.Text = "Alta";
             // 
-            // rolToolStripMenuItem
+            // alta_rol
             // 
-            this.rolToolStripMenuItem.Name = "rolToolStripMenuItem";
-            this.rolToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rolToolStripMenuItem.Text = "Rol";
-            this.rolToolStripMenuItem.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
+            this.alta_rol.Name = "alta_rol";
+            this.alta_rol.Size = new System.Drawing.Size(152, 22);
+            this.alta_rol.Text = "Rol";
+            this.alta_rol.Visible = false;
+            this.alta_rol.Click += new System.EventHandler(this.rolToolStripMenuItem_Click);
             // 
-            // microToolStripMenuItem
+            // alta_micro
             // 
-            this.microToolStripMenuItem.Name = "microToolStripMenuItem";
-            this.microToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.microToolStripMenuItem.Text = "Micro";
-            this.microToolStripMenuItem.Click += new System.EventHandler(this.microToolStripMenuItem_Click);
+            this.alta_micro.Name = "alta_micro";
+            this.alta_micro.Size = new System.Drawing.Size(152, 22);
+            this.alta_micro.Text = "Micro";
+            this.alta_micro.Visible = false;
+            this.alta_micro.Click += new System.EventHandler(this.microToolStripMenuItem_Click);
             // 
-            // modificaciónToolStripMenuItem
+            // alta_recorrido
             // 
-            this.modificaciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rolToolStripMenuItem1,
-            this.microToolStripMenuItem1,
-            this.recorridoToolStripMenuItem1});
-            this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.modificaciónToolStripMenuItem.Text = "Modificación";
+            this.alta_recorrido.Name = "alta_recorrido";
+            this.alta_recorrido.Size = new System.Drawing.Size(152, 22);
+            this.alta_recorrido.Text = "Recorrido";
+            this.alta_recorrido.Visible = false;
+            this.alta_recorrido.Click += new System.EventHandler(this.recorridoToolStripMenuItem_Click);
             // 
-            // rolToolStripMenuItem1
+            // modificacionMenu
             // 
-            this.rolToolStripMenuItem1.Name = "rolToolStripMenuItem1";
-            this.rolToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.rolToolStripMenuItem1.Text = "Rol";
-            this.rolToolStripMenuItem1.Click += new System.EventHandler(this.rolToolStripMenuItem1_Click);
+            this.modificacionMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modif_rol,
+            this.modif_micro,
+            this.modif_reco});
+            this.modificacionMenu.Name = "modificacionMenu";
+            this.modificacionMenu.Size = new System.Drawing.Size(89, 20);
+            this.modificacionMenu.Text = "Modificación";
             // 
-            // microToolStripMenuItem1
+            // modif_rol
             // 
-            this.microToolStripMenuItem1.Name = "microToolStripMenuItem1";
-            this.microToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.microToolStripMenuItem1.Text = "Micro";
-            this.microToolStripMenuItem1.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
+            this.modif_rol.Name = "modif_rol";
+            this.modif_rol.Size = new System.Drawing.Size(152, 22);
+            this.modif_rol.Text = "Rol";
+            this.modif_rol.Visible = false;
+            this.modif_rol.Click += new System.EventHandler(this.rolToolStripMenuItem1_Click);
             // 
-            // bajaToolStripMenuItem
+            // modif_micro
             // 
-            this.bajaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.microToolStripMenuItem2,
-            this.recorridoToolStripMenuItem2});
-            this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.bajaToolStripMenuItem.Text = "Baja";
+            this.modif_micro.Name = "modif_micro";
+            this.modif_micro.Size = new System.Drawing.Size(152, 22);
+            this.modif_micro.Text = "Micro";
+            this.modif_micro.Visible = false;
+            this.modif_micro.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
             // 
-            // microToolStripMenuItem2
+            // modif_reco
             // 
-            this.microToolStripMenuItem2.Name = "microToolStripMenuItem2";
-            this.microToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.microToolStripMenuItem2.Text = "Micro";
-            this.microToolStripMenuItem2.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
+            this.modif_reco.Name = "modif_reco";
+            this.modif_reco.Size = new System.Drawing.Size(152, 22);
+            this.modif_reco.Text = "Recorrido";
+            this.modif_reco.Visible = false;
+            this.modif_reco.Click += new System.EventHandler(this.recorridoToolStripMenuItem1_Click);
             // 
-            // compraToolStripMenuItem
+            // bajaMenu
             // 
-            this.compraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bajaMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.baja_micro,
+            this.baja_reco});
+            this.bajaMenu.Name = "bajaMenu";
+            this.bajaMenu.Size = new System.Drawing.Size(41, 20);
+            this.bajaMenu.Text = "Baja";
+            // 
+            // baja_micro
+            // 
+            this.baja_micro.Name = "baja_micro";
+            this.baja_micro.Size = new System.Drawing.Size(152, 22);
+            this.baja_micro.Text = "Micro";
+            this.baja_micro.Visible = false;
+            this.baja_micro.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
+            // 
+            // baja_reco
+            // 
+            this.baja_reco.Name = "baja_reco";
+            this.baja_reco.Size = new System.Drawing.Size(152, 22);
+            this.baja_reco.Text = "Recorrido";
+            this.baja_reco.Visible = false;
+            // 
+            // compra_menu
+            // 
+            this.compra_menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.facturaciónToolStripMenuItem});
-            this.compraToolStripMenuItem.Name = "compraToolStripMenuItem";
-            this.compraToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-            this.compraToolStripMenuItem.Text = "Compra";
+            this.compra_menu.Name = "compra_menu";
+            this.compra_menu.Size = new System.Drawing.Size(62, 20);
+            this.compra_menu.Text = "Compra";
+            this.compra_menu.Visible = false;
             // 
             // facturaciónToolStripMenuItem
             // 
             this.facturaciónToolStripMenuItem.Name = "facturaciónToolStripMenuItem";
-            this.facturaciónToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.facturaciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.facturaciónToolStripMenuItem.Text = "Facturación";
             this.facturaciónToolStripMenuItem.Click += new System.EventHandler(this.facturaciónToolStripMenuItem_Click);
             // 
-            // estadisticaToolStripMenuItem
+            // registrarDevoluciónCancelacionMenu
             // 
-            this.estadisticaToolStripMenuItem.Name = "estadisticaToolStripMenuItem";
-            this.estadisticaToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.estadisticaToolStripMenuItem.Text = "Estadistica";
-            this.estadisticaToolStripMenuItem.Click += new System.EventHandler(this.estadisticaToolStripMenuItem_Click);
+            this.registrarDevoluciónCancelacionMenu.Name = "registrarDevoluciónCancelacionMenu";
+            this.registrarDevoluciónCancelacionMenu.Size = new System.Drawing.Size(191, 20);
+            this.registrarDevoluciónCancelacionMenu.Text = "Registrar Devolucin/Cancelacion";
+            this.registrarDevoluciónCancelacionMenu.Visible = false;
+            this.registrarDevoluciónCancelacionMenu.Click += new System.EventHandler(this.registrarDevoluciónCancelaciónToolStripMenuItem_Click);
             // 
-            // registrarArriboToolStripMenuItem
+            // estadisticaMenu
             // 
-            this.registrarArriboToolStripMenuItem.Name = "registrarArriboToolStripMenuItem";
-            this.registrarArriboToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
-            this.registrarArriboToolStripMenuItem.Text = "Registrar Arribo";
-            this.registrarArriboToolStripMenuItem.Click += new System.EventHandler(this.registrarArriboToolStripMenuItem_Click);
+            this.estadisticaMenu.Name = "estadisticaMenu";
+            this.estadisticaMenu.Size = new System.Drawing.Size(74, 20);
+            this.estadisticaMenu.Text = "Estadistica";
+            this.estadisticaMenu.Visible = false;
+            this.estadisticaMenu.Click += new System.EventHandler(this.estadisticaToolStripMenuItem_Click);
             // 
-            // registrarDevoluciónCancelaciónToolStripMenuItem
+            // registrarArriboMenu
             // 
-            this.registrarDevoluciónCancelaciónToolStripMenuItem.Name = "registrarDevoluciónCancelaciónToolStripMenuItem";
-            this.registrarDevoluciónCancelaciónToolStripMenuItem.Size = new System.Drawing.Size(198, 20);
-            this.registrarDevoluciónCancelaciónToolStripMenuItem.Text = "Registrar Devolución/Cancelación";
-            this.registrarDevoluciónCancelaciónToolStripMenuItem.Click += new System.EventHandler(this.registrarDevoluciónCancelaciónToolStripMenuItem_Click);
+            this.registrarArriboMenu.Name = "registrarArriboMenu";
+            this.registrarArriboMenu.Size = new System.Drawing.Size(101, 20);
+            this.registrarArriboMenu.Text = "Registrar Arribo";
+            this.registrarArriboMenu.Click += new System.EventHandler(this.registrarArriboToolStripMenuItem_Click);
             // 
-            // canjePremioToolStripMenuItem
+            // canjePremioMenu
             // 
-            this.canjePremioToolStripMenuItem.Name = "canjePremioToolStripMenuItem";
-            this.canjePremioToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
-            this.canjePremioToolStripMenuItem.Text = "Canje Premio";
-            this.canjePremioToolStripMenuItem.Click += new System.EventHandler(this.canjePremioToolStripMenuItem_Click);
+            this.canjePremioMenu.Name = "canjePremioMenu";
+            this.canjePremioMenu.Size = new System.Drawing.Size(90, 20);
+            this.canjePremioMenu.Text = "Canje Premio";
+            this.canjePremioMenu.Visible = false;
+            this.canjePremioMenu.Click += new System.EventHandler(this.canjePremioToolStripMenuItem_Click);
             // 
-            // recorridoToolStripMenuItem
+            // generarViajeMenu
             // 
-            this.recorridoToolStripMenuItem.Name = "recorridoToolStripMenuItem";
-            this.recorridoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.recorridoToolStripMenuItem.Text = "Recorrido";
-            this.recorridoToolStripMenuItem.Click += new System.EventHandler(this.recorridoToolStripMenuItem_Click);
-            // 
-            // recorridoToolStripMenuItem1
-            // 
-            this.recorridoToolStripMenuItem1.Name = "recorridoToolStripMenuItem1";
-            this.recorridoToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.recorridoToolStripMenuItem1.Text = "Recorrido";
-            this.recorridoToolStripMenuItem1.Click += new System.EventHandler(this.recorridoToolStripMenuItem1_Click);
-            // 
-            // recorridoToolStripMenuItem2
-            // 
-            this.recorridoToolStripMenuItem2.Name = "recorridoToolStripMenuItem2";
-            this.recorridoToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.recorridoToolStripMenuItem2.Text = "Recorrido";
-            // 
-            // generarViajeToolStripMenuItem
-            // 
-            this.generarViajeToolStripMenuItem.Name = "generarViajeToolStripMenuItem";
-            this.generarViajeToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
-            this.generarViajeToolStripMenuItem.Text = "Generar Viaje";
-            this.generarViajeToolStripMenuItem.Click += new System.EventHandler(this.generarViajeToolStripMenuItem_Click);
+            this.generarViajeMenu.Name = "generarViajeMenu";
+            this.generarViajeMenu.Size = new System.Drawing.Size(88, 20);
+            this.generarViajeMenu.Text = "Generar Viaje";
+            this.generarViajeMenu.Visible = false;
+            this.generarViajeMenu.Click += new System.EventHandler(this.generarViajeToolStripMenuItem_Click);
             // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 68);
+            this.ClientSize = new System.Drawing.Size(845, 68);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormAdmin";
             this.Text = "Menu Administrador";
+            this.Load += new System.EventHandler(this.FormAdmin_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -221,23 +235,23 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bajaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rolToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem compraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alta_menu;
+        private System.Windows.Forms.ToolStripMenuItem modificacionMenu;
+        private System.Windows.Forms.ToolStripMenuItem bajaMenu;
+        private System.Windows.Forms.ToolStripMenuItem alta_rol;
+        private System.Windows.Forms.ToolStripMenuItem modif_rol;
+        private System.Windows.Forms.ToolStripMenuItem compra_menu;
         private System.Windows.Forms.ToolStripMenuItem facturaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem estadisticaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registrarArriboToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem microToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem microToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem microToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem registrarDevoluciónCancelaciónToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem canjePremioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem recorridoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem recorridoToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem recorridoToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem generarViajeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem estadisticaMenu;
+        private System.Windows.Forms.ToolStripMenuItem registrarArriboMenu;
+        private System.Windows.Forms.ToolStripMenuItem alta_micro;
+        private System.Windows.Forms.ToolStripMenuItem modif_micro;
+        private System.Windows.Forms.ToolStripMenuItem baja_micro;
+        private System.Windows.Forms.ToolStripMenuItem registrarDevoluciónCancelacionMenu;
+        private System.Windows.Forms.ToolStripMenuItem canjePremioMenu;
+        private System.Windows.Forms.ToolStripMenuItem alta_recorrido;
+        private System.Windows.Forms.ToolStripMenuItem modif_reco;
+        private System.Windows.Forms.ToolStripMenuItem baja_reco;
+        private System.Windows.Forms.ToolStripMenuItem generarViajeMenu;
     }
 }

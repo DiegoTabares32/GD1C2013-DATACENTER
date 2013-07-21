@@ -82,7 +82,19 @@ namespace FrbaBus.Abm_Micro
             //Hacer devoluciones por los viajes y encomiendas que tenían asignado el micro para la fecha en que se da de baja
 
             //consulta a ejecutar para cancelar todos los viajes de ese micro en la fecha requerida
-            string query2 = "exec cancelaViajesXMicro '" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("dd/MM/yyyy HH:mm") + "','" + fechaReing.Value.ToString("dd/MM/yyyy HH:mm") + "'";
+
+            DateTimePicker datetimepicker = new DateTimePicker();
+            datetimepicker.Value = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+
+            string query2;
+            if (fechaReing == null)
+            {
+                query2 = "exec DATACENTER.cancelaViajesXMicro '" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("yyyy/MM/dd HH:mm") + "',NULL,'" + datetimepicker.Value.ToString("yyyy/MM/dd HH:mm") + "'";
+            }
+            else
+            {
+                query2 = "exec DATACENTER.cancelaViajesXMicro '" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("yyyy/MM/dd HH:mm") + "','" + fechaReing.Value.ToString("yyyy/MM/dd HH:mm") + "','" + datetimepicker.Value.ToString("yyyy/MM/dd HH:mm") + "'";
+            }
             connection connect2 = new connection();
             connect2.execute_query(query2);
 

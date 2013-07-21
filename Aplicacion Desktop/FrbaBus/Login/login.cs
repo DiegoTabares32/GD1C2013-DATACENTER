@@ -59,7 +59,7 @@ namespace FrbaBus.Login
             connection conexion = new connection();
 
 
-            DataTable administrador = conexion.execute_query("SELECT adm_username, adm_password, adm_cant_intentos, rol_estado FROM DATACENTER.Administrador  JOIN DATACENTER.Rol  ON (adm_rol_id=rol_id) WHERE adm_username= " + "'" + username_textbox.Text + "'");
+            DataTable administrador = conexion.execute_query("SELECT usu_username, usu_password, usu_cant_intentos, rol_estado, rol_id FROM DATACENTER.Usuario  JOIN DATACENTER.Rol  ON (usu_rol_id=rol_id) WHERE usu_username= " + "'" + username_textbox.Text + "'");
             
             
             if (administrador.Rows.Count == 1)
@@ -67,7 +67,7 @@ namespace FrbaBus.Login
                 //verificamos que el Rol administrador NO este inhabilitado
                 if (administrador.Rows[0].ItemArray[3].ToString() != "H")
                 {
-                    MessageBox.Show("Rol Administrador Inhabilitado", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Rol  Inhabilitado", "Acceso al Sistema", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -93,8 +93,9 @@ namespace FrbaBus.Login
 
                     
 
-                    //abrimos el formulario de administradores
-                    FormAdmin form_admin = new FormAdmin();
+                    //abrimos el formulario de Funcionalides
+                    string id_rol = administrador.Rows[0].ItemArray[4].ToString();
+                    FormAdmin form_admin = new FormAdmin(id_rol);
                     form_admin.ShowDialog();
 
                     
