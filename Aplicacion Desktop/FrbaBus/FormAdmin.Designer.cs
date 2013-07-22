@@ -47,6 +47,7 @@
             this.estadisticaMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.canjePremioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.generarViajeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,10 +62,11 @@
             this.registrarDevoluciónCancelacionMenu,
             this.estadisticaMenu,
             this.canjePremioMenu,
-            this.generarViajeMenu});
+            this.generarViajeMenu,
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(845, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1077, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -115,7 +117,7 @@
             // modif_rol
             // 
             this.modif_rol.Name = "modif_rol";
-            this.modif_rol.Size = new System.Drawing.Size(152, 22);
+            this.modif_rol.Size = new System.Drawing.Size(125, 22);
             this.modif_rol.Text = "Rol";
             this.modif_rol.Visible = false;
             this.modif_rol.Click += new System.EventHandler(this.rolToolStripMenuItem1_Click);
@@ -123,7 +125,7 @@
             // modif_micro
             // 
             this.modif_micro.Name = "modif_micro";
-            this.modif_micro.Size = new System.Drawing.Size(152, 22);
+            this.modif_micro.Size = new System.Drawing.Size(125, 22);
             this.modif_micro.Text = "Micro";
             this.modif_micro.Visible = false;
             this.modif_micro.Click += new System.EventHandler(this.microToolStripMenuItem1_Click);
@@ -131,7 +133,7 @@
             // modif_reco
             // 
             this.modif_reco.Name = "modif_reco";
-            this.modif_reco.Size = new System.Drawing.Size(152, 22);
+            this.modif_reco.Size = new System.Drawing.Size(125, 22);
             this.modif_reco.Text = "Recorrido";
             this.modif_reco.Visible = false;
             this.modif_reco.Click += new System.EventHandler(this.recorridoToolStripMenuItem1_Click);
@@ -148,7 +150,7 @@
             // baja_micro
             // 
             this.baja_micro.Name = "baja_micro";
-            this.baja_micro.Size = new System.Drawing.Size(152, 22);
+            this.baja_micro.Size = new System.Drawing.Size(125, 22);
             this.baja_micro.Text = "Micro";
             this.baja_micro.Visible = false;
             this.baja_micro.Click += new System.EventHandler(this.microToolStripMenuItem2_Click);
@@ -156,7 +158,7 @@
             // baja_reco
             // 
             this.baja_reco.Name = "baja_reco";
-            this.baja_reco.Size = new System.Drawing.Size(152, 22);
+            this.baja_reco.Size = new System.Drawing.Size(125, 22);
             this.baja_reco.Text = "Recorrido";
             this.baja_reco.Visible = false;
             this.baja_reco.Click += new System.EventHandler(this.baja_reco_Click);
@@ -217,11 +219,19 @@
             this.generarViajeMenu.Visible = false;
             this.generarViajeMenu.Click += new System.EventHandler(this.generarViajeToolStripMenuItem_Click);
             // 
+            // consultaPuntosPasajeroFrecuenteToolStripMenuItem
+            // 
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem.Name = "consultaPuntosPasajeroFrecuenteToolStripMenuItem";
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem.Size = new System.Drawing.Size(208, 20);
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem.Text = "Consulta Puntos Pasajero Frecuente";
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem.Visible = false;
+            this.consultaPuntosPasajeroFrecuenteToolStripMenuItem.Click += new System.EventHandler(this.consultaPuntosPasajeroFrecuenteToolStripMenuItem_Click);
+            // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 68);
+            this.ClientSize = new System.Drawing.Size(1077, 68);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormAdmin";
@@ -255,5 +265,6 @@
         private System.Windows.Forms.ToolStripMenuItem modif_reco;
         private System.Windows.Forms.ToolStripMenuItem baja_reco;
         private System.Windows.Forms.ToolStripMenuItem generarViajeMenu;
+        private System.Windows.Forms.ToolStripMenuItem consultaPuntosPasajeroFrecuenteToolStripMenuItem;
     }
 }

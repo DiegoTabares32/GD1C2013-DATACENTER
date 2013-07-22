@@ -63,6 +63,7 @@
             this.list_funcionalidades.Name = "list_funcionalidades";
             this.list_funcionalidades.Size = new System.Drawing.Size(141, 94);
             this.list_funcionalidades.TabIndex = 3;
+
             // 
             // label3
             // 

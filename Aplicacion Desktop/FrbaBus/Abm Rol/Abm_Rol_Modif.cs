@@ -35,25 +35,47 @@ namespace FrbaBus.Abm_Rol
                 this.select_boton.Enabled = false;
 
                 //cargamos lista segun corresponde
-
-                string query = "SELECT func_id, func_nombre FROM DATACENTER.Funcionalidad";
-                connection connect = new connection();
-                DataTable tabla_todas_func = connect.execute_query(query);
-                list_funcionalidades.DataSource = tabla_todas_func;
-                list_funcionalidades.DisplayMember = "func_nombre";
-                list_funcionalidades.ValueMember = "func_id";
-
-                //tildamos las funciones que ya tiene el rol
-
-                int i;
-                funciones func = new funciones();
-                for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+                if (this.id_rol_a_mod != "2")
                 {
-                     this.list_funcionalidades.SelectedIndex= i;
-                     if(func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
-                         this.list_funcionalidades.SetItemChecked(i, true);
-                }
+                    string query = "SELECT func_id, func_nombre FROM DATACENTER.Funcionalidad";
+                    connection connect = new connection();
+                    DataTable tabla_todas_func = connect.execute_query(query);
+                    list_funcionalidades.DataSource = tabla_todas_func;
+                    list_funcionalidades.DisplayMember = "func_nombre";
+                    list_funcionalidades.ValueMember = "func_id";
 
+                    //tildamos las funciones que ya tiene el rol
+
+                    int i;
+                    funciones func = new funciones();
+                    for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+                    {
+                        this.list_funcionalidades.SelectedIndex = i;
+                        if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
+                            this.list_funcionalidades.SetItemChecked(i, true);
+                    }
+                }
+                else
+                {
+                    //mostramos funcionalidades que se le pueden asignar a un cliente
+                    string query = "SELECT func_id, func_nombre  FROM DATACENTER.Funcionalidad where func_id= 4 or func_id=10";
+                    connection connect = new connection();
+                    DataTable tabla_todas_func = connect.execute_query(query);
+                    list_funcionalidades.DataSource = tabla_todas_func;
+                    list_funcionalidades.DisplayMember = "func_nombre";
+                    list_funcionalidades.ValueMember = "func_id";
+
+                    //tildamos las funciones que ya tiene el rol
+
+                    int i;
+                    funciones func = new funciones();
+                    for (i = 0; i < (this.list_funcionalidades.Items.Count); i++)
+                    {
+                        this.list_funcionalidades.SelectedIndex = i;
+                        if (func.check_func_activa(this.id_rol_a_mod, this.list_funcionalidades.SelectedValue.ToString()))
+                            this.list_funcionalidades.SetItemChecked(i, true);
+                    }
+                }
               
             }
             else
@@ -137,6 +159,7 @@ namespace FrbaBus.Abm_Rol
                 this.estado_actual_rol = 'D';
             }
         }
+
 
  
           

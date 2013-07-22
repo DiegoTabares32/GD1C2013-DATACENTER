@@ -44,13 +44,6 @@ namespace FrbaBus.Compra_de_Pasajes
 
         }
 
-        private void login_boton_Click(object sender, EventArgs e)
-        {
-            //cuando un administrador hace click en login se le abre la
-            //pantalla de login
-            login login = new login();
-            login.ShowDialog();
-        }
 
         private void select_boton_Click(object sender, EventArgs e)
         {
@@ -59,6 +52,8 @@ namespace FrbaBus.Compra_de_Pasajes
 
         private void FormCompra_Load(object sender, EventArgs e)
         {
+
+
             string query = "SELECT ciu_nombre FROM DATACENTER.Ciudad";
             connection conexion = new connection();
             DataTable table_ciu_orig= conexion.execute_query(query);

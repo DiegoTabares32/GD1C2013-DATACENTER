@@ -391,9 +391,16 @@ VALUES (1, 9, 'H') --H HABILITADO D DESHABILITADO
 GO
 
 INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (1, 10, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
 VALUES (2, 4, 'H') --H HABILITADO D DESHABILITADO
 GO
 
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_id,fxrol_func_id, fxrol_estado)
+VALUES (2, 10, 'H') --H HABILITADO D DESHABILITADO
+GO
 ----INSERTAMOS ADMINISTRADORES 
 INSERT INTO DATACENTER.Usuario(usu_username, usu_password, usu_cant_intentos, usu_rol_id)
 VALUES ('frann96','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)

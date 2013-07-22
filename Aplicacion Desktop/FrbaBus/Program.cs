@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using FrbaBus.Compra_de_Pasajes;
+using FrbaBus;
 
 namespace FrbaBus
 {
@@ -16,7 +16,7 @@ namespace FrbaBus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormCompra());
+            Application.Run(new Form_Principal());
             
            
         }

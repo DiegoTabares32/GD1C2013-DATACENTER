@@ -14,6 +14,7 @@ using FrbaBus.Canc_Dev_de_Pas_Enc;
 using FrbaBus.Canje_de_Ptos;
 using FrbaBus.Abm_Recorrido;
 using FrbaBus.GenerarViaje;
+using FrbaBus.Consulta_Puntos_Adquiridos;
 
 namespace FrbaBus
 {
@@ -49,8 +50,8 @@ namespace FrbaBus
         private void facturaciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormCompra compra = new FormCompra();
+            compra.buttonConsultaPuntos.Visible = false;
             compra.compra_admin = true;
-            compra.login_boton.Visible = false;
             compra.ShowDialog();
         }
 
@@ -156,6 +157,9 @@ namespace FrbaBus
                     case "9":
                         generarViajeMenu.Visible = true;
                         break;
+                    case "10":
+                        consultaPuntosPasajeroFrecuenteToolStripMenuItem.Visible = true;
+                        break;
                     default:
                         MessageBox.Show("Funcionalidad Inexistente");
                         break;
@@ -168,6 +172,12 @@ namespace FrbaBus
         {
             Abm_Reco_SelecDel selec_reco_del = new Abm_Reco_SelecDel();
             selec_reco_del.Show();
+        }
+
+        private void consultaPuntosPasajeroFrecuenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Abm_Consulta_Puntos consultar_puntos = new Abm_Consulta_Puntos();
+            consultar_puntos.ShowDialog();
         }
 
 

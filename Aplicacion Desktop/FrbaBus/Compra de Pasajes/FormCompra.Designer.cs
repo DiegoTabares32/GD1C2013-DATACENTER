@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.login_boton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.select_boton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,16 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.CantPasaj_numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cant_encomiendas_numUpdown)).BeginInit();
             this.SuspendLayout();
-            // 
-            // login_boton
-            // 
-            this.login_boton.Location = new System.Drawing.Point(506, 3);
-            this.login_boton.Name = "login_boton";
-            this.login_boton.Size = new System.Drawing.Size(64, 25);
-            this.login_boton.TabIndex = 0;
-            this.login_boton.Text = "login";
-            this.login_boton.UseVisualStyleBackColor = true;
-            this.login_boton.Click += new System.EventHandler(this.login_boton_Click);
             // 
             // label1
             // 
@@ -368,7 +357,6 @@
             this.Controls.Add(this.select_boton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ciu_orig_list);
-            this.Controls.Add(this.login_boton);
             this.Name = "FormCompra";
             this.Text = "Compra";
             this.Load += new System.EventHandler(this.FormCompra_Load);
@@ -407,9 +395,8 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        public System.Windows.Forms.Button login_boton;
         public System.Windows.Forms.TextBox total_tbox;
-        private System.Windows.Forms.Button buttonConsultaPuntos;
         public System.Windows.Forms.DateTimePicker fechaViajeDateTimeP;
+        public System.Windows.Forms.Button buttonConsultaPuntos;
     }
 }
