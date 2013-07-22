@@ -14,9 +14,15 @@ namespace FrbaBus
 {
     public partial class Form_Principal : Form
     {
+        //fecha del sistema
+        DateTime fechaDelSistema = Convert.ToDateTime((System.Configuration.ConfigurationSettings.AppSettings["FechaDelSistema"]).ToString());
+
         public Form_Principal()
         {
             InitializeComponent();
+            /*-------------------------ACTUALIZACION DE FECHA DE ALTA DE MICRO--------------*/
+            stored_procedures stored = new stored_procedures();
+            stored.update_fecha_alta_micro(fechaDelSistema.ToString("yyyy-MM-dd HH:mm"));
         }
 
         private void comboBoxPerfil_SelectedIndexChanged(object sender, EventArgs e)
