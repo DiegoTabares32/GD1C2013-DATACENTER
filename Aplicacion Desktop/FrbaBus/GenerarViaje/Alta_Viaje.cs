@@ -30,6 +30,7 @@ namespace FrbaBus.GenerarViaje
             botonSelMicro.Enabled = false;
             dateTimePickerSalida.Enabled = true;
             dateTimePickerLlegada.Enabled = true;
+            botonSelReco.Enabled = true;
         }
 
 
@@ -50,6 +51,7 @@ namespace FrbaBus.GenerarViaje
         {
             dateTimePickerSalida.Enabled = false;
             dateTimePickerLlegada.Enabled = false;
+            botonSelReco.Enabled = false;
             string dia_prox = dateTimePickerSalida.Value.AddDays(1).ToString("yyyy-MM-dd HH:mm");
             string dia_ant = dateTimePickerSalida.Value.AddDays(-1).ToString("yyyy-MM-dd HH:mm");
             string fecha_sal = dateTimePickerSalida.Value.ToString("yyyy-MM-dd HH:mm");
