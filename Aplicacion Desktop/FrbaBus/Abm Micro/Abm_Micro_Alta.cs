@@ -95,7 +95,7 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para registrar nuevo micro
             string query3 = "INSERT INTO DATACENTER.Micro(mic_patente, mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo, mic_fecha_alta, mic_fecha_baja_def) VALUES ('"+
-                            nroPatente + "','" + idMarca.Rows[0].ItemArray[0].ToString() + "','" + idServ.Rows[0].ItemArray[0].ToString() + "','" + textBoxCButacas.Text.ToString() + "','" + textBoxCKGDisp.Text.ToString() + "','" + textBoxModelo.Text.ToString() + "','" + dateTimePickerFechaAlta.Value.ToString("dd/MM/yyyy HH:mm") + "',NULL)";
+                            nroPatente + "','" + idMarca.Rows[0].ItemArray[0].ToString() + "','" + idServ.Rows[0].ItemArray[0].ToString() + "','" + textBoxCButacas.Text.ToString() + "','" + textBoxCKGDisp.Text.ToString() + "','" + textBoxModelo.Text.ToString() + "','" + dateTimePickerFechaAlta.Value.ToString("yyyy/MM/dd HH:mm") + "',NULL)";   //Se corrige tipo fecha
             connection connect3 = new connection();
             connect3.execute_query(query3);
 
